@@ -3,12 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		013BD3C907E0DE8C7C2A0250 /* Pods_MusicBox_MusicBoxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9AAED110D6ED031E02DD11 /* Pods_MusicBox_MusicBoxUITests.framework */; };
 		440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */; };
+		440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */; };
+		440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */; };
+		440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */; };
+		449A412126ECD87E00EE3B67 /* MusicBoxPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaper.swift */; };
+		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
+		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -43,6 +49,12 @@
 		277946FD287DAD92F4025F40 /* Pods-MusicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.release.xcconfig"; path = "Target Support Files/Pods-MusicBox/Pods-MusicBox.release.xcconfig"; sourceTree = "<group>"; };
 		3D9AAED110D6ED031E02DD11 /* Pods_MusicBox_MusicBoxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicBox_MusicBoxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
+		449A412026ECD87E00EE3B67 /* MusicBoxPaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaper.swift; sourceTree = "<group>"; };
+		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +105,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		440A1A2C26ECC08A00AA4135 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
+				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
+				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		449A411F26ECD86000EE3B67 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				449A412026ECD87E00EE3B67 /* MusicBoxPaper.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		449A412226ECE8BC00EE3B67 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				449A412326ECE90200EE3B67 /* Int+.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		449A412526ECF83C00EE3B67 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
 		44E682DC26EA46310074FE46 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +164,10 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				449A412526ECF83C00EE3B67 /* core */,
+				449A412226ECE8BC00EE3B67 /* extension */,
+				449A411F26ECD86000EE3B67 /* view */,
+				440A1A2C26ECC08A00AA4135 /* controller */,
 				44E682E826EA46320074FE46 /* AppDelegate.swift */,
 				44E682EA26EA46320074FE46 /* SceneDelegate.swift */,
 				44E682EC26EA46320074FE46 /* ViewController.swift */,
@@ -182,7 +232,6 @@
 				44E682E126EA46320074FE46 /* Sources */,
 				44E682E226EA46320074FE46 /* Frameworks */,
 				44E682E326EA46320074FE46 /* Resources */,
-				09358A6CC57D893E0391452D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,7 +269,6 @@
 				44E6830226EA46340074FE46 /* Sources */,
 				44E6830326EA46340074FE46 /* Frameworks */,
 				44E6830426EA46340074FE46 /* Resources */,
-				C9C162724DBCAB2E669BF3E8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,23 +351,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09358A6CC57D893E0391452D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MusicBox/Pods-MusicBox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MusicBox/Pods-MusicBox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicBox/Pods-MusicBox-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B696A53C85143A0474A031F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,23 +371,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9C162724DBCAB2E669BF3E8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MusicBox-MusicBoxUITests/Pods-MusicBox-MusicBoxUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MusicBox-MusicBoxUITests/Pods-MusicBox-MusicBoxUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicBox-MusicBoxUITests/Pods-MusicBox-MusicBoxUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D66BF6A74E767E6F22A00442 /* [CP] Check Pods Manifest.lock */ = {
@@ -412,6 +426,12 @@
 			files = (
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
+				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
+				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
+				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
+				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
+				449A412126ECD87E00EE3B67 /* MusicBoxPaper.swift in Sources */,
+				440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */,
 				44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

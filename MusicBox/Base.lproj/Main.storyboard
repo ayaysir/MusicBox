@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FTy-9d-VvX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -9,9 +9,63 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="G8Z-Oz-T0u">
+            <objects>
+                <viewController id="FTy-9d-VvX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vtq-lx-h6U">
+                        <rect key="frame" x="0.0" y="0.0" width="5000" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Mp-J0-GZM">
+                                <rect key="frame" x="0.0" y="44" width="5000" height="510"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-Wl-es1" customClass="MusicBoxPaper" customModule="MusicBox" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="5000" height="1000"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayg-nN-tL3">
+                                                <rect key="frame" x="110" y="171" width="0.0" height="0.0"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="5000" id="YfR-eA-Nca"/>
+                                            <constraint firstAttribute="height" constant="1000" id="ucP-nR-p7O"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qeb-Wl-es1" firstAttribute="bottom" secondItem="g8B-8S-aZ8" secondAttribute="bottom" id="0DT-tc-m49"/>
+                                    <constraint firstItem="qeb-Wl-es1" firstAttribute="leading" secondItem="g8B-8S-aZ8" secondAttribute="leading" id="6yI-kD-ANy"/>
+                                    <constraint firstItem="qeb-Wl-es1" firstAttribute="trailing" secondItem="g8B-8S-aZ8" secondAttribute="trailing" id="Uvz-0f-MSO"/>
+                                    <constraint firstItem="qeb-Wl-es1" firstAttribute="top" secondItem="g8B-8S-aZ8" secondAttribute="top" id="t2W-vA-VoP"/>
+                                    <constraint firstAttribute="height" constant="510" id="zap-JT-PzW"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="g8B-8S-aZ8"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="13U-bf-gJw"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xSb-PQ-oX3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Mp-J0-GZM" firstAttribute="top" secondItem="xSb-PQ-oX3" secondAttribute="top" id="FUv-44-N8d"/>
+                            <constraint firstItem="7Mp-J0-GZM" firstAttribute="leading" secondItem="xSb-PQ-oX3" secondAttribute="leading" id="ILz-QX-iLa"/>
+                            <constraint firstItem="7Mp-J0-GZM" firstAttribute="trailing" secondItem="xSb-PQ-oX3" secondAttribute="trailing" id="Ldy-5h-4Yi"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="5000" height="896"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uUh-Cs-DtH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1762" y="-631"/>
+        </scene>
+        <!--Sign In View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,20 +107,27 @@
                                 <rect key="frame" x="352" y="313" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="로그인"/>
+                                <connections>
+                                    <action selector="btnActSubmit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="32g-18-QVJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="txtPassword" destination="gLt-Pk-5mf" id="bKQ-Wq-QBQ"/>
+                        <outlet property="txtUserId" destination="cia-wA-wTO" id="I2A-4Q-Waz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="28.985507246376812" y="64.955357142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="fp9-yA-hHZ">
             <objects>
-                <viewController id="UOQ-MV-4Qk" sceneMemberID="viewController">
+                <viewController id="UOQ-MV-4Qk" customClass="SignUpViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ugu-0f-FHb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,30 +224,48 @@
                                 <rect key="frame" x="146" y="795" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="회원가입"/>
+                                <connections>
+                                    <action selector="btnActSubmit:" destination="UOQ-MV-4Qk" eventType="touchUpInside" id="n9M-ox-4Rw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWZ-Me-ge1">
                                 <rect key="frame" x="81" y="795" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="리셋"/>
+                                <connections>
+                                    <action selector="btnActReset:" destination="UOQ-MV-4Qk" eventType="touchUpInside" id="LW6-qS-zsr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="810-iC-gZ1">
                                 <rect key="frame" x="37" y="795" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="취소"/>
+                                <connections>
+                                    <action selector="btnActCancel:" destination="UOQ-MV-4Qk" eventType="touchUpInside" id="b7c-9L-Ic2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SlQ-h0-Y3D"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="imgProfilePicture" destination="dSS-p1-d3s" id="NV8-7d-SMF"/>
+                        <outlet property="lblPasswordConfirmed" destination="lDL-mW-8g6" id="YEh-Ye-RFf"/>
+                        <outlet property="pkvInteresting" destination="peB-Jr-5Rf" id="mRa-pO-vmV"/>
+                        <outlet property="txtEmail" destination="tmx-vB-EtO" id="Zck-tn-dSh"/>
+                        <outlet property="txtPassword" destination="ctE-IG-K4u" id="eGu-2U-Kwr"/>
+                        <outlet property="txtPasswordConfirm" destination="DOZ-55-OTG" id="xFS-ub-3Vd"/>
+                        <outlet property="txtUserId" destination="IzI-22-b7s" id="xph-BY-ODg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yss-AX-Vaf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="692.75362318840587" y="64.955357142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Member Profile View Controller-->
         <scene sceneID="6fZ-vL-9jE">
             <objects>
-                <viewController id="7xa-NR-DdY" sceneMemberID="viewController">
+                <viewController id="7xa-NR-DdY" customClass="MemberProfileViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Db-b5-hXT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,11 +338,20 @@
                                 <rect key="frame" x="50" y="790" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="확인"/>
+                                <connections>
+                                    <action selector="btnActFinish:" destination="7xa-NR-DdY" eventType="touchUpInside" id="K65-Em-OMO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Y6F-ln-ut4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="imgProfilePicture" destination="rlP-nT-H4o" id="oYZ-PU-1uW"/>
+                        <outlet property="txtInteresting" destination="DYO-Jv-Lha" id="GCK-87-Xyq"/>
+                        <outlet property="txtPassword" destination="wDV-a9-gLY" id="Sow-1i-ljH"/>
+                        <outlet property="txtUserId" destination="EG6-Gs-pvE" id="NLM-uh-GPF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="udF-Rt-ITX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -276,6 +364,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
