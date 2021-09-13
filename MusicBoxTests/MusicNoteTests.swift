@@ -22,8 +22,8 @@ class MusicNoteTest: XCTestCase {
 
     func test_semitone() throws {
         // given
-        let musicNoteF4 = MusicNote(note: Scale.F, octave: 4)
-        let musicNoteC5 = MusicNote(note: Scale.C, octave: 5)
+        let musicNoteF4 = Note(note: .F, octave: 4)
+        let musicNoteC5 = Note(note: .C, octave: 5)
         
         // when
         let semitoneF4 = musicNoteF4.semitone
@@ -41,19 +41,19 @@ class MusicNoteTest: XCTestCase {
         let semitoneGSharp7 = (12 * 7) + Scale.G_sharp.rawValue
         
         // when
-        let musicNoteC5 = MusicNote.getNote(semitone: semitoneC5)
-        let musicNoteA4 = MusicNote.getNote(semitone: semitoneA4)
-        let musicNoteGSharp7 = MusicNote.getNote(semitone: semitoneGSharp7)
+        let musicNoteC5 = Note.getNote(semitone: semitoneC5)
+        let musicNoteA4 = Note.getNote(semitone: semitoneA4)
+        let musicNoteGSharp7 = Note.getNote(semitone: semitoneGSharp7)
         
         // then
-        XCTAssertEqual(musicNoteC5, MusicNote(note: Scale.C, octave: 5))
-        XCTAssertEqual(musicNoteA4, MusicNote(note: Scale.A, octave: 4))
-        XCTAssertEqual(musicNoteGSharp7, MusicNote(note: Scale.G_sharp, octave: 7))
+        XCTAssertEqual(musicNoteC5, Note(note: .C, octave: 5))
+        XCTAssertEqual(musicNoteA4, Note(note: .A, octave: 4))
+        XCTAssertEqual(musicNoteGSharp7, Note(note: .G_sharp, octave: 7))
     }
     
     func test_textValueSharp() throws {
-        let noteASharp3 = MusicNote(note: Scale.A_sharp, octave: 3)
-        let noteG5 = MusicNote(note: Scale.G, octave: 5)
+        let noteASharp3 = Note(note: .A_sharp, octave: 3)
+        let noteG5 = Note(note: .G, octave: 5)
         
         let textValueASharp3 = noteASharp3.textValueSharp
         let textValueG5 = noteG5.textValueSharp

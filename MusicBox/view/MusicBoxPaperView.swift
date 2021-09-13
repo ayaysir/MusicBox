@@ -23,15 +23,44 @@ class MusicBoxPaperView: UIView {
     
     // 변수
     var util: MusicBoxUtil!
-    var noteRange: [MusicNote]!
+    var noteRange: [Note]!
+    var noteRangeWithHeight: [NoteWithHeight] = []
     
     var rowNum = 29
     var colNum = 80
+    
+    // draw 주요 정보 저장
+    var boxOutline: CGRect!
 
-    var circles: [CGPoint] = [] {
+    var data: [CGPoint] = [] {
         didSet {
             self.setNeedsDisplay()
         }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        let boxWidth = cellWidth * colNum.cgFloat
+        let boxHeight = cellHeight * (rowNum - 1).cgFloat
+        self.boxOutline = CGRect(x: leftMargin, y: topMargin, width: boxWidth, height: boxHeight)
+        print("init from coder")
+        
+        util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cellWidth, cellHeight: cellHeight)
+        noteRange = util.getNoteRange()
+        rowNum = noteRange.count
+        
+        let tolerance = cellHeight - topMargin
+        for (index, note) in noteRange.enumerated() {
+            let noteHeight = NoteWithHeight(height: tolerance + boxOutline.minY + cellHeight * index.cgFloat, note: note)
+            noteRangeWithHeight.append(noteHeight)
+        }
+    }
+    
+    func addPaperCoordByCGPoint() {
+        
     }
     
     private func gridToCGPoint(x: Int, y: Int) -> CGPoint {
@@ -40,18 +69,10 @@ class MusicBoxPaperView: UIView {
         return CGPoint(x: pointX, y: pointY)
     }
     
-    private func snapToGridX(originalX: CGFloat) -> CGFloat {
-        return round(originalX / cellWidth) * cellWidth - (cellWidth / 2)
-    }
+
     
-    private func snapToGridY(originalY: CGFloat) -> CGFloat {
-        return round(originalY / cellHeight) * cellHeight
-    }
-    
-    func setup() {
-        util = MusicBoxUtil()
-        noteRange = util.getNoteRange(highestNote: MusicNote(note: Scale.E, octave: 6))
-        rowNum = noteRange.count
+    func setValues() {
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -59,13 +80,10 @@ class MusicBoxPaperView: UIView {
             return
         }
         
-        setup()
-        
+        setValues()
+
         // 모든 가로 수치는 절대값 사용
         UIColor.black.set()
-        let boxWidth = cellWidth * colNum.cgFloat
-        let boxHeight = cellHeight * (rowNum - 1).cgFloat
-        let boxOutline = CGRect(x: leftMargin, y: topMargin, width: boxWidth, height: boxHeight)
         context.addRect(boxOutline)
         context.strokePath()
         
@@ -74,7 +92,7 @@ class MusicBoxPaperView: UIView {
         for index in 1...innerRowNum {
             let targetY = topMargin + (index.cgFloat * cellHeight)
             context.move(to: CGPoint(x: leftMargin, y: targetY))
-            context.addLine(to: CGPoint(x: leftMargin + boxWidth, y: targetY))
+            context.addLine(to: CGPoint(x: leftMargin + boxOutline.width, y: targetY))
             context.strokePath()
         }
         
@@ -83,7 +101,7 @@ class MusicBoxPaperView: UIView {
         for index in 1...innerColNum {
             let targetX = leftMargin + (index.cgFloat * cellWidth)
             context.move(to: CGPoint(x: targetX, y: topMargin))
-            context.addLine(to: CGPoint(x: targetX, y: topMargin + boxHeight))
+            context.addLine(to: CGPoint(x: targetX, y: topMargin + boxOutline.height))
             context.strokePath()
         }
         
@@ -99,18 +117,27 @@ class MusicBoxPaperView: UIView {
             
             let noteTextValue = note.textValueSharp
             noteTextValue.draw(with: noteRect, options: .usesLineFragmentOrigin, attributes: noteNameAttrs, context: nil)
-            isFirstRun ? print(boxOutline.minY + cellHeight * index.cgFloat) : nil
         }
         
+//        // 지우개 모드인 경우
+//        if true {
+//            data.map { coord in
+//                
+//            }
+//        }
+//        
         // 점 더하기
-        for coord in circles {
+        for coord in data {
             UIColor.red.set()
-            let snapCoord = CGPoint(x: snapToGridX(originalX: coord.x), y: snapToGridY(originalY: coord.y))
+            let snapCoord = CGPoint(x: util.snapToGridX(originalX: coord.x), y: util.snapToGridY(originalY: coord.y))
             let circle = UIBezierPath(arcCenter: snapCoord, radius: circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
             context.addPath(circle.cgPath)
+            
+            _ = util.getNoteFromCGPointY(range: noteRangeWithHeight, coord: coord)
         }
         context.fillPath()
         
         isFirstRun = false
+        
     }
 }

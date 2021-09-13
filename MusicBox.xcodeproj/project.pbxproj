@@ -18,10 +18,11 @@
 		449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */; };
 		449F3E9C26EF2C39002C874D /* MusicBoxUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */; };
 		449F3E9E26EF3016002C874D /* MusicNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3E9D26EF3016002C874D /* MusicNoteTests.swift */; };
-		449F3EA126EF3315002C874D /* MusicNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA026EF3315002C874D /* MusicNote.swift */; };
+		449F3EA126EF3315002C874D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA026EF3315002C874D /* Note.swift */; };
 		449F3EA326EF332D002C874D /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA226EF332D002C874D /* Scale.swift */; };
 		449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA426EF334A002C874D /* MusicBoxUtil.swift */; };
 		449F3EA826EF3529002C874D /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA726EF3529002C874D /* TextUtil.swift */; };
+		44B18C3226EF7FF900890C13 /* PaperCoord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B18C3126EF7FF900890C13 /* PaperCoord.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -65,10 +66,11 @@
 		449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPaperViewController.swift; sourceTree = "<group>"; };
 		449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxUtilTests.swift; sourceTree = "<group>"; };
 		449F3E9D26EF3016002C874D /* MusicNoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicNoteTests.swift; sourceTree = "<group>"; };
-		449F3EA026EF3315002C874D /* MusicNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicNote.swift; sourceTree = "<group>"; };
+		449F3EA026EF3315002C874D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		449F3EA226EF332D002C874D /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		449F3EA426EF334A002C874D /* MusicBoxUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxUtil.swift; sourceTree = "<group>"; };
 		449F3EA726EF3529002C874D /* TextUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtil.swift; sourceTree = "<group>"; };
+		44B18C3126EF7FF900890C13 /* PaperCoord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperCoord.swift; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,8 +160,9 @@
 		449F3E9F26EF32FF002C874D /* vo */ = {
 			isa = PBXGroup;
 			children = (
-				449F3EA026EF3315002C874D /* MusicNote.swift */,
+				449F3EA026EF3315002C874D /* Note.swift */,
 				449F3EA226EF332D002C874D /* Scale.swift */,
+				44B18C3126EF7FF900890C13 /* PaperCoord.swift */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -467,10 +470,11 @@
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
+				44B18C3226EF7FF900890C13 /* PaperCoord.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */,
-				449F3EA126EF3315002C874D /* MusicNote.swift in Sources */,
+				449F3EA126EF3315002C874D /* Note.swift in Sources */,
 				449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */,
 				440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */,
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,

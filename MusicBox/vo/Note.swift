@@ -5,9 +5,9 @@
 //  Created by yoonbumtae on 2021/09/13.
 //
 
-import Foundation
+import UIKit
 
-struct MusicNote: Equatable {
+struct Note: Equatable {
     var note: Scale
     var octave: Int
     
@@ -19,10 +19,15 @@ struct MusicNote: Equatable {
         return note.textValueForSharp + TextUtil.makeSubscriptOfNumber(octave)
     }
     
-    static func getNote(semitone: Int) -> MusicNote? {
+    static func getNote(semitone: Int) -> Note? {
         let octave = semitone / 12
         let noteNum = semitone % 12
         guard let note = Scale(rawValue: noteNum) else { return nil }
         return self.init(note: note, octave: octave)
     }
+}
+
+struct NoteWithHeight {
+    var height: CGFloat
+    var note: Note
 }

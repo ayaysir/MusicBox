@@ -18,6 +18,8 @@ class MusicPaperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(musicPaperView.noteRangeWithHeight)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         let gesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(sender:)))
         self.musicPaperView.addGestureRecognizer(tapGesture)
@@ -28,7 +30,7 @@ class MusicPaperViewController: UIViewController {
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: musicPaperView)
         print(point)
-        musicPaperView.circles.append(point)
+        musicPaperView.data.append(point)
     }
     
     @objc func pinchAction(sender:UIPinchGestureRecognizer) {

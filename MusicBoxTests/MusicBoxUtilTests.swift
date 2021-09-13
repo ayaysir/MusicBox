@@ -24,7 +24,7 @@ class MusicBoxUtilTests: XCTestCase {
 
     func test_getNoteRange() throws {
         // given
-        let musicNote = MusicNote(note: Scale.E, octave: 6)
+        let musicNote = Note(note: Scale.E, octave: 6)
         
         // when
         let range = sut.getNoteRange(highestNote: musicNote)
@@ -35,10 +35,49 @@ class MusicBoxUtilTests: XCTestCase {
         let beforeLastNote = range[range.count - 2]
         let lastNote = range.last
         
-        XCTAssertEqual(firstNote, MusicNote(note: Scale.E, octave: 6))
-        XCTAssertEqual(secondNote, MusicNote(note: Scale.D_sharp, octave: 6))
-        XCTAssertEqual(beforeLastNote, MusicNote(note: Scale.F, octave: 3))
-        XCTAssertEqual(lastNote, MusicNote(note: Scale.E, octave: 3))
+        XCTAssertEqual(firstNote, Note(note: Scale.E, octave: 6))
+        XCTAssertEqual(secondNote, Note(note: Scale.D_sharp, octave: 6))
+        XCTAssertEqual(beforeLastNote, Note(note: Scale.F, octave: 3))
+        XCTAssertEqual(lastNote, Note(note: Scale.E, octave: 3))
+    }
+    
+    func test_snapToGridX() throws {
+        let originalX: CGFloat = 420
+        
+        let result = sut.snapToGridX(originalX: originalX)
+        
+        // round(420 / 58) * 58 - (58 / 2) = 7 * 58 - 29
+        XCTAssertEqual(result, 377)
+    }
+    
+    func test_snapToGridY() throws {
+        let originalY: CGFloat = 387
+        
+        // round(387 / 22) * 22 = 18 * 22
+        let result = sut.snapToGridY(originalY: originalY)
+        
+        XCTAssertEqual(result, 396)
+    }
+    
+    func test_getNoteFromCGPointY() throws {
+        let tolerance: CGFloat = 2
+        let topMargin: CGFloat = 20
+        
+        let noteRange = sut.getNoteRange(highestNote: Note(note: Scale.E, octave: 6))
+        
+        var noteRangeWithHeight: [NoteWithHeight] = []
+        for (index, note) in noteRange.enumerated() {
+            let noteHeight = NoteWithHeight(height: tolerance + topMargin + sut.cellHeight * index.cgFloat, note: note)
+            noteRangeWithHeight.append(noteHeight)
+        }
+        
+        print(noteRangeWithHeight)
+        
+        let result1 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, coord: CGPoint(x: 100, y: 227))
+        let result2 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, coord: CGPoint(x: 2, y: 671))
+        
+        XCTAssertEqual(result1, Note(note: .G, octave: 5))
+        XCTAssertEqual(result2, Note(note: .A_sharp, octave: 3))
     }
 
     func testPerformanceExample() throws {
