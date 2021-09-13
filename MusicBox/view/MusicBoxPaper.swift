@@ -9,6 +9,7 @@ import UIKit
 
 class MusicBoxPaper: UIView {
     
+    // 상수
     let leftMargin: CGFloat = 20
     let topMargin: CGFloat = 20
     
@@ -18,14 +19,26 @@ class MusicBoxPaper: UIView {
     let rowNum = 29
     let colNum = 80
     
+    let circleRadius: CGFloat = 15
+    
+    // 변수
+    var circles: [CGPoint] = [] {
+        didSet {
+            print("didSet")
+            self.setNeedsDisplay()
+        }
+    }
+    
     private func gridToCGPoint(x: Int, y: Int) -> CGPoint {
         let pointX = leftMargin + x.cgFloat * cellWidth
         let pointY = topMargin + (y - 1).cgFloat * cellHeight
         return CGPoint(x: pointX, y: pointY)
     }
     
+    // 점 찍기
+    
     override func draw(_ rect: CGRect) {
-        guard let ctx = UIGraphicsGetCurrentContext() else {
+        guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
         
@@ -34,25 +47,25 @@ class MusicBoxPaper: UIView {
         let boxWidth = cellWidth * colNum.cgFloat
         let boxHeight = cellHeight * rowNum.cgFloat
         let outline = CGRect(x: leftMargin, y: topMargin, width: boxWidth, height: boxHeight)
-        ctx.addRect(outline)
-        ctx.strokePath()
+        context.addRect(outline)
+        context.strokePath()
         
         // 가로줄 그리기
         let innerRowNum = rowNum - 1
         for index in 1...innerRowNum {
             let targetY = topMargin + (index.cgFloat * cellHeight)
-            ctx.move(to: CGPoint(x: topMargin, y: targetY))
-            ctx.addLine(to: CGPoint(x: leftMargin + boxWidth, y: targetY))
-            ctx.strokePath()
+            context.move(to: CGPoint(x: topMargin, y: targetY))
+            context.addLine(to: CGPoint(x: leftMargin + boxWidth, y: targetY))
+            context.strokePath()
         }
         
         // 세로줄 그리기
         let innerColNum = colNum - 1
         for index in 1...innerColNum {
             let targetX = leftMargin + (index.cgFloat * cellWidth)
-            ctx.move(to: CGPoint(x: targetX, y: leftMargin))
-            ctx.addLine(to: CGPoint(x: targetX, y: leftMargin + boxHeight))
-            ctx.strokePath()
+            context.move(to: CGPoint(x: targetX, y: leftMargin))
+            context.addLine(to: CGPoint(x: targetX, y: leftMargin + boxHeight))
+            context.strokePath()
         }
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -70,9 +83,18 @@ class MusicBoxPaper: UIView {
         
         let circle1 = UIBezierPath(arcCenter: point1, radius: 15, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
         let circle2 = UIBezierPath(arcCenter: point2, radius: 15, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        ctx.addPath(circle1.cgPath)
-        ctx.addPath(circle2.cgPath)
-        ctx.fillPath()
+        context.addPath(circle1.cgPath)
+        context.fillPath()
+        context.addPath(circle2.cgPath)
+        context.fillPath()
+        
+        // 점 더하기
+        for coord in circles {
+            UIColor.red.set()
+            let circle = UIBezierPath(arcCenter: coord, radius: circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+            context.addPath(circle.cgPath)
+        }
+        context.fillPath()
         
     }
 }

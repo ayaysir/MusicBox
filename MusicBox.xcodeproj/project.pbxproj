@@ -15,6 +15,12 @@
 		449A412126ECD87E00EE3B67 /* MusicBoxPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaper.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
+		449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */; };
+		449F3E9C26EF2C39002C874D /* MusicBoxUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */; };
+		449F3E9E26EF3016002C874D /* MusicNoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3E9D26EF3016002C874D /* MusicNoteTests.swift */; };
+		449F3EA126EF3315002C874D /* MusicNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA026EF3315002C874D /* MusicNote.swift */; };
+		449F3EA326EF332D002C874D /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA226EF332D002C874D /* Scale.swift */; };
+		449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F3EA426EF334A002C874D /* MusicBoxUtil.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -55,6 +61,12 @@
 		449A412026ECD87E00EE3B67 /* MusicBoxPaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaper.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
+		449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPaperViewController.swift; sourceTree = "<group>"; };
+		449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxUtilTests.swift; sourceTree = "<group>"; };
+		449F3E9D26EF3016002C874D /* MusicNoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicNoteTests.swift; sourceTree = "<group>"; };
+		449F3EA026EF3315002C874D /* MusicNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicNote.swift; sourceTree = "<group>"; };
+		449F3EA226EF332D002C874D /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
+		449F3EA426EF334A002C874D /* MusicBoxUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxUtil.swift; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +123,7 @@
 				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
 				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
 				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
+				449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -135,8 +148,18 @@
 			isa = PBXGroup;
 			children = (
 				449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */,
+				449F3EA426EF334A002C874D /* MusicBoxUtil.swift */,
 			);
 			path = core;
+			sourceTree = "<group>";
+		};
+		449F3E9F26EF32FF002C874D /* vo */ = {
+			isa = PBXGroup;
+			children = (
+				449F3EA026EF3315002C874D /* MusicNote.swift */,
+				449F3EA226EF332D002C874D /* Scale.swift */,
+			);
+			path = vo;
 			sourceTree = "<group>";
 		};
 		44E682DC26EA46310074FE46 = {
@@ -164,6 +187,7 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				449F3E9F26EF32FF002C874D /* vo */,
 				449A412526ECF83C00EE3B67 /* core */,
 				449A412226ECE8BC00EE3B67 /* extension */,
 				449A411F26ECD86000EE3B67 /* view */,
@@ -183,6 +207,8 @@
 		44E682FE26EA46340074FE46 /* MusicBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				449F3E9D26EF3016002C874D /* MusicNoteTests.swift */,
+				449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */,
 				44E682FF26EA46340074FE46 /* MusicBoxTests.swift */,
 				44E6830126EA46340074FE46 /* Info.plist */,
 			);
@@ -426,12 +452,16 @@
 			files = (
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
+				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaper.swift in Sources */,
+				449F3EA126EF3315002C874D /* MusicNote.swift in Sources */,
+				449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */,
 				440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */,
+				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
 				44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,7 +470,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				449F3E9E26EF3016002C874D /* MusicNoteTests.swift in Sources */,
 				44E6830026EA46340074FE46 /* MusicBoxTests.swift in Sources */,
+				449F3E9C26EF2C39002C874D /* MusicBoxUtilTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
