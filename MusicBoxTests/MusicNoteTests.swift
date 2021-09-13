@@ -50,6 +50,18 @@ class MusicNoteTest: XCTestCase {
         XCTAssertEqual(musicNoteA4, MusicNote(note: Scale.A, octave: 4))
         XCTAssertEqual(musicNoteGSharp7, MusicNote(note: Scale.G_sharp, octave: 7))
     }
+    
+    func test_textValueSharp() throws {
+        let noteASharp3 = MusicNote(note: Scale.A_sharp, octave: 3)
+        let noteG5 = MusicNote(note: Scale.G, octave: 5)
+        
+        let textValueASharp3 = noteASharp3.textValueSharp
+        let textValueG5 = noteG5.textValueSharp
+        
+        XCTAssertEqual(textValueASharp3, "A♯₃")
+        XCTAssertEqual(textValueG5, "G₅")
+        
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

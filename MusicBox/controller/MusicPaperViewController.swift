@@ -11,7 +11,7 @@ class MusicPaperViewController: UIViewController {
     
     var previousScale: CGFloat = 1.0
     
-    @IBOutlet weak var musicPaperView: MusicBoxPaper!
+    @IBOutlet weak var musicPaperView: MusicBoxPaperView!
     @IBOutlet weak var constraintMusicPaperWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintMusicPaperHeight: NSLayoutConstraint!
     

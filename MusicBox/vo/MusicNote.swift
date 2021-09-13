@@ -15,6 +15,10 @@ struct MusicNote: Equatable {
         return note.rawValue + octave * 12
     }
     
+    var textValueSharp: String {
+        return note.textValueForSharp + TextUtil.makeSubscriptOfNumber(octave)
+    }
+    
     static func getNote(semitone: Int) -> MusicNote? {
         let octave = semitone / 12
         let noteNum = semitone % 12
