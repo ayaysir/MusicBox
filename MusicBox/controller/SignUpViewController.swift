@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Photos
 
 class SignUpViewController: UIViewController {
 
@@ -21,6 +22,13 @@ class SignUpViewController: UIViewController {
     
     let interestingList = ["치킨", "피자", "탕수육"]
     var selectedInteresting: String!
+    
+    let imagePickerController = UIImagePickerController()
+    var userProfileThumbnail: UIImage!
+    
+    /// Here is the completion block
+    typealias FileCompletionBlock = () -> Void
+    var block: FileCompletionBlock?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,23 +46,20 @@ class SignUpViewController: UIViewController {
         
         selectedInteresting = interestingList[0]
         lblPasswordConfirmed.text = ""
+        
+        // 사진, 카메라 권한 (최초 요청)
+        PHPhotoLibrary.requestAuthorization { status in
+        }
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+        }
+        
+        // 사진: 이미지 피커에 딜리게이트 생성
+        imagePickerController.delegate = self
+        
+        // 최초 섬네일 생성
+        userProfileThumbnail = makeImageThumbnail(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
+        
 
-    }
-    
-    func setLabelPasswordConfirm(_ password: String, _ passwordConfirm: String)  {
-        
-        guard passwordConfirm != "" else {
-            lblPasswordConfirmed.text = ""
-            return
-        }
-        
-        if password == passwordConfirm {
-            lblPasswordConfirmed.textColor = .green
-            lblPasswordConfirmed.text = "패스워드가 일치합니다."
-        } else {
-            lblPasswordConfirmed.textColor = .red
-            lblPasswordConfirmed.text = "패스워드가 일치하지 않습니다."
-        }
     }
     
     @IBAction func btnActCancel(_ sender: UIButton) {
@@ -85,25 +90,145 @@ class SignUpViewController: UIViewController {
         }
         
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
+            // 이메일, 비밀번호 전송
             guard let user = authResult?.user, error == nil else {
                 simpleAlert(self, message: error!.localizedDescription)
                 return
             }
             
             // 추가 정보 입력
-            guard let interesting = selectedInteresting else {
-                print("관심 분야가 없습니다.")
-                return
-            }
-            ref.child("users").child(user.uid).setValue(["interesting": interesting])
+            ref.child("users").child(user.uid).setValue(["interesting": selectedInteresting])
             
-            simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
-                self.dismiss(animated: true, completion: nil)
+            // 이미지 업로드
+            let images = [
+                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: imgProfilePicture.image!, fileExt: "png")
+            ]
+            startUploading(images: images) {
+                simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }
     
+    @IBAction func btnActTakePhoto(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.imagePickerController.sourceType = .camera
+            doTaskByCameraAuthorization()
+        } else {
+            simpleAlert(self, message: "카메라 사용이 불가능합니다.")
+        }
+    }
+    
+    @IBAction func btnActFromLoadPhoto(_ sender: UIButton) {
+        self.imagePickerController.sourceType = .photoLibrary
+        doTaskByPhotoAuthorization()
+    }
+    
+    
 }
+
+extension SignUpViewController {
+    
+    func startUploading(images: [ImageWithName], completion: @escaping FileCompletionBlock) {
+        if images.count == 0 {
+            completion()
+            return;
+        }
+        
+        block = completion
+        uploadImage(forIndex: 0, images: images)
+    }
+    
+    private func uploadImage(forIndex index:Int, images: [ImageWithName]) {
+        
+        if index < images.count {
+            /// Perform uploading
+            
+            let imageInfo = images[index]
+            let name = imageInfo.name
+            let image = imageInfo.image
+            let fileExt = imageInfo.fileExt
+            let quality = imageInfo.compressionQuality
+            
+            guard let data = fileExt == "jpg"
+                    ? image.jpegData(compressionQuality: quality)
+                    : image.pngData() else {
+                return
+            }
+            
+            let fileName = "\(name).\(fileExt)"
+            
+            FirebaseFileManager.shared.setChild("images/users")
+            FirebaseFileManager.shared.upload(data: data, withName: fileName, block: { (url) in
+                /// After successfully uploading call this method again by increment the **index = index + 1**
+                print(url ?? "Couldn't not upload. You can either check the error or just skip this.")
+                self.uploadImage(forIndex: index + 1, images: images)
+            })
+            return;
+        }
+        
+        if block != nil {
+            block!()
+        }
+    }
+    
+    private func uploadImageToFirebase(uid: String) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let originalImageRef = storageRef.child("images/users/\(uid)/original_\(uid).jpg")
+        let thumbnailImageRef = storageRef.child("images/users/\(uid)/thumb_\(uid).jpg")
+        
+        // Data in memory
+        guard let originalData = imgProfilePicture.image?.pngData(),
+              let thumbnailData = userProfileThumbnail.jpegData(compressionQuality: 0.95) else {
+            return
+        }
+        
+        _ = originalImageRef.putData(originalData, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                print(error!.localizedDescription)
+                return
+            }
+            // Metadata contains file metadata such as size, content-type.
+            _ = metadata.size
+            
+            // You can also access to download URL after upload.
+            originalImageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                _ = downloadURL
+            }
+        }
+        
+        // Data in memory
+        
+        // Upload the file to the path "images/rivers.jpg"
+        _ = thumbnailImageRef.putData(thumbnailData, metadata: nil) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                print(error!.localizedDescription)
+                return
+            }
+            // Metadata contains file metadata such as size, content-type.
+            _ = metadata.size
+            
+            // You can also access to download URL after upload.
+            thumbnailImageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                _ = downloadURL
+            }
+        }
+    }
+}
+
+
 
 extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     // 컴포넌트(열) 개수
@@ -121,12 +246,30 @@ extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return interestingList[row]
     }
     
+    // 특정 피커뷰 선택시 selectedInteresting에 할당
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedInteresting = interestingList[row]
     }
 }
 
 extension SignUpViewController: UITextFieldDelegate {
+    
+    func setLabelPasswordConfirm(_ password: String, _ passwordConfirm: String)  {
+        
+        guard passwordConfirm != "" else {
+            lblPasswordConfirmed.text = ""
+            return
+        }
+        
+        if password == passwordConfirm {
+            lblPasswordConfirmed.textColor = .green
+            lblPasswordConfirmed.text = "패스워드가 일치합니다."
+        } else {
+            lblPasswordConfirmed.textColor = .red
+            lblPasswordConfirmed.text = "패스워드가 일치하지 않습니다."
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
@@ -153,5 +296,70 @@ extension SignUpViewController: UITextFieldDelegate {
         }
         return true
     }
+}
+
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imgProfilePicture.image = image
+            userProfileThumbnail = makeImageThumbnail(image: image, maxSize: 200)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func openSetting(action: UIAlertAction) -> Void {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                print("Settings opened: \(success)") // Prints true
+            })
+        }
+    }
+    
+    func doTaskByPhotoAuthorization() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .notDetermined:
+            print("photo auth >>> not determined")
+            simpleDestructiveYesAndNo(self, message: "사진 권한 설정을 변경하시겠습니까?", title: "권한 정보 없음", yesHandler: openSetting)
+        case .restricted:
+            print("photo auth >>> restricted")
+            simpleAlert(self, message: "시스템에 의해 거부되었습니다.")
+        case .denied:
+            print("photo auth >>> denied")
+            simpleDestructiveYesAndNo(self, message: "사진 기능 권한이 거부되어 사용할 수 없습니다. 사진 권한 설정을 변경하시겠습니까?", title: "권한 거부됨", yesHandler: openSetting(action:))
+        case .authorized:
+            print("photo auth >>> authorized")
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        case .limited:
+            print("photo auth >>> limited")
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        @unknown default:
+            print("photo auth >>> unknown")
+            simpleAlert(self, message: "unknown")
+        }
+    }
+    
+    func doTaskByCameraAuthorization() {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+        case .notDetermined:
+            print("camera auth >>> not determined")
+            simpleDestructiveYesAndNo(self, message: "카메라 권한 설정을 변경하시겠습니까?", title: "권한 정보 없음", yesHandler: openSetting)
+        case .restricted:
+            print("camera auth >>> restricted")
+            simpleAlert(self, message: "시스템에 의해 거부되었습니다.")
+        case .denied:
+            print("camera auth >>> denied")
+            simpleDestructiveYesAndNo(self, message: "카메라 기능 권한이 거부되어 사용할 수 없습니다. 카메라 권한 설정을 변경하시겠습니까?", title: "권한 거부됨", yesHandler: openSetting(action:))
+        case .authorized:
+            print("camera auth >>> authorized")
+            self.present(self.imagePickerController, animated: true, completion: nil)
+        @unknown default:
+            print("camera auth >>> unknown")
+            simpleAlert(self, message: "unknown")
+        }
+    }
 }

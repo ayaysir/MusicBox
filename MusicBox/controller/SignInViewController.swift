@@ -34,6 +34,7 @@ class SignInViewController: UIViewController {
         ref = Database.database().reference()
         
         lblInteresting.text = "관심분야:"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,4 +97,26 @@ class SignInViewController: UIViewController {
     }
     
     
+}
+
+extension SignInViewController {
+    private func getSampleImage() {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let sampleImageRef = storageRef.child("images/yoonbumtae-300x300.png")
+
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        sampleImageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+          if let error = error {
+            // Uh-oh, an error occurred!
+            print("download error", error.localizedDescription)
+          } else {
+            // Data for "images/island.jpg" is returned
+            let image = UIImage(data: data!)
+            let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+            self.view.addSubview(imageView)
+          }
+        }
+    }
 }

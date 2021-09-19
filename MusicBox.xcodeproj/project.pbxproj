@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		013BD3C907E0DE8C7C2A0250 /* Pods_MusicBox_MusicBoxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D9AAED110D6ED031E02DD11 /* Pods_MusicBox_MusicBoxUITests.framework */; };
+		4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405E96926F76E180012E4F5 /* ImageUtil.swift */; };
+		4405E96E26F770A90012E4F5 /* ImageUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405E96D26F770A90012E4F5 /* ImageUtilTests.swift */; };
+		4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */; };
+		4405E97226F784930012E4F5 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405E97126F784930012E4F5 /* UIImage+.swift */; };
+		4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405E97326F785350012E4F5 /* ImageWithName.swift */; };
 		440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */; };
 		440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */; };
 		440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */; };
@@ -58,6 +63,11 @@
 		20D59A4FC9D8F9FC4721AB4B /* Pods-MusicBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBoxTests.release.xcconfig"; path = "Target Support Files/Pods-MusicBoxTests/Pods-MusicBoxTests.release.xcconfig"; sourceTree = "<group>"; };
 		277946FD287DAD92F4025F40 /* Pods-MusicBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.release.xcconfig"; path = "Target Support Files/Pods-MusicBox/Pods-MusicBox.release.xcconfig"; sourceTree = "<group>"; };
 		3D9AAED110D6ED031E02DD11 /* Pods_MusicBox_MusicBoxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicBox_MusicBoxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4405E96926F76E180012E4F5 /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
+		4405E96D26F770A90012E4F5 /* ImageUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtilTests.swift; sourceTree = "<group>"; };
+		4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFileManager.swift; sourceTree = "<group>"; };
+		4405E97126F784930012E4F5 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		4405E97326F785350012E4F5 /* ImageWithName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithName.swift; sourceTree = "<group>"; };
 		440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +159,7 @@
 			children = (
 				449A412326ECE90200EE3B67 /* Int+.swift */,
 				44F5B39D26F631F4004DE730 /* String+.swift */,
+				4405E97126F784930012E4F5 /* UIImage+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -168,6 +179,7 @@
 				449F3EA026EF3315002C874D /* Note.swift */,
 				449F3EA226EF332D002C874D /* Scale.swift */,
 				44B18C3126EF7FF900890C13 /* PaperCoord.swift */,
+				4405E97326F785350012E4F5 /* ImageWithName.swift */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -177,6 +189,8 @@
 			children = (
 				449F3EA726EF3529002C874D /* TextUtil.swift */,
 				44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */,
+				4405E96926F76E180012E4F5 /* ImageUtil.swift */,
+				4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -227,6 +241,7 @@
 		44E682FE26EA46340074FE46 /* MusicBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				4405E96D26F770A90012E4F5 /* ImageUtilTests.swift */,
 				449F3E9D26EF3016002C874D /* MusicNoteTests.swift */,
 				449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */,
 				44E682FF26EA46340074FE46 /* MusicBoxTests.swift */,
@@ -507,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
+				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
 				449F3EA826EF3529002C874D /* TextUtil.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
@@ -515,12 +531,15 @@
 				44B18C3226EF7FF900890C13 /* PaperCoord.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
+				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */,
 				449F3EA126EF3315002C874D /* Note.swift in Sources */,
 				449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */,
 				440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */,
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
+				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
+				4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */,
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,
 				44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */,
 			);
@@ -533,6 +552,7 @@
 				449F3E9E26EF3016002C874D /* MusicNoteTests.swift in Sources */,
 				44E6830026EA46340074FE46 /* MusicBoxTests.swift in Sources */,
 				449F3E9C26EF2C39002C874D /* MusicBoxUtilTests.swift in Sources */,
+				4405E96E26F770A90012E4F5 /* ImageUtilTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				INFOPLIST_FILE = MusicBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,6 +745,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				INFOPLIST_FILE = MusicBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
