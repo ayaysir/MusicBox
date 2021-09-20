@@ -9,6 +9,10 @@ import UIKit
 import Firebase
 import Photos
 
+protocol SignUpDelegate: AnyObject {
+    func didSignUpSuccess (_ controller: SignUpViewController, isSuccess: Bool, uid: String)
+}
+
 class SignUpViewController: UIViewController {
 
     @IBOutlet weak var txtUserEmail: UITextField!
@@ -17,6 +21,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lblPasswordConfirmed: UILabel!
     @IBOutlet weak var pkvInteresting: UIPickerView!
     @IBOutlet weak var imgProfilePicture: UIImageView!
+    
+    weak var delegate: SignUpDelegate?
     
     var ref: DatabaseReference!
     
@@ -107,6 +113,9 @@ class SignUpViewController: UIViewController {
             startUploading(images: images) {
                 simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
                     self.dismiss(animated: true, completion: nil)
+                    if delegate != nil {
+                        delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
+                    }
                 }
             }
         }
@@ -171,59 +180,6 @@ extension SignUpViewController {
         
         if block != nil {
             block!()
-        }
-    }
-    
-    private func uploadImageToFirebase(uid: String) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let originalImageRef = storageRef.child("images/users/\(uid)/original_\(uid).jpg")
-        let thumbnailImageRef = storageRef.child("images/users/\(uid)/thumb_\(uid).jpg")
-        
-        // Data in memory
-        guard let originalData = imgProfilePicture.image?.pngData(),
-              let thumbnailData = userProfileThumbnail.jpegData(compressionQuality: 0.95) else {
-            return
-        }
-        
-        _ = originalImageRef.putData(originalData, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
-                print(error!.localizedDescription)
-                return
-            }
-            // Metadata contains file metadata such as size, content-type.
-            _ = metadata.size
-            
-            // You can also access to download URL after upload.
-            originalImageRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                _ = downloadURL
-            }
-        }
-        
-        // Data in memory
-        
-        // Upload the file to the path "images/rivers.jpg"
-        _ = thumbnailImageRef.putData(thumbnailData, metadata: nil) { (metadata, error) in
-            guard let metadata = metadata else {
-                // Uh-oh, an error occurred!
-                print(error!.localizedDescription)
-                return
-            }
-            // Metadata contains file metadata such as size, content-type.
-            _ = metadata.size
-            
-            // You can also access to download URL after upload.
-            thumbnailImageRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                _ = downloadURL
-            }
         }
     }
 }

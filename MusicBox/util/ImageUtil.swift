@@ -8,7 +8,7 @@
 import UIKit
 
 func makeImageThumbnail(image: UIImage, maxSize: Int = 100) -> UIImage? {
-    guard let imageData = image.jpegData(compressionQuality: 0.95) ?? image.pngData() else {
+    guard let imageData = image.jpegData(compressionQuality: 0.95) else {
         return nil
     }
 
@@ -18,8 +18,8 @@ func makeImageThumbnail(image: UIImage, maxSize: Int = 100) -> UIImage? {
         kCGImageSourceThumbnailMaxPixelSize: maxSize] as CFDictionary // Specify your desired size at kCGImageSourceThumbnailMaxPixelSize. I've specified 100 as per your question
     
     var thumbnail: UIImage?
-    imageData.withUnsafeBytes { ptr in
-       guard let bytes = ptr.baseAddress?.assumingMemoryBound(to: UInt8.self) else {
+    imageData.withUnsafeBytes { pointer in
+       guard let bytes = pointer.baseAddress?.assumingMemoryBound(to: UInt8.self) else {
           return
        }
        if let cfData = CFDataCreate(kCFAllocatorDefault, bytes, imageData.count){

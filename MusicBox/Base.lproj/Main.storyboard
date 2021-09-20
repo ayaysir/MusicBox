@@ -133,7 +133,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="회원가입"/>
                                         <connections>
-                                            <segue destination="UOQ-MV-4Qk" kind="show" id="hNf-qT-hhT"/>
+                                            <segue destination="UOQ-MV-4Qk" kind="show" identifier="signUp" id="hNf-qT-hhT"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -151,14 +151,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUi-Ph-t6T">
-                                        <rect key="frame" x="8" y="63" width="257" height="21"/>
+                                        <rect key="frame" x="82" y="63" width="257" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="관심분야: 클래식" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCd-cP-P8v">
-                                        <rect key="frame" x="8" y="92" width="257" height="21"/>
+                                        <rect key="frame" x="82" y="92" width="257" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -172,6 +172,10 @@
                                             <action selector="btnActSignOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EIt-ln-RTh"/>
                                         </connections>
                                     </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="questionmark.folder.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="V9h-A3-woL">
+                                        <rect key="frame" x="8" y="54" width="66" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                             </view>
@@ -180,6 +184,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="imgUserProfile" destination="V9h-A3-woL" id="Am0-Fm-s8k"/>
                         <outlet property="lblInteresting" destination="ZCd-cP-P8v" id="yDl-B5-L7c"/>
                         <outlet property="lblUserEmail" destination="dUi-Ph-t6T" id="YbN-Fp-oar"/>
                         <outlet property="txtUserEmail" destination="cia-wA-wTO" id="7NU-mh-fli"/>
@@ -463,6 +468,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="questionmark.folder.fill" catalog="system" width="128" height="97"/>
         <image name="sample" width="1024" height="768"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
