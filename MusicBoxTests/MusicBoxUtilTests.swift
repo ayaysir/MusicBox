@@ -73,8 +73,8 @@ class MusicBoxUtilTests: XCTestCase {
         
         print(noteRangeWithHeight)
         
-        let result1 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, coord: CGPoint(x: 100, y: 227))
-        let result2 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, coord: CGPoint(x: 2, y: 671))
+        let result1 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: CGPoint(x: 100, y: 227))
+        let result2 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: CGPoint(x: 2, y: 671))
         
         XCTAssertEqual(result1, Note(note: .G, octave: 5))
         XCTAssertEqual(result2, Note(note: .A_sharp, octave: 3))

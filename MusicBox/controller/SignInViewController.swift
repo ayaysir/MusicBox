@@ -63,18 +63,6 @@ class SignInViewController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handle!)
     }
     
-    func getUserAdditionalInfo(uid: String) {
-        let userRef = self.ref.child("users/\(uid)/interesting")
-        userRef.getData { error, snapshot in
-            if snapshot.exists() {
-                self.lblInteresting.text = "관심분야: \(snapshot.value ?? "-")"
-            } else if let error = error {
-                self.lblInteresting.text = "관심분야: -"
-                print("get data failed:", error.localizedDescription)
-            }
-        }
-    }
-    
     @IBAction func btnActSubmit(_ sender: UIButton) {
         guard let userEmail = txtUserEmail.text,
               let userPassword = txtUserPassword.text else {
@@ -114,6 +102,19 @@ class SignInViewController: UIViewController {
 }
 
 extension SignInViewController {
+    
+    private func getUserAdditionalInfo(uid: String) {
+        let userRef = self.ref.child("users/\(uid)/interesting")
+        userRef.getData { error, snapshot in
+            if snapshot.exists() {
+                self.lblInteresting.text = "관심분야: \(snapshot.value ?? "-")"
+            } else if let error = error {
+                self.lblInteresting.text = "관심분야: -"
+                print("get data failed:", error.localizedDescription)
+            }
+        }
+    }
+    
     private func getUserProfileImage(uid: String) {
         let storage = Storage.storage()
         let storageRef = storage.reference()

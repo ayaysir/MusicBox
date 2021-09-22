@@ -12,6 +12,7 @@ class MusicBoxUtil {
     var highestNote: Note
     var cellWidth: CGFloat
     var cellHeight: CGFloat
+    var noteRange: [Note]!
     
     init() {
         self.highestNote = Note(note: .E, octave: 6)
@@ -23,6 +24,7 @@ class MusicBoxUtil {
         self.highestNote = highestNote
         self.cellWidth = cellWidth
         self.cellHeight = cellHeight
+        noteRange = getNoteRange()
     }
     
     func getNoteRange() -> [Note] {
@@ -52,11 +54,10 @@ class MusicBoxUtil {
         return round(originalY / cellHeight) * cellHeight
     }
     
-    func getNoteFromCGPointY(range: [NoteWithHeight], coord: CGPoint) -> Note? {
+    func getNoteFromCGPointY(range: [NoteWithHeight], cgPoint: CGPoint) -> Note? {
         guard range.count >= 2 else { return nil }
-        let snappedY = snapToGridY(originalY: coord.y)
+        let snappedY = snapToGridY(originalY: cgPoint.y)
         
-        print("snapped:", snappedY)
         if let targetNoteWithHeight = range.first(where: { $0.height == snappedY } ) {
             return targetNoteWithHeight.note
         }

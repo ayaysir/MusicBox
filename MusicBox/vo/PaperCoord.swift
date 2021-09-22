@@ -10,6 +10,7 @@ import UIKit
 struct PaperCoord {
     var id: UUID = UUID()
     var musicNote: Note
-    var cgCoord: CGPoint
+    var cgPoint: CGPoint
+    var snappedPoint: CGPoint
     var gridCoord: Any?
 }
