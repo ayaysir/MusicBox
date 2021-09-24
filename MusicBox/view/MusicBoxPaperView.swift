@@ -82,6 +82,10 @@ class MusicBoxPaperView: UIView {
             return
         }
         
+        // 배경색 채우기
+        UIColor.lightGray.setFill()
+        context.fill(boxOutline)
+        
         let cst = PaperConstant.shared
 
         setValues()

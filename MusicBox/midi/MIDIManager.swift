@@ -63,7 +63,7 @@ class MIDIManager {
     func createAVMIDIPlayer(midiFile midiFileURL: URL?) {
         
         guard let midiFileURL = midiFileURL else {
-            fatalError("\"nightBaldMountain.mid\" file not found.")
+            fatalError("midi file not found.")
         }
         
         guard let bankURL = soundbank else {

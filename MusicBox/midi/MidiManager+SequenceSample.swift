@@ -210,19 +210,48 @@ extension MIDIManager {
             Event(note: 64, duration: 0.5, beat: 0.5),
             Event(note: 62, duration: 0.5, beat: 0.5),
             Event(note: 60, duration: 1.5, beat: 2),
+            
         ]
         
-        for event in scoreBaduk {
-            var msg = MIDINoteMessage(channel: 0,
-                                      note: event.note,
-                                      velocity: event.velocity,
-                                       releaseVelocity: 0,
-                                       duration: event.duration )
-            status = MusicTrackNewMIDINoteEvent(track!, beat, &msg)
-            if status != noErr {
-                print("creating new midi note event \(status)")
+        let scoreBadukHarmony = [
+            Event(note: 60, duration: 4, beat: 4),
+            Event(note: 55, duration: 4, beat: 4),
+            Event(note: 60, duration: 4, beat: 4),
+            Event(note: 55, duration: 2, beat: 2),
+            Event(note: 48, duration: 1.5, beat: 2),
+            
+            Event(note: 60, duration: 4, beat: 4),
+            Event(note: 53, duration: 1, beat: 1),
+            Event(note: 54, duration: 1, beat: 1),
+            Event(note: 55, duration: 2, beat: 2),
+            
+            Event(note: 60, duration: 4, beat: 4),
+            Event(note: 53, duration: 1, beat: 1),
+            Event(note: 54, duration: 1, beat: 1),
+            Event(note: 55, duration: 1, beat: 1),
+            Event(note: 43, duration: 1, beat: 1),
+            
+            Event(note: 48, duration: 4, beat: 4),
+            Event(note: 55, duration: 4, beat: 4),
+            Event(note: 60, duration: 4, beat: 4),
+            Event(note: 55, duration: 2, beat: 2),
+            Event(note: 48, duration: 1.5, beat: 2),
+        ]
+        
+        for voice in [scoreBaduk, scoreBadukHarmony] {
+            beat = 0
+            for event in voice {
+                var msg = MIDINoteMessage(channel: 0,
+                                          note: event.note,
+                                          velocity: event.velocity,
+                                           releaseVelocity: 0,
+                                           duration: event.duration )
+                status = MusicTrackNewMIDINoteEvent(track!, beat, &msg)
+                if status != noErr {
+                    print("creating new midi note event \(status)")
+                }
+                beat += event.beat
             }
-            beat += event.beat
         }
         
         

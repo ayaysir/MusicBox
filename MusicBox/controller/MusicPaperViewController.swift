@@ -26,6 +26,7 @@ class MusicPaperViewController: UIViewController {
     let cst = PaperConstant.shared
     
     var midiManager: MIDIManager!
+    var midiManager2: MIDIManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,9 @@ class MusicPaperViewController: UIViewController {
         
         isEraserMode = swtEraserOn.isOn
         
-        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
+//        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
+        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "VintageDreamsWaves-v2", withExtension: "sf2"))
+        midiManager2 = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
         
     }
     
@@ -100,17 +103,25 @@ class MusicPaperViewController: UIViewController {
     
     
     @IBAction func btnActPlaySampleMIDIFile(_ sender: Any) {
-        midiManager.createAVMIDIPlayer(midiFile: Bundle.main.url(forResource: "Allian1", withExtension: "mid"))
+        midiManager2.midiPlayer?.stop()
+        midiManager2.playMusicPlayer()
+        guard let sample = Bundle.main.url(forResource: "Allian1", withExtension: "mid") else {
+            print("파일이 없습니다.")
+            return
+        }
+        midiManager.createAVMIDIPlayer(midiFile: sample)
         midiManager.midiPlayer?.play(nil)
     }
     
     @IBAction func btnActPlaySampleSequence(_ sender: Any) {
-        midiManager.createAVMIDIPlayer(sequence: midiManager.musicSequence)
-        midiManager.midiPlayer?.play(nil)
+        midiManager.midiPlayer?.stop()
+        midiManager2.createAVMIDIPlayer(sequence: midiManager.musicSequence)
+        midiManager2.midiPlayer?.play(nil)
     }
     
     @IBAction func btnActPlayMusicPlayer(_ sender: Any) {
-        midiManager.playMusicPlayer()
+        midiManager.midiPlayer?.stop()
+        midiManager2.playMusicPlayer()
     }
     
     

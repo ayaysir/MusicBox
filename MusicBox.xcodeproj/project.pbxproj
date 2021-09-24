@@ -41,6 +41,7 @@
 		44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02C26FE0C71000CE46F /* Allian1.mid */; };
 		44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */; };
 		44F3A03126FE121A000CE46F /* MidiManager+SequenceSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03026FE121A000CE46F /* MidiManager+SequenceSample.swift */; };
+		44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */; };
 		44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */; };
 		44F5B39E26F631F4004DE730 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5B39D26F631F4004DE730 /* String+.swift */; };
 		5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BF41CD842EF9D0FCDFC1A1 /* Pods_MusicBox.framework */; };
@@ -106,6 +107,7 @@
 		44F3A02C26FE0C71000CE46F /* Allian1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = Allian1.mid; sourceTree = "<group>"; };
 		44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
 		44F3A03026FE121A000CE46F /* MidiManager+SequenceSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MidiManager+SequenceSample.swift"; sourceTree = "<group>"; };
+		44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
 		44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		44F5B39D26F631F4004DE730 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5440410DCB0C33B7C081310F /* Pods-MusicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.debug.xcconfig"; path = "Target Support Files/Pods-MusicBox/Pods-MusicBox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,18 +241,17 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				44F3A03426FE1E06000CE46F /* resource */,
 				4405E97526FB77660012E4F5 /* midi */,
 				449F3EA626EF34F1002C874D /* util */,
 				449F3E9F26EF32FF002C874D /* vo */,
 				449A412526ECF83C00EE3B67 /* core */,
 				449A412226ECE8BC00EE3B67 /* extension */,
-				44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */,
 				449A411F26ECD86000EE3B67 /* view */,
 				440A1A2C26ECC08A00AA4135 /* controller */,
 				44E682E826EA46320074FE46 /* AppDelegate.swift */,
 				44E682EA26EA46320074FE46 /* SceneDelegate.swift */,
 				44E682EC26EA46320074FE46 /* ViewController.swift */,
-				44F3A02C26FE0C71000CE46F /* Allian1.mid */,
 				44E682EE26EA46320074FE46 /* Main.storyboard */,
 				44E682F126EA46340074FE46 /* Assets.xcassets */,
 				440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */,
@@ -279,6 +280,16 @@
 				44E6830C26EA46340074FE46 /* Info.plist */,
 			);
 			path = MusicBoxUITests;
+			sourceTree = "<group>";
+		};
+		44F3A03426FE1E06000CE46F /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */,
+				44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */,
+				44F3A02C26FE0C71000CE46F /* Allian1.mid */,
+			);
+			path = resource;
 			sourceTree = "<group>";
 		};
 		E154B62EBCEB69AFD9DD5287 /* Pods */ = {
@@ -424,6 +435,7 @@
 				44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */,
 				44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */,
 				44E682F026EA46320074FE46 /* Main.storyboard in Resources */,
+				44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
