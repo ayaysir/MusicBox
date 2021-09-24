@@ -104,7 +104,7 @@ class MusicPaperViewController: UIViewController {
     
     @IBAction func btnActPlaySampleMIDIFile(_ sender: Any) {
         midiManager2.midiPlayer?.stop()
-        midiManager2.playMusicPlayer()
+        midiManager2.stopMusicPlayer()
         guard let sample = Bundle.main.url(forResource: "Allian1", withExtension: "mid") else {
             print("파일이 없습니다.")
             return
@@ -115,12 +115,14 @@ class MusicPaperViewController: UIViewController {
     
     @IBAction func btnActPlaySampleSequence(_ sender: Any) {
         midiManager.midiPlayer?.stop()
+        midiManager2.stopMusicPlayer()
         midiManager2.createAVMIDIPlayer(sequence: midiManager.musicSequence)
         midiManager2.midiPlayer?.play(nil)
     }
     
     @IBAction func btnActPlayMusicPlayer(_ sender: Any) {
         midiManager.midiPlayer?.stop()
+        midiManager2.midiPlayer?.stop()
         midiManager2.playMusicPlayer()
     }
     

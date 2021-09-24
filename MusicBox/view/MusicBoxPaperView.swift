@@ -39,6 +39,9 @@ class MusicBoxPaperView: UIView {
             self.setNeedsDisplay()
         }
     }
+    
+    let cst = PaperConstant.shared
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -51,7 +54,6 @@ class MusicBoxPaperView: UIView {
         self.rowNum = rowNum
         self.colNum = colNum
         
-        let cst = PaperConstant.shared
         let boxWidth = cst.cellWidth * colNum.cgFloat
         let boxHeight = cst.cellHeight * (rowNum - 1).cgFloat
         self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
@@ -83,8 +85,18 @@ class MusicBoxPaperView: UIView {
         }
         
         // 배경색 채우기
-        UIColor.lightGray.setFill()
-        context.fill(boxOutline)
+        var toggleTableBackgroundColor: Bool = false
+        
+        for index in 1...colNum {
+            toggleTableBackgroundColor ? UIColor.lightGray.setFill() : UIColor.white.setFill()
+            
+            context.fill(CGRect(x: boxOutline.minX + cst.cellWidth * CGFloat(index - 1), y: boxOutline.minY, width: cst.cellWidth, height: boxOutline.height))
+            
+            if index % 8 == 0 {
+                toggleTableBackgroundColor = !toggleTableBackgroundColor
+            }
+            
+        }
         
         let cst = PaperConstant.shared
 

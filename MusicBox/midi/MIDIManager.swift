@@ -130,5 +130,14 @@ class MIDIManager {
             return
         }
     }
+    
+    func stopMusicPlayer() {
+        let status = MusicPlayerStop(musicPlayer!)
+        if status != noErr {
+            print("Error stopping \(status)")
+            return
+        }
+        
+    }
 }
 
