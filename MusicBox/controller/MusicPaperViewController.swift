@@ -25,6 +25,8 @@ class MusicPaperViewController: UIViewController {
     
     let cst = PaperConstant.shared
     
+    var midiManager: MIDIManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +50,8 @@ class MusicPaperViewController: UIViewController {
         self.musicPaperView.addGestureRecognizer(gesture)
         
         isEraserMode = swtEraserOn.isOn
+        
+        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
         
     }
     
@@ -93,6 +97,22 @@ class MusicPaperViewController: UIViewController {
             isEraserMode = false
         }
     }
+    
+    
+    @IBAction func btnActPlaySampleMIDIFile(_ sender: Any) {
+        midiManager.createAVMIDIPlayer(midiFile: Bundle.main.url(forResource: "Allian1", withExtension: "mid"))
+        midiManager.midiPlayer?.play(nil)
+    }
+    
+    @IBAction func btnActPlaySampleSequence(_ sender: Any) {
+        midiManager.createAVMIDIPlayer(sequence: midiManager.musicSequence)
+        midiManager.midiPlayer?.play(nil)
+    }
+    
+    @IBAction func btnActPlayMusicPlayer(_ sender: Any) {
+        midiManager.playMusicPlayer()
+    }
+    
     
 
     /*

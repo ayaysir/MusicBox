@@ -62,6 +62,31 @@
                                     <action selector="swtActEraserOn:" destination="FTy-9d-VvX" eventType="valueChanged" id="8ts-dj-41L"/>
                                 </connections>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgm-u4-IR3">
+                                <rect key="frame" x="20" y="612" width="115" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="play sample midi"/>
+                                <connections>
+                                    <action selector="btnActPlaySampleMIDIFile:" destination="FTy-9d-VvX" eventType="touchUpInside" id="rvb-On-qqD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wT-f7-Qmj">
+                                <rect key="frame" x="20" y="650" width="153" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="play sample sequence"/>
+                                <connections>
+                                    <action selector="btnActPlaySampleSequence:" destination="FTy-9d-VvX" eventType="touchUpInside" id="qAY-J4-K89"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwe-Na-WFk">
+                                <rect key="frame" x="20" y="688" width="119" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="play music player"/>
+                                <connections>
+                                    <action selector="btnActPlayMusicPlayer:" destination="FTy-9d-VvX" eventType="touchUpInside" id="ePL-zv-yKH"/>
+                                    <action selector="btnActPlaySampleSequence:" destination="FTy-9d-VvX" eventType="touchUpInside" id="453-Fp-jsc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xSb-PQ-oX3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
