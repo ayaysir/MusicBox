@@ -152,7 +152,6 @@ class MusicBoxPaperView: UIView {
             let circle = UIBezierPath(arcCenter: coord.snappedPoint, radius: cst.circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
             context.addPath(circle.cgPath)
 
-//            _ = util.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: cgPoint)
         }
         context.fillPath()
 

@@ -12,5 +12,12 @@ struct PaperCoord {
     var musicNote: Note
     var cgPoint: CGPoint
     var snappedPoint: CGPoint
-    var gridCoord: Any?
+    var gridX: Double?
+    
+    mutating func setGridX(start: CGFloat, eachCellWidth: CGFloat) {
+        let currentX = cgPoint.x
+        let xCGPosFromZero = currentX - start
+        self.gridX = Double(xCGPosFromZero / eachCellWidth)
+    }
 }
+

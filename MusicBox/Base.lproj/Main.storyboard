@@ -87,6 +87,36 @@
                                     <action selector="btnActPlaySampleSequence:" destination="FTy-9d-VvX" eventType="touchUpInside" id="453-Fp-jsc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHm-0Z-qOA">
+                                <rect key="frame" x="189" y="612" width="152" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="convert Paper To MIDI"/>
+                                <connections>
+                                    <action selector="btnActConvertPaperToMIDI:" destination="FTy-9d-VvX" eventType="touchUpInside" id="W6p-uU-nVM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLi-V3-B4X">
+                                <rect key="frame" x="189" y="650" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Erase All Note"/>
+                                <connections>
+                                    <action selector="btnActEraseAllNote:" destination="FTy-9d-VvX" eventType="touchUpInside" id="eN3-hG-Z3F"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Snap To Grid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEX-s7-vIM">
+                                <rect key="frame" x="168" y="582" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5IQ-xC-Ewo">
+                                <rect key="frame" x="268" y="578" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="swtActSnapToGridOn:" destination="FTy-9d-VvX" eventType="valueChanged" id="aMV-AD-9es"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xSb-PQ-oX3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

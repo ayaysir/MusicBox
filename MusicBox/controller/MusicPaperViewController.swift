@@ -18,6 +18,7 @@ class MusicPaperViewController: UIViewController {
     @IBOutlet weak var swtEraserOn: UISwitch!
     
     var isEraserMode: Bool = false
+    var isSnapToGridMode: Bool = true
     
     var util: MusicBoxUtil!
     var noteRange: [Note]!
@@ -52,8 +53,8 @@ class MusicPaperViewController: UIViewController {
         
         isEraserMode = swtEraserOn.isOn
         
-//        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
-        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "VintageDreamsWaves-v2", withExtension: "sf2"))
+        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
+//        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "VintageDreamsWaves-v2", withExtension: "sf2"))
         midiManager2 = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
         
     }
@@ -64,8 +65,10 @@ class MusicPaperViewController: UIViewController {
             guard let note = util.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: cgPoint) else {
                 return
             }
-            let snapped = CGPoint(x: util.snapToGridX(originalX: cgPoint.x), y: util.snapToGridY(originalY: cgPoint.y))
-            let coord = PaperCoord(musicNote: note, cgPoint: cgPoint, snappedPoint: snapped)
+            let snappedX: CGFloat = isSnapToGridMode ? util.snapToGridX(originalX: cgPoint.x) : cgPoint.x
+            let snappedY: CGFloat = util.snapToGridY(originalY: cgPoint.y)
+            var coord = PaperCoord(musicNote: note, cgPoint: cgPoint, snappedPoint: CGPoint(x: snappedX, y: snappedY))
+            coord.setGridX(start: cst.leftMargin, eachCellWidth: cst.cellWidth)
             print(coord)
             musicPaperView.data.append(coord)
         } else {
@@ -101,6 +104,15 @@ class MusicPaperViewController: UIViewController {
         }
     }
     
+    @IBAction func swtActSnapToGridOn(_ sender: UISwitch) {
+        if sender.isOn {
+            isSnapToGridMode = true
+        } else {
+            isSnapToGridMode = false
+        }
+    }
+    
+    
     
     @IBAction func btnActPlaySampleMIDIFile(_ sender: Any) {
         midiManager2.midiPlayer?.stop()
@@ -125,6 +137,19 @@ class MusicPaperViewController: UIViewController {
         midiManager2.midiPlayer?.stop()
         midiManager2.playMusicPlayer()
     }
+    
+    @IBAction func btnActConvertPaperToMIDI(_ sender: Any) {
+        let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+        midiManager.musicSequence = sequence
+        midiManager.midiPlayer?.play({
+            print("finished")
+        })
+    }
+    
+    @IBAction func btnActEraseAllNote(_ sender: Any) {
+        musicPaperView.data = []
+    }
+    
     
     
 

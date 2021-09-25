@@ -15,7 +15,12 @@ class MIDIManager {
     
     var musicPlayer: MusicPlayer?
     
-    var musicSequence: MusicSequence!
+    var musicSequence: MusicSequence! {
+        didSet {
+            createAVMIDIPlayer(sequence: self.musicSequence)
+            self.musicPlayer = createMusicPlayer(musicSequence)
+        }
+    }
     
     init(soundbank: URL?) {
         
