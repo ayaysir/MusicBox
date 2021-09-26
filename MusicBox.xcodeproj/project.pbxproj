@@ -43,6 +43,13 @@
 		44F3A03126FE121A000CE46F /* MidiManager+SequenceSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03026FE121A000CE46F /* MidiManager+SequenceSample.swift */; };
 		44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */; };
 		44F3A03626FF5327000CE46F /* PaperCoordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03526FF5327000CE46F /* PaperCoordTests.swift */; };
+		44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03726FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 */; };
+		44F3A03A26FF72FA000CE46F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03926FF72FA000CE46F /* .gitignore */; };
+		44F3A03D2700A40A000CE46F /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03C2700A40A000CE46F /* ENSideMenu.swift */; };
+		44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03E2700A448000CE46F /* ENSideMenuNavigationController.swift */; };
+		44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */; };
+		44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */; };
+		44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A0442700B8FA000CE46F /* UIViewPreview.swift */; };
 		44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */; };
 		44F5B39E26F631F4004DE730 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5B39D26F631F4004DE730 /* String+.swift */; };
 		5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BF41CD842EF9D0FCDFC1A1 /* Pods_MusicBox.framework */; };
@@ -110,6 +117,13 @@
 		44F3A03026FE121A000CE46F /* MidiManager+SequenceSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MidiManager+SequenceSample.swift"; sourceTree = "<group>"; };
 		44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
 		44F3A03526FF5327000CE46F /* PaperCoordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperCoordTests.swift; sourceTree = "<group>"; };
+		44F3A03726FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
+		44F3A03926FF72FA000CE46F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		44F3A03C2700A40A000CE46F /* ENSideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
+		44F3A03E2700A448000CE46F /* ENSideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSideMenuNavigationController.swift; sourceTree = "<group>"; };
+		44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperOptionPanelView.xib; sourceTree = "<group>"; };
+		44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperOptionPanelView.swift; sourceTree = "<group>"; };
+		44F3A0442700B8FA000CE46F /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		44F5B39D26F631F4004DE730 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5440410DCB0C33B7C081310F /* Pods-MusicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.debug.xcconfig"; path = "Target Support Files/Pods-MusicBox/Pods-MusicBox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */,
+				44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */,
+				44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -214,6 +230,7 @@
 				44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */,
 				4405E96926F76E180012E4F5 /* ImageUtil.swift */,
 				4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */,
+				44F3A0442700B8FA000CE46F /* UIViewPreview.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -221,6 +238,8 @@
 		44E682DC26EA46310074FE46 = {
 			isa = PBXGroup;
 			children = (
+				44F3A03B2700A3E8000CE46F /* ENSwiftSideMenu */,
+				44F3A03926FF72FA000CE46F /* .gitignore */,
 				44E682E726EA46320074FE46 /* MusicBox */,
 				44E682FE26EA46340074FE46 /* MusicBoxTests */,
 				44E6830926EA46340074FE46 /* MusicBoxUITests */,
@@ -290,9 +309,19 @@
 			children = (
 				44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */,
 				44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */,
+				44F3A03726FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 */,
 				44F3A02C26FE0C71000CE46F /* Allian1.mid */,
 			);
 			path = resource;
+			sourceTree = "<group>";
+		};
+		44F3A03B2700A3E8000CE46F /* ENSwiftSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				44F3A03C2700A40A000CE46F /* ENSideMenu.swift */,
+				44F3A03E2700A448000CE46F /* ENSideMenuNavigationController.swift */,
+			);
+			path = ENSwiftSideMenu;
 			sourceTree = "<group>";
 		};
 		E154B62EBCEB69AFD9DD5287 /* Pods */ = {
@@ -432,12 +461,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */,
+				44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
 				44E682F226EA46340074FE46 /* Assets.xcassets in Resources */,
 				44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */,
 				44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */,
 				44E682F026EA46320074FE46 /* Main.storyboard in Resources */,
+				44F3A03A26FF72FA000CE46F /* .gitignore in Resources */,
 				44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,10 +598,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44F3A03D2700A40A000CE46F /* ENSideMenu.swift in Sources */,
 				4405E97726FB77B60012E4F5 /* MIDIManager.swift in Sources */,
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
+				44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */,
+				44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */,
 				449F3EA826EF3529002C874D /* TextUtil.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
@@ -578,6 +613,7 @@
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
+				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */,
 				449F3EA126EF3315002C874D /* Note.swift in Sources */,
 				44F3A03126FE121A000CE46F /* MidiManager+SequenceSample.swift in Sources */,

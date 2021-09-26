@@ -47,7 +47,7 @@ class MusicBoxUtil {
     }
     
     func snapToGridX(originalX: CGFloat) -> CGFloat {
-        return round(originalX / cellWidth) * cellWidth - (cellWidth / 2)
+        return ceil(originalX / cellWidth) * cellWidth - (cellWidth / 2)
     }
     
     func snapToGridY(originalY: CGFloat) -> CGFloat {

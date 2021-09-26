@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct Paper {
+    var bpm: Int
+    var timeSignature: Any?
+    var coords: [PaperCoord]
+}
+
 struct PaperCoord {
     var id: UUID = UUID()
     var musicNote: Note
@@ -15,7 +21,7 @@ struct PaperCoord {
     var gridX: Double?
     
     mutating func setGridX(start: CGFloat, eachCellWidth: CGFloat) {
-        let currentX = cgPoint.x
+        let currentX = snappedPoint.x
         let xCGPosFromZero = currentX - start
         self.gridX = Double(xCGPosFromZero / eachCellWidth)
     }

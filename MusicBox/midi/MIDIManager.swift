@@ -15,6 +15,8 @@ class MIDIManager {
     
     var musicPlayer: MusicPlayer?
     
+    var headSilence: Double = 0.1
+    
     var musicSequence: MusicSequence! {
         didSet {
             createAVMIDIPlayer(sequence: self.musicSequence)

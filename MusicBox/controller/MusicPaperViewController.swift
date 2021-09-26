@@ -15,7 +15,7 @@ class MusicPaperViewController: UIViewController {
     @IBOutlet weak var constraintMusicPaperWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintMusicPaperHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var swtEraserOn: UISwitch!
+    var panelView: PaperOptionPanelView!
     
     var isEraserMode: Bool = false
     var isSnapToGridMode: Bool = true
@@ -51,11 +51,24 @@ class MusicPaperViewController: UIViewController {
         self.musicPaperView.addGestureRecognizer(tapGesture)
         self.musicPaperView.addGestureRecognizer(gesture)
         
-        isEraserMode = swtEraserOn.isOn
-        
-        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
+        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
 //        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "VintageDreamsWaves-v2", withExtension: "sf2"))
         midiManager2 = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
+        
+        panelView = PaperOptionPanelView()
+        panelView.delegate = self
+        panelView.clipsToBounds = true
+        view.addSubview(panelView)
+        
+        panelView.translatesAutoresizingMaskIntoConstraints = false
+        panelView.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
+        panelView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 100).isActive = true
+        
+        panelView.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        panelView.heightAnchor.constraint(equalToConstant: 320).isActive = true
+        
+        
+        
         
     }
     
@@ -128,7 +141,7 @@ class MusicPaperViewController: UIViewController {
     @IBAction func btnActPlaySampleSequence(_ sender: Any) {
         midiManager.midiPlayer?.stop()
         midiManager2.stopMusicPlayer()
-        midiManager2.createAVMIDIPlayer(sequence: midiManager.musicSequence)
+        midiManager2.createAVMIDIPlayer(sequence: midiManager2.musicSequence)
         midiManager2.midiPlayer?.play(nil)
     }
     
@@ -139,15 +152,11 @@ class MusicPaperViewController: UIViewController {
     }
     
     @IBAction func btnActConvertPaperToMIDI(_ sender: Any) {
-        let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
-        midiManager.musicSequence = sequence
-        midiManager.midiPlayer?.play({
-            print("finished")
-        })
+
     }
     
     @IBAction func btnActEraseAllNote(_ sender: Any) {
-        musicPaperView.data = []
+        
     }
     
     
@@ -164,3 +173,68 @@ class MusicPaperViewController: UIViewController {
     */
 
 }
+
+extension MusicPaperViewController: PaperOptionPanelViewDelegate {
+    func didClickedBackToMain(_ view: UIView) {
+        
+    }
+    
+    func didClickedSetting(_ view: UIView) {
+        
+    }
+    
+    func didClickedEraser(_ view: UIView) {
+        isEraserMode = !isEraserMode
+    }
+    
+    func didClickedSnapToGrid(_ view: UIView) {
+        isSnapToGridMode = !isSnapToGridMode
+    }
+    
+    func didClickedPlaySequence(_ view: UIView) {
+        let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+        midiManager.musicSequence = sequence
+        midiManager.midiPlayer?.play({
+            print("finished")
+        })
+    }
+    
+    func didClickedResetPaper(_ view: UIView) {
+        musicPaperView.data = []
+    }
+    
+    func didClickedUndo(_ view: UIView) {
+        
+    }
+    
+    func didClickedSave(_ view: UIView) {
+        
+    }
+    
+    
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+let deviceNames: [String] = [
+    "iPhone SE",
+    "iPad 11 Pro Max",
+    "iPad Pro (11-inch)"
+]
+
+@available(iOS 13.0, *)
+struct MusicPaperViewController_Preview: PreviewProvider {
+  static var previews: some View {
+    ForEach(deviceNames, id: \.self) { deviceName in
+      UIViewControllerPreview {
+        UIStoryboard(name: "Main", bundle: nil)
+            .instantiateInitialViewController { coder in
+            MusicPaperViewController(coder: coder)
+        }!
+      }.previewDevice(PreviewDevice(rawValue: deviceName))
+        .previewDisplayName(deviceName)
+    }
+  }
+}
+#endif

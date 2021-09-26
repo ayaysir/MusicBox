@@ -88,7 +88,9 @@ class MusicBoxPaperView: UIView {
         var toggleTableBackgroundColor: Bool = false
         
         for index in 1...colNum {
-            toggleTableBackgroundColor ? UIColor.lightGray.setFill() : UIColor.white.setFill()
+            toggleTableBackgroundColor
+                ? context.setFillColor(CGColor(gray: 0.894, alpha: 1))
+                : context.setFillColor(CGColor(gray: 1, alpha: 1))
             
             context.fill(CGRect(x: boxOutline.minX + cst.cellWidth * CGFloat(index - 1), y: boxOutline.minY, width: cst.cellWidth, height: boxOutline.height))
             
@@ -115,21 +117,12 @@ class MusicBoxPaperView: UIView {
             context.addLine(to: CGPoint(x: cst.leftMargin + boxOutline.width, y: targetY))
             context.strokePath()
         }
-
-        // 세로줄 그리기
-        let innerColNum = colNum - 1
-        for index in 1...innerColNum {
-            let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth)
-            context.move(to: CGPoint(x: targetX, y: cst.topMargin))
-            context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
-            context.strokePath()
-        }
-
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-
-        let noteNameAttrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 13.4)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: UIColor.black]
-
+        
+        var noteNameAttrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 13.4)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: UIColor.black]
+        
         // 왼쪽에 노트 이름 적기
         for (index, note) in util.noteRange.enumerated() {
             let noteTextTopMargin: CGFloat = cst.topMargin * 0.5
@@ -138,6 +131,40 @@ class MusicBoxPaperView: UIView {
             let noteTextValue = note.textValueSharp
             noteTextValue.draw(with: noteRect, options: .usesLineFragmentOrigin, attributes: noteNameAttrs, context: nil)
         }
+        
+        // 세로줄 그리기
+        let innerColNum = colNum - 1
+        context.setStrokeColor(CGColor(gray: 0.95, alpha: 1))
+        
+        noteNameAttrs[NSAttributedString.Key.foregroundColor] = UIColor(cgColor: CGColor(gray: 0.1, alpha: 0.5))
+        for index in 1...innerColNum {
+            let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth)
+            context.move(to: CGPoint(x: targetX, y: cst.topMargin))
+            if index % 4 == 0 {
+                context.setLineWidth(2)
+                context.setStrokeColor(CGColor(gray: 0, alpha: 1))
+            } else {
+                context.setLineWidth(1)
+                context.setStrokeColor(CGColor(gray: 0.1, alpha: 1))
+            }
+            context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
+            context.strokePath()
+            
+            if index % 16 == 0 {
+                // 왼쪽에 노트 이름 적기
+                for (index, note) in util.noteRange.enumerated() {
+                    let noteTextTopMargin: CGFloat = cst.topMargin * 0.5
+                    let noteRect = CGRect(x: targetX, y: noteTextTopMargin + cst.cellHeight * index.cgFloat, width: 0, height: 0)
+
+                    let noteTextValue = note.textValueSharp
+                    noteTextValue.draw(with: noteRect, options: .usesLineFragmentOrigin, attributes: noteNameAttrs, context: nil)
+                }
+
+            }
+        }
+
+
+
 
 //        // 지우개 모드인 경우
 //        if true {
