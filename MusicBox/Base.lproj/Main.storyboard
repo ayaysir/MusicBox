@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Mp-J0-GZM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="510"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-Wl-es1" customClass="MusicBoxPaperView" customModule="MusicBox" customModuleProvider="target">
                                         <rect key="frame" x="-37" y="25" width="5000" height="1000"/>
@@ -43,7 +43,6 @@
                                     <constraint firstItem="qeb-Wl-es1" firstAttribute="leading" secondItem="g8B-8S-aZ8" secondAttribute="leading" id="6yI-kD-ANy"/>
                                     <constraint firstItem="qeb-Wl-es1" firstAttribute="trailing" secondItem="g8B-8S-aZ8" secondAttribute="trailing" id="Uvz-0f-MSO"/>
                                     <constraint firstItem="qeb-Wl-es1" firstAttribute="top" secondItem="g8B-8S-aZ8" secondAttribute="top" id="t2W-vA-VoP"/>
-                                    <constraint firstAttribute="height" constant="510" id="zap-JT-PzW"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="g8B-8S-aZ8"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="13U-bf-gJw"/>
@@ -52,6 +51,7 @@
                         <viewLayoutGuide key="safeArea" id="xSb-PQ-oX3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="xSb-PQ-oX3" firstAttribute="bottom" secondItem="7Mp-J0-GZM" secondAttribute="bottom" id="5O7-QT-Ie9"/>
                             <constraint firstItem="7Mp-J0-GZM" firstAttribute="top" secondItem="xSb-PQ-oX3" secondAttribute="top" id="FUv-44-N8d"/>
                             <constraint firstItem="7Mp-J0-GZM" firstAttribute="leading" secondItem="xSb-PQ-oX3" secondAttribute="leading" id="ILz-QX-iLa"/>
                             <constraint firstItem="7Mp-J0-GZM" firstAttribute="trailing" secondItem="xSb-PQ-oX3" secondAttribute="trailing" id="Ldy-5h-4Yi"/>

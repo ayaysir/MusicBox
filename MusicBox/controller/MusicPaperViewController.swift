@@ -204,6 +204,9 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedUndo(_ view: UIView) {
+        if musicPaperView.data.count >= 1 {
+            musicPaperView.data.removeLast()
+        }
         
     }
     
