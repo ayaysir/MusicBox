@@ -21,7 +21,7 @@ extension MIDIManager {
             assert(tempoTrack != nil, "Cannot get tempo track")
         }
         //MusicTrackClear(tempoTrack, 0, 1)
-        if MusicTrackNewExtendedTempoEvent(tempoTrack!, 0.0, 70     ) != noErr {
+        if MusicTrackNewExtendedTempoEvent(tempoTrack!, 0.0, 70) != noErr {
             print("could not set tempo")
         }
         
@@ -55,10 +55,10 @@ extension MIDIManager {
         
         // now make some notes and put them on the track
         // 60: C4 -> C0 = 0 ~
-        let duration: Float32 = 1
+        let duration: Float32 = 8
         for coord in coords {
             var msg = MIDINoteMessage(channel: 0,
-                                      note: UInt8(coord.musicNote.semitone),
+                                      note: UInt8(coord.musicNote.semitone + 12),
                                       velocity: 96,
                                        releaseVelocity: 0,
                                        duration: duration )
