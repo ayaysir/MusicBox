@@ -13,7 +13,7 @@ class PaperInfoBridge {
     var currentBPM: Int?
     
     // 못갖춘마디가 있다면 16분음표 기준으로 몇인지?
-    var incompleteMeasureBeatCount: Int!
+    var incompleteMeasureBeatCount: Int?
     
     var currentPaperName: String!
     

@@ -11,6 +11,7 @@ struct Paper {
     var bpm: Int
     var timeSignature: Any?
     var coords: [PaperCoord]
+    var albumartURL: URL?
 }
 
 struct PaperCoord {

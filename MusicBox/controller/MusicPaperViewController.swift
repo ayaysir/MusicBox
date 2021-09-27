@@ -189,7 +189,8 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int) {
-        print(numOf16beat)
+        PaperInfoBridge.shared.incompleteMeasureBeatCount = numOf16beat
+        musicPaperView.reloadPaper()
     }
     
     func didClickedBackToMain(_ view: UIView) {

@@ -31,6 +31,8 @@ class MusicBoxPaperView: UIView {
 
     var test: String!
     
+    var imBeatCount: Int!
+    
     // draw 주요 정보 저장
     var boxOutline: CGRect!
 
@@ -51,15 +53,26 @@ class MusicBoxPaperView: UIView {
     }
     
     func configure(rowNum: Int, colNum: Int, util: MusicBoxUtil) {
+        if let imBeatCount = PaperInfoBridge.shared.incompleteMeasureBeatCount {
+            self.imBeatCount = imBeatCount
+        } else {
+            self.imBeatCount = 0
+        }
+        
         self.rowNum = rowNum
         self.colNum = colNum
         
-        let boxWidth = cst.cellWidth * colNum.cgFloat
+        let boxWidth = cst.cellWidth * (colNum + imBeatCount).cgFloat
         let boxHeight = cst.cellHeight * (rowNum - 1).cgFloat
         self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
 
         self.util = util
         print("init1")
+    }
+    
+    func reloadPaper() {
+        self.configure(rowNum: self.rowNum, colNum: self.colNum, util: util)
+        self.setNeedsDisplay()
     }
 
     func addPaperCoordByCGPoint() {
@@ -85,6 +98,22 @@ class MusicBoxPaperView: UIView {
         }
         
         // 배경색 채우기
+        // 못갖춘마디
+
+        if imBeatCount > 0 {
+            context.setFillColor(CGColor(gray: 0.894, alpha: 1))
+            for index in 1...imBeatCount {
+                context.fill(
+                    CGRect(
+                        x: boxOutline.minX + cst.cellWidth * CGFloat(index - 1),
+                        y: boxOutline.minY,
+                        width: cst.cellWidth,
+                        height: boxOutline.height
+                    )
+                )
+            }
+        }
+        
         var toggleTableBackgroundColor: Bool = false
         
         for index in 1...colNum {
@@ -92,7 +121,14 @@ class MusicBoxPaperView: UIView {
                 ? context.setFillColor(CGColor(gray: 0.894, alpha: 1))
                 : context.setFillColor(CGColor(gray: 1, alpha: 1))
             
-            context.fill(CGRect(x: boxOutline.minX + cst.cellWidth * CGFloat(index - 1), y: boxOutline.minY, width: cst.cellWidth, height: boxOutline.height))
+            context.fill(
+                CGRect(
+                    x: CGFloat(imBeatCount) * cst.cellWidth + boxOutline.minX + cst.cellWidth * CGFloat(index - 1),
+                    y: boxOutline.minY,
+                    width: cst.cellWidth,
+                    height: boxOutline.height
+                )
+            )
             
             if index % 8 == 0 {
                 toggleTableBackgroundColor = !toggleTableBackgroundColor
@@ -136,9 +172,25 @@ class MusicBoxPaperView: UIView {
         let innerColNum = colNum - 1
         context.setStrokeColor(CGColor(gray: 0.95, alpha: 1))
         
+        if imBeatCount > 0 {
+            for index in 1...imBeatCount {
+                let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth)
+                context.move(to: CGPoint(x: targetX, y: cst.topMargin))
+                if index < imBeatCount {
+                    context.setLineWidth(1)
+                    context.setStrokeColor(CGColor(gray: 0.4, alpha: 1))
+                } else {
+                    context.setLineWidth(2)
+                    context.setStrokeColor(CGColor(gray: 0, alpha: 1))
+                }
+                context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
+                context.strokePath()
+            }
+        }
+        
         noteNameAttrs[NSAttributedString.Key.foregroundColor] = UIColor(cgColor: CGColor(gray: 0.1, alpha: 0.5))
         for index in 1...innerColNum {
-            let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth)
+            let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
             if index % 4 == 0 {
                 context.setLineWidth(2)
