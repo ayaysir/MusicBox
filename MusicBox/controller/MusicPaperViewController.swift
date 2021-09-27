@@ -184,6 +184,14 @@ class MusicPaperViewController: UIViewController {
 }
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
+    func didClickedBpmChange(_ view: UIView, bpm: Int) {
+        PaperInfoBridge.shared.currentBPM = bpm
+    }
+    
+    func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int) {
+        print(numOf16beat)
+    }
+    
     func didClickedBackToMain(_ view: UIView) {
         
     }

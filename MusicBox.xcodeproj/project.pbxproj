@@ -50,6 +50,7 @@
 		44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */; };
 		44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */; };
 		44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A0442700B8FA000CE46F /* UIViewPreview.swift */; };
+		44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A046270199F1000CE46F /* PaperInfoBridge.swift */; };
 		44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */; };
 		44F5B39E26F631F4004DE730 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5B39D26F631F4004DE730 /* String+.swift */; };
 		5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BF41CD842EF9D0FCDFC1A1 /* Pods_MusicBox.framework */; };
@@ -124,6 +125,7 @@
 		44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperOptionPanelView.xib; sourceTree = "<group>"; };
 		44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperOptionPanelView.swift; sourceTree = "<group>"; };
 		44F3A0442700B8FA000CE46F /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
+		44F3A046270199F1000CE46F /* PaperInfoBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfoBridge.swift; sourceTree = "<group>"; };
 		44F5B39B26F61EA3004DE730 /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		44F5B39D26F631F4004DE730 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5440410DCB0C33B7C081310F /* Pods-MusicBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicBox.debug.xcconfig"; path = "Target Support Files/Pods-MusicBox/Pods-MusicBox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			children = (
 				449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */,
 				449F3EA426EF334A002C874D /* MusicBoxUtil.swift */,
+				44F3A046270199F1000CE46F /* PaperInfoBridge.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
+				44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* PaperCoord.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,

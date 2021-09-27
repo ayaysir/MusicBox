@@ -16,6 +16,8 @@ protocol PaperOptionPanelViewDelegate: AnyObject {
     func didClickedResetPaper(_ view: UIView)
     func didClickedUndo(_ view: UIView)
     func didClickedSave(_ view: UIView)
+    func didClickedBpmChange(_ view: UIView, bpm: Int)
+    func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int)
 }
 
 class PaperOptionPanelView: UIView {
@@ -23,6 +25,9 @@ class PaperOptionPanelView: UIView {
     weak var delegate: PaperOptionPanelViewDelegate?
 
     let nibName = "PaperOptionPanelView"
+    
+    @IBOutlet weak var txtBpm: UITextField!
+    @IBOutlet weak var txtIncompleteMeasure: UITextField!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -72,4 +77,29 @@ class PaperOptionPanelView: UIView {
     @IBAction func btnActReset(_ sender: Any) {
         delegate?.didClickedResetPaper(self)
     }
+    
+    @IBAction func btnActChangeBPM(_ sender: Any) {
+        guard let bpmStr = txtBpm.text else {
+            delegate?.didClickedBpmChange(self, bpm: 0)
+            return
+        }
+        guard let bpmInt = Int(bpmStr) else {
+            delegate?.didClickedBpmChange(self, bpm: 0)
+            return
+        }
+        delegate?.didClickedBpmChange(self, bpm: bpmInt)
+    }
+    
+    @IBAction func btnActChangeIncompleteMeasure(_ sender: Any) {
+        guard let imStr = txtIncompleteMeasure.text else {
+            delegate?.didIncompleteMeasureChange(self, numOf16beat: 0)
+            return
+        }
+        guard let imInt = Int(imStr) else {
+            delegate?.didIncompleteMeasureChange(self, numOf16beat: 0)
+            return
+        }
+        delegate?.didIncompleteMeasureChange(self, numOf16beat: imInt)
+    }
+    
 }

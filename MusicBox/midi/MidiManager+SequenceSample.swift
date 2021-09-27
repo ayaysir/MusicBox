@@ -21,7 +21,9 @@ extension MIDIManager {
             assert(tempoTrack != nil, "Cannot get tempo track")
         }
         //MusicTrackClear(tempoTrack, 0, 1)
-        if MusicTrackNewExtendedTempoEvent(tempoTrack!, 0.0, 70) != noErr {
+        
+        let bpm: Int = PaperInfoBridge.shared.currentBPM ?? 100
+        if MusicTrackNewExtendedTempoEvent(tempoTrack!, 0.0, Float64(bpm)) != noErr {
             print("could not set tempo")
         }
         
@@ -47,7 +49,8 @@ extension MIDIManager {
         }
         
         // program change. first data byte is the patch, the second data byte is unused for program change messages.
-        chMsg = MIDIChannelMessage(status: 0xC0, data1: 11, data2: 0, reserved: 0)
+        let instNumber = 11
+        chMsg = MIDIChannelMessage(status: 0xC0, data1: UInt8(instNumber), data2: 0, reserved: 0)
         status = MusicTrackNewMIDIChannelEvent(track!, 0, &chMsg)
         if status != noErr {
             print("creating program change event \(status)")
@@ -56,6 +59,7 @@ extension MIDIManager {
         // now make some notes and put them on the track
         // 60: C4 -> C0 = 0 ~
         let duration: Float32 = 8
+        
         for coord in coords {
             var msg = MIDINoteMessage(channel: 0,
                                       note: UInt8(coord.musicNote.semitone + 12),
