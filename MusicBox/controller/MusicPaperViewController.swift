@@ -194,7 +194,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedBackToMain(_ view: UIView) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func didClickedSetting(_ view: UIView) {
@@ -229,6 +229,23 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedSave(_ view: UIView) {
+        guard let bpm = PaperInfoBridge.shared.currentBPM else {
+            print(#function, "bpm error")
+            return
+        }
+        let coords = musicPaperView.data
+        let timeSignature = TimeSignature()
+        let paper = Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
+        
+        do {
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(paper)
+            let jsonString = String(data: jsonData, encoding: .utf8)
+            print(jsonString as Any)
+            
+        } catch {
+            print(error.localizedDescription)
+        }
         
     }
     

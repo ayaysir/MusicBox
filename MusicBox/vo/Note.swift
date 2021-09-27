@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Note: Equatable {
+struct Note: Equatable, Codable {
     var note: Scale
     var octave: Int
     
