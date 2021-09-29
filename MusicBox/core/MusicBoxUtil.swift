@@ -46,6 +46,8 @@ class MusicBoxUtil {
         return noteArray
     }
     
+
+    
     func snapToGridX(originalX: CGFloat) -> CGFloat {
         return ceil(originalX / cellWidth) * cellWidth - (cellWidth / 2)
     }

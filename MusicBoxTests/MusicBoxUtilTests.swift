@@ -35,10 +35,10 @@ class MusicBoxUtilTests: XCTestCase {
         let beforeLastNote = range[range.count - 2]
         let lastNote = range.last
         
-        XCTAssertEqual(firstNote, Note(note: Scale.E, octave: 6))
-        XCTAssertEqual(secondNote, Note(note: Scale.D_sharp, octave: 6))
-        XCTAssertEqual(beforeLastNote, Note(note: Scale.F, octave: 3))
-        XCTAssertEqual(lastNote, Note(note: Scale.E, octave: 3))
+        XCTAssert(firstNote!.equalTo(rhs: Note(note: Scale.E, octave: 6)))
+        XCTAssert(secondNote.equalTo(rhs: Note(note: Scale.D_sharp, octave: 6)))
+        XCTAssert(beforeLastNote.equalTo(rhs: Note(note: Scale.F, octave: 3)))
+        XCTAssert(lastNote!.equalTo(rhs: Note(note: Scale.E, octave: 3)))
     }
     
     func test_snapToGridX() throws {
@@ -47,6 +47,7 @@ class MusicBoxUtilTests: XCTestCase {
         let result = sut.snapToGridX(originalX: originalX)
         
         // round(420 / 58) * 58 - (58 / 2) = 7 * 58 - 29
+        // ceil(420 / cellWidth) * cellWidth - (cellWidth / 2)
         XCTAssertEqual(result, 377)
     }
     
@@ -76,8 +77,8 @@ class MusicBoxUtilTests: XCTestCase {
         let result1 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: CGPoint(x: 100, y: 227))
         let result2 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: CGPoint(x: 2, y: 671))
         
-        XCTAssertEqual(result1, Note(note: .G, octave: 5))
-        XCTAssertEqual(result2, Note(note: .A_sharp, octave: 3))
+        XCTAssert(result1!.equalTo(rhs: Note(note: .G, octave: 5)))
+        XCTAssert(result2!.equalTo(rhs: Note(note: .A_sharp, octave: 3)))
     }
 
     func testPerformanceExample() throws {

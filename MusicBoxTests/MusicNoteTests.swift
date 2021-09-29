@@ -46,9 +46,14 @@ class MusicNoteTest: XCTestCase {
         let musicNoteGSharp7 = Note.getNote(semitone: semitoneGSharp7)
         
         // then
-        XCTAssertEqual(musicNoteC5, Note(note: .C, octave: 5))
-        XCTAssertEqual(musicNoteA4, Note(note: .A, octave: 4))
-        XCTAssertEqual(musicNoteGSharp7, Note(note: .G_sharp, octave: 7))
+        XCTAssertEqual(musicNoteC5?.note, Scale.C)
+        XCTAssertEqual(musicNoteC5?.octave, 5)
+        
+        XCTAssertEqual(musicNoteA4?.note, Scale.A)
+        XCTAssertEqual(musicNoteA4?.octave, 4)
+        
+        XCTAssertEqual(musicNoteGSharp7?.note, Scale.G_sharp)
+        XCTAssertEqual(musicNoteGSharp7?.octave, 7)
     }
     
     func test_textValueSharp() throws {

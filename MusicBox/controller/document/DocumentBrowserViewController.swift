@@ -24,6 +24,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         // Specify the allowed content types of your application via the Info.plist.
         
         // Do any additional setup after loading the view.
+        
+        let url = getDocumentsDirectory().appendingPathComponent("dasfadsf").appendingPathExtension("fdfe")
+        do {
+            try UUID().uuidString.write(to: url, atomically: true, encoding: .utf8)
+            print("akasjafjkf: ", Bundle.main.infoDictionary?["UIFileSharingEnabled"] as Any)
+        } catch  {
+            
+        }
     }
     
     
@@ -39,7 +47,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         
         simpleDestructiveYesAndNo(self, message: "파일을 만드시겠습니까?", title: "파일") { action in
             let newDocumentURL: URL? = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("musicbox")
-                .appendingPathExtension("musicbox-json")
+                .appendingPathExtension("musicbox")
             
             do {
                 try UUID().uuidString.write(to: newDocumentURL!, atomically: true, encoding: .utf8)

@@ -161,7 +161,7 @@ class MusicPaperViewController: UIViewController {
     }
     
     @IBAction func btnActConvertPaperToMIDI(_ sender: Any) {
-
+        
     }
     
     @IBAction func btnActEraseAllNote(_ sender: Any) {
@@ -235,16 +235,28 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         }
         let coords = musicPaperView.data
         let timeSignature = TimeSignature()
-        let paper = Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
         
+        let paper = Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
+        print(paper.coords)
+        
+        print(FileUtil.getDocumentsDirectory())
         do {
-            let encoder = JSONEncoder()
-            let jsonData = try encoder.encode(paper)
-            let jsonString = String(data: jsonData, encoding: .utf8)
-            print(jsonString as Any)
+            let url = FileUtil.getDocumentsDirectory().appendingPathComponent("music").appendingPathExtension("musicbox")
+            let archived = try NSKeyedArchiver.archivedData(withRootObject: paper, requiringSecureCoding: true)
+            try archived.write(to: url)
+            print("archived success:", archived)
+            
+            let dataFromDisk = try Data(contentsOf: url)
+            guard let unarchived = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Paper.self, PaperCoord.self, Note.self, NSArray.self, NSString.self, NSNumber.self], from: dataFromDisk) as? Paper else {
+                print("unarchived failed")
+                return
+            }
+            unarchived.coords.forEach { coord in
+                print(coord.description)
+            }
             
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
         
     }
