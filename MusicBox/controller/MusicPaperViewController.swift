@@ -33,10 +33,14 @@ class MusicPaperViewController: UIViewController {
     var imBeatCount: Int = 0
     var currentFileName: String = "song"
     
+    var document: PaperDocument?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let colNum = 80
+        let document = document
+        print("title:", document?.paper?.title)
         
         util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cst.cellWidth, cellHeight: cst.cellHeight)
         noteRange = util.getNoteRange()
@@ -246,11 +250,12 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         print(FileUtil.getDocumentsDirectory())
         
         do {
-            let docUrl = FileUtil.getDocumentsDirectory().appendingPathComponent(UUID().uuidString).appendingPathExtension("musicbox")
+            let fileName = currentFileName
+            let docUrl = FileUtil.getDocumentsDirectory().appendingPathComponent(fileName).appendingPathExtension("musicbox")
             let document = PaperDocument(fileURL: docUrl)
             paper.comment = ""
-            paper.title = "asdf"
-            paper.paperMaker = "a"
+            paper.title = "this is aabbcc"
+            paper.paperMaker = "acnmexaz"
             
             document.paper = paper
             

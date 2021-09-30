@@ -44,6 +44,7 @@
 		44AE99472705EA4700D046D1 /* PaperDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE99462705EA4700D046D1 /* PaperDocument.swift */; };
 		44AE99492705EB5400D046D1 /* MIDISequenceExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE99482705EB5400D046D1 /* MIDISequenceExample.swift */; };
 		44AE994B2705EC1A00D046D1 /* PaperInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE994A2705EC1A00D046D1 /* PaperInfo.swift */; };
+		44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */; };
 		44B18C3226EF7FF900890C13 /* Paper+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B18C3126EF7FF900890C13 /* Paper+.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
@@ -129,6 +130,7 @@
 		44AE99462705EA4700D046D1 /* PaperDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperDocument.swift; sourceTree = "<group>"; };
 		44AE99482705EB5400D046D1 /* MIDISequenceExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISequenceExample.swift; sourceTree = "<group>"; };
 		44AE994A2705EC1A00D046D1 /* PaperInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfo.swift; sourceTree = "<group>"; };
+		44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCollectionViewController.swift; sourceTree = "<group>"; };
 		44B18C3126EF7FF900890C13 /* Paper+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Paper+.swift"; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
 				449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */,
 				444AF39D2701E26400BD8E38 /* HomeViewController.swift */,
+				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				444AF39E2701E26400BD8E38 /* HomeViewController.swift in Sources */,
 				44AE993E2705DBE200D046D1 /* CGPoint+.swift in Sources */,
 				44AE99472705EA4700D046D1 /* PaperDocument.swift in Sources */,
+				44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */,
 				44AE994B2705EC1A00D046D1 /* PaperInfo.swift in Sources */,
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,

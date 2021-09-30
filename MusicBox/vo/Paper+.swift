@@ -27,6 +27,8 @@ extension String {
     
     static let kScaleRawValue = "scale-rawvalue"
     static let kOctave = "octave"
+    
+    static let kIncompleteMeasureBeat = "imBeat"
 }
 
 struct TimeSignature: Codable {
@@ -52,6 +54,8 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var bpm: Int = 120
     var coords: [PaperCoord] = []
     var timeSignature: TimeSignature = TimeSignature()
+    
+    var incompleteMeasureBeat: Int = 0
 
     var albumartURL: URL?
     var paperMaker: String = ""
@@ -61,7 +65,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var fileId: UUID = UUID()
     
     enum CodingKeys: CodingKey {
-        case bpm, coords, timeSignature, albumartURL, paperMaker, title, comment, fileId
+        case bpm, coords, timeSignature, albumartURL, paperMaker, title, comment, fileId, incompleteMeasureBeat
     }
     
     override init() {
@@ -78,6 +82,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     func encode(with coder: NSCoder) {
         coder.encode(bpm, forKey: .kBPM)
         coder.encode(coords, forKey: .kCoords)
+        coder.encode(incompleteMeasureBeat, forKey: .kIncompleteMeasureBeat)
         
         coder.encode(timeSignature.upper, forKey: .kTimeSignatureUpper)
         coder.encode(timeSignature.lower, forKey: .kTimeSignatureLower)
@@ -95,6 +100,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         
         // not nullable
         let bpm = coder.decodeInteger(forKey: .kBPM)
+        let imBeat = coder.decodeInteger(forKey: .kIncompleteMeasureBeat)
         let tsLower = coder.decodeInteger(forKey: .kTimeSignatureLower)
         let tsUpper = coder.decodeInteger(forKey: .kTimeSignatureUpper)
         
@@ -117,6 +123,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         let timeSignature = TimeSignature(upper: tsUpper, lower: tsLower)
         
         self.bpm = bpm
+        self.incompleteMeasureBeat = imBeat
         self.coords = coords
         self.timeSignature = timeSignature
         self.albumartURL = albumartURL
