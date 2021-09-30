@@ -29,6 +29,10 @@ class MusicPaperViewController: UIViewController {
     var midiManager: MIDIManager!
     var midiManager2: MIDIManager!
     
+    var bpm: Int = 100
+    var imBeatCount: Int = 0
+    var currentFileName: String = "song"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -185,11 +189,13 @@ class MusicPaperViewController: UIViewController {
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedBpmChange(_ view: UIView, bpm: Int) {
-        PaperInfoBridge.shared.currentBPM = bpm
+        midiManager.currentBPM = bpm
+        self.bpm = bpm
     }
     
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int) {
-        PaperInfoBridge.shared.incompleteMeasureBeatCount = numOf16beat
+        musicPaperView.imBeatCount = numOf16beat
+        self.imBeatCount = numOf16beat
         musicPaperView.reloadPaper()
     }
     
@@ -229,35 +235,54 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedSave(_ view: UIView) {
-        guard let bpm = PaperInfoBridge.shared.currentBPM else {
-            print(#function, "bpm error")
-            return
-        }
+        
+        let filemgr = FileManager.default
+        
         let coords = musicPaperView.data
         let timeSignature = TimeSignature()
         
         let paper = Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
-        print(paper.coords)
         
         print(FileUtil.getDocumentsDirectory())
+        
         do {
-            let url = FileUtil.getDocumentsDirectory().appendingPathComponent("music").appendingPathExtension("musicbox")
-            let archived = try NSKeyedArchiver.archivedData(withRootObject: paper, requiringSecureCoding: true)
-            try archived.write(to: url)
-            print("archived success:", archived)
+            let docUrl = FileUtil.getDocumentsDirectory().appendingPathComponent(UUID().uuidString).appendingPathExtension("musicbox")
+            let document = PaperDocument(fileURL: docUrl)
+            paper.comment = ""
+            paper.title = "asdf"
+            paper.paperMaker = "a"
             
-            let dataFromDisk = try Data(contentsOf: url)
-            guard let unarchived = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Paper.self, PaperCoord.self, Note.self, NSArray.self, NSString.self, NSNumber.self], from: dataFromDisk) as? Paper else {
-                print("unarchived failed")
-                return
-            }
-            unarchived.coords.forEach { coord in
-                print(coord.description)
-            }
+            document.paper = paper
             
-        } catch {
-            print(error)
+            let saveOption: UIDocument.SaveOperation = filemgr.fileExists(atPath: docUrl.path) ? .forOverwriting : .forCreating
+            
+            document.save(to: docUrl, for: saveOption) { (success: Bool) -> Void in
+                if success {
+                    print("File save OK")
+                } else {
+                    print("Failed to save file ")
+                }
+            }
         }
+        
+//        do {
+//            let url = FileUtil.getDocumentsDirectory().appendingPathComponent("music").appendingPathExtension("musicbox")
+//            let archived = try NSKeyedArchiver.archivedData(withRootObject: paper, requiringSecureCoding: true)
+//            try archived.write(to: url)
+//            print("archived success:", archived)
+//
+//            let dataFromDisk = try Data(contentsOf: url)
+//            guard let unarchived = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Paper.self, PaperCoord.self, Note.self, NSArray.self, NSString.self, NSNumber.self], from: dataFromDisk) as? Paper else {
+//                print("unarchived failed")
+//                return
+//            }
+//            unarchived.coords.forEach { coord in
+//                print(coord.description)
+//            }
+//
+//        } catch {
+//            print(error)
+//        }
         
     }
     

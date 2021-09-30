@@ -44,11 +44,12 @@ class MusicBoxUtilTests: XCTestCase {
     func test_snapToGridX() throws {
         let originalX: CGFloat = 420
         
+        sut.cellWidth = 58
         let result = sut.snapToGridX(originalX: originalX)
         
-        // round(420 / 58) * 58 - (58 / 2) = 7 * 58 - 29
-        // ceil(420 / cellWidth) * cellWidth - (cellWidth / 2)
-        XCTAssertEqual(result, 377)
+        // ceil(originalX / cellWidth) * cellWidth - (cellWidth / 2)
+        // ceil(420 / 58) * 58 - (58 / 2) = 8 * 58 - 29 =
+        XCTAssertEqual(result, 435)
     }
     
     func test_snapToGridY() throws {

@@ -23,7 +23,7 @@ class PaperCoordTests: XCTestCase {
         let eachCellWidth: CGFloat = 58
         let currentX: CGFloat = 325.5
         
-        var coord1 = PaperCoord(musicNote: Note(note: .C, octave: 0), cgPoint: CGPoint(x: currentX, y: 0), snappedPoint: CGPoint(x: 0, y: 0))
+        let coord1 = PaperCoord(musicNote: Note(note: .C, octave: 0), cgPoint: CGPoint(x: 0, y: 0), snappedPoint: CGPoint(x: currentX, y: 0))
         
         // 325.5 - 30 = 295.5
         // 295.5 / 58 = 5.094827586206897
@@ -35,7 +35,7 @@ class PaperCoordTests: XCTestCase {
         // 613.3 - 52 = 561.3
         // 561.3 / 61.1 = 9.186579378068739
         
-        var coord2 = PaperCoord(musicNote: Note(note: .C, octave: 0), cgPoint: CGPoint(x: currentX2, y: 0), snappedPoint: CGPoint(x: 0, y: 0))
+        let coord2 = PaperCoord(musicNote: Note(note: .C, octave: 0), cgPoint: CGPoint(x: 0, y: 0), snappedPoint: CGPoint(x: currentX2, y: 0))
         
         coord1.setGridX(start: start, eachCellWidth: eachCellWidth)
         coord2.setGridX(start: start2, eachCellWidth: eachCellWidth2)

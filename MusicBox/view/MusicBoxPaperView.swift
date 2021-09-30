@@ -31,7 +31,7 @@ class MusicBoxPaperView: UIView {
 
     var test: String!
     
-    var imBeatCount: Int!
+    var imBeatCount: Int = 0
     
     // draw 주요 정보 저장
     var boxOutline: CGRect!
@@ -53,11 +53,6 @@ class MusicBoxPaperView: UIView {
     }
     
     func configure(rowNum: Int, colNum: Int, util: MusicBoxUtil) {
-        if let imBeatCount = PaperInfoBridge.shared.incompleteMeasureBeatCount {
-            self.imBeatCount = imBeatCount
-        } else {
-            self.imBeatCount = 0
-        }
         
         self.rowNum = rowNum
         self.colNum = colNum

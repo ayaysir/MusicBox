@@ -5,7 +5,6 @@
 //  Created by yoonbumtae on 2021/09/22.
 //
 
-import Foundation
 import AVFoundation
 
 class MIDIManager {
@@ -23,6 +22,8 @@ class MIDIManager {
             self.musicPlayer = createMusicPlayer(musicSequence)
         }
     }
+    
+    var currentBPM: Int = 100
     
     init(soundbank: URL?) {
         

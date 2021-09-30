@@ -8,18 +8,6 @@
 import UIKit
 import AudioKit
 
-extension CGPoint {
-    var doubleArray: [Double] {
-        return [self.x, self.y]
-    }
-}
-
-extension Array where Element == Double {
-    var cgPoint: CGPoint {
-        return CGPoint(x: self[0], y: self[1])
-    }
-}
-
 extension String {
     static let kBPM = "bpm"
     static let kCoords = "coords"
@@ -39,7 +27,6 @@ extension String {
     
     static let kScaleRawValue = "scale-rawvalue"
     static let kOctave = "octave"
-
 }
 
 struct TimeSignature: Codable {
@@ -75,6 +62,10 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     
     enum CodingKeys: CodingKey {
         case bpm, coords, timeSignature, albumartURL, paperMaker, title, comment, fileId
+    }
+    
+    override init() {
+        super.init()
     }
     
     // Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
