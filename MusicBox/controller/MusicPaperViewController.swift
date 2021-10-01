@@ -60,8 +60,10 @@ class MusicPaperViewController: UIViewController {
         self.musicPaperView.addGestureRecognizer(gesture)
         
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
-//        midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "VintageDreamsWaves-v2", withExtension: "sf2"))
+        midiManager.currentBPM = bpm
+        
         midiManager2 = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
+        
         
         panelView = PaperOptionPanelView()
         panelView.delegate = self

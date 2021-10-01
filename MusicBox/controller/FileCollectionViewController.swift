@@ -6,15 +6,32 @@
 //
 
 import UIKit
+import PanModal
 
 class FileCollectionViewController: UICollectionViewController {
+    
+    let filemgr = FileManager.default
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        do {
+            // Get the directory contents urls (including subfolders urls)
+            let directoryContents = try filemgr.contentsOfDirectory(at: dirPaths, includingPropertiesForKeys: nil)
 
-        // Do any additional setup after loading the view.
+            // if you want to filter the directory contents you can do like this:
+            print("document file list:", directoryContents)
+
+        } catch {
+            print(error)
+        }
+        
+        
     }
     
 
@@ -59,21 +76,10 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
         print(indexPath.row)
         if indexPath.row == 0 {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let paperViewController = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
-//            documentViewController.document = Document(fileURL: documentURL)
-            paperViewController.modalPresentationStyle = .fullScreen
-            
-            let sampleUrl = FileUtil.getDocumentsDirectory().appendingPathComponent("sample").appendingPathExtension("musicbox")
-            let paper = Paper(bpm: 177, coords: [], timeSignature: TimeSignature())
-            paper.paperMaker = "sampler"
-            paper.title = "sample"
-            
-            let blankDocument = PaperDocument(fileURL: sampleUrl)
-            blankDocument.paper = paper
-            paperViewController.document = blankDocument
-            paperViewController.currentFileName = "ssample"
-
-            present(paperViewController, animated: true, completion: nil)
+            let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
+            modalVC.delegate = self
+            self.dismiss(animated: true, completion: nil)
+            presentPanModal(modalVC)
         } else {
             
         }
@@ -111,4 +117,27 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
+}
+
+extension FileCollectionViewController: CreateNewPaperVCDelegate {
+    func didNewPaperCreated(_ controller: CreateNewPaperViewController, newPaper: Paper, fileNameWithoutExt: String) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let paperViewController = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
+
+        paperViewController.modalPresentationStyle = .fullScreen
+        
+        let paperURL = FileUtil.getDocumentsDirectory().appendingPathComponent(fileNameWithoutExt).appendingPathExtension("musicbox")
+        
+        let paperDocument = PaperDocument(fileURL: paperURL)
+        paperDocument.paper = newPaper
+        paperViewController.document = paperDocument
+        paperViewController.bpm = newPaper.bpm
+        paperViewController.imBeatCount = newPaper.incompleteMeasureBeat
+        paperViewController.currentFileName = fileNameWithoutExt
+        
+        dismiss(animated: true, completion: nil)
+        present(paperViewController, animated: true, completion: nil)
+    }
+    
 }

@@ -60,7 +60,12 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var albumartURL: URL?
     var paperMaker: String = ""
     var title: String = "My MusicBox Sheet"
+    var originalArtist: String = "J. S. Bach"
     var comment: String = ""
+    
+    // firebaseUID가 있는 경우에만 isAllowOthersToEdit가 유효
+    var firebaseUID: String?
+    var isAllowOthersToEdit: Bool? = true
 
     var fileId: UUID = UUID()
     

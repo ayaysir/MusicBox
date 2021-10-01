@@ -45,6 +45,8 @@
 		44AE99492705EB5400D046D1 /* MIDISequenceExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE99482705EB5400D046D1 /* MIDISequenceExample.swift */; };
 		44AE994B2705EC1A00D046D1 /* PaperInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE994A2705EC1A00D046D1 /* PaperInfo.swift */; };
 		44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */; };
+		44AE995027071EA100D046D1 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 44AE994F27071EA100D046D1 /* PanModal */; };
+		44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */; };
 		44B18C3226EF7FF900890C13 /* Paper+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B18C3126EF7FF900890C13 /* Paper+.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
@@ -131,6 +133,7 @@
 		44AE99482705EB5400D046D1 /* MIDISequenceExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISequenceExample.swift; sourceTree = "<group>"; };
 		44AE994A2705EC1A00D046D1 /* PaperInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfo.swift; sourceTree = "<group>"; };
 		44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCollectionViewController.swift; sourceTree = "<group>"; };
+		44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPaperViewController.swift; sourceTree = "<group>"; };
 		44B18C3126EF7FF900890C13 /* Paper+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Paper+.swift"; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 			files = (
 				4405E97A26FB798D0012E4F5 /* AudioKit in Frameworks */,
 				5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */,
+				44AE995027071EA100D046D1 /* PanModal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +216,7 @@
 		440A1A2C26ECC08A00AA4135 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				44AE99512707226600D046D1 /* modal */,
 				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
 				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
 				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
@@ -298,6 +303,14 @@
 				4417C7B027034C690086FECA /* NSCodingExample.swift */,
 			);
 			path = misc;
+			sourceTree = "<group>";
+		};
+		44AE99512707226600D046D1 /* modal */ = {
+			isa = PBXGroup;
+			children = (
+				44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */,
+			);
+			path = modal;
 			sourceTree = "<group>";
 		};
 		44E682DC26EA46310074FE46 = {
@@ -437,6 +450,7 @@
 			name = MusicBox;
 			packageProductDependencies = (
 				4405E97926FB798D0012E4F5 /* AudioKit */,
+				44AE994F27071EA100D046D1 /* PanModal */,
 			);
 			productName = MusicBox;
 			productReference = 44E682E526EA46320074FE46 /* MusicBox.app */;
@@ -514,6 +528,7 @@
 			mainGroup = 44E682DC26EA46310074FE46;
 			packageReferences = (
 				4405E97826FB798D0012E4F5 /* XCRemoteSwiftPackageReference "AudioKit" */,
+				44AE994E27071EA100D046D1 /* XCRemoteSwiftPackageReference "PanModal" */,
 			);
 			productRefGroup = 44E682E626EA46320074FE46 /* Products */;
 			projectDirPath = "";
@@ -706,6 +721,7 @@
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
+				44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */,
 				444AF3A52701E5BC00BD8E38 /* Document.swift in Sources */,
 				4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */,
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,
@@ -1067,6 +1083,14 @@
 				minimumVersion = 5.2.1;
 			};
 		};
+		44AE994E27071EA100D046D1 /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1074,6 +1098,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4405E97826FB798D0012E4F5 /* XCRemoteSwiftPackageReference "AudioKit" */;
 			productName = AudioKit;
+		};
+		44AE994F27071EA100D046D1 /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44AE994E27071EA100D046D1 /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
