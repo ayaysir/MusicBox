@@ -35,6 +35,10 @@ class MusicPaperViewController: UIViewController {
     
     var document: PaperDocument?
     
+    var lastTouchedTime: Date?
+    var touchTimeCheckMode: Bool!
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,9 +59,9 @@ class MusicPaperViewController: UIViewController {
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        let gesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(sender:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction))
         self.musicPaperView.addGestureRecognizer(tapGesture)
-        self.musicPaperView.addGestureRecognizer(gesture)
+        self.musicPaperView.addGestureRecognizer(pinchGesture)
         
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
         midiManager.currentBPM = bpm
@@ -77,7 +81,18 @@ class MusicPaperViewController: UIViewController {
         panelView.widthAnchor.constraint(equalToConstant: 320).isActive = true
         panelView.heightAnchor.constraint(equalToConstant: 320).isActive = true
         
-        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+            
+            guard let lastTouchedTimeInterval = self.lastTouchedTime?.timeIntervalSince1970 else {
+                return
+            }
+            let currentTimeInterval = Date().timeIntervalSince1970
+            if self.touchTimeCheckMode && floor(currentTimeInterval) - floor(lastTouchedTimeInterval) >= 5 {
+                print("터치되지 않은지 5초 경과")
+                self.didClickedSave(nil)
+                self.touchTimeCheckMode = false
+            }
+        })
         
         
     }
@@ -90,7 +105,7 @@ class MusicPaperViewController: UIViewController {
             }
             let snappedX: CGFloat = isSnapToGridMode ? util.snapToGridX(originalX: cgPoint.x) : cgPoint.x
             let snappedY: CGFloat = util.snapToGridY(originalY: cgPoint.y)
-            var coord = PaperCoord(musicNote: note, cgPoint: cgPoint, snappedPoint: CGPoint(x: snappedX, y: snappedY))
+            let coord = PaperCoord(musicNote: note, cgPoint: cgPoint, snappedPoint: CGPoint(x: snappedX, y: snappedY))
             
             // 중복된 노트 제거: contains도 o(n)이므로 차이없음
             for another in musicPaperView.data {
@@ -117,9 +132,14 @@ class MusicPaperViewController: UIViewController {
             }
             musicPaperView.data = filtered
         }
+        
+        // 마지막 터치된 시점으로부터
+        lastTouchedTime = Date()
+        touchTimeCheckMode = true
     }
     
-    @objc func pinchAction(sender:UIPinchGestureRecognizer) {
+    
+    @objc func pinchAction(sender: UIPinchGestureRecognizer) {
         let scale: CGFloat = previousScale * sender.scale
         self.musicPaperView.transform = CGAffineTransform(scaleX: scale, y: scale)
 //        constraintMusicPaperWidth.constant = constraintMusicPaperWidth.constant * scale
@@ -240,7 +260,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         
     }
     
-    func didClickedSave(_ view: UIView) {
+    func didClickedSave(_ view: UIView?) {
         
         let filemgr = FileManager.default
         

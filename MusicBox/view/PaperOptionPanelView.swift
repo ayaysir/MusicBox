@@ -15,7 +15,7 @@ protocol PaperOptionPanelViewDelegate: AnyObject {
     func didClickedPlaySequence(_ view: UIView)
     func didClickedResetPaper(_ view: UIView)
     func didClickedUndo(_ view: UIView)
-    func didClickedSave(_ view: UIView)
+    func didClickedSave(_ view: UIView?)
     func didClickedBpmChange(_ view: UIView, bpm: Int)
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int)
 }
