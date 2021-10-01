@@ -18,6 +18,9 @@ struct PaperConstant {
     let cellHeight: CGFloat = 22
     
     let circleRadius: CGFloat = 10
+    
+    let defaultColNum: Int = 80
+    let viewWidthPerCol: CGFloat = 62.5
 }
 
 class MusicBoxPaperView: UIView {
@@ -62,7 +65,8 @@ class MusicBoxPaperView: UIView {
         self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
 
         self.util = util
-        print("init1")
+        
+        self.setNeedsDisplay()
     }
     
     func reloadPaper() {

@@ -13,6 +13,8 @@ class FileCollectionViewController: UICollectionViewController {
     let filemgr = FileManager.default
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    
+    var documents: [PaperDocument] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +24,15 @@ class FileCollectionViewController: UICollectionViewController {
         
         do {
             // Get the directory contents urls (including subfolders urls)
-            let directoryContents = try filemgr.contentsOfDirectory(at: dirPaths, includingPropertiesForKeys: nil)
+            let files = try filemgr.contentsOfDirectory(at: dirPaths, includingPropertiesForKeys: nil)
 
             // if you want to filter the directory contents you can do like this:
-            print("document file list:", directoryContents)
+            print("document file list:", files)
+            
+            documents = files.map { url in
+                let document = PaperDocument(fileURL: url)
+                return document
+            }
 
         } catch {
             print(error)
@@ -50,37 +57,47 @@ class FileCollectionViewController: UICollectionViewController {
 extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        documents.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.row == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newCell", for: indexPath) as?
-                    UICollectionViewCell else {
-                return UICollectionViewCell()
-            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newCell", for: indexPath)
             
             return cell
         }
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileCell", for: indexPath) as?
-                UICollectionViewCell else {
+                FileCollectionViewCell else {
             return UICollectionViewCell()
+        }
+        
+        print(documents)
+        documents[indexPath.row].open { _ in
+            cell.update(paper: self.documents[indexPath.row].paper)
         }
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         if indexPath.row == 0 {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
             modalVC.delegate = self
             self.dismiss(animated: true, completion: nil)
             presentPanModal(modalVC)
         } else {
+            let musicPaperVC = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
+            
+            documents[indexPath.row].open { success in
+                if success {
+                    musicPaperVC.document = self.documents[indexPath.row]
+                    self.present(musicPaperVC, animated: true, completion: nil)
+                }
+            }
             
         }
     }
@@ -90,18 +107,13 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
         
         // 140 : 200 = 1.43
         let width = collectionView.frame.width
-        let height = collectionView.frame.height
         
         let itemsPerRow: CGFloat = 2
         let widthPadding = sectionInsets.left * (itemsPerRow + 1)
-        let itemsPerColumn: CGFloat = 3
-        let heightPadding = sectionInsets.top * (itemsPerColumn + 1)
         
         let cellWidth = (width - widthPadding) / itemsPerRow
         let cellHeight = cellWidth * 1.43
-//        let cellHeight = (height - heightPadding) / itemsPerColumn
         
-        //
         print("cellSize:", cellWidth, cellHeight)
         return CGSize(width: cellWidth, height: cellHeight)
     }
@@ -132,12 +144,31 @@ extension FileCollectionViewController: CreateNewPaperVCDelegate {
         let paperDocument = PaperDocument(fileURL: paperURL)
         paperDocument.paper = newPaper
         paperViewController.document = paperDocument
-        paperViewController.bpm = newPaper.bpm
-        paperViewController.imBeatCount = newPaper.incompleteMeasureBeat
         paperViewController.currentFileName = fileNameWithoutExt
         
         dismiss(animated: true, completion: nil)
         present(paperViewController, animated: true, completion: nil)
     }
+    
+}
+
+class FileCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var imgAlbumart: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblArtist: UILabel!
+    @IBOutlet weak var lblPaperMaker: UILabel!
+    
+    func update(paper: Paper?) {
+        guard let paper = paper else { return }
+        lblTitle.text = paper.title
+        lblArtist.text = paper.originalArtist
+        lblPaperMaker.text = paper.paperMaker
+        print(paper.originalArtist)
+    }
+    
+}
+
+class fileViewModel {
     
 }

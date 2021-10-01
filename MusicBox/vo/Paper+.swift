@@ -29,6 +29,9 @@ extension String {
     static let kOctave = "octave"
     
     static let kIncompleteMeasureBeat = "imBeat"
+    
+    static let kOriginalArtist = "artist"
+    static let kColNum = "colNum"
 }
 
 struct TimeSignature: Codable {
@@ -55,6 +58,8 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var coords: [PaperCoord] = []
     var timeSignature: TimeSignature = TimeSignature()
     
+    var colNum: Int = 80
+    
     var incompleteMeasureBeat: Int = 0
 
     var albumartURL: URL?
@@ -70,7 +75,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var fileId: UUID = UUID()
     
     enum CodingKeys: CodingKey {
-        case bpm, coords, timeSignature, albumartURL, paperMaker, title, comment, fileId, incompleteMeasureBeat
+        case bpm, coords, timeSignature, albumartURL, paperMaker, title, comment, fileId, incompleteMeasureBeat, colNum
     }
     
     override init() {
@@ -97,6 +102,9 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         coder.encode(title, forKey: .kTitle)
         coder.encode(comment, forKey: .kComment)
         
+        coder.encode(originalArtist, forKey: .kOriginalArtist)
+        coder.encode(colNum, forKey: .kColNum)
+        
         coder.encode(fileId.uuidString, forKey: .kUUIDString)
     }
     
@@ -108,6 +116,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         let imBeat = coder.decodeInteger(forKey: .kIncompleteMeasureBeat)
         let tsLower = coder.decodeInteger(forKey: .kTimeSignatureLower)
         let tsUpper = coder.decodeInteger(forKey: .kTimeSignatureUpper)
+        let colNum = coder.decodeInteger(forKey: .kColNum)
         
         // not allow null
         guard
@@ -115,7 +124,8 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
             let paperMaker = coder.decodeObject(forKey: .kPaperMaker) as? String,
             let title = coder.decodeObject(forKey: .kTitle) as? String,
             let comment = coder.decodeObject(forKey: .kComment) as? String,
-            let uuidString = coder.decodeObject(forKey: .kUUIDString) as? String
+            let uuidString = coder.decodeObject(forKey: .kUUIDString) as? String,
+            let originalArtist = coder.decodeObject(forKey: .kOriginalArtist) as? String
         else {
             print("error")
             return
@@ -136,6 +146,9 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         self.title = title
         self.comment = comment
         self.fileId = uuid
+        
+        self.originalArtist = originalArtist
+        self.colNum = colNum
         
     }
     

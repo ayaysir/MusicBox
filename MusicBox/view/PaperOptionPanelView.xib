@@ -117,6 +117,15 @@
                         <action selector="btnActChangeIncompleteMeasure:" destination="-1" eventType="touchUpInside" id="nff-Th-VL1"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOQ-h9-Hpj">
+                    <rect key="frame" x="238" y="8" width="45" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="tinted" image="arrow.right.doc.on.clipboard" catalog="system"/>
+                    <connections>
+                        <action selector="btnActExtendPaper:" destination="-1" eventType="touchUpInside" id="QjT-PL-Hi4"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="F3C-DG-wjk"/>
             <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -131,6 +140,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow.right.doc.on.clipboard" catalog="system" width="116" height="128"/>
         <image name="arrow.uturn.backward" catalog="system" width="128" height="112"/>
         <image name="cloud.fill" catalog="system" width="128" height="88"/>
         <image name="dock.arrow.up.rectangle" catalog="system" width="128" height="93"/>

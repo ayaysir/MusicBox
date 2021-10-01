@@ -18,6 +18,7 @@ protocol PaperOptionPanelViewDelegate: AnyObject {
     func didClickedSave(_ view: UIView?)
     func didClickedBpmChange(_ view: UIView, bpm: Int)
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int)
+    func didClickedExtendPaper(_ view: UIView?)
 }
 
 class PaperOptionPanelView: UIView {
@@ -100,6 +101,10 @@ class PaperOptionPanelView: UIView {
             return
         }
         delegate?.didIncompleteMeasureChange(self, numOf16beat: imInt)
+    }
+    
+    @IBAction func btnActExtendPaper(_ sender: Any) {
+        delegate?.didClickedExtendPaper(self)
     }
     
 }

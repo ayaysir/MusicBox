@@ -30,8 +30,9 @@ class MusicPaperViewController: UIViewController {
     var midiManager2: MIDIManager!
     
     var bpm: Int = 100
+    var colNum: Int = 80
     var imBeatCount: Int = 0
-    var currentFileName: String = "song"
+    var currentFileName: String = "paper"
     
     var document: PaperDocument?
     
@@ -42,7 +43,28 @@ class MusicPaperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let colNum = 80
+        if let bpm = document?.paper?.bpm {
+            self.bpm = bpm
+            print("set bpm: \(bpm)")
+        }
+        
+        if let colNum = document?.paper?.colNum {
+            self.colNum = colNum
+            print("set colNum: \(colNum)")
+        } else {
+            self.colNum = cst.defaultColNum
+        }
+        
+        if let imBeatCount = document?.paper?.incompleteMeasureBeat {
+            self.imBeatCount = imBeatCount
+            print("set colNum: \(imBeatCount)")
+        }
+        
+        if let paperCoords = document?.paper?.coords {
+            musicPaperView.data = paperCoords
+            print("set coords array: \(paperCoords.count) notes")
+        }
+        
         let document = document
         print("title:", document?.paper?.title)
         
@@ -214,14 +236,23 @@ class MusicPaperViewController: UIViewController {
 }
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
+    func didClickedExtendPaper(_ view: UIView?) {
+        self.colNum += cst.defaultColNum
+        document?.paper?.colNum = colNum
+        musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util)
+        constraintMusicPaperWidth.constant = colNum.cgFloat * cst.viewWidthPerCol
+    }
+    
     func didClickedBpmChange(_ view: UIView, bpm: Int) {
         midiManager.currentBPM = bpm
         self.bpm = bpm
+        document?.paper?.bpm = bpm
     }
     
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int) {
         musicPaperView.imBeatCount = numOf16beat
         self.imBeatCount = numOf16beat
+        document?.paper?.incompleteMeasureBeat = numOf16beat
         musicPaperView.reloadPaper()
     }
     
@@ -263,27 +294,15 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedSave(_ view: UIView?) {
         
         let filemgr = FileManager.default
-        
-        let coords = musicPaperView.data
-        let timeSignature = TimeSignature()
-        
-        let paper = Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
-        
         print(FileUtil.getDocumentsDirectory())
         
         do {
-            let fileName = currentFileName
-            let docUrl = FileUtil.getDocumentsDirectory().appendingPathComponent(fileName).appendingPathExtension("musicbox")
-            let document = PaperDocument(fileURL: docUrl)
-            paper.comment = ""
-            paper.title = "this is aabbcc"
-            paper.paperMaker = "acnmexaz"
+            guard let document = document else { return }
+            document.paper?.coords = musicPaperView.data
             
-            document.paper = paper
+            let saveOption: UIDocument.SaveOperation = filemgr.fileExists(atPath: document.fileURL.path) ? .forOverwriting : .forCreating
             
-            let saveOption: UIDocument.SaveOperation = filemgr.fileExists(atPath: docUrl.path) ? .forOverwriting : .forCreating
-            
-            document.save(to: docUrl, for: saveOption) { (success: Bool) -> Void in
+            document.save(to: document.fileURL, for: saveOption) { (success: Bool) -> Void in
                 if success {
                     print("File save OK")
                 } else {
@@ -291,29 +310,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 }
             }
         }
-        
-//        do {
-//            let url = FileUtil.getDocumentsDirectory().appendingPathComponent("music").appendingPathExtension("musicbox")
-//            let archived = try NSKeyedArchiver.archivedData(withRootObject: paper, requiringSecureCoding: true)
-//            try archived.write(to: url)
-//            print("archived success:", archived)
-//
-//            let dataFromDisk = try Data(contentsOf: url)
-//            guard let unarchived = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Paper.self, PaperCoord.self, Note.self, NSArray.self, NSString.self, NSNumber.self], from: dataFromDisk) as? Paper else {
-//                print("unarchived failed")
-//                return
-//            }
-//            unarchived.coords.forEach { coord in
-//                print(coord.description)
-//            }
-//
-//        } catch {
-//            print(error)
-//        }
-        
     }
-    
-    
 }
 
 #if canImport(SwiftUI) && DEBUG
