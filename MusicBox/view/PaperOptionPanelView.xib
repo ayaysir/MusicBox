@@ -126,6 +126,15 @@
                         <action selector="btnActExtendPaper:" destination="-1" eventType="touchUpInside" id="QjT-PL-Hi4"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaQ-Zi-vPf">
+                    <rect key="frame" x="235" y="60" width="52" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="tinted" image="arrowtriangle.right.fill.and.line.vertical.and.arrowtriangle.left.fill" catalog="system"/>
+                    <connections>
+                        <action selector="btnActToggleSnapToGrid:" destination="-1" eventType="touchUpInside" id="Zdg-it-4Ao"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="F3C-DG-wjk"/>
             <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -142,6 +151,7 @@
     <resources>
         <image name="arrow.right.doc.on.clipboard" catalog="system" width="116" height="128"/>
         <image name="arrow.uturn.backward" catalog="system" width="128" height="112"/>
+        <image name="arrowtriangle.right.fill.and.line.vertical.and.arrowtriangle.left.fill" catalog="system" width="128" height="89"/>
         <image name="cloud.fill" catalog="system" width="128" height="88"/>
         <image name="dock.arrow.up.rectangle" catalog="system" width="128" height="93"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>

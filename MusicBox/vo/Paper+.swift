@@ -7,6 +7,7 @@
 
 import UIKit
 import AudioKit
+import AVFoundation
 
 extension String {
     static let kBPM = "bpm"
@@ -24,6 +25,7 @@ extension String {
     static let kCGPoint = "cgPoint"
     static let kSnappedPoint = "snappedPoint"
     static let kGridX = "gridX"
+    static let kGridY = "gridY"
     
     static let kScaleRawValue = "scale-rawvalue"
     static let kOctave = "octave"
@@ -160,28 +162,30 @@ class PaperCoord: NSObject, NSCoding, NSSecureCoding, Codable {
 
     var paperId: UUID = UUID()
     var musicNote: Note!
-    var cgPoint: CGPoint!
-    var snappedPoint: CGPoint!
-    var gridX: Double?
+    var absoluteTouchedPoint: CGPoint!
+    var gridX: Double!
+    var gridY: Int!
     
     enum CodingKeys: CodingKey {
-        case paperId, musicNote, cgPoint, snappedPoint, gridX
+        case paperId, musicNote, absoluteTouchedPoint, gridX
     }
     
-    init(musicNote: Note, cgPoint: CGPoint, snappedPoint: CGPoint) {
+    init(musicNote: Note, absoluteTouchedPoint: CGPoint, gridX: Double, gridY: Int) {
         self.musicNote = musicNote
-        self.cgPoint = cgPoint
-        self.snappedPoint = snappedPoint
+        self.absoluteTouchedPoint = absoluteTouchedPoint
+        self.gridX = gridX
+        self.gridY = gridY
     }
     
     func encode(with coder: NSCoder) {
         coder.encode(paperId.uuidString, forKey: .kUUIDString)
         coder.encode(musicNote, forKey: .kNote)
-        coder.encode(cgPoint.doubleArray, forKey: .kCGPoint)
-        coder.encode(snappedPoint.doubleArray, forKey: .kSnappedPoint)
+        coder.encode(absoluteTouchedPoint.doubleArray, forKey: .kCGPoint)
+
         
-        if let gridX = gridX {
+        if let gridX = gridX, let gridY = gridY {
             coder.encode(gridX, forKey: .kGridX)
+            coder.encode(gridY, forKey: .kGridY)
         }
     }
     
@@ -191,14 +195,14 @@ class PaperCoord: NSObject, NSCoding, NSSecureCoding, Codable {
         guard
             let uuidString = coder.decodeObject(forKey: .kUUIDString) as? String,
             let musicNote = coder.decodeObject(forKey: .kNote) as? Note,
-            let cgPointArr = coder.decodeObject(forKey: .kCGPoint) as? [Double],
-            let snappedPointArr = coder.decodeObject(forKey: .kSnappedPoint) as? [Double]
+            let absoluteTouchedPointArr = coder.decodeObject(forKey: .kCGPoint) as? [Double]
         else {
             return
         }
         
         // allow null
         let gridX = coder.decodeDouble(forKey: .kGridX)
+        let gridY = coder.decodeInteger(forKey: .kGridY)
         
         guard let paperId = UUID(uuidString: uuidString) else {
             return
@@ -206,20 +210,14 @@ class PaperCoord: NSObject, NSCoding, NSSecureCoding, Codable {
         
         self.paperId = paperId
         self.musicNote = musicNote
-        self.cgPoint = cgPointArr.cgPoint
-        self.snappedPoint = snappedPointArr.cgPoint
+        self.absoluteTouchedPoint = absoluteTouchedPointArr.cgPoint
         self.gridX = gridX
-    }
-
-    func setGridX(start: CGFloat, eachCellWidth: CGFloat) {
-        let currentX = snappedPoint.x
-        let xCGPosFromZero = currentX - start
-        self.gridX = Double(xCGPosFromZero / eachCellWidth)
+        self.gridY = gridY
     }
     
     override var description: String {
-        if let musicNote = musicNote, let gridX = gridX {
-            return "[musicNote: \(musicNote), gridX: \(gridX)]"
+        if let musicNote = musicNote, let gridX = gridX, let gridY = gridY {
+            return "[musicNote: \(musicNote), gridX: \(gridX), gridY: \(gridY)]"
         } else {
             return "[]"
         }

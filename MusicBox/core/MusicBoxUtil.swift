@@ -12,26 +12,27 @@ class MusicBoxUtil {
     var highestNote: Note
     var cellWidth: CGFloat
     var cellHeight: CGFloat
+    var topMargin: CGFloat
+    var leftMargin: CGFloat
     var noteRange: [Note]!
     
-    init() {
-        self.highestNote = Note(note: .E, octave: 6)
-        self.cellWidth = 58
-        self.cellHeight = 22
+    convenience init() {
+        let highestNote = Note(note: .E, octave: 6)
+        self.init(highestNote: highestNote, cellWidth: 58, cellHeight: 22, topMargin: 120, leftMargin: 80)
     }
     
-    init(highestNote: Note, cellWidth: CGFloat, cellHeight: CGFloat) {
+    init(highestNote: Note, cellWidth: CGFloat, cellHeight: CGFloat, topMargin: CGFloat, leftMargin: CGFloat) {
+        
         self.highestNote = highestNote
         self.cellWidth = cellWidth
         self.cellHeight = cellHeight
+        self.topMargin = topMargin
+        self.leftMargin = leftMargin
+        
         noteRange = getNoteRange()
     }
     
     func getNoteRange() -> [Note] {
-        getNoteRange(highestNote: self.highestNote)
-    }
-    
-    func getNoteRange(highestNote: Note) -> [Note] {
         // E6 ~ E3
         var noteArray: [Note] = []
         
@@ -46,23 +47,31 @@ class MusicBoxUtil {
         return noteArray
     }
     
+    func getGridXFromGridBox(touchedPoint: CGPoint, snapToGridMode: Bool = false) -> Double {
+        
+        let relativeX = touchedPoint.x - leftMargin
+        let gridX = relativeX / cellWidth
+        return snapToGridMode ? round(gridX) : gridX
+    }
+    
+    func getGridYFromGridBox(touchedPoint: CGPoint) -> Int {
+        
+        let rangeCount: CGFloat = noteRange.count.cgFloat
+        let boxHeight = cellHeight * (rangeCount - 1)
+        let relativeY = (touchedPoint.y - topMargin) / boxHeight * (rangeCount - 1)
+        return Int(round(relativeY))
+    }
+    
+    func getNoteFromGridBox(touchedPoint: CGPoint) -> Note? {
+        
+        let index: Int = getGridYFromGridBox(touchedPoint: touchedPoint)
+        guard index >= 0 && index < noteRange.count else {
+            return nil
+        }
+        return noteRange[Int(index)]
+    }
+    
 
     
-    func snapToGridX(originalX: CGFloat) -> CGFloat {
-        return ceil(originalX / cellWidth) * cellWidth - (cellWidth / 2)
-    }
-    
-    func snapToGridY(originalY: CGFloat) -> CGFloat {
-        return round(originalY / cellHeight) * cellHeight
-    }
-    
-    func getNoteFromCGPointY(range: [NoteWithHeight], cgPoint: CGPoint) -> Note? {
-        guard range.count >= 2 else { return nil }
-        let snappedY = snapToGridY(originalY: cgPoint.y)
-        
-        if let targetNoteWithHeight = range.first(where: { $0.height == snappedY } ) {
-            return targetNoteWithHeight.note
-        }
-        return nil
-    }
+
 }

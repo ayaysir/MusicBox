@@ -23,11 +23,9 @@ class MusicBoxUtilTests: XCTestCase {
     }
 
     func test_getNoteRange() throws {
-        // given
-        let musicNote = Note(note: Scale.E, octave: 6)
         
-        // when
-        let range = sut.getNoteRange(highestNote: musicNote)
+        sut.highestNote = Note(note: Scale.E, octave: 6)
+        let range = sut.getNoteRange()
         
         // then
         let firstNote = range.first
@@ -41,45 +39,70 @@ class MusicBoxUtilTests: XCTestCase {
         XCTAssert(lastNote!.equalTo(rhs: Note(note: Scale.E, octave: 3)))
     }
     
-    func test_snapToGridX() throws {
-        let originalX: CGFloat = 420
+    func test_getGridXFromGridBox() throws {
         
         sut.cellWidth = 58
-        let result = sut.snapToGridX(originalX: originalX)
+        sut.leftMargin = 100
+        let touchedPoint = CGPoint(x: 433, y: 0)
         
-        // ceil(originalX / cellWidth) * cellWidth - (cellWidth / 2)
-        // ceil(420 / 58) * 58 - (58 / 2) = 8 * 58 - 29 =
-        XCTAssertEqual(result, 435)
+        let result = sut.getGridXFromGridBox(touchedPoint: touchedPoint)
+        
+        // 433 - 100 = 333
+        // 333 / 58 = 5.7413793103
+        // round : round(5.74138 * 100) / 100
+        let roundedResult = round(result * 100) / 100
+        XCTAssertEqual(roundedResult, 5.74)
+        
+        sut.cellWidth = 193
+        sut.leftMargin = 5
+        let touchedPoint2 = CGPoint(x: 29964, y: 0)
+        
+        // 29964 - 5 = 29,959
+        // 29959 / 193 = 155.23
+        let result2 = sut.getGridXFromGridBox(touchedPoint: touchedPoint2, snapToGridMode: true)
+        XCTAssertEqual(round(result2), 155)
     }
     
-    func test_snapToGridY() throws {
-        let originalY: CGFloat = 387
+    func test_getGridYFromGridBox() throws {
         
-        // round(387 / 22) * 22 = 18 * 22
-        let result = sut.snapToGridY(originalY: originalY)
+        sut.cellHeight = 25
+        sut.topMargin = 107
+        sut.highestNote = Note(note: Scale.E, octave: 6)
         
-        XCTAssertEqual(result, 396)
+        let touchedPoint = CGPoint(x: 0, y: 178)
+
+        // 900 = 25 * 36
+        // 2.84 = (178 - 107) / 900 * 36
+        let result = sut.getGridYFromGridBox(touchedPoint: touchedPoint)
+
+        XCTAssertEqual(result, 3)
     }
-    
-    func test_getNoteFromCGPointY() throws {
-        let tolerance: CGFloat = 2
-        let topMargin: CGFloat = 20
+
+    func test_getNoteFromGridBox() throws {
+        /*
+         let index: Int = getGridYFromGridBox(touchedPoint: touchedPoint)
+         guard index >= 0 && index < noteRange.count else {
+             return nil
+         }
+         return noteRange[Int(index)]
+         */
         
-        let noteRange = sut.getNoteRange(highestNote: Note(note: Scale.E, octave: 6))
+        sut.cellHeight = 25
+        sut.topMargin = 107
+        sut.highestNote = Note(note: Scale.E, octave: 6)
         
-        var noteRangeWithHeight: [NoteWithHeight] = []
-        for (index, note) in noteRange.enumerated() {
-            let noteHeight = NoteWithHeight(height: tolerance + topMargin + sut.cellHeight * index.cgFloat, note: note)
-            noteRangeWithHeight.append(noteHeight)
+        let touchedPoint = CGPoint(x: 0, y: 178) // 3
+        let touchedPoint2 = CGPoint(x: 0, y: 287) // 7
+
+        guard let result1 = sut.getNoteFromGridBox(touchedPoint: touchedPoint),
+              let result2 = sut.getNoteFromGridBox(touchedPoint: touchedPoint2)
+        else {
+            XCTFail()
+            return
         }
-        
-        print(noteRangeWithHeight)
-        
-        let result1 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: CGPoint(x: 100, y: 227))
-        let result2 = sut.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: CGPoint(x: 2, y: 671))
-        
-        XCTAssert(result1!.equalTo(rhs: Note(note: .G, octave: 5)))
-        XCTAssert(result2!.equalTo(rhs: Note(note: .A_sharp, octave: 3)))
+
+        XCTAssert(result1 == Note(note: Scale.C_sharp, octave: 6))
+        XCTAssert(result2 == Note(note: .A, octave: 5))
     }
 
     func testPerformanceExample() throws {

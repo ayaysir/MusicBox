@@ -29,7 +29,7 @@ extension HomeViewController {
 
         documentURL = dirPaths.appendingPathComponent("savefile.musicbox")
         document = PaperDocument(fileURL: documentURL!)
-        let paper = Paper(bpm: 400, coords: [PaperCoord(musicNote: Note(note: .A, octave: 4), cgPoint: CGPoint(), snappedPoint: CGPoint())], timeSignature: TimeSignature())
+        let paper = Paper(bpm: 400, coords: [PaperCoord(musicNote: Note(note: .A, octave: 4), absoluteTouchedPoint: CGPoint(), gridX: 4, gridY: 4)], timeSignature: TimeSignature())
         paper.comment = "dfdafd"
         paper.title = "aaaaa"
         paper.paperMaker = "afdfas"
@@ -63,7 +63,7 @@ extension HomeViewController {
         let filemgr = FileManager.default
         let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask).first!
         
-        let paper = Paper(bpm: 400, coords: [PaperCoord(musicNote: Note(note: .A, octave: 4), cgPoint: CGPoint(), snappedPoint: CGPoint())], timeSignature: TimeSignature())
+        let paper = Paper(bpm: 400, coords: [PaperCoord(musicNote: Note(note: .A, octave: 4), absoluteTouchedPoint: CGPoint(), gridX: 4, gridY: 4)], timeSignature: TimeSignature())
         paper.comment = "dfdafd"
         paper.title = "aaaaa"
         paper.paperMaker = "afdfas"

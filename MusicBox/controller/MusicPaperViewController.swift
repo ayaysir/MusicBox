@@ -17,12 +17,11 @@ class MusicPaperViewController: UIViewController {
     
     var panelView: PaperOptionPanelView!
     
-    var isEraserMode: Bool = false
-    var isSnapToGridMode: Bool = true
+    var eraserMode: Bool = false
+    var snapToGridMode: Bool = true
     
     var util: MusicBoxUtil!
     var noteRange: [Note]!
-    var noteRangeWithHeight: [NoteWithHeight] = []
     
     let cst = PaperConstant.shared
     
@@ -65,20 +64,11 @@ class MusicPaperViewController: UIViewController {
             print("set coords array: \(paperCoords.count) notes")
         }
         
-        let document = document
-        print("title:", document?.paper?.title)
-        
-        util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cst.cellWidth, cellHeight: cst.cellHeight)
-        noteRange = util.getNoteRange()
+        util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cst.cellWidth, cellHeight: cst.cellHeight, topMargin: cst.topMargin, leftMargin: cst.leftMargin)
         let rowNum = util.noteRange.count
 
         musicPaperView.configure(rowNum: rowNum, colNum: colNum, util: util)
         
-        let tolerance = cst.cellHeight - cst.topMargin
-        for (index, note) in noteRange.enumerated() {
-            let noteHeight = NoteWithHeight(height: tolerance + cst.topMargin + cst.cellHeight * index.cgFloat, note: note)
-            noteRangeWithHeight.append(noteHeight)
-        }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction))
@@ -87,9 +77,6 @@ class MusicPaperViewController: UIViewController {
         
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
         midiManager.currentBPM = bpm
-        
-        midiManager2 = MIDIManager(soundbank: Bundle.main.url(forResource: "gs_instruments", withExtension: "dls"))
-        
         
         panelView = PaperOptionPanelView()
         panelView.delegate = self
@@ -111,7 +98,7 @@ class MusicPaperViewController: UIViewController {
             let currentTimeInterval = Date().timeIntervalSince1970
             if self.touchTimeCheckMode && floor(currentTimeInterval) - floor(lastTouchedTimeInterval) >= 5 {
                 print("터치되지 않은지 5초 경과")
-                self.didClickedSave(nil)
+                self.saveDocument()
                 self.touchTimeCheckMode = false
             }
         })
@@ -119,35 +106,43 @@ class MusicPaperViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        saveDocument()
+    }
+    
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
-        let cgPoint = sender.location(in: musicPaperView)
-        if !isEraserMode {
-            guard let note = util.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: cgPoint) else {
+        let touchedPoint = sender.location(in: musicPaperView)
+        
+        if !eraserMode {
+            
+            
+            
+            guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else {
+                print("not found note.")
                 return
             }
-            let snappedX: CGFloat = isSnapToGridMode ? util.snapToGridX(originalX: cgPoint.x) : cgPoint.x
-            let snappedY: CGFloat = util.snapToGridY(originalY: cgPoint.y)
-            let coord = PaperCoord(musicNote: note, cgPoint: cgPoint, snappedPoint: CGPoint(x: snappedX, y: snappedY))
+            let gridX = util.getGridXFromGridBox(touchedPoint: touchedPoint, snapToGridMode: snapToGridMode)
+            let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
+            let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
+
             
-            // 중복된 노트 제거: contains도 o(n)이므로 차이없음
+            // 중복된 노트 제거
             for another in musicPaperView.data {
-                if another.musicNote == coord.musicNote
-                    && another.snappedPoint.x == snappedX {
-                    print("중복 발견")
+                if another.musicNote == coord.musicNote && another.gridX == gridX {
                     return
                 }
             }
-            coord.setGridX(start: cst.leftMargin, eachCellWidth: cst.cellWidth)
-            print(coord)
+            
             musicPaperView.data.append(coord)
         } else {
-            print(cgPoint, cgPoint.x - cst.circleRadius, cgPoint.y - cst.circleRadius)
-            guard let note = util.getNoteFromCGPointY(range: noteRangeWithHeight, cgPoint: cgPoint) else {
-                return
-            }
+            
+            let note = util.getNoteFromGridBox(touchedPoint: touchedPoint)
             let filtered = musicPaperView.data.filter { coord in
-                let circleBounds = CGRect(x: coord.snappedPoint.x - cst.circleRadius, y: coord.snappedPoint.y - cst.circleRadius, width: cst.circleRadius * 2, height: cst.circleRadius * 2)
-                if coord.musicNote == note && circleBounds.contains(cgPoint) {
+                let absoulteCircleBounds = CGRect(x: cst.leftMargin + coord.gridX * cst.cellWidth - cst.circleRadius,
+                                          y: cst.topMargin + coord.gridY.cgFloat * cst.cellHeight - cst.circleRadius,
+                                          width: cst.circleRadius * 2,
+                                          height: cst.circleRadius * 2)
+                if coord.musicNote == note && absoulteCircleBounds.contains(touchedPoint) {
                     return false
                 }
                 return true
@@ -172,55 +167,19 @@ class MusicPaperViewController: UIViewController {
     
     @IBAction func swtActEraserOn(_ sender: UISwitch) {
         if sender.isOn {
-            isEraserMode = true
+            eraserMode = true
         } else {
-            isEraserMode = false
+            eraserMode = false
         }
     }
     
     @IBAction func swtActSnapToGridOn(_ sender: UISwitch) {
         if sender.isOn {
-            isSnapToGridMode = true
+            snapToGridMode = true
         } else {
-            isSnapToGridMode = false
+            snapToGridMode = false
         }
     }
-    
-    
-    
-    @IBAction func btnActPlaySampleMIDIFile(_ sender: Any) {
-        midiManager2.midiPlayer?.stop()
-        midiManager2.stopMusicPlayer()
-        guard let sample = Bundle.main.url(forResource: "Allian1", withExtension: "mid") else {
-            print("파일이 없습니다.")
-            return
-        }
-        midiManager.createAVMIDIPlayer(midiFile: sample)
-        midiManager.midiPlayer?.play(nil)
-    }
-    
-    @IBAction func btnActPlaySampleSequence(_ sender: Any) {
-        midiManager.midiPlayer?.stop()
-        midiManager2.stopMusicPlayer()
-        midiManager2.createAVMIDIPlayer(sequence: midiManager2.musicSequence)
-        midiManager2.midiPlayer?.play(nil)
-    }
-    
-    @IBAction func btnActPlayMusicPlayer(_ sender: Any) {
-        midiManager.midiPlayer?.stop()
-        midiManager2.midiPlayer?.stop()
-        midiManager2.playMusicPlayer()
-    }
-    
-    @IBAction func btnActConvertPaperToMIDI(_ sender: Any) {
-        
-    }
-    
-    @IBAction func btnActEraseAllNote(_ sender: Any) {
-        
-    }
-    
-    
     
 
     /*
@@ -236,7 +195,11 @@ class MusicPaperViewController: UIViewController {
 }
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
-    func didClickedExtendPaper(_ view: UIView?) {
+    func didClickedToggleSnapToGrid(_ view: UIView) {
+        snapToGridMode = !snapToGridMode
+    }
+    
+    func didClickedExtendPaper(_ view: UIView) {
         self.colNum += cst.defaultColNum
         document?.paper?.colNum = colNum
         musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util)
@@ -265,11 +228,11 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedEraser(_ view: UIView) {
-        isEraserMode = !isEraserMode
+        eraserMode = !eraserMode
     }
     
     func didClickedSnapToGrid(_ view: UIView) {
-        isSnapToGridMode = !isSnapToGridMode
+        snapToGridMode = !snapToGridMode
     }
     
     func didClickedPlaySequence(_ view: UIView) {
@@ -291,25 +254,27 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         
     }
     
-    func didClickedSave(_ view: UIView?) {
-        
+    func didClickedSave(_ view: UIView) {
+        saveDocument()
+    }
+    
+    func saveDocument() {
         let filemgr = FileManager.default
-        print(FileUtil.getDocumentsDirectory())
+    
+        guard let document = document else { return }
+        document.paper?.coords = musicPaperView.data
         
-        do {
-            guard let document = document else { return }
-            document.paper?.coords = musicPaperView.data
-            
-            let saveOption: UIDocument.SaveOperation = filemgr.fileExists(atPath: document.fileURL.path) ? .forOverwriting : .forCreating
-            
-            document.save(to: document.fileURL, for: saveOption) { (success: Bool) -> Void in
-                if success {
-                    print("File save OK")
-                } else {
-                    print("Failed to save file ")
-                }
+        let saveOption: UIDocument.SaveOperation = filemgr.fileExists(atPath: document.fileURL.path)
+                        ? .forOverwriting : .forCreating
+        
+        document.save(to: document.fileURL, for: saveOption) { (success: Bool) -> Void in
+            if success {
+                print("File save OK")
+            } else {
+                print("Failed to save file ")
             }
         }
+        
     }
 }
 

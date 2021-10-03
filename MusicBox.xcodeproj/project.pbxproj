@@ -60,7 +60,6 @@
 		44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */; };
 		44F3A03126FE121A000CE46F /* MidiManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */; };
 		44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */; };
-		44F3A03626FF5327000CE46F /* PaperCoordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03526FF5327000CE46F /* PaperCoordTests.swift */; };
 		44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03726FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 */; };
 		44F3A03A26FF72FA000CE46F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03926FF72FA000CE46F /* .gitignore */; };
 		44F3A03D2700A40A000CE46F /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03C2700A40A000CE46F /* ENSideMenu.swift */; };
@@ -153,7 +152,6 @@
 		44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
 		44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MidiManager+Sequence.swift"; sourceTree = "<group>"; };
 		44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VintageDreamsWaves-v2.sf2"; sourceTree = "<group>"; };
-		44F3A03526FF5327000CE46F /* PaperCoordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperCoordTests.swift; sourceTree = "<group>"; };
 		44F3A03726FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GeneralUser GS MuseScore v1.442.sf2"; sourceTree = "<group>"; };
 		44F3A03926FF72FA000CE46F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		44F3A03C2700A40A000CE46F /* ENSideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
@@ -366,7 +364,6 @@
 			children = (
 				44AE99412705E37900D046D1 /* PaperDocumentTests.swift */,
 				44AE993B2704CDEC00D046D1 /* SwiftExtensionTests.swift */,
-				44F3A03526FF5327000CE46F /* PaperCoordTests.swift */,
 				4405E96D26F770A90012E4F5 /* ImageUtilTests.swift */,
 				449F3E9D26EF3016002C874D /* MusicNoteTests.swift */,
 				449F3E9B26EF2C39002C874D /* MusicBoxUtilTests.swift */,
@@ -738,7 +735,6 @@
 				44E6830026EA46340074FE46 /* MusicBoxTests.swift in Sources */,
 				449F3E9C26EF2C39002C874D /* MusicBoxUtilTests.swift in Sources */,
 				4405E96E26F770A90012E4F5 /* ImageUtilTests.swift in Sources */,
-				44F3A03626FF5327000CE46F /* PaperCoordTests.swift in Sources */,
 				44AE99422705E37900D046D1 /* PaperDocumentTests.swift in Sources */,
 				44AE993C2704CDEC00D046D1 /* SwiftExtensionTests.swift in Sources */,
 			);

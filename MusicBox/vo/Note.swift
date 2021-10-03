@@ -54,7 +54,11 @@ class Note: NSObject, NSCoding, NSSecureCoding, Codable {
     }
     
     func equalTo(rhs: Note) -> Bool {
-        return self.note == note && self.octave == octave
+        return self.note == rhs.note && self.octave == rhs.octave
+    }
+    
+    static func ==(lhs: Note, rhs: Note) -> Bool {
+        return lhs.note == rhs.note && lhs.octave == rhs.octave
     }
     
     static func getNote(semitone: Int) -> Note? {
@@ -74,7 +78,7 @@ class Note: NSObject, NSCoding, NSSecureCoding, Codable {
     }
 }
 
-struct NoteWithHeight {
+struct NoteDisplayWithHeight {
     var height: CGFloat
     var note: Note
 }
