@@ -11,8 +11,8 @@ struct PaperConstant {
     static let shared = PaperConstant()
     
     // 상수
-    let leftMargin: CGFloat = 80
-    let topMargin: CGFloat = 120
+    let leftMargin: CGFloat = 120
+    let topMargin: CGFloat = 80
 //    let leftMargin: CGFloat = 20
 //    let topMargin: CGFloat = 57
     
@@ -48,6 +48,12 @@ class MusicBoxPaperView: UIView {
             self.setNeedsDisplay()
         }
     }
+    var title: String = "Toccata & Fugue In D Minor - II. Fugue - BWV 538"
+    var originalArtist: String = "J. S. Bach"
+    var paperMaker: String = "Paper Man"
+    var paperMadeBy: String = "The paper was made by"
+    var fontPalatio: UIFont!
+    var fontAlpha: CGFloat = 0.8
     
     let cst = PaperConstant.shared
     
@@ -70,6 +76,19 @@ class MusicBoxPaperView: UIView {
 
         self.util = util
         
+        fontPalatio = UIFont(name: "Palatio", size: 30) ?? UIFont()
+        
+        self.setNeedsDisplay()
+    }
+    
+    func setTexts(title: String?, originalArtist: String?, paperMaker: String?) {
+        if let title = title,
+           let originalArtist = originalArtist,
+           let paperMaker = paperMaker {
+            self.title = title
+            self.originalArtist = originalArtist
+            self.paperMaker = paperMaker
+        }
         self.setNeedsDisplay()
     }
     
@@ -87,7 +106,7 @@ class MusicBoxPaperView: UIView {
         // 못갖춘마디
 
         if imBeatCount > 0 {
-            context.setFillColor(CGColor(gray: 0.894, alpha: 1))
+            context.setFillColor(CGColor(gray: 0.894, alpha: fontAlpha))
             for index in 1...imBeatCount {
                 context.fill(
                     CGRect(
@@ -104,8 +123,8 @@ class MusicBoxPaperView: UIView {
         
         for index in 1...colNum {
             toggleTableBackgroundColor
-                ? context.setFillColor(CGColor(gray: 0.894, alpha: 1))
-                : context.setFillColor(CGColor(gray: 1, alpha: 1))
+                ? context.setFillColor(CGColor(gray: 0.894, alpha: fontAlpha))
+                : context.setFillColor(CGColor(gray: 1, alpha: fontAlpha))
             
             context.fill(
                 CGRect(
@@ -125,7 +144,7 @@ class MusicBoxPaperView: UIView {
         let cst = PaperConstant.shared
 
         // 모든 가로 수치는 절대값 사용
-        UIColor.black.set()
+        context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
         context.addRect(boxOutline)
         context.strokePath()
 
@@ -140,8 +159,9 @@ class MusicBoxPaperView: UIView {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
+        let blackFontUIColor = UIColor.black
         
-        var noteNameAttrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 13.4)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: UIColor.black]
+        var noteNameAttrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 13.4)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
         
         // 노트 이름 윗 마진 (공통)
         let noteTextTopMargin: CGFloat = cst.topMargin - 8.4
@@ -157,7 +177,7 @@ class MusicBoxPaperView: UIView {
         
         // 세로줄 그리기
         let innerColNum = colNum - 1
-        context.setStrokeColor(CGColor(gray: 0.95, alpha: 1))
+        context.setStrokeColor(CGColor(gray: 0.95, alpha: fontAlpha))
         
         if imBeatCount > 0 {
             for index in 1...imBeatCount {
@@ -165,10 +185,10 @@ class MusicBoxPaperView: UIView {
                 context.move(to: CGPoint(x: targetX, y: cst.topMargin))
                 if index < imBeatCount {
                     context.setLineWidth(1)
-                    context.setStrokeColor(CGColor(gray: 0.4, alpha: 1))
+                    context.setStrokeColor(CGColor(gray: 0.4, alpha: fontAlpha))
                 } else {
                     context.setLineWidth(2)
-                    context.setStrokeColor(CGColor(gray: 0, alpha: 1))
+                    context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
                 }
                 context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
                 context.strokePath()
@@ -179,12 +199,12 @@ class MusicBoxPaperView: UIView {
         for index in 1...innerColNum {
             let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
-            if index % 4 == 0 {
+            if index % 6 == 0 {
                 context.setLineWidth(2)
-                context.setStrokeColor(CGColor(gray: 0, alpha: 1))
+                context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
             } else {
                 context.setLineWidth(1)
-                context.setStrokeColor(CGColor(gray: 0.1, alpha: 1))
+                context.setStrokeColor(CGColor(gray: 0.1, alpha: fontAlpha))
             }
             context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
             context.strokePath()
@@ -201,11 +221,40 @@ class MusicBoxPaperView: UIView {
 
             }
         }
+        
+        // 제목 - 아티스트
+        let titleParagaphStyle = NSMutableParagraphStyle()
+        titleParagaphStyle.alignment = .left
+        let titleFontSize: CGFloat = 39
+        let titleAttrs = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: titleFontSize)!, NSAttributedString.Key.paragraphStyle: titleParagaphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
+        
+        let titleSize = (title as NSString).size(withAttributes: titleAttrs)
+        let titleX: CGFloat = boxOutline.minX
+        let titleY: CGFloat = boxOutline.minY - 10 - titleSize.height
+        let titleRect = CGRect(x: titleX, y: titleY, width: titleSize.width, height: titleSize.height)
+        title.draw(with: titleRect, options: .usesLineFragmentOrigin, attributes: titleAttrs, context: nil)
+        
+        let artistFontSize: CGFloat = 27
+        let artistAttrs = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: artistFontSize)!, NSAttributedString.Key.paragraphStyle: titleParagaphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
+        
+        let artistSize = (originalArtist as NSString).size(withAttributes: artistAttrs)
+        let artistX = titleRect.maxX + 30
+        let artistY = boxOutline.minY - 10 - artistSize.height
+        let artistRect = CGRect(x: artistX, y: artistY, width: artistSize.width, height: artistSize.height)
+        originalArtist.draw(with: artistRect, options: .usesLineFragmentOrigin, attributes: artistAttrs, context: nil)
+        
+        // 꼬릿말
+        let footerFontSize: CGFloat = 25
+        let footerAttrs = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: footerFontSize)!, NSAttributedString.Key.paragraphStyle: titleParagaphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
+        
+        let footerText: NSString = "\(paperMadeBy) \(paperMaker) - http://musicbox.con" as NSString
+        let footerSize = footerText.size(withAttributes: footerAttrs)
+        let footerRect = CGRect(x: boxOutline.minX, y: boxOutline.maxY + 20, width: footerSize.width, height: footerSize.height)
+        footerText.draw(with: footerRect, options: .usesLineFragmentOrigin, attributes: footerAttrs, context: nil)
 
         // 점 더하기
+        UIColor.black.set()
         for coord in data {
-            UIColor.red.set()
-//            let arcCenter = CGPoint(x: coord.snappedPoint.x + cst.leftMargin, y: coord.snappedPoint.y + cst.topMargin)
             let arcX = cst.leftMargin + coord.gridX! * cst.cellWidth
             let arcY = cst.topMargin + coord.gridY!.cgFloat * cst.cellHeight
             let arcCenter = CGPoint(x: arcX, y: arcY)

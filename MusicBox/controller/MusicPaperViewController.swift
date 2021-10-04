@@ -68,12 +68,24 @@ class MusicPaperViewController: UIViewController {
         let rowNum = util.noteRange.count
 
         musicPaperView.configure(rowNum: rowNum, colNum: colNum, util: util)
-        
+        constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
+        constraintMusicPaperHeight.constant = cst.topMargin * 2 + musicPaperView.boxOutline.height
+        let title = document?.paper?.title ?? "Unknown Title"
+        let originalArtist = document?.paper?.originalArtist ?? "Unknown Artist"
+        let paperMaker = document?.paper?.paperMaker ?? "Unknown"
+        musicPaperView.setTexts(title: title, originalArtist: originalArtist, paperMaker: paperMaker)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction))
         self.musicPaperView.addGestureRecognizer(tapGesture)
         self.musicPaperView.addGestureRecognizer(pinchGesture)
+        
+        // PaperView 배경화면 설정
+        if let patternImage = UIImage(named: "1. White paper with fibers") {
+            let pattern = UIColor(patternImage: patternImage)
+            musicPaperView.backgroundColor = pattern
+        }
+        
         
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
         midiManager.currentBPM = bpm
@@ -115,13 +127,14 @@ class MusicPaperViewController: UIViewController {
         
         if !eraserMode {
             
-            
-            
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else {
                 print("not found note.")
                 return
             }
             let gridX = util.getGridXFromGridBox(touchedPoint: touchedPoint, snapToGridMode: snapToGridMode)
+            guard gridX >= 0 else {
+                return
+            }
             let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
             let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
 
@@ -136,13 +149,13 @@ class MusicPaperViewController: UIViewController {
             musicPaperView.data.append(coord)
         } else {
             
-            let note = util.getNoteFromGridBox(touchedPoint: touchedPoint)
+            guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else { return }
             let filtered = musicPaperView.data.filter { coord in
                 let absoulteCircleBounds = CGRect(x: cst.leftMargin + coord.gridX * cst.cellWidth - cst.circleRadius,
                                           y: cst.topMargin + coord.gridY.cgFloat * cst.cellHeight - cst.circleRadius,
                                           width: cst.circleRadius * 2,
                                           height: cst.circleRadius * 2)
-                if coord.musicNote == note && absoulteCircleBounds.contains(touchedPoint) {
+                if coord.musicNote.equalTo(rhs: note) && absoulteCircleBounds.contains(touchedPoint) {
                     return false
                 }
                 return true
@@ -203,7 +216,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         self.colNum += cst.defaultColNum
         document?.paper?.colNum = colNum
         musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util)
-        constraintMusicPaperWidth.constant = colNum.cgFloat * cst.viewWidthPerCol
+        constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
     }
     
     func didClickedBpmChange(_ view: UIView, bpm: Int) {
@@ -236,11 +249,16 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedPlaySequence(_ view: UIView) {
-        let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
-        midiManager.musicSequence = sequence
-        midiManager.midiPlayer?.play({
-            print("finished")
-        })
+        if midiManager.midiPlayer!.isPlaying {
+            midiManager.midiPlayer?.stop()
+        } else {
+            let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+            midiManager.musicSequence = sequence
+            midiManager.midiPlayer?.play({
+                print("midi play finished")
+            })
+        }
+        
     }
     
     func didClickedResetPaper(_ view: UIView) {

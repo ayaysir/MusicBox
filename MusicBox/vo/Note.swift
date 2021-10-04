@@ -58,7 +58,7 @@ class Note: NSObject, NSCoding, NSSecureCoding, Codable {
     }
     
     static func ==(lhs: Note, rhs: Note) -> Bool {
-        return lhs.note == rhs.note && lhs.octave == rhs.octave
+        return lhs.equalTo(rhs: rhs)
     }
     
     static func getNote(semitone: Int) -> Note? {

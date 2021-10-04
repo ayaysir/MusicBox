@@ -107,7 +107,7 @@
                                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="5000" id="YfR-eA-Nca"/>
-                                            <constraint firstAttribute="height" constant="1000" id="ucP-nR-p7O"/>
+                                            <constraint firstAttribute="height" constant="952" id="ucP-nR-p7O"/>
                                         </constraints>
                                     </view>
                                 </subviews>
