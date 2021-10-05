@@ -7,17 +7,95 @@
 
 import UIKit
 import PanModal
+import DropDown
 
 class FileCollectionViewController: UICollectionViewController {
+
+    let btnAdd = UIButton()
     
     let filemgr = FileManager.default
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
     var documents: [PaperDocument] = []
+    
+    let menuDropDown = DropDown()
+    let menuDataSource = ["곡 정보 변경", "게시판에 공유", "삭제"]
+    
+    var selectedCellIndexPath: IndexPath?
+    
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setMenuDropDown()
+        setGestures()
+        loadFileList()
+        addButton()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAndRefresh), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadAndRefresh()
+    }
+    
+    @objc func reloadAndRefresh() {
+        loadFileList(reloadCollectionView: true)
+    }
+    
+    private func addButton(){
+        btnAdd.translatesAutoresizingMaskIntoConstraints = false
+        
+        btnAdd.setTitleColor(.white, for: .normal)
+        btnAdd.tintColor = .white
+        if let plus = UIImage(systemName: "plus") {
+            btnAdd.setImage(plus, for: .normal)
+        } else {
+            btnAdd.setTitle("+", for: .normal)
+        }
+        btnAdd.backgroundColor = .systemPink
+        
+        let buttonWidth: CGFloat = 67
+        
+        self.view.addSubview(btnAdd)
+        let guide = self.view.safeAreaLayoutGuide
+        btnAdd.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
+        btnAdd.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -20).isActive = true
+        btnAdd.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        btnAdd.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        
+        btnAdd.contentVerticalAlignment = .fill
+        btnAdd.contentHorizontalAlignment = .fill
+        let insetValue: CGFloat = 10
+        
+        btnAdd.layer.cornerRadius = buttonWidth * 0.5
+        btnAdd.clipsToBounds = true
+        
+        btnAdd.imageEdgeInsets = UIEdgeInsets(top: insetValue, left: insetValue, bottom: insetValue * 2, right: insetValue * 2)
+        
+        print(btnAdd.bounds) // (0.0, 0.0, 0.0, 0.0)
+        btnAdd.addTarget(self, action: #selector(touchedAddButton), for: .touchUpInside)
+    }
+    
+    @objc private func touchedAddButton() {
+        
+        let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
+        modalVC.delegate = self
+        self.dismiss(animated: true, completion: nil)
+        presentPanModal(modalVC)
+    }
+    
+    private func setGestures() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delaysTouchesBegan = true
+        longPressGesture.delegate = self
+        self.collectionView.addGestureRecognizer(longPressGesture)
+    }
+    
+    private func loadFileList(reloadCollectionView: Bool = false) {
         guard let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return
         }
@@ -25,33 +103,55 @@ class FileCollectionViewController: UICollectionViewController {
         do {
             // Get the directory contents urls (including subfolders urls)
             let files = try filemgr.contentsOfDirectory(at: dirPaths, includingPropertiesForKeys: nil)
+            let musicboxFiles = files.filter { (url: URL) in
+                return url.pathExtension == "musicbox"
+            }
 
             // if you want to filter the directory contents you can do like this:
-            print("document file list:", files)
+            print("document file list:", musicboxFiles)
             
-            documents = files.map { url in
+            documents = musicboxFiles.map { url in
                 let document = PaperDocument(fileURL: url)
                 return document
             }
 
+            if reloadCollectionView {
+                collectionView.reloadSections(NSIndexSet(index: 0) as IndexSet)
+            }
         } catch {
             print(error)
         }
-        
-        
     }
+
+}
+
+extension FileCollectionViewController: UIGestureRecognizerDelegate {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != UIGestureRecognizer.State.ended {
+            return
+        }
+        
+        let p = gestureReconizer.location(in: self.collectionView)
+        let indexPath = self.collectionView.indexPathForItem(at: p)
+        
+        if let index = indexPath {
+            if index.row == 0 {
+                return
+            }
+            
+            let cell = self.collectionView.cellForItem(at: index)
+            // do stuff with your cell, for example print the indexPath
+            
+            selectedCellIndexPath = index
+            menuDropDown.anchorView = cell
+            menuDropDown.show()
+                
+            print(index.row)
+        } else {
+            print("Could not find index path")
+        }
     }
-    */
-
 }
 
 extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
@@ -62,20 +162,21 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newCell", for: indexPath)
-            
-            return cell
-        }
-        
+//        if indexPath.row == 0 {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newCell", for: indexPath)
+//
+//            return cell
+//        }
+//
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileCell", for: indexPath) as?
                 FileCollectionViewCell else {
             return UICollectionViewCell()
         }
         
-        print(documents)
+//        let realRowIndex = indexPath.row - 1
+        print(documents, indexPath.row)
         documents[indexPath.row].open { _ in
-            cell.update(paper: self.documents[indexPath.row].paper)
+            cell.update(document: self.documents[indexPath.row])
         }
         
         return cell
@@ -83,23 +184,23 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        if indexPath.row == 0 {
-            let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
-            modalVC.delegate = self
-            self.dismiss(animated: true, completion: nil)
-            presentPanModal(modalVC)
-        } else {
+        
+//        if indexPath.row == 0 {
+
+//        } else {
             let musicPaperVC = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
             
             documents[indexPath.row].open { success in
                 if success {
                     musicPaperVC.document = self.documents[indexPath.row]
+                    musicPaperVC.delegate = self
                     self.present(musicPaperVC, animated: true, completion: nil)
+                } else {
+                    simpleAlert(self, message: "파일이 없거나 손상되었습니다.", title: "파일을 열 수 없음", handler: nil)
                 }
             }
             
-        }
+//        }
     }
     
     // 사이즈 결정
@@ -129,6 +230,7 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
+    
 }
 
 extension FileCollectionViewController: CreateNewPaperVCDelegate {
@@ -152,6 +254,58 @@ extension FileCollectionViewController: CreateNewPaperVCDelegate {
     
 }
 
+extension FileCollectionViewController {
+    func setMenuDropDown() {
+        menuDropDown.dataSource = menuDataSource
+        menuDropDown.cornerRadius = 15
+        menuDropDown.bottomOffset = CGPoint(x: 0, y: 20)
+        menuDropDown.width = 120
+        
+        menuDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+
+            print(index, item)
+            switch index {
+            case 0:
+                break
+            case 1:
+                break
+            case 2:
+                print("delete")
+                simpleDestructiveYesAndNo(self, message: "이 파일을 삭제하시겠습니까?", title: "파일 삭제") { action in
+                    guard let index = selectedCellIndexPath else {
+                        return
+                    }
+                    
+                    let target = collectionView.cellForItem(at: index) as? FileCollectionViewCell
+                    guard let document = target?.document else {
+                        return
+                    }
+                    
+                    do {
+                        try filemgr.removeItem(at: document.fileURL)
+                        loadFileList()
+                        reloadAndRefresh()
+                        simpleAlert(self, message: "삭제되었습니다.", title: "삭제 완료", handler: nil)
+                    } catch  {
+                        print(error.localizedDescription)
+                    }
+                }
+            default:
+                break
+            }
+
+        }
+    }
+}
+
+extension FileCollectionViewController: MusicPaperVCDelegate {
+    
+    func didPaperEditFinished(_ controller: MusicPaperViewController) {
+        reloadAndRefresh()
+    }
+    
+}
+
 class FileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imgAlbumart: UIImageView!
@@ -159,12 +313,16 @@ class FileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblArtist: UILabel!
     @IBOutlet weak var lblPaperMaker: UILabel!
     
-    func update(paper: Paper?) {
-        guard let paper = paper else { return }
+    var document: PaperDocument?
+    
+    func update(document: PaperDocument?) {
+        
+        self.document = document
+        guard document != nil, let paper = document!.paper else { return }
+        
         lblTitle.text = paper.title
         lblArtist.text = paper.originalArtist
         lblPaperMaker.text = paper.paperMaker
-        print(paper.originalArtist)
     }
     
 }

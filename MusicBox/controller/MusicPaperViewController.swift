@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol MusicPaperVCDelegate: AnyObject {
+    func didPaperEditFinished(_ controller: MusicPaperViewController)
+}
+
 class MusicPaperViewController: UIViewController {
     
     var previousScale: CGFloat = 1.0
+    
+    weak var delegate: MusicPaperVCDelegate?
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var musicPaperView: MusicBoxPaperView!
@@ -128,7 +134,7 @@ class MusicPaperViewController: UIViewController {
             }
         })
         
-        
+        saveDocument()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -270,6 +276,11 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedBackToMain(_ view: UIView) {
+        
+        saveDocument()
+        if delegate != nil {
+            delegate!.didPaperEditFinished(self)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

@@ -54,6 +54,8 @@ class MusicBoxPaperView: UIView {
     var paperMadeBy: String = "The paper was made by"
     var fontPalatio: UIFont!
     var fontAlpha: CGFloat = 0.8
+    var whenDrawAThickLineEveryBars = 4
+    var whenToggleBackgroundColorEveryBars = 8
     
     let cst = PaperConstant.shared
     
@@ -135,7 +137,7 @@ class MusicBoxPaperView: UIView {
                 )
             )
             
-            if index % 8 == 0 {
+            if index % whenToggleBackgroundColorEveryBars == 0 {
                 toggleTableBackgroundColor = !toggleTableBackgroundColor
             }
             
@@ -199,7 +201,7 @@ class MusicBoxPaperView: UIView {
         for index in 1...innerColNum {
             let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
-            if index % 6 == 0 {
+            if index % whenDrawAThickLineEveryBars == 0 {
                 context.setLineWidth(2)
                 context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
             } else {
