@@ -111,6 +111,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="qeb-Wl-es1" firstAttribute="bottom" secondItem="g8B-8S-aZ8" secondAttribute="bottom" id="0DT-tc-m49"/>
                                     <constraint firstItem="qeb-Wl-es1" firstAttribute="leading" secondItem="g8B-8S-aZ8" secondAttribute="leading" id="6yI-kD-ANy"/>
@@ -122,7 +123,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xSb-PQ-oX3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xSb-PQ-oX3" firstAttribute="bottom" secondItem="7Mp-J0-GZM" secondAttribute="bottom" id="5O7-QT-Ie9"/>
                             <constraint firstItem="7Mp-J0-GZM" firstAttribute="top" secondItem="xSb-PQ-oX3" secondAttribute="top" id="FUv-44-N8d"/>
@@ -134,6 +135,11 @@
                         <outlet property="constraintMusicPaperHeight" destination="ucP-nR-p7O" id="Ppw-FL-7RZ"/>
                         <outlet property="constraintMusicPaperWidth" destination="YfR-eA-Nca" id="HGM-21-T5F"/>
                         <outlet property="musicPaperView" destination="qeb-Wl-es1" id="SJd-Vo-Yxq"/>
+                        <outlet property="paperViewBottomConstraint" destination="0DT-tc-m49" id="4Ch-mD-bZK"/>
+                        <outlet property="paperViewLeadingConstraint" destination="6yI-kD-ANy" id="n1p-QG-tvG"/>
+                        <outlet property="paperViewTopConstraint" destination="t2W-vA-VoP" id="4Ib-n0-lUC"/>
+                        <outlet property="paperViewTrailingConstraint" destination="Uvz-0f-MSO" id="D2y-RS-i6a"/>
+                        <outlet property="scrollView" destination="7Mp-J0-GZM" id="swr-KB-USS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uUh-Cs-DtH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

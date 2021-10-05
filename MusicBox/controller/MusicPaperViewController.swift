@@ -11,9 +11,15 @@ class MusicPaperViewController: UIViewController {
     
     var previousScale: CGFloat = 1.0
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var musicPaperView: MusicBoxPaperView!
     @IBOutlet weak var constraintMusicPaperWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintMusicPaperHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var paperViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var paperViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var paperViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var paperViewTrailingConstraint: NSLayoutConstraint!
     
     var panelView: PaperOptionPanelView!
     
@@ -68,17 +74,17 @@ class MusicPaperViewController: UIViewController {
         let rowNum = util.noteRange.count
 
         musicPaperView.configure(rowNum: rowNum, colNum: colNum, util: util)
+        
         constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
         constraintMusicPaperHeight.constant = cst.topMargin * 2 + musicPaperView.boxOutline.height
+        
         let title = document?.paper?.title ?? "Unknown Title"
         let originalArtist = document?.paper?.originalArtist ?? "Unknown Artist"
         let paperMaker = document?.paper?.paperMaker ?? "Unknown"
         musicPaperView.setTexts(title: title, originalArtist: originalArtist, paperMaker: paperMaker)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction))
         self.musicPaperView.addGestureRecognizer(tapGesture)
-        self.musicPaperView.addGestureRecognizer(pinchGesture)
         
         // PaperView 배경화면 설정
         if let patternImage = UIImage(named: "1. White paper with fibers") {
@@ -86,6 +92,13 @@ class MusicPaperViewController: UIViewController {
             musicPaperView.backgroundColor = pattern
         }
         
+        // scrollView 배경화면 설정
+        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
+            let pattern = UIColor(patternImage: backgroundPatternImage)
+            scrollView.backgroundColor = pattern
+        }
+        
+        scrollView.delegate = self
         
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
         midiManager.currentBPM = bpm
@@ -167,16 +180,7 @@ class MusicPaperViewController: UIViewController {
         lastTouchedTime = Date()
         touchTimeCheckMode = true
     }
-    
-    
-    @objc func pinchAction(sender: UIPinchGestureRecognizer) {
-        let scale: CGFloat = previousScale * sender.scale
-        self.musicPaperView.transform = CGAffineTransform(scaleX: scale, y: scale)
-//        constraintMusicPaperWidth.constant = constraintMusicPaperWidth.constant * scale
-//        constraintMusicPaperHeight.constant = constraintMusicPaperHeight.constant * scale
-        
-        previousScale = sender.scale
-    }
+
     
     @IBAction func swtActEraserOn(_ sender: UISwitch) {
         if sender.isOn {
@@ -205,6 +209,39 @@ class MusicPaperViewController: UIViewController {
     }
     */
 
+}
+
+extension MusicPaperViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return musicPaperView
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        scrollView.minimumZoomScale = 0.4
+        scrollView.maximumZoomScale = 3
+    }
+    
+    // 확대/축소하면 가운데로 위치하게
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        updateConstraintsForSize(view.bounds.size)
+    }
+    
+    func updateConstraintsForSize(_ size: CGSize) {
+        
+        let yOffset = max(0, (size.height - musicPaperView.frame.height) / 2)
+        paperViewTopConstraint.constant = yOffset
+        paperViewBottomConstraint.constant = yOffset
+        
+        
+        let xOffset = max(0, (size.width - musicPaperView.frame.width) / 2)
+        paperViewLeadingConstraint.constant = xOffset
+        paperViewTrailingConstraint.constant = xOffset
+        
+        view.layoutIfNeeded()
+    }
 }
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
@@ -296,27 +333,27 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-let deviceNames: [String] = [
-    "iPhone SE",
-    "iPad 11 Pro Max",
-    "iPad Pro (11-inch)"
-]
-
-@available(iOS 13.0, *)
-struct MusicPaperViewController_Preview: PreviewProvider {
-  static var previews: some View {
-    ForEach(deviceNames, id: \.self) { deviceName in
-      UIViewControllerPreview {
-        UIStoryboard(name: "Main", bundle: nil)
-            .instantiateInitialViewController { coder in
-            MusicPaperViewController(coder: coder)
-        }!
-      }.previewDevice(PreviewDevice(rawValue: deviceName))
-        .previewDisplayName(deviceName)
-    }
-  }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//
+//let deviceNames: [String] = [
+//    "iPhone SE",
+//    "iPad 11 Pro Max",
+//    "iPad Pro (11-inch)"
+//]
+//
+//@available(iOS 13.0, *)
+//struct MusicPaperViewController_Preview: PreviewProvider {
+//  static var previews: some View {
+//    ForEach(deviceNames, id: \.self) { deviceName in
+//      UIViewControllerPreview {
+//        UIStoryboard(name: "Main", bundle: nil)
+//            .instantiateInitialViewController { coder in
+//            MusicPaperViewController(coder: coder)
+//        }!
+//      }.previewDevice(PreviewDevice(rawValue: deviceName))
+//        .previewDisplayName(deviceName)
+//    }
+//  }
+//}
+//#endif

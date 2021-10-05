@@ -230,7 +230,7 @@ class MusicBoxPaperView: UIView {
         
         let titleSize = (title as NSString).size(withAttributes: titleAttrs)
         let titleX: CGFloat = boxOutline.minX
-        let titleY: CGFloat = boxOutline.minY - 10 - titleSize.height
+        let titleY: CGFloat = 30
         let titleRect = CGRect(x: titleX, y: titleY, width: titleSize.width, height: titleSize.height)
         title.draw(with: titleRect, options: .usesLineFragmentOrigin, attributes: titleAttrs, context: nil)
         
@@ -238,8 +238,8 @@ class MusicBoxPaperView: UIView {
         let artistAttrs = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: artistFontSize)!, NSAttributedString.Key.paragraphStyle: titleParagaphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
         
         let artistSize = (originalArtist as NSString).size(withAttributes: artistAttrs)
-        let artistX = titleRect.maxX + 30
-        let artistY = boxOutline.minY - 10 - artistSize.height
+        let artistX: CGFloat = titleRect.maxX + 30
+        let artistY: CGFloat = 40.2
         let artistRect = CGRect(x: artistX, y: artistY, width: artistSize.width, height: artistSize.height)
         originalArtist.draw(with: artistRect, options: .usesLineFragmentOrigin, attributes: artistAttrs, context: nil)
         
@@ -253,7 +253,11 @@ class MusicBoxPaperView: UIView {
         footerText.draw(with: footerRect, options: .usesLineFragmentOrigin, attributes: footerAttrs, context: nil)
 
         // 점 더하기
-        UIColor.black.set()
+        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
+            UIColor(patternImage: backgroundPatternImage).set()
+        } else {
+            UIColor.black.set()
+        }
         for coord in data {
             let arcX = cst.leftMargin + coord.gridX! * cst.cellWidth
             let arcY = cst.topMargin + coord.gridY!.cgFloat * cst.cellHeight
