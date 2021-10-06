@@ -21,6 +21,11 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var viewSignUpForm: UIView!
     @IBOutlet weak var viewUserInfo: UIView!
     
+    @IBOutlet weak var imgEmailVerified: UIImageView!
+    @IBOutlet weak var lblEmailVerified: UILabel!
+    @IBOutlet weak var btnRefreshUserInfo: UIButton!
+    
+    
     var handle: AuthStateDidChangeListenerHandle!
     
     // firebase ref
@@ -38,25 +43,58 @@ class SignInViewController: UIViewController {
         
         imgUserProfile.layer.cornerRadius = imgUserProfile.bounds.size.width * 0.5
         imgUserProfile.clipsToBounds = true
+  
+        btnRefreshUserInfo.setTitle("", for: .normal)
+    }
+    
+    func changeEmailVerified(_ isVerified: Bool) {
+        if isVerified {
+            lblEmailVerified.text = "이메일 인증이 완료되었습니다."
+            imgEmailVerified.image = UIImage(systemName: "checkmark.circle.fill")
+            imgEmailVerified.tintColor = .green
+        } else {
+            lblEmailVerified.text = "이메일이 인증되지 않았습니다."
+            imgEmailVerified.image = UIImage(systemName: "xmark.circle.fill")
+            imgEmailVerified.tintColor = .systemGray3
+        }
         
+    }
+    
+    func setUserInfoView(user: User?) {
+        if let user = user {
+            self.viewUserInfo.isHidden = false
+            self.viewSignUpForm.isHidden = true
+            self.lblUserEmail.text = user.email
+            
+            self.getUserAdditionalInfo(uid: user.uid)
+            self.getUserProfileImage(uid: user.uid)
+            
+            if user.isEmailVerified {
+                self.changeEmailVerified(true)
+            } else {
+                self.changeEmailVerified(false)
+            }
+            
+        } else {
+            self.viewUserInfo.isHidden = true
+            self.viewSignUpForm.isHidden = false
+            self.lblUserEmail.text = ""
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         handle = Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user {
-                self.viewUserInfo.isHidden = false
-                self.viewSignUpForm.isHidden = true
-                self.lblUserEmail.text = user.email
-                
-                self.getUserAdditionalInfo(uid: user.uid)
-                self.getUserProfileImage(uid: user.uid)
-                
-            } else {
-                self.viewUserInfo.isHidden = true
-                self.viewSignUpForm.isHidden = false
-                self.lblUserEmail.text = ""
-            }
+            self.setUserInfoView(user: user)
         }
+        
+        Auth.auth().currentUser?.reload(completion: { error in
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            self.setUserInfoView(user: Auth.auth().currentUser)
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +112,7 @@ class SignInViewController: UIViewController {
             
             if authResult != nil {
                 print("로그인 되었습니다")
+                
             } else {
                 print("로그인되지 않았습니다.", error?.localizedDescription ?? "")
             }
@@ -93,6 +132,14 @@ class SignInViewController: UIViewController {
         performSegue(withIdentifier: "userOnlyPage", sender: nil)
     }
     
+    @IBAction func btnActRefreshUserInfo(_ sender: UIButton) {
+        Auth.auth().currentUser?.reload(completion: { error in
+            self.setUserInfoView(user: Auth.auth().currentUser)
+        })
+        
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let signUpViewController = segue.destination as! SignUpViewController
         if segue.identifier == "signUp" {
@@ -102,6 +149,10 @@ class SignInViewController: UIViewController {
 }
 
 extension SignInViewController {
+    
+    func getUserAdditionInfoWithPhoto(uid: String) {
+        
+    }
     
     private func getUserAdditionalInfo(uid: String) {
         let userRef = self.ref.child("users/\(uid)/interesting")

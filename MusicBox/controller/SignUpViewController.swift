@@ -68,6 +68,53 @@ class SignUpViewController: UIViewController {
 
     }
     
+    func sendVerificationMail(authUser: User?) {
+        if authUser != nil && authUser!.isEmailVerified == false {
+            authUser!.sendEmailVerification(completion: { (error) in
+                // Notify the user that the mail has sent or couldn't because of an error.
+                if error != nil {
+                    print(error!.localizedDescription, error!)
+                    return
+                }
+                
+                print("이메일 전송 완료")
+            })
+        }
+        else {
+            // Either the user is not available, or the user is already verified.
+        }
+    }
+    
+    func sendInfoToFirebase(withEmail userEmail: String, password userPassword: String) {
+        Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
+            // 이메일, 비밀번호 전송
+            guard let user = authResult?.user, error == nil else {
+                simpleAlert(self, message: error!.localizedDescription)
+                return
+            }
+            
+            // 이메일 인증 요청
+            sendVerificationMail(authUser: user)
+            
+            // 추가 정보 입력
+            ref.child("users").child(user.uid).setValue(["interesting": selectedInteresting])
+            
+            // 이미지 업로드
+            let images = [
+                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: imgProfilePicture.image!, fileExt: "png")
+            ]
+            startUploading(images: images) {
+                simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
+                    self.dismiss(animated: true, completion: nil)
+                    if delegate != nil {
+                        delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
+                    }
+                }
+            }
+        }
+    }
+    
     @IBAction func btnActCancel(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -95,30 +142,7 @@ class SignUpViewController: UIViewController {
             return
         }
         
-        Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
-            // 이메일, 비밀번호 전송
-            guard let user = authResult?.user, error == nil else {
-                simpleAlert(self, message: error!.localizedDescription)
-                return
-            }
-            
-            // 추가 정보 입력
-            ref.child("users").child(user.uid).setValue(["interesting": selectedInteresting])
-            
-            // 이미지 업로드
-            let images = [
-                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: imgProfilePicture.image!, fileExt: "png")
-            ]
-            startUploading(images: images) {
-                simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
-                    self.dismiss(animated: true, completion: nil)
-                    if delegate != nil {
-                        delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
-                    }
-                }
-            }
-        }
+        sendInfoToFirebase(withEmail: userEmail, password: userPassword)
     }
     
     @IBAction func btnActTakePhoto(_ sender: UIButton) {

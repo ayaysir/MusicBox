@@ -201,7 +201,11 @@ class MusicBoxPaperView: UIView {
         for index in 1...innerColNum {
             let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
-            if index % whenDrawAThickLineEveryBars == 0 {
+            if index % 16 == 0 {
+                context.setLineWidth(4)
+                context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
+            }
+            else if index % whenDrawAThickLineEveryBars == 0 {
                 context.setLineWidth(2)
                 context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
             } else {
@@ -215,7 +219,7 @@ class MusicBoxPaperView: UIView {
                 // (중간) 왼쪽에 노트 이름 적기
                 for (index, note) in util.noteRange.enumerated() {
                     
-                    let noteRect = CGRect(x: targetX, y: noteTextTopMargin + cst.cellHeight * index.cgFloat, width: 0, height: 0)
+                    let noteRect = CGRect(x: targetX + 2, y: noteTextTopMargin + cst.cellHeight * index.cgFloat, width: 0, height: 0)
 
                     let noteTextValue = note.textValueSharp
                     noteTextValue.draw(with: noteRect, options: .usesLineFragmentOrigin, attributes: noteNameAttrs, context: nil)
