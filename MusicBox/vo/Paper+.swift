@@ -36,22 +36,6 @@ extension String {
     static let kColNum = "colNum"
 }
 
-struct TimeSignature: Codable {
-    
-    var upper: Int
-    var lower: Int
-    
-    init() {
-        self.init(upper: 4, lower: 4)
-    }
-    
-    init(upper: Int, lower: Int) {
-        self.upper = upper
-        self.lower = lower
-    }
-    
-}
-
 class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     
     static var supportsSecureCoding: Bool = true

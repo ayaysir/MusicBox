@@ -54,8 +54,10 @@ class MusicBoxPaperView: UIView {
     var paperMadeBy: String = "The paper was made by"
     var fontPalatio: UIFont!
     var fontAlpha: CGFloat = 0.8
-    var whenDrawAThickLineEveryBars = 4
-    var whenToggleBackgroundColorEveryBars = 8
+//    var whenDrawAThickLineEveryBars = 4
+//    var whenToggleBackgroundColorEveryBars = 8
+    var paperGrid: GridInfo = GridInfo()
+    
     
     let cst = PaperConstant.shared
     
@@ -67,7 +69,7 @@ class MusicBoxPaperView: UIView {
         super.init(coder: coder)
     }
     
-    func configure(rowNum: Int, colNum: Int, util: MusicBoxUtil) {
+    func configure(rowNum: Int, colNum: Int, util: MusicBoxUtil, gridInfo: GridInfo) {
         
         self.rowNum = rowNum
         self.colNum = colNum
@@ -77,6 +79,7 @@ class MusicBoxPaperView: UIView {
         self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
 
         self.util = util
+        self.paperGrid = gridInfo
         
         fontPalatio = UIFont(name: "Palatio", size: 30) ?? UIFont()
         
@@ -95,7 +98,7 @@ class MusicBoxPaperView: UIView {
     }
     
     func reloadPaper() {
-        self.configure(rowNum: self.rowNum, colNum: self.colNum, util: util)
+        self.configure(rowNum: self.rowNum, colNum: self.colNum, util: util, gridInfo: paperGrid)
         self.setNeedsDisplay()
     }
 
@@ -137,7 +140,7 @@ class MusicBoxPaperView: UIView {
                 )
             )
             
-            if index % whenToggleBackgroundColorEveryBars == 0 {
+            if index % paperGrid.toggleBackgroundInterval == 0 {
                 toggleTableBackgroundColor = !toggleTableBackgroundColor
             }
             
@@ -201,11 +204,11 @@ class MusicBoxPaperView: UIView {
         for index in 1...innerColNum {
             let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
-            if index % 16 == 0 {
+            if index % paperGrid.bolderLineInterval == 0 {
                 context.setLineWidth(4)
                 context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
             }
-            else if index % whenDrawAThickLineEveryBars == 0 {
+            else if index % paperGrid.boldLineInterval == 0 {
                 context.setLineWidth(2)
                 context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
             } else {
@@ -215,7 +218,7 @@ class MusicBoxPaperView: UIView {
             context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
             context.strokePath()
             
-            if index % 16 == 0 {
+            if index % paperGrid.bolderLineInterval == 0 {
                 // (중간) 왼쪽에 노트 이름 적기
                 for (index, note) in util.noteRange.enumerated() {
                     

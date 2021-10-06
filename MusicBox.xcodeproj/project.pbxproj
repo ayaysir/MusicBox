@@ -25,6 +25,8 @@
 		444AF3A12701E35100BD8E38 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF3A02701E35100BD8E38 /* DocumentBrowserViewController.swift */; };
 		444AF3A42701E5BC00BD8E38 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF3A22701E5BB00BD8E38 /* DocumentViewController.swift */; };
 		444AF3A52701E5BC00BD8E38 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF3A32701E5BC00BD8E38 /* Document.swift */; };
+		444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9445270DCFBC0090F587 /* TimeSignature.swift */; };
+		444D9448270DD5830090F587 /* TimeSignatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9447270DD5830090F587 /* TimeSignatureTests.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -112,6 +114,8 @@
 		444AF3A02701E35100BD8E38 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		444AF3A22701E5BB00BD8E38 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		444AF3A32701E5BC00BD8E38 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		444D9445270DCFBC0090F587 /* TimeSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignature.swift; sourceTree = "<group>"; };
+		444D9447270DD5830090F587 /* TimeSignatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignatureTests.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				449F3EA226EF332D002C874D /* Scale.swift */,
 				44B18C3126EF7FF900890C13 /* Paper+.swift */,
 				4405E97326F785350012E4F5 /* ImageWithName.swift */,
+				444D9445270DCFBC0090F587 /* TimeSignature.swift */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 		44E682FE26EA46340074FE46 /* MusicBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				444D9447270DD5830090F587 /* TimeSignatureTests.swift */,
 				44AE99412705E37900D046D1 /* PaperDocumentTests.swift */,
 				44AE993B2704CDEC00D046D1 /* SwiftExtensionTests.swift */,
 				4405E96D26F770A90012E4F5 /* ImageUtilTests.swift */,
@@ -697,6 +703,7 @@
 				44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */,
 				449F3EA826EF3529002C874D /* TextUtil.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
+				444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */,
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,
 				44AE99402705DBED00D046D1 /* Array+.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
@@ -737,6 +744,7 @@
 				4405E96E26F770A90012E4F5 /* ImageUtilTests.swift in Sources */,
 				44AE99422705E37900D046D1 /* PaperDocumentTests.swift in Sources */,
 				44AE993C2704CDEC00D046D1 /* SwiftExtensionTests.swift in Sources */,
+				444D9448270DD5830090F587 /* TimeSignatureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

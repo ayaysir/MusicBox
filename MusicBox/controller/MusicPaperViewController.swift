@@ -79,7 +79,7 @@ class MusicPaperViewController: UIViewController {
         util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cst.cellWidth, cellHeight: cst.cellHeight, topMargin: cst.topMargin, leftMargin: cst.leftMargin)
         let rowNum = util.noteRange.count
 
-        musicPaperView.configure(rowNum: rowNum, colNum: colNum, util: util)
+        musicPaperView.configure(rowNum: rowNum, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
         
         constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
         constraintMusicPaperHeight.constant = cst.topMargin * 2 + musicPaperView.boxOutline.height
@@ -258,7 +258,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedExtendPaper(_ view: UIView) {
         self.colNum += cst.defaultColNum
         document?.paper?.colNum = colNum
-        musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util)
+        musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
         constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
     }
     
