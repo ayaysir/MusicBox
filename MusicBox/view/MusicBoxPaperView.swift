@@ -167,6 +167,7 @@ class MusicBoxPaperView: UIView {
         let blackFontUIColor = UIColor.black
         
         var noteNameAttrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 13.4)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
+        let measureNameAttrs = [NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 20)!, NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
         
         // 노트 이름 윗 마진 (공통)
         let noteTextTopMargin: CGFloat = cst.topMargin - 8.4
@@ -201,6 +202,7 @@ class MusicBoxPaperView: UIView {
         }
         
         noteNameAttrs[NSAttributedString.Key.foregroundColor] = UIColor(cgColor: CGColor(gray: 0.1, alpha: 0.5))
+        var measureIndex = 1
         for index in 1...innerColNum {
             let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
@@ -227,7 +229,11 @@ class MusicBoxPaperView: UIView {
                     let noteTextValue = note.textValueSharp
                     noteTextValue.draw(with: noteRect, options: .usesLineFragmentOrigin, attributes: noteNameAttrs, context: nil)
                 }
-
+                
+                // 마디수
+                let measureRect = CGRect(x: targetX - 2, y: boxOutline.maxY + 5, width: 0, height: 0)
+                "\(measureIndex)".draw(with: measureRect, options: .usesLineFragmentOrigin, attributes: measureNameAttrs, context: nil)
+                measureIndex += 1
             }
         }
         
