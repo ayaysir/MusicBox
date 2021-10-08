@@ -29,7 +29,7 @@ class SignUpViewController: UIViewController {
     let interestingList = ["치킨", "피자", "탕수육"]
     var selectedInteresting: String!
     
-    let imagePickerController = UIImagePickerController()
+    var imagePickerController = UIImagePickerController()
     var userProfileThumbnail: UIImage!
     
     /// Here is the completion block
@@ -63,7 +63,7 @@ class SignUpViewController: UIViewController {
         imagePickerController.delegate = self
         
         // 최초 섬네일 생성
-        userProfileThumbnail = makeImageThumbnail(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
+        userProfileThumbnail = resizeImage(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
         
 
     }
@@ -99,10 +99,12 @@ class SignUpViewController: UIViewController {
             // 추가 정보 입력
             ref.child("users").child(user.uid).setValue(["interesting": selectedInteresting])
             
+            let image = resizeImage(image: imgProfilePicture.image!, maxSize: 1020) ?? imgProfilePicture.image!
+            
             // 이미지 업로드
             let images = [
                 ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: imgProfilePicture.image!, fileExt: "png")
+                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "png")
             ]
             startUploading(images: images) {
                 simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
@@ -146,17 +148,11 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func btnActTakePhoto(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            self.imagePickerController.sourceType = .camera
-            doTaskByCameraAuthorization()
-        } else {
-            simpleAlert(self, message: "카메라 사용이 불가능합니다.")
-        }
+        takePhoto()
     }
     
     @IBAction func btnActFromLoadPhoto(_ sender: UIButton) {
-        self.imagePickerController.sourceType = .photoLibrary
-        doTaskByPhotoAuthorization()
+        getPhotoFromLibrary()
     }
     
     
@@ -280,66 +276,38 @@ extension SignUpViewController: UITextFieldDelegate {
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    /*
+     var imagePickerController = UIImagePickerController()
+     var userProfileThumbnail: UIImage!
+     
+     // 사진: 이미지 피커에 딜리게이트 생성
+     imagePickerController.delegate = self
+     */
+    
+    func takePhoto() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.imagePickerController.sourceType = .camera
+            if doTaskByCameraAuthorization(self) {
+                present(self.imagePickerController, animated: true, completion: nil)
+            }
+        } else {
+            simpleAlert(self, message: "카메라 사용이 불가능합니다.")
+        }
+    }
+    
+    func getPhotoFromLibrary() {
+        self.imagePickerController.sourceType = .photoLibrary
+        if doTaskByPhotoAuthorization(self) {
+            present(self.imagePickerController, animated: true, completion: nil)
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imgProfilePicture.image = image
-            userProfileThumbnail = makeImageThumbnail(image: image, maxSize: 200)
+            userProfileThumbnail = resizeImage(image: image, maxSize: 200) ?? image
         }
+        
         dismiss(animated: true, completion: nil)
-    }
-    
-    private func openSetting(action: UIAlertAction) -> Void {
-        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-            return
-        }
-
-        if UIApplication.shared.canOpenURL(settingsUrl) {
-            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                print("Settings opened: \(success)") // Prints true
-            })
-        }
-    }
-    
-    func doTaskByPhotoAuthorization() {
-        switch PHPhotoLibrary.authorizationStatus() {
-        case .notDetermined:
-            print("photo auth >>> not determined")
-            simpleDestructiveYesAndNo(self, message: "사진 권한 설정을 변경하시겠습니까?", title: "권한 정보 없음", yesHandler: openSetting)
-        case .restricted:
-            print("photo auth >>> restricted")
-            simpleAlert(self, message: "시스템에 의해 거부되었습니다.")
-        case .denied:
-            print("photo auth >>> denied")
-            simpleDestructiveYesAndNo(self, message: "사진 기능 권한이 거부되어 사용할 수 없습니다. 사진 권한 설정을 변경하시겠습니까?", title: "권한 거부됨", yesHandler: openSetting(action:))
-        case .authorized:
-            print("photo auth >>> authorized")
-            self.present(self.imagePickerController, animated: true, completion: nil)
-        case .limited:
-            print("photo auth >>> limited")
-            self.present(self.imagePickerController, animated: true, completion: nil)
-        @unknown default:
-            print("photo auth >>> unknown")
-            simpleAlert(self, message: "unknown")
-        }
-    }
-    
-    func doTaskByCameraAuthorization() {
-        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
-        case .notDetermined:
-            print("camera auth >>> not determined")
-            simpleDestructiveYesAndNo(self, message: "카메라 권한 설정을 변경하시겠습니까?", title: "권한 정보 없음", yesHandler: openSetting)
-        case .restricted:
-            print("camera auth >>> restricted")
-            simpleAlert(self, message: "시스템에 의해 거부되었습니다.")
-        case .denied:
-            print("camera auth >>> denied")
-            simpleDestructiveYesAndNo(self, message: "카메라 기능 권한이 거부되어 사용할 수 없습니다. 카메라 권한 설정을 변경하시겠습니까?", title: "권한 거부됨", yesHandler: openSetting(action:))
-        case .authorized:
-            print("camera auth >>> authorized")
-            self.present(self.imagePickerController, animated: true, completion: nil)
-        @unknown default:
-            print("camera auth >>> unknown")
-            simpleAlert(self, message: "unknown")
-        }
     }
 }

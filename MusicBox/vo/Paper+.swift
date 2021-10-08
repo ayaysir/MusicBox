@@ -15,7 +15,8 @@ extension String {
     static let kTimeSignatureUpper = "timeSignature_upper"
     static let kTimeSignatureLower = "timeSignature_lower"
     
-    static let kAlbumartURL = "albumart"
+    static let kAlbumartBase64 = "albumart"
+    static let kThumbnailBase64 = "albumartThumbnail"
     static let kPaperMaker = "paperMaker"
     static let kTitle = "title"
     static let kComment = "comment"
@@ -48,7 +49,10 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     
     var incompleteMeasureBeat: Int = 0
 
-    var albumartURL: URL?
+//    var albumartURL: URL?
+    var albumartBase64: String?
+    var thumbnailBase64: String?
+    
     var paperMaker: String = ""
     var title: String = "My MusicBox Sheet"
     var originalArtist: String = "J. S. Bach"
@@ -61,7 +65,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var fileId: UUID = UUID()
     
     enum CodingKeys: CodingKey {
-        case bpm, coords, timeSignature, albumartURL, paperMaker, title, comment, fileId, incompleteMeasureBeat, colNum
+        case bpm, coords, timeSignature, albumartBase64, thumbnailBase64, paperMaker, title, comment, fileId, incompleteMeasureBeat, colNum
     }
     
     override init() {
@@ -83,7 +87,9 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         coder.encode(timeSignature.upper, forKey: .kTimeSignatureUpper)
         coder.encode(timeSignature.lower, forKey: .kTimeSignatureLower)
         
-        coder.encode(albumartURL, forKey: .kAlbumartURL)
+        coder.encode(albumartBase64, forKey: .kAlbumartBase64)
+        coder.encode(thumbnailBase64, forKey: .kThumbnailBase64)
+        
         coder.encode(paperMaker, forKey: .kPaperMaker)
         coder.encode(title, forKey: .kTitle)
         coder.encode(comment, forKey: .kComment)
@@ -118,7 +124,8 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         }
         
         // allow null
-        let albumartURL = coder.decodeObject(forKey: .kAlbumartURL) as? URL
+        let albumartBase64 = coder.decodeObject(forKey: .kAlbumartBase64) as? String
+        let thumbnailBase64 = coder.decodeObject(forKey: .kThumbnailBase64) as? String
         
         guard let uuid = UUID(uuidString: uuidString) else { return }
         let timeSignature = TimeSignature(upper: tsUpper, lower: tsLower)
@@ -127,7 +134,10 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         self.incompleteMeasureBeat = imBeat
         self.coords = coords
         self.timeSignature = timeSignature
-        self.albumartURL = albumartURL
+        
+        self.albumartBase64 = albumartBase64
+        self.thumbnailBase64 = thumbnailBase64
+        
         self.paperMaker = paperMaker
         self.title = title
         self.comment = comment

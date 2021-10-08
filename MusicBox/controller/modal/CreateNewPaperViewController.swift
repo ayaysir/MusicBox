@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 import PanModal
 
 protocol CreateNewPaperVCDelegate: AnyObject {
@@ -24,6 +25,9 @@ class CreateNewPaperViewController: UIViewController {
     @IBOutlet weak var txfOriginalArtist: UITextField!
     @IBOutlet weak var txfPaperMaker: UITextField!
     
+    @IBOutlet weak var imgAlbumart: UIImageView!
+    var thumbnail: UIImage?
+    
     @IBOutlet weak var pkvTimeSignature: UIPickerView!
     
     let upperListTS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16]
@@ -32,6 +36,7 @@ class CreateNewPaperViewController: UIViewController {
     var selectedUpperTS: Int = 4
     var selectedLowerTS: Int = 4
     
+    var imagePickerController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +45,9 @@ class CreateNewPaperViewController: UIViewController {
         pkvTimeSignature.dataSource = self
         pkvTimeSignature.selectRow(2, inComponent: 0, animated: false)
         pkvTimeSignature.selectRow(1, inComponent: 2, animated: false)
-//        view.backgroundColor = #colorLiteral(red: 0.1019607843, green: 0.1137254902, blue: 0.1294117647, alpha: 1)
-        
+
+        imagePickerController.delegate = self
+        thumbnail = resizeImage(image: imgAlbumart.image!, maxSize: 200) ?? imgAlbumart.image!
     }
     
     @IBAction func btnActCreateNewPaper(_ sender: Any) {
@@ -57,26 +63,42 @@ class CreateNewPaperViewController: UIViewController {
                   }
             
             guard let bpm = Int(bpmStr) else {
-                      print("cannot convert string to integer.")
-                      return
-                  }
+                print("cannot convert string to integer.")
+                return
+            }
+            
             let imBeat = Int(txfIncompleteMeasureBeat.text!) ?? 0
             
             let timeSignature = TimeSignature(upper: selectedUpperTS, lower: selectedLowerTS)
+            
+            let albumartBase64 = convertImageToBase64String(img: imgAlbumart.image!)
+            let thumbnailBase64 = convertImageToBase64String(img: thumbnail!)
         
             let paper = Paper(bpm: bpm, coords: [], timeSignature: TimeSignature())
+            
             paper.title = title
             paper.incompleteMeasureBeat = imBeat
             paper.originalArtist = originalArtist
             paper.paperMaker = paperMaker
             paper.timeSignature = timeSignature
             
+            paper.albumartBase64 = albumartBase64
+            paper.thumbnailBase64 = thumbnailBase64
+             
             delegate?.didNewPaperCreated(self, newPaper: paper, fileNameWithoutExt: fileName)
             
             self.dismiss(animated: true, completion: nil)
         } else {
             print("CreateNewPaperVCDelegate is nil.")
         }
+    }
+    
+    @IBAction func btnActCamera(_ sender: Any) {
+        takePhoto()
+    }
+    
+    @IBAction func btnActPhotoLibrary(_ sender: Any) {
+        getPhotoFromLibrary()
     }
     
     
@@ -129,6 +151,47 @@ extension CreateNewPaperViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
 }
+
+extension CreateNewPaperViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    /*
+     import Photos
+     
+     var imagePickerController = UIImagePickerController()
+     var userProfileThumbnail: UIImage!
+     
+     // 사진: 이미지 피커에 딜리게이트 생성
+     imagePickerController.delegate = self
+     */
+    
+    func takePhoto() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.imagePickerController.sourceType = .camera
+            if doTaskByCameraAuthorization(self) {
+                present(self.imagePickerController, animated: true, completion: nil)
+            }
+        } else {
+            simpleAlert(self, message: "카메라 사용이 불가능합니다.")
+        }
+    }
+    
+    func getPhotoFromLibrary() {
+        self.imagePickerController.sourceType = .photoLibrary
+        if doTaskByPhotoAuthorization(self) {
+            present(self.imagePickerController, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imgAlbumart.image = image
+            thumbnail = resizeImage(image: image, maxSize: 200) ?? image
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+}
+
 
 extension CreateNewPaperViewController: PanModalPresentable {
 

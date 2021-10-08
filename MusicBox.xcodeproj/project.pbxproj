@@ -28,6 +28,9 @@
 		444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9445270DCFBC0090F587 /* TimeSignature.swift */; };
 		444D9448270DD5830090F587 /* TimeSignatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9447270DD5830090F587 /* TimeSignatureTests.swift */; };
 		444D944A270DF24F0090F587 /* UserCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9449270DF24F0090F587 /* UserCommunityViewController.swift */; };
+		444D944C270F32670090F587 /* PostPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944B270F32670090F587 /* PostPageViewController.swift */; };
+		444D944E27105D960090F587 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944D27105D960090F587 /* Checkbox.swift */; };
+		444D945027106FF90090F587 /* PhotoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944F27106FF90090F587 /* PhotoAuth.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -118,6 +121,9 @@
 		444D9445270DCFBC0090F587 /* TimeSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignature.swift; sourceTree = "<group>"; };
 		444D9447270DD5830090F587 /* TimeSignatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSignatureTests.swift; sourceTree = "<group>"; };
 		444D9449270DF24F0090F587 /* UserCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommunityViewController.swift; sourceTree = "<group>"; };
+		444D944B270F32670090F587 /* PostPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageViewController.swift; sourceTree = "<group>"; };
+		444D944D27105D960090F587 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		444D944F27106FF90090F587 /* PhotoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuth.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -228,6 +234,7 @@
 				444AF39D2701E26400BD8E38 /* HomeViewController.swift */,
 				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
 				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
+				444D944B270F32670090F587 /* PostPageViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -296,6 +303,8 @@
 				4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */,
 				44F3A0442700B8FA000CE46F /* UIViewPreview.swift */,
 				44F3A0882701CD7D000CE46F /* FileUtil.swift */,
+				444D944D27105D960090F587 /* Checkbox.swift */,
+				444D944F27106FF90090F587 /* PhotoAuth.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -706,6 +715,7 @@
 				44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */,
 				449F3EA826EF3529002C874D /* TextUtil.swift in Sources */,
 				444D944A270DF24F0090F587 /* UserCommunityViewController.swift in Sources */,
+				444D945027106FF90090F587 /* PhotoAuth.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */,
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,
@@ -714,12 +724,14 @@
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
 				44AE99492705EB5400D046D1 /* MIDISequenceExample.swift in Sources */,
 				44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */,
+				444D944C270F32670090F587 /* PostPageViewController.swift in Sources */,
 				444AF3A42701E5BC00BD8E38 /* DocumentViewController.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* Paper+.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
+				444D944E27105D960090F587 /* Checkbox.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */,
 				449F3EA126EF3315002C874D /* Note.swift in Sources */,
 				44F3A03126FE121A000CE46F /* MidiManager+Sequence.swift in Sources */,

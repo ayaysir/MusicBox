@@ -10,6 +10,8 @@ import PanModal
 import DropDown
 
 class FileCollectionViewController: UICollectionViewController {
+    
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     let btnAdd = UIButton()
     
@@ -29,12 +31,18 @@ class FileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showSpinner()
+        
         setMenuDropDown()
         setGestures()
         loadFileList()
         addButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAndRefresh), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        collectionView.performBatchUpdates(nil) { result in
+            print(Date(), "loadcomplete")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,11 +126,23 @@ class FileCollectionViewController: UICollectionViewController {
             if reloadCollectionView {
                 collectionView.reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
+            hideSpinner()
         } catch {
             print(error)
         }
     }
 
+    private func showSpinner() {
+        indicator.startAnimating()
+        collectionView.isHidden = true
+//        loadingView.isHidden = false
+    }
+
+    private func hideSpinner() {
+        indicator.stopAnimating()
+        collectionView.isHidden = false
+//        loadingView.isHidden = true
+    }
 }
 
 extension FileCollectionViewController: UIGestureRecognizerDelegate {
@@ -162,21 +182,20 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-//        if indexPath.row == 0 {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "newCell", for: indexPath)
-//
-//            return cell
-//        }
-//
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileCell", for: indexPath) as?
                 FileCollectionViewCell else {
             return UICollectionViewCell()
         }
         
-//        let realRowIndex = indexPath.row - 1
-        print(documents, indexPath.row)
+        print("documents", indexPath.row)
         documents[indexPath.row].open { _ in
             cell.update(document: self.documents[indexPath.row])
+            if(indexPath.row == self.documents.count - 1) {
+                print("total loaded", indexPath.row)
+            } else {
+                print("loading", indexPath.row)
+            }
+            
         }
         
         return cell
@@ -184,10 +203,6 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-//        if indexPath.row == 0 {
-
-//        } else {
             let musicPaperVC = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
             
             documents[indexPath.row].open { success in
@@ -323,6 +338,7 @@ class FileCollectionViewCell: UICollectionViewCell {
         lblTitle.text = paper.title
         lblArtist.text = paper.originalArtist
         lblPaperMaker.text = paper.paperMaker
+        imgAlbumart.image = convertBase64StringToImage(imageBase64String: paper.thumbnailBase64 ?? "")
     }
     
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UserCommunityViewController: UIViewController {
     
@@ -18,7 +19,27 @@ class UserCommunityViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+}
+
+extension UserCommunityViewController {
+    
+    @objc func getPost(sender: UIButton) {
+        print(sender.tag)
+        var ref = Database.database().reference(withPath: "community/UVID1")
+        ref.observe(.value) { (snapshot: DataSnapshot) in
+            print(snapshot.value as Any)
+        }
+    }
 }
 
 extension UserCommunityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -32,6 +53,8 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         cell.update(id: indexPath.row)
+        cell.btnEnterPost.tag = indexPath.row
+        cell.btnEnterPost.addTarget(self, action: #selector(getPost), for: .touchUpInside)
         return cell
     }
     
@@ -101,17 +124,12 @@ class PostCell: UICollectionViewCell {
         imgUserProfile.layer.cornerRadius = imgUserProfile.bounds.size.width * 0.5
         imgUserProfile.clipsToBounds = true
         
-        btnEnterPost.tag = id
-        btnEnterPost.addTarget(self, action: #selector(someTask), for: .touchUpInside)
+
         
         lblUserNickname.text = "\(id)"
     }
     
     
-    
-    @objc func someTask(sender: UIButton) {
-        print(sender.tag)
-    }
 
 }
 

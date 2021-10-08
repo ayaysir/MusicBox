@@ -20,8 +20,8 @@ class ImageUtilTests: XCTestCase {
 
     func test_makeImageThumbnail() throws {
         let image = #imageLiteral(resourceName: "sample")
-        let thumbnail = makeImageThumbnail(image: image)
-        let thumbnail250 = makeImageThumbnail(image: image, maxSize: 250)
+        let thumbnail = resizeImage(image: image)
+        let thumbnail250 = resizeImage(image: image, maxSize: 250)
         
         XCTAssertNotNil(thumbnail)
         XCTAssertNotNil(thumbnail250)
