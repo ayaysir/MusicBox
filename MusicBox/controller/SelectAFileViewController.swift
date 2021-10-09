@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol SelectAFileVCDelegate: AnyObject {
+    
+    func didSelectedAFile(_ controller: SelectAFileViewController, selectedDocument: PaperDocument)
+}
+
 class SelectAFileViewController: UITableViewController {
     
     var documents: [PaperDocument] = []
+    
+    var delegate: SelectAFileVCDelegate?
     
     override func viewDidLoad() {
         
@@ -40,6 +47,13 @@ extension SelectAFileViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let delegate = delegate {
+            delegate.didSelectedAFile(self, selectedDocument: documents[indexPath.row])
+        }
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 class FileTableViewCell: UITableViewCell {
@@ -49,6 +63,8 @@ class FileTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPaperInfo: UILabel!
     @IBOutlet weak var lblOriginalArtist: UILabel!
     @IBOutlet weak var lblLastModified: UILabel!
+    
+    var document: PaperDocument?
     
     func reset() {
         
@@ -60,6 +76,8 @@ class FileTableViewCell: UITableViewCell {
     }
     
     func update(document: PaperDocument) {
+        
+        self.document = document
         
         guard let paper = document.paper else {
             return

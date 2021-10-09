@@ -33,6 +33,7 @@
 		444D945027106FF90090F587 /* PhotoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944F27106FF90090F587 /* PhotoAuth.swift */; };
 		444D94522711C8440090F587 /* SelectAFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94512711C8440090F587 /* SelectAFileViewController.swift */; };
 		444D94552711C95F0090F587 /* LoadMusicboxFileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */; };
+		444D945A2711DB550090F587 /* UploadFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94592711DB550090F587 /* UploadFormViewController.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -128,6 +129,7 @@
 		444D944F27106FF90090F587 /* PhotoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuth.swift; sourceTree = "<group>"; };
 		444D94512711C8440090F587 /* SelectAFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAFileViewController.swift; sourceTree = "<group>"; };
 		444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMusicboxFileList.swift; sourceTree = "<group>"; };
+		444D94592711DB550090F587 /* UploadFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFormViewController.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -230,16 +232,12 @@
 		440A1A2C26ECC08A00AA4135 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				444D94582711DB070090F587 /* online_community */,
 				444D94532711C94A0090F587 /* common */,
 				44AE99512707226600D046D1 /* modal */,
-				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
-				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
-				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
 				449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */,
 				444AF39D2701E26400BD8E38 /* HomeViewController.swift */,
 				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
-				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
-				444D944B270F32670090F587 /* PostPageViewController.swift */,
 				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
 			);
 			path = controller;
@@ -261,6 +259,19 @@
 				444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */,
 			);
 			path = common;
+			sourceTree = "<group>";
+		};
+		444D94582711DB070090F587 /* online_community */ = {
+			isa = PBXGroup;
+			children = (
+				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
+				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
+				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
+				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
+				444D944B270F32670090F587 /* PostPageViewController.swift */,
+				444D94592711DB550090F587 /* UploadFormViewController.swift */,
+			);
+			path = online_community;
 			sourceTree = "<group>";
 		};
 		449A411F26ECD86000EE3B67 /* view */ = {
@@ -741,6 +752,7 @@
 				44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */,
 				444D944C270F32670090F587 /* PostPageViewController.swift in Sources */,
 				444AF3A42701E5BC00BD8E38 /* DocumentViewController.swift in Sources */,
+				444D945A2711DB550090F587 /* UploadFormViewController.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* Paper+.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
