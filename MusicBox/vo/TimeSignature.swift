@@ -33,6 +33,10 @@ struct TimeSignature: Codable {
         self.lower = lower
     }
     
+    var textValue: String {
+        return "\(upper)/\(lower)"
+    }
+    
 }
 
 extension TimeSignature {

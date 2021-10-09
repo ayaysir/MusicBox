@@ -124,8 +124,6 @@ class PostCell: UICollectionViewCell {
         imgUserProfile.layer.cornerRadius = imgUserProfile.bounds.size.width * 0.5
         imgUserProfile.clipsToBounds = true
         
-
-        
         lblUserNickname.text = "\(id)"
     }
     

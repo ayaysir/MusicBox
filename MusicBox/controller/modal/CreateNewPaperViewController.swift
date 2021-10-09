@@ -26,7 +26,7 @@ class CreateNewPaperViewController: UIViewController {
     @IBOutlet weak var txfPaperMaker: UITextField!
     
     @IBOutlet weak var imgAlbumart: UIImageView!
-    var thumbnail: UIImage?
+    var thumbnailImage: UIImage?
     
     @IBOutlet weak var pkvTimeSignature: UIPickerView!
     
@@ -47,7 +47,7 @@ class CreateNewPaperViewController: UIViewController {
         pkvTimeSignature.selectRow(1, inComponent: 2, animated: false)
 
         imagePickerController.delegate = self
-        thumbnail = resizeImage(image: imgAlbumart.image!, maxSize: 200) ?? imgAlbumart.image!
+        thumbnailImage = resizeImage(image: imgAlbumart.image!, maxSize: 200) ?? imgAlbumart.image!
     }
     
     @IBAction func btnActCreateNewPaper(_ sender: Any) {
@@ -70,9 +70,6 @@ class CreateNewPaperViewController: UIViewController {
             let imBeat = Int(txfIncompleteMeasureBeat.text!) ?? 0
             
             let timeSignature = TimeSignature(upper: selectedUpperTS, lower: selectedLowerTS)
-            
-            let albumartBase64 = convertImageToBase64String(img: imgAlbumart.image!)
-            let thumbnailBase64 = convertImageToBase64String(img: thumbnail!)
         
             let paper = Paper(bpm: bpm, coords: [], timeSignature: TimeSignature())
             
@@ -82,8 +79,13 @@ class CreateNewPaperViewController: UIViewController {
             paper.paperMaker = paperMaker
             paper.timeSignature = timeSignature
             
-            paper.albumartBase64 = albumartBase64
-            paper.thumbnailBase64 = thumbnailBase64
+            if let albumartImage = imgAlbumart.image {
+                paper.albumartImageData = albumartImage.jpegData(compressionQuality: 1)
+            }
+            
+            if let thumbnailImage = thumbnailImage {
+                paper.thumbnailImageData = thumbnailImage.jpegData(compressionQuality: 1)
+            }
              
             delegate?.didNewPaperCreated(self, newPaper: paper, fileNameWithoutExt: fileName)
             
@@ -185,7 +187,7 @@ extension CreateNewPaperViewController: UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imgAlbumart.image = image
-            thumbnail = resizeImage(image: image, maxSize: 200) ?? image
+            thumbnailImage = resizeImage(image: image, maxSize: 200) ?? image
         }
         
         dismiss(animated: true, completion: nil)

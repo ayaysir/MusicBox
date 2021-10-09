@@ -292,6 +292,38 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urQ-ou-ipa">
+                                                <rect key="frame" x="299" y="153" width="96" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="재선택"/>
+                                            </button>
+                                            <view alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNM-35-28i">
+                                                <rect key="frame" x="8" y="8" width="398" height="182"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t08-zz-O29">
+                                                        <rect key="frame" x="43" y="61" width="313" height="61"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain">
+                                                            <attributedString key="attributedTitle">
+                                                                <fragment content="Select a paper file">
+                                                                    <attributes>
+                                                                        <font key="NSFont" size="22" name="Helvetica"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <segue destination="Oyr-lU-MnN" kind="show" id="xR9-9U-CNe"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -476,22 +508,71 @@
             </objects>
             <point key="canvasLocation" x="-1508" y="1326"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Select a Paper file-->
         <scene sceneID="otg-Db-hs4">
             <objects>
-                <tableViewController id="Oyr-lU-MnN" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="fIn-sv-pI9">
+                <tableViewController id="Oyr-lU-MnN" customClass="SelectAFileViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="124" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="fIn-sv-pI9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BOB-cx-PBW">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FileTableViewCell" rowHeight="124" id="BOB-cx-PBW" customClass="FileTableViewCell" customModule="MusicBox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="124"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BOB-cx-PBW" id="SmR-hW-fmn">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BOB-cx-PBW" id="SmR-hW-fmn">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="124"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="AUd-fk-3Tq">
+                                            <rect key="frame" x="20" y="11" width="101" height="104"/>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="H4r-3N-2Al">
+                                            <rect key="frame" x="131" y="11" width="247" height="103.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Wind of Poseidon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sp-vx-oCa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="247" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM 170, 4/4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aI-6u-kFH">
+                                                    <rect key="frame" x="0.0" y="34" width="247" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Robert W. Smith " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Li8-Ol-xFn">
+                                                    <rect key="frame" x="0.0" y="58.5" width="247" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Modified on 12:12:12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBU-YC-XYa">
+                                                    <rect key="frame" x="0.0" y="83" width="247" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="H4r-3N-2Al" firstAttribute="top" secondItem="SmR-hW-fmn" secondAttribute="topMargin" id="3Lz-PL-FoZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="AUd-fk-3Tq" secondAttribute="bottom" constant="9" id="B8N-Ra-TRL"/>
+                                        <constraint firstItem="AUd-fk-3Tq" firstAttribute="top" secondItem="SmR-hW-fmn" secondAttribute="top" constant="11" id="SNh-5N-Vgo"/>
+                                        <constraint firstItem="AUd-fk-3Tq" firstAttribute="leading" secondItem="SmR-hW-fmn" secondAttribute="leading" constant="20" symbolic="YES" id="oGP-qq-68T"/>
+                                        <constraint firstItem="AUd-fk-3Tq" firstAttribute="width" secondItem="SmR-hW-fmn" secondAttribute="height" multiplier="101:124" id="pzw-PO-7AP"/>
+                                        <constraint firstItem="H4r-3N-2Al" firstAttribute="leading" secondItem="AUd-fk-3Tq" secondAttribute="trailing" constant="10" id="vRM-GU-EE0"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imgAlbumart" destination="AUd-fk-3Tq" id="4ab-v2-ERI"/>
+                                    <outlet property="lblLastModified" destination="wBU-YC-XYa" id="7ZB-vf-lKc"/>
+                                    <outlet property="lblOriginalArtist" destination="Li8-Ol-xFn" id="jmP-gH-ZBo"/>
+                                    <outlet property="lblPaperInfo" destination="5aI-6u-kFH" id="her-le-OYU"/>
+                                    <outlet property="lblTitle" destination="7sp-vx-oCa" id="wLd-Un-vPK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -499,11 +580,11 @@
                             <outlet property="delegate" destination="Oyr-lU-MnN" id="mLh-DZ-QtL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="sFP-bZ-71Q"/>
+                    <navigationItem key="navigationItem" title="Select a Paper file" id="sFP-bZ-71Q"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5lq-nn-dyE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1043" y="444"/>
+            <point key="canvasLocation" x="-1280" y="600"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tC5-SG-FFQ">

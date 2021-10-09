@@ -31,6 +31,8 @@
 		444D944C270F32670090F587 /* PostPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944B270F32670090F587 /* PostPageViewController.swift */; };
 		444D944E27105D960090F587 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944D27105D960090F587 /* Checkbox.swift */; };
 		444D945027106FF90090F587 /* PhotoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D944F27106FF90090F587 /* PhotoAuth.swift */; };
+		444D94522711C8440090F587 /* SelectAFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94512711C8440090F587 /* SelectAFileViewController.swift */; };
+		444D94552711C95F0090F587 /* LoadMusicboxFileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -124,6 +126,8 @@
 		444D944B270F32670090F587 /* PostPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageViewController.swift; sourceTree = "<group>"; };
 		444D944D27105D960090F587 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		444D944F27106FF90090F587 /* PhotoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuth.swift; sourceTree = "<group>"; };
+		444D94512711C8440090F587 /* SelectAFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAFileViewController.swift; sourceTree = "<group>"; };
+		444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMusicboxFileList.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 		440A1A2C26ECC08A00AA4135 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				444D94532711C94A0090F587 /* common */,
 				44AE99512707226600D046D1 /* modal */,
 				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
 				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
@@ -235,6 +240,7 @@
 				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
 				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
 				444D944B270F32670090F587 /* PostPageViewController.swift */,
+				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -247,6 +253,14 @@
 				444AF3A02701E35100BD8E38 /* DocumentBrowserViewController.swift */,
 			);
 			path = document;
+			sourceTree = "<group>";
+		};
+		444D94532711C94A0090F587 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 		449A411F26ECD86000EE3B67 /* view */ = {
@@ -702,6 +716,7 @@
 			files = (
 				444AF3A12701E35100BD8E38 /* DocumentBrowserViewController.swift in Sources */,
 				44F3A03D2700A40A000CE46F /* ENSideMenu.swift in Sources */,
+				444D94552711C95F0090F587 /* LoadMusicboxFileList.swift in Sources */,
 				4405E97726FB77B60012E4F5 /* MIDIManager.swift in Sources */,
 				444AF39E2701E26400BD8E38 /* HomeViewController.swift in Sources */,
 				44AE993E2705DBE200D046D1 /* CGPoint+.swift in Sources */,
@@ -743,6 +758,7 @@
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
 				44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */,
 				444AF3A52701E5BC00BD8E38 /* Document.swift in Sources */,
+				444D94522711C8440090F587 /* SelectAFileViewController.swift in Sources */,
 				4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */,
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,
 				4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */,

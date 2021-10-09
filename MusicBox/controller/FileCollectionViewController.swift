@@ -14,11 +14,9 @@ class FileCollectionViewController: UICollectionViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     let btnAdd = UIButton()
-    
-    let filemgr = FileManager.default
-    
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
+    let filemgr = FileManager.default
     var documents: [PaperDocument] = []
     
     let menuDropDown = DropDown()
@@ -104,28 +102,14 @@ class FileCollectionViewController: UICollectionViewController {
     }
     
     private func loadFileList(reloadCollectionView: Bool = false) {
-        guard let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return
-        }
         
         do {
-            // Get the directory contents urls (including subfolders urls)
-            let files = try filemgr.contentsOfDirectory(at: dirPaths, includingPropertiesForKeys: nil)
-            let musicboxFiles = files.filter { (url: URL) in
-                return url.pathExtension == "musicbox"
-            }
-
-            // if you want to filter the directory contents you can do like this:
-            print("document file list:", musicboxFiles)
-            
-            documents = musicboxFiles.map { url in
-                let document = PaperDocument(fileURL: url)
-                return document
-            }
+            documents = try loadMusicboxFileList() ?? []
 
             if reloadCollectionView {
                 collectionView.reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
+            
             hideSpinner()
         } catch {
             print(error)
@@ -186,15 +170,10 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
                 FileCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.reset()
         
-        print("documents", indexPath.row)
         documents[indexPath.row].open { _ in
             cell.update(document: self.documents[indexPath.row])
-            if(indexPath.row == self.documents.count - 1) {
-                print("total loaded", indexPath.row)
-            } else {
-                print("loading", indexPath.row)
-            }
             
         }
         
@@ -330,6 +309,13 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     var document: PaperDocument?
     
+    func reset() {
+        imgAlbumart.image = nil
+        lblTitle.text = ""
+        lblArtist.text = ""
+        lblPaperMaker.text = ""
+    }
+    
     func update(document: PaperDocument?) {
         
         self.document = document
@@ -338,7 +324,12 @@ class FileCollectionViewCell: UICollectionViewCell {
         lblTitle.text = paper.title
         lblArtist.text = paper.originalArtist
         lblPaperMaker.text = paper.paperMaker
-        imgAlbumart.image = convertBase64StringToImage(imageBase64String: paper.thumbnailBase64 ?? "")
+        
+        if let data = paper.albumartImageData {
+            imgAlbumart.image = UIImage(data: data)
+        } else {
+            imgAlbumart.image = UIImage(named: "sample")
+        }
     }
     
 }
