@@ -86,6 +86,10 @@ class CreateNewPaperViewController: UIViewController {
             if let thumbnailImage = thumbnailImage {
                 paper.thumbnailImageData = thumbnailImage.jpegData(compressionQuality: 1)
             }
+            
+            if let firebaseUID = getCurrentUserUID() {
+                paper.firebaseUID = firebaseUID
+            }
              
             delegate?.didNewPaperCreated(self, newPaper: paper, fileNameWithoutExt: fileName)
             

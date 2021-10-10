@@ -222,8 +222,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allow to edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9p-IP-R03">
-                                                <rect key="frame" x="20" y="516" width="376" height="32"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allow to paper edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9p-IP-R03">
+                                                <rect key="frame" x="20" y="516" width="376" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -358,6 +358,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Upload"/>
+                                <connections>
+                                    <action selector="btnActUpload:" destination="Hh2-PP-4wj" eventType="touchUpInside" id="haq-hf-h38"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fPd-4o-eam"/>
@@ -378,6 +381,9 @@
                         <outlet property="lblSelectedPaperMaker" destination="JLY-SC-Pbs" id="Zvt-PT-m4h"/>
                         <outlet property="lblSelectedTitle" destination="EzZ-3U-sIi" id="J0c-Pu-nCs"/>
                         <outlet property="selectAFileButtonView" destination="eNM-35-28i" id="XHS-eI-DcM"/>
+                        <outlet property="swtPostAllowToEdit" destination="qNy-DB-wUg" id="e2r-fa-kt0"/>
+                        <outlet property="txfPostTitle" destination="dUc-EB-k6Y" id="xrx-h3-Tfg"/>
+                        <outlet property="txvPostComment" destination="CXG-n8-Hki" id="cpZ-cc-4GN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZp-8E-cGV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
