@@ -25,6 +25,12 @@ class MIDIManager {
     
     var currentBPM: Int = 100
     
+    /// 기본 사운드폰트 사용
+    convenience init() {
+        let generalSoundbank = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2")
+        self.init(soundbank: generalSoundbank)
+    }
+    
     init(soundbank: URL?) {
         
         self.soundbank = soundbank

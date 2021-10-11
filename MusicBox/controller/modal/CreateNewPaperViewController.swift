@@ -47,7 +47,12 @@ class CreateNewPaperViewController: UIViewController {
         pkvTimeSignature.selectRow(1, inComponent: 2, animated: false)
 
         imagePickerController.delegate = self
-        thumbnailImage = resizeImage(image: imgAlbumart.image!, maxSize: 200) ?? imgAlbumart.image!
+        do {
+            try thumbnailImage = resizeImage(image: imgAlbumart.image!, maxSize: 200)
+        } catch  {
+            print(error)
+            thumbnailImage = imgAlbumart.image!
+        }
     }
     
     @IBAction func btnActCreateNewPaper(_ sender: Any) {
@@ -80,7 +85,12 @@ class CreateNewPaperViewController: UIViewController {
             paper.timeSignature = timeSignature
             
             if let albumartImage = imgAlbumart.image {
-                paper.albumartImageData = albumartImage.jpegData(compressionQuality: 1)
+                do {
+                    let resized = try resizeImage(image: albumartImage, maxSize: 1020)
+                    paper.albumartImageData = resized.jpegData(compressionQuality: 1)
+                } catch {
+                    print(error)
+                }
             }
             
             if let thumbnailImage = thumbnailImage {
@@ -191,7 +201,12 @@ extension CreateNewPaperViewController: UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imgAlbumart.image = image
-            thumbnailImage = resizeImage(image: image, maxSize: 200) ?? image
+            do {
+                try thumbnailImage = resizeImage(image: image, maxSize: 200)
+            } catch {
+                print(error)
+                thumbnailImage = image
+            }
         }
         
         dismiss(animated: true, completion: nil)

@@ -63,7 +63,11 @@ class SignUpViewController: UIViewController {
         imagePickerController.delegate = self
         
         // 최초 섬네일 생성
-        userProfileThumbnail = resizeImage(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
+        do {
+            userProfileThumbnail = try resizeImage(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
+        } catch {
+            print(error)
+        }
         
 
     }
@@ -99,21 +103,28 @@ class SignUpViewController: UIViewController {
             // 추가 정보 입력
             ref.child("users").child(user.uid).setValue(["interesting": selectedInteresting])
             
-            let image = resizeImage(image: imgProfilePicture.image!, maxSize: 1020) ?? imgProfilePicture.image!
-            
-            // 이미지 업로드
-            let images = [
-                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "png")
-            ]
-            startUploading(images: images) {
-                simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
-                    self.dismiss(animated: true, completion: nil)
-                    if delegate != nil {
-                        delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
+            do {
+                let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
+                
+                let images = [
+                    ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                    ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "png")
+                ]
+                startUploading(images: images) {
+                    simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
+                        self.dismiss(animated: true, completion: nil)
+                        if delegate != nil {
+                            delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
+                        }
                     }
                 }
+            } catch {
+                print(error)
+                return
             }
+            
+            // 이미지 업로드
+            
         }
     }
     
@@ -305,7 +316,11 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imgProfilePicture.image = image
-            userProfileThumbnail = resizeImage(image: image, maxSize: 200) ?? image
+            do {
+                try userProfileThumbnail = resizeImage(image: image, maxSize: 200)
+            } catch {
+                userProfileThumbnail = image
+            }
         }
         
         dismiss(animated: true, completion: nil)

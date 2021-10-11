@@ -7,13 +7,19 @@
 
 import UIKit
 
-func resizeImage(image: UIImage, maxSize: Int = 100) -> UIImage? {
+enum ResizeImageError: Error {
+    case imageDataIsNil
+    case sizeIsTooSmall
+    case convertFailed
+}
+
+func resizeImage(image: UIImage, maxSize: Int = 100) throws -> UIImage  {
     guard let imageData = image.jpegData(compressionQuality: 0.95) else {
-        return nil
+        throw ResizeImageError.imageDataIsNil
     }
     
     guard image.size.width >= CGFloat(maxSize) && image.size.height >= CGFloat(maxSize) else {
-        return nil
+        throw ResizeImageError.sizeIsTooSmall
     }
 
     let options = [
@@ -31,6 +37,10 @@ func resizeImage(image: UIImage, maxSize: Int = 100) -> UIImage? {
           let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options)!
           thumbnail = UIImage(cgImage: imageReference) // You get your thumbail here
        }
+    }
+    
+    guard let thumbnail = thumbnail else {
+        throw ResizeImageError.convertFailed
     }
     return thumbnail
 }

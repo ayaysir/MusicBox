@@ -8,6 +8,7 @@
 import UIKit
 import PanModal
 import DropDown
+import Photos
 
 class FileCollectionViewController: UICollectionViewController {
     
@@ -25,11 +26,13 @@ class FileCollectionViewController: UICollectionViewController {
     var selectedCellIndexPath: IndexPath?
     
     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    
+    var midiManager: MIDIManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showSpinner()
+        askPhotoAuth()
         
         setMenuDropDown()
         setGestures()
@@ -110,22 +113,20 @@ class FileCollectionViewController: UICollectionViewController {
                 collectionView.reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
             
-            hideSpinner()
         } catch {
             print(error)
         }
     }
+    
+    private func askPhotoAuth() {
+        PHPhotoLibrary.requestAuthorization { status in
+            return
+        }
+        
+        AVCaptureDevice.requestAccess(for: .video) { granted in
 
-    private func showSpinner() {
-        indicator.startAnimating()
-        collectionView.isHidden = true
-//        loadingView.isHidden = false
-    }
-
-    private func hideSpinner() {
-        indicator.stopAnimating()
-        collectionView.isHidden = false
-//        loadingView.isHidden = true
+        }
+        
     }
 }
 

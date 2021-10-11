@@ -38,6 +38,8 @@
 		444D94602711EE170090F587 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D945F2711EE170090F587 /* Post.swift */; };
 		444D94632711EF950090F587 /* PaperCoord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94622711EF950090F587 /* PaperCoord.swift */; };
 		444D94652711F7720090F587 /* JSONUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94642711F7720090F587 /* JSONUtil.swift */; };
+		444D9467271328F70090F587 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9466271328F70090F587 /* UIButton+.swift */; };
+		444D946B2714787B0090F587 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946A2714787B0090F587 /* ImageManager.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -137,6 +139,8 @@
 		444D945F2711EE170090F587 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		444D94622711EF950090F587 /* PaperCoord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperCoord.swift; sourceTree = "<group>"; };
 		444D94642711F7720090F587 /* JSONUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONUtil.swift; sourceTree = "<group>"; };
+		444D9466271328F70090F587 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		444D946A2714787B0090F587 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				4405E97126F784930012E4F5 /* UIImage+.swift */,
 				44AE993D2705DBE200D046D1 /* CGPoint+.swift */,
 				44AE993F2705DBED00D046D1 /* Array+.swift */,
+				444D9466271328F70090F587 /* UIButton+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				444D944D27105D960090F587 /* Checkbox.swift */,
 				444D944F27106FF90090F587 /* PhotoAuth.swift */,
 				444D94642711F7720090F587 /* JSONUtil.swift */,
+				444D946A2714787B0090F587 /* ImageManager.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -789,6 +795,8 @@
 				444D945A2711DB550090F587 /* UploadFormViewController.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* Paper.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
+				444D946B2714787B0090F587 /* ImageManager.swift in Sources */,
+				444D9467271328F70090F587 /* UIButton+.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,

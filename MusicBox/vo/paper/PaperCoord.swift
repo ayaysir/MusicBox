@@ -18,7 +18,7 @@ class PaperCoord: NSObject, NSCoding, NSSecureCoding, Codable {
     var gridY: Int!
     
     enum CodingKeys: CodingKey {
-        case paperId, musicNote, absoluteTouchedPoint, gridX
+        case paperId, musicNote, absoluteTouchedPoint, gridX, gridY
     }
     
     init(musicNote: Note, absoluteTouchedPoint: CGPoint, gridX: Double, gridY: Int) {
@@ -66,11 +66,13 @@ class PaperCoord: NSObject, NSCoding, NSSecureCoding, Codable {
         self.gridY = gridY
     }
     
+    
+    
     override var description: String {
         if let musicNote = musicNote, let gridX = gridX, let gridY = gridY {
-            return "[musicNote: \(musicNote), gridX: \(gridX), gridY: \(gridY)]"
+            return "(musicNote: \(musicNote), gridX: \(gridX), gridY: \(gridY))"
         } else {
-            return "[]"
+            return "(musicNote: \(String(describing: musicNote)), gridX: \(String(describing: gridX)), gridY: \(String(describing: gridY)))"
         }
         
     }

@@ -38,7 +38,6 @@ class MusicPaperViewController: UIViewController {
     let cst = PaperConstant.shared
     
     var midiManager: MIDIManager!
-    var midiManager2: MIDIManager!
     
     var bpm: Int = 100
     var colNum: Int = 80
@@ -186,35 +185,6 @@ class MusicPaperViewController: UIViewController {
         lastTouchedTime = Date()
         touchTimeCheckMode = true
     }
-
-    
-    @IBAction func swtActEraserOn(_ sender: UISwitch) {
-        if sender.isOn {
-            eraserMode = true
-        } else {
-            eraserMode = false
-        }
-    }
-    
-    @IBAction func swtActSnapToGridOn(_ sender: UISwitch) {
-        if sender.isOn {
-            snapToGridMode = true
-        } else {
-            snapToGridMode = false
-        }
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension MusicPaperViewController: UIScrollViewDelegate {
@@ -297,6 +267,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedPlaySequence(_ view: UIView) {
+        
         if midiManager.midiPlayer!.isPlaying {
             midiManager.midiPlayer?.stop()
         } else {
@@ -306,7 +277,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 print("midi play finished")
             })
         }
-        
     }
     
     func didClickedResetPaper(_ view: UIView) {
@@ -343,28 +313,3 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         
     }
 }
-
-//#if canImport(SwiftUI) && DEBUG
-//import SwiftUI
-//
-//let deviceNames: [String] = [
-//    "iPhone SE",
-//    "iPad 11 Pro Max",
-//    "iPad Pro (11-inch)"
-//]
-//
-//@available(iOS 13.0, *)
-//struct MusicPaperViewController_Preview: PreviewProvider {
-//  static var previews: some View {
-//    ForEach(deviceNames, id: \.self) { deviceName in
-//      UIViewControllerPreview {
-//        UIStoryboard(name: "Main", bundle: nil)
-//            .instantiateInitialViewController { coder in
-//            MusicPaperViewController(coder: coder)
-//        }!
-//      }.previewDevice(PreviewDevice(rawValue: deviceName))
-//        .previewDisplayName(deviceName)
-//    }
-//  }
-//}
-//#endif

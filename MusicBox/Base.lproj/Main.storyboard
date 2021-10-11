@@ -307,11 +307,26 @@
                                                             <action selector="btnActReselectAFile:" destination="Hh2-PP-4wj" eventType="touchUpInside" id="CWo-91-Glj"/>
                                                         </connections>
                                                     </button>
-                                                    <view alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNM-35-28i">
-                                                        <rect key="frame" x="0.0" y="-6" width="398" height="182"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwW-vq-RRr">
+                                                        <rect key="frame" x="90" y="120" width="40" height="40"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="17"/>
+                                                        </buttonConfiguration>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="circleButton" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnActPreplay:" destination="Hh2-PP-4wj" eventType="touchUpInside" id="xmz-H5-YCK"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view alpha="0.94999998807907104" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KWB-I9-ReI">
+                                                        <rect key="frame" x="0.0" y="-3" width="398" height="182"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t08-zz-O29">
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srj-rf-EtM">
                                                                 <rect key="frame" x="43" y="61" width="313" height="61"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -327,11 +342,11 @@
                                                                     </attributedString>
                                                                 </buttonConfiguration>
                                                                 <connections>
-                                                                    <segue destination="Oyr-lU-MnN" kind="show" identifier="SelectAFileSegue" id="xR9-9U-CNe"/>
+                                                                    <action selector="btnActSelectAFile:" destination="Hh2-PP-4wj" eventType="touchUpInside" id="rVS-Nh-m0t"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -376,14 +391,16 @@
                     <navigationItem key="navigationItem" title="Upload" largeTitleDisplayMode="never" id="bNG-YB-QJA"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnPreplay" destination="mwW-vq-RRr" id="W2m-yH-K3r"/>
                         <outlet property="imgSelectedAlbumart" destination="jcL-Tp-xv4" id="Hsn-c3-j8m"/>
                         <outlet property="lblSelectedArtist" destination="QGg-qA-eAc" id="YyV-rz-bnx"/>
                         <outlet property="lblSelectedPaperMaker" destination="JLY-SC-Pbs" id="Zvt-PT-m4h"/>
                         <outlet property="lblSelectedTitle" destination="EzZ-3U-sIi" id="J0c-Pu-nCs"/>
-                        <outlet property="selectAFileButtonView" destination="eNM-35-28i" id="XHS-eI-DcM"/>
+                        <outlet property="selectAFileButtonView" destination="KWB-I9-ReI" id="5KY-vy-1ZF"/>
                         <outlet property="swtPostAllowToEdit" destination="qNy-DB-wUg" id="e2r-fa-kt0"/>
                         <outlet property="txfPostTitle" destination="dUc-EB-k6Y" id="xrx-h3-Tfg"/>
                         <outlet property="txvPostComment" destination="CXG-n8-Hki" id="cpZ-cc-4GN"/>
+                        <segue destination="Oyr-lU-MnN" kind="show" identifier="SelectAFileSegue" id="EmL-l0-h4X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZp-8E-cGV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1397,6 +1414,7 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sample" width="1024" height="768"/>
         <image name="square.and.arrow.up.circle.fill" catalog="system" width="128" height="121"/>
