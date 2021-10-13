@@ -50,6 +50,9 @@ class MusicPaperViewController: UIViewController {
     var touchTimeCheckMode: Bool!
     var timer: Timer?
     
+    var isPanelCollapsed: Bool = true
+    var panelMoveX: CGFloat = 324
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,17 +111,7 @@ class MusicPaperViewController: UIViewController {
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
         midiManager.currentBPM = bpm
         
-        panelView = PaperOptionPanelView()
-        panelView.delegate = self
-        panelView.clipsToBounds = true
-        view.addSubview(panelView)
-        
-        panelView.translatesAutoresizingMaskIntoConstraints = false
-        panelView.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
-        panelView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 100).isActive = true
-        
-        panelView.widthAnchor.constraint(equalToConstant: 320).isActive = true
-        panelView.heightAnchor.constraint(equalToConstant: 320).isActive = true
+        initPanel()
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             
@@ -134,6 +127,39 @@ class MusicPaperViewController: UIViewController {
         })
         
         saveDocument()
+        
+        let value = UIInterfaceOrientation.landscapeRight.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        print(UIDevice.current.orientation)
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+
+        } else {
+            print("Portrait")
+        }
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscape
+    }
+    
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        print(#function, scrollView.bounds)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -184,6 +210,44 @@ class MusicPaperViewController: UIViewController {
         // 마지막 터치된 시점으로부터
         lastTouchedTime = Date()
         touchTimeCheckMode = true
+    }
+    
+    func initPanel() {
+        panelView = PaperOptionPanelView()
+        panelView.delegate = self
+        panelView.clipsToBounds = true
+        view.addSubview(panelView)
+        
+        panelView.translatesAutoresizingMaskIntoConstraints = false
+        panelView.centerYAnchor.constraint(equalTo:view.centerYAnchor).isActive = true
+        panelView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: panelMoveX).isActive = true
+        
+        panelView.widthAnchor.constraint(equalToConstant: 380).isActive = true
+        panelView.heightAnchor.constraint(equalToConstant: 320).isActive = true
+        
+        panelView.layer.borderWidth = 1
+        /// 테두리 밖으로 contents가 있을 때, 마스킹(true)하여 표출안되게 할것인지 마스킹을 off(false)하여 보일것인지 설정
+        panelView.layer.masksToBounds = false
+        /// shadow 색상
+        panelView.layer.shadowColor = UIColor.black.cgColor
+        /// 현재 shadow는 view의 layer 테두리와 동일한 위치로 있는 상태이므로 offset을 통해 그림자를 이동시켜야 표출
+        panelView.layer.shadowOffset = CGSize(width: 4, height: 10)
+        /// shadow의 투명도 (0 ~ 1)
+        panelView.layer.shadowOpacity = 0.8
+        /// shadow의 corner radius
+        panelView.layer.shadowRadius = 5.0
+    }
+    
+    func pullPanel() {
+        UIView.animate(withDuration: 0.5) { [unowned self] in
+            panelView.frame = panelView.frame.offsetBy(dx: -panelMoveX, dy: 0)
+        }
+    }
+    
+    func pushPanel() {
+        UIView.animate(withDuration: 0.5) { [unowned self] in
+            panelView.frame = panelView.frame.offsetBy(dx: +panelMoveX, dy: 0)
+        }
     }
 }
 
@@ -255,7 +319,13 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedSetting(_ view: UIView) {
+        if isPanelCollapsed {
+            pullPanel()
+        } else {
+            pushPanel()
+        }
         
+        isPanelCollapsed.toggle()
     }
     
     func didClickedEraser(_ view: UIView) {

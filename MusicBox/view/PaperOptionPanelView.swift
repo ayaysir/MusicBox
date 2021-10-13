@@ -44,6 +44,9 @@ class PaperOptionPanelView: UIView {
     func commonInit() {
         guard let view = loadViewFromNib() else { return }
         view.frame = self.bounds
+        if let pattern = UIImage(named: "marble") {
+            view.backgroundColor = UIColor(patternImage: pattern)
+        }
         self.addSubview(view)
     }
     

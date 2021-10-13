@@ -11,8 +11,6 @@ import DropDown
 import Photos
 
 class FileCollectionViewController: UICollectionViewController {
-    
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     let btnAdd = UIButton()
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)

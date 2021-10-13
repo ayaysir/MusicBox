@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Black_and_gold_marble_texture 1x.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Black_and_gold_marble_texture 2x.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Black_and_gold_marble_texture 3x.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
