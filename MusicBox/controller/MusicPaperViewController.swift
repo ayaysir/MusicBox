@@ -52,6 +52,10 @@ class MusicPaperViewController: UIViewController {
     
     var isPanelCollapsed: Bool = true
     var panelMoveX: CGFloat = 324
+    var panelTrailingConstraint: NSLayoutConstraint!
+    
+    var lastScrollViewOffset: CGPoint!
+    var lastScrollViewZoomScale: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,6 +138,7 @@ class MusicPaperViewController: UIViewController {
         
     }
     
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -155,11 +160,8 @@ class MusicPaperViewController: UIViewController {
         return false
     }
     
-    override func viewDidLayoutSubviews() {
-        print(#function, scrollView.bounds)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -220,7 +222,9 @@ class MusicPaperViewController: UIViewController {
         
         panelView.translatesAutoresizingMaskIntoConstraints = false
         panelView.centerYAnchor.constraint(equalTo:view.centerYAnchor).isActive = true
-        panelView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: panelMoveX).isActive = true
+        
+        panelTrailingConstraint = panelView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: panelMoveX)
+        panelTrailingConstraint.isActive = true
         
         panelView.widthAnchor.constraint(equalToConstant: 380).isActive = true
         panelView.heightAnchor.constraint(equalToConstant: 320).isActive = true
@@ -236,18 +240,32 @@ class MusicPaperViewController: UIViewController {
         panelView.layer.shadowOpacity = 0.8
         /// shadow의 corner radius
         panelView.layer.shadowRadius = 5.0
+        
+        if let bpm = document?.paper?.bpm {
+            panelView.txtBpm.text = String(bpm)
+        }
+        if let imBeat = document?.paper?.incompleteMeasureBeat {
+            panelView.txtIncompleteMeasure.text = String(imBeat)
+        }
+        
     }
     
     func pullPanel() {
+        panelTrailingConstraint.isActive = false
         UIView.animate(withDuration: 0.5) { [unowned self] in
             panelView.frame = panelView.frame.offsetBy(dx: -panelMoveX, dy: 0)
         }
+        panelTrailingConstraint.constant = 0
+        panelTrailingConstraint.isActive = true
     }
     
     func pushPanel() {
+        panelTrailingConstraint.isActive = false
         UIView.animate(withDuration: 0.5) { [unowned self] in
             panelView.frame = panelView.frame.offsetBy(dx: +panelMoveX, dy: 0)
         }
+        panelTrailingConstraint.constant = panelMoveX
+        panelTrailingConstraint.isActive = true
     }
 }
 
@@ -339,6 +357,10 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedPlaySequence(_ view: UIView) {
         
         if midiManager.midiPlayer!.isPlaying {
+            self.scrollView.layer.removeAllAnimations()
+            scrollView.zoomScale = lastScrollViewZoomScale
+            scrollView.setContentOffset(lastScrollViewOffset, animated: false)
+            
             midiManager.midiPlayer?.stop()
         } else {
             let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
@@ -346,6 +368,31 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             midiManager.midiPlayer?.play({
                 print("midi play finished")
             })
+            
+            let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
+                max(partialResult, coord.gridX)
+            }
+            
+            guard let duration = midiManager.midiPlayer?.duration else {
+                return
+            }
+            
+            let endGridX = maxGridX * cst.cellWidth + cst.leftMargin
+            
+            lastScrollViewOffset = scrollView.contentOffset
+            lastScrollViewZoomScale = scrollView.zoomScale
+            
+            DispatchQueue.main.async {
+                self.scrollView.contentOffset.x = 0
+                self.scrollView.zoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
+                
+                UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
+                    self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale
+                } completion: { [unowned self] success in
+                    scrollView.zoomScale = lastScrollViewZoomScale
+                    scrollView.setContentOffset(lastScrollViewOffset, animated: false)
+                }
+            }
         }
     }
     

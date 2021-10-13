@@ -40,6 +40,7 @@
 		444D94652711F7720090F587 /* JSONUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D94642711F7720090F587 /* JSONUtil.swift */; };
 		444D9467271328F70090F587 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9466271328F70090F587 /* UIButton+.swift */; };
 		444D946B2714787B0090F587 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946A2714787B0090F587 /* ImageManager.swift */; };
+		444D946F271727EB0090F587 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946E271727EA0090F587 /* UITextField+.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -141,6 +142,7 @@
 		444D94642711F7720090F587 /* JSONUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONUtil.swift; sourceTree = "<group>"; };
 		444D9466271328F70090F587 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		444D946A2714787B0090F587 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		444D946E271727EA0090F587 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				44AE993D2705DBE200D046D1 /* CGPoint+.swift */,
 				44AE993F2705DBED00D046D1 /* Array+.swift */,
 				444D9466271328F70090F587 /* UIButton+.swift */,
+				444D946E271727EA0090F587 /* UITextField+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,
 				44AE99402705DBED00D046D1 /* Array+.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
+				444D946F271727EB0090F587 /* UITextField+.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
 				44AE99492705EB5400D046D1 /* MIDISequenceExample.swift in Sources */,
 				44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */,

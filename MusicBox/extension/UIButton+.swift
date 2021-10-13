@@ -8,15 +8,15 @@
 import UIKit
 
 extension UIButton {
-    var circleButton: Bool {
-        set {
-            if newValue {
+    @IBInspectable var circleButton: Bool {
+        set(isCircle) {
+            if isCircle {
                 self.layer.cornerRadius = 0.5 * self.bounds.size.width
             } else {
                 self.layer.cornerRadius = 0
             }
         } get {
-            return self.layer.cornerRadius != 0
+            return self.circleButton
         }
     }
 }
