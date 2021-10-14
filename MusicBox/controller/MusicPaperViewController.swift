@@ -382,9 +382,30 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             lastScrollViewOffset = scrollView.contentOffset
             lastScrollViewZoomScale = scrollView.zoomScale
             
+            var playbackData = document?.paper?.coords
+            playbackData?.sort(by: { p1, p2 in
+                p1.gridX < p2.gridX
+            })
+            
+            guard let bpm = document?.paper!.bpm else {
+                return
+            }
+            
+            playbackData?.forEach({ coord in
+                let fireEventMS = round(60 * 1000 / Double(bpm) * coord.gridX)
+                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fireEventMS))) {
+//                    self.musicPaperView.currentPlayingBeat = Int(coord.gridX)
+//                    print(fireEventMS)
+//                }
+            })
+            
             DispatchQueue.main.async {
                 self.scrollView.contentOffset.x = 0
-                self.scrollView.zoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
+                let newZoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
+                if self.scrollView.zoomScale >= newZoomScale {
+                    self.scrollView.zoomScale = newZoomScale
+                }
                 
                 UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
                     self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale

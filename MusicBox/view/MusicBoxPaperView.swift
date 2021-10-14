@@ -13,13 +13,9 @@ struct PaperConstant {
     // 상수
     let leftMargin: CGFloat = 120
     let topMargin: CGFloat = 80
-//    let leftMargin: CGFloat = 20
-//    let topMargin: CGFloat = 57
     
     let cellWidth: CGFloat = 58
     let cellHeight: CGFloat = 22
-//    let cellWidth: CGFloat = 20
-//    let cellHeight: CGFloat = 35
     
     let circleRadius: CGFloat = 10
     
@@ -48,14 +44,19 @@ class MusicBoxPaperView: UIView {
             self.setNeedsDisplay()
         }
     }
+    
+    var currentPlayingBeat: Int = 8 {
+        didSet{
+            self.setNeedsDisplay()
+        }
+    }
+    
     var title: String = "Toccata & Fugue In D Minor - II. Fugue - BWV 538"
     var originalArtist: String = "J. S. Bach"
     var paperMaker: String = "Paper Man"
     var paperMadeBy: String = "The paper was made by"
     var fontPalatio: UIFont!
     var fontAlpha: CGFloat = 0.8
-//    var whenDrawAThickLineEveryBars = 4
-//    var whenToggleBackgroundColorEveryBars = 8
     var paperGrid: GridInfo = GridInfo()
     
     
@@ -202,10 +203,11 @@ class MusicBoxPaperView: UIView {
         }
         
         noteNameAttrs[NSAttributedString.Key.foregroundColor] = UIColor(cgColor: CGColor(gray: 0.1, alpha: 0.5))
-        var measureIndex = 1
+        var measureIndex = 2
         for index in 1...innerColNum {
             let targetX = cst.leftMargin + (index.cgFloat * cst.cellWidth) + (imBeatCount.cgFloat * cst.cellWidth)
             context.move(to: CGPoint(x: targetX, y: cst.topMargin))
+            
             if index % paperGrid.bolderLineInterval == 0 {
                 context.setLineWidth(4)
                 context.setStrokeColor(CGColor(gray: 0, alpha: fontAlpha))
@@ -217,6 +219,7 @@ class MusicBoxPaperView: UIView {
                 context.setLineWidth(1)
                 context.setStrokeColor(CGColor(gray: 0.1, alpha: fontAlpha))
             }
+            
             context.addLine(to: CGPoint(x: targetX, y: cst.topMargin + boxOutline.height))
             context.strokePath()
             
@@ -268,11 +271,6 @@ class MusicBoxPaperView: UIView {
         footerText.draw(with: footerRect, options: .usesLineFragmentOrigin, attributes: footerAttrs, context: nil)
 
         // 점 더하기
-        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
-            UIColor(patternImage: backgroundPatternImage).set()
-        } else {
-            UIColor.black.set()
-        }
         for coord in data {
             let arcX = cst.leftMargin + coord.gridX! * cst.cellWidth
             let arcY = cst.topMargin + coord.gridY!.cgFloat * cst.cellHeight
@@ -280,9 +278,40 @@ class MusicBoxPaperView: UIView {
             let circle = UIBezierPath(arcCenter: arcCenter, radius: cst.circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
             
             context.addPath(circle.cgPath)
-
         }
+        
+        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
+            UIColor(patternImage: backgroundPatternImage).set()
+        } else {
+            UIColor.black.set()
+        }
+        
+        
         context.fillPath()
+//
+//
+//                let circles = UIBezierPath()
+//                let playingCircles = UIBezierPath()
+//
+//        for coord in data {
+//            let arcX = cst.leftMargin + coord.gridX! * cst.cellWidth
+//            let arcY = cst.topMargin + coord.gridY!.cgFloat * cst.cellHeight
+//            let arcCenter = CGPoint(x: arcX, y: arcY)
+//            circles.addArc(withCenter: arcCenter, radius: cst.circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+//            circles.close()
+//        }
+//
+//        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
+//            UIColor(patternImage: backgroundPatternImage).set()
+//        } else {
+//            UIColor.black.set()
+//        }
+//
+//        context.addPath(circles.cgPath)
+//
+//        context.setFillColor(CGColor(red: 255, green: 0, blue: 0, alpha: 1))
+//        context.addPath(playingCircles.cgPath)
+//        context.fillPath()
 
         isFirstRun = false
         
