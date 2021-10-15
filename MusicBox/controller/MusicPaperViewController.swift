@@ -57,6 +57,8 @@ class MusicPaperViewController: UIViewController {
     var lastScrollViewOffset: CGPoint!
     var lastScrollViewZoomScale: CGFloat!
     
+    var propertyAnimator: UIViewPropertyAnimator!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -356,11 +358,14 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     
     func didClickedPlaySequence(_ view: UIView) {
         
+        
+        
         if midiManager.midiPlayer!.isPlaying {
-            self.scrollView.layer.removeAllAnimations()
-            scrollView.zoomScale = lastScrollViewZoomScale
-            scrollView.setContentOffset(lastScrollViewOffset, animated: false)
-            
+            if propertyAnimator.isRunning {
+                propertyAnimator.stopAnimation(true)
+                scrollView.zoomScale = lastScrollViewZoomScale
+                scrollView.setContentOffset(lastScrollViewOffset, animated: false)
+            }
             midiManager.midiPlayer?.stop()
         } else {
             let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
@@ -369,35 +374,30 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 print("midi play finished")
             })
             
-            let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
-                max(partialResult, coord.gridX)
-            }
-            
             guard let duration = midiManager.midiPlayer?.duration else {
                 return
             }
             
+            let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
+                max(partialResult, coord.gridX)
+            }
+            
             let endGridX = maxGridX * cst.cellWidth + cst.leftMargin
-            
-            lastScrollViewOffset = scrollView.contentOffset
-            lastScrollViewZoomScale = scrollView.zoomScale
-            
-            var playbackData = document?.paper?.coords
-            playbackData?.sort(by: { p1, p2 in
-                p1.gridX < p2.gridX
-            })
             
             guard let bpm = document?.paper!.bpm else {
                 return
             }
             
-            playbackData?.forEach({ coord in
-                let fireEventMS = round(60 * 1000 / Double(bpm) * coord.gridX)
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(fireEventMS))) {
-//                    self.musicPaperView.currentPlayingBeat = Int(coord.gridX)
-//                    print(fireEventMS)
-//                }
+            lastScrollViewOffset = scrollView.contentOffset
+            lastScrollViewZoomScale = scrollView.zoomScale
+            
+            guard let coords = document?.paper?.coords else {
+                return
+            }
+            var playbackData = coords
+            
+            playbackData.sort(by: { p1, p2 in
+                p1.gridX < p2.gridX
             })
             
             DispatchQueue.main.async {
@@ -407,12 +407,13 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                     self.scrollView.zoomScale = newZoomScale
                 }
                 
-                UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
+                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: .curveLinear, animations: { [unowned self] in
                     self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale
-                } completion: { [unowned self] success in
+                }, completion: { [unowned self]  position in
                     scrollView.zoomScale = lastScrollViewZoomScale
                     scrollView.setContentOffset(lastScrollViewOffset, animated: false)
-                }
+                })
+                self.propertyAnimator.pausesOnCompletion = true
             }
         }
     }
