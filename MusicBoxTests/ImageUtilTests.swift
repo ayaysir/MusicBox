@@ -20,17 +20,21 @@ class ImageUtilTests: XCTestCase {
 
     func test_makeImageThumbnail() throws {
         let image = #imageLiteral(resourceName: "sample")
-        let thumbnail = resizeImage(image: image)
-        let thumbnail250 = resizeImage(image: image, maxSize: 250)
-        
-        XCTAssertNotNil(thumbnail)
-        XCTAssertNotNil(thumbnail250)
-        
-        let maxSize = max(thumbnail!.size.width, thumbnail!.size.height)
-        let maxSizeOf250 = max(thumbnail250!.size.width, thumbnail250!.size.height)
-        
-        XCTAssertEqual(maxSize, 100)
-        XCTAssertEqual(maxSizeOf250, 250)
+        do {
+            let thumbnail = try resizeImage(image: image)
+            let thumbnail250 = try resizeImage(image: image, maxSize: 250)
+            
+            XCTAssertNotNil(thumbnail)
+            XCTAssertNotNil(thumbnail250)
+            
+            let maxSize = max(thumbnail.size.width, thumbnail.size.height)
+            let maxSizeOf250 = max(thumbnail250.size.width, thumbnail250.size.height)
+            
+            XCTAssertEqual(maxSize, 100)
+            XCTAssertEqual(maxSizeOf250, 250)
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
     }
 
     func testPerformanceExample() throws {

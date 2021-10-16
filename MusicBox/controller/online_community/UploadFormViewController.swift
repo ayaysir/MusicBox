@@ -172,12 +172,9 @@ extension UploadFormViewController {
             
             FirebaseFileManager.shared.upload(data: thumbData, withName: "\(postIdStr).jpg") { url in
                 if url != nil {
-                    SwiftSpinner.hide(nil)
-                    simpleAlert(self, message: "글 작성 및 파일 업로드가 완료되었습니다.", title: "글 등록 완료") { action in
-                        self.navigationController?.popViewController(animated: true)
-                    }
+                    self.third_uploadFullSizeImage(postIdStr: postIdStr)
                 } else {
-                    SwiftSpinner.show("이미지 업로드 에러", animated: false)
+                    SwiftSpinner.show("섬네일 업로드 에러", animated: false)
                 }
             }
         } catch {
@@ -191,6 +188,29 @@ extension UploadFormViewController {
             
         }
        
+    }
+    
+    private func third_uploadFullSizeImage(postIdStr: String) {
+        SwiftSpinner.show("앨범아트를 업로드하고 있습니다...")
+        
+        FirebaseFileManager.shared.setChild("PostAlbumart/\(postIdStr)")
+        
+        guard let imageData = imgSelectedAlbumart.image?.jpegData(compressionQuality: 1) else {
+            SwiftSpinner.show("이미지 오류", animated: false)
+            return
+        }
+        
+
+        FirebaseFileManager.shared.upload(data: imageData, withName: "\(postIdStr).jpg") { url in
+            if url != nil {
+                SwiftSpinner.hide(nil)
+                simpleAlert(self, message: "글 작성 및 파일 업로드가 완료되었습니다.", title: "글 등록 완료") { action in
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                SwiftSpinner.show("이미지 업로드 에러", animated: false)
+            }
+        }
     }
 }
 

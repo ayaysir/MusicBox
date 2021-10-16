@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class UserCommunityViewController: UIViewController {
     
@@ -19,13 +20,11 @@ class UserCommunityViewController: UIViewController {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
         
         getPostList()
     }
@@ -34,6 +33,17 @@ class UserCommunityViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PostPageSegue" {
+            guard let vc = segue.destination as? PostPageViewController,
+                  let indexPath = sender as? IndexPath else {
+                return
+            }
+            vc.posts = posts
+            vc.currentIndex = indexPath.row
+        }
+    }
 }
 
 extension UserCommunityViewController {
@@ -41,7 +51,11 @@ extension UserCommunityViewController {
     func getPostList() {
         let ref = Database.database().reference(withPath: "community")
         ref.observe(.value) { (snapshot: DataSnapshot) in
-            let snapshotDict = snapshot.value as! Dictionary<String, Any>
+            
+            guard let snapshotDict = snapshot.value as? Dictionary<String, Any> else {
+                print("글이 없습니다.")
+                return
+            }
             let array = snapshotDict.map { (key: String, value: Any) in
                 return value as! Dictionary<String, Any>
             }
@@ -54,7 +68,7 @@ extension UserCommunityViewController {
                 }
                 self.collectionView.reloadData()
             } catch {
-                
+                print(error.localizedDescription)
             }
             
         }
@@ -65,23 +79,14 @@ extension UserCommunityViewController {
     }
     
     private func getPostThumbImage(_ cell: PostCell, indexPath: IndexPath, postIdStr: String) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference()
-        let sampleImageRef = storageRef.child("PostThumbnail/\(postIdStr)/\(postIdStr).jpg")
         
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        sampleImageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                // Uh-oh, an error occurred!
-                print(#function, "download error", error.localizedDescription)
-                cell.setAlbumartImage(image: UIImage(named: "sample")!)
-            } else {
-                // Data for "images/island.jpg" is returned
-                guard let image = UIImage(data: data!) else {
-                    return
-                }
-                cell.setAlbumartImage(image: image)
+        let refPath = "PostThumbnail/\(postIdStr)/\(postIdStr).jpg"
+        getFileURL(childRefStr: refPath) { url in
+            guard let url = url else {
+                return
             }
+            
+            cell.imgAlbumart.kf.setImage(with: url, placeholder: UIImage(named: "sample"), options: [.cacheOriginalImage], completionHandler: nil)
         }
     }
 }
@@ -96,10 +101,9 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UICollectionViewCell()
         }
+//        cell.imgAlbumart.image = nil
         let targetPost = posts[indexPath.row]
         cell.update(post: targetPost)
-        cell.btnEnterPost.tag = indexPath.row
-        cell.btnEnterPost.addTarget(self, action: #selector(getPost), for: .touchUpInside)
         cell.tag = indexPath.row
         getPostThumbImage(cell, indexPath: indexPath, postIdStr: targetPost.postId.uuidString)
         return cell
@@ -113,6 +117,11 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         default:
             return UICollectionReusableView()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "PostPageSegue", sender: indexPath)
     }
     
     // 사이즈 결정
@@ -152,11 +161,12 @@ class PostCell: UICollectionViewCell {
     @IBOutlet weak var imgUserProfile: UIImageView!
     @IBOutlet weak var lblUserNickname: UILabel!
     
-    @IBOutlet weak var btnEnterPost: UIButton!
+    var post: Post!
     
     override func prepareForReuse() {
         super.prepareForReuse()
         imgAlbumart?.image = nil
+        imgAlbumart.image = UIImage(named: "sample")
     }
     
     func reset() {
@@ -167,6 +177,8 @@ class PostCell: UICollectionViewCell {
     }
     
     func update(post: Post) {
+        
+        self.post = post
         
         imgAlbumart.layer.cornerRadius = 10
         imgAlbumart.clipsToBounds = true
@@ -179,11 +191,11 @@ class PostCell: UICollectionViewCell {
         lblTitle.text = post.postTitle
     }
     
-    func setAlbumartImage(image: UIImage) {
-        DispatchQueue.main.async {
-            self.imgAlbumart.image = image
-        }
-    }
+//    func setAlbumartImage(image: UIImage) {
+//        DispatchQueue.main.async {
+//            self.imgAlbumart.image = image
+//        }
+//    }
     
     
 

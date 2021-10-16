@@ -9,13 +9,10 @@ import UIKit
 
 class PostPageViewController: UIPageViewController {
     
-    lazy var vcArray: [UIViewController] = {
-        return [self.vcInstance(name: "FirstVC"),
-                self.vcInstance(name: "SecondVC"),
-                self.vcInstance(name: "PostView")]
-    }()
+    var currentIndex: Int!
+    var posts: [Post]!
     
-    private func vcInstance(name: String) -> UIViewController{
+    private func vcInstance(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
     }
 
@@ -27,9 +24,13 @@ class PostPageViewController: UIPageViewController {
         self.delegate = self
         
         // 첫 번째 페이지를 기본 페이지로 설정
-        if let firstVC = vcArray.first {
-            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        guard let postViewVC = vcInstance(name: "PostView") as? PostViewController else {
+            return
         }
+        let currentPost = posts[currentIndex]
+        postViewVC.post = currentPost
+        setViewControllers([postViewVC], direction: .forward, animated: true, completion: nil)
+        
     }
     
 
@@ -47,42 +48,47 @@ class PostPageViewController: UIPageViewController {
 
 extension PostPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        // 배열에서 현재 페이지의 컨트롤러를 찾아서 해당 인덱스를 현재 인덱스로 기록
-        guard let vcIndex = vcArray.firstIndex(of: viewController) else { return nil }
-        
+
+        guard let prevVC = vcInstance(name: "PostView") as? PostViewController else {
+            return nil
+        }
         // 이전 페이지 인덱스
-        let prevIndex = vcIndex - 1
+        currentIndex -= 1
         
         // 인덱스가 0 이상이라면 그냥 놔둠
-        guard prevIndex >= 0 else {
-            return nil
+        guard currentIndex! >= 0 else {
+            currentIndex = 0
             
+            // currentIndex = posts.count - 1
             // 무한반복 시 - 1페이지에서 마지막 페이지로 가야함
-            // return vcArray.last
+            // prevVC.post = posts[currentIndex]
+            return nil
         }
         
-        // 인덱스는 vcArray.count 이상이 될 수 없음
-        guard vcArray.count > prevIndex else { return nil }
-        
-        return vcArray[prevIndex]
+        prevVC.post = posts[currentIndex]
+        return prevVC
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let vcIndex = vcArray.firstIndex(of: viewController) else { return nil }
         
-        // 다음 페이지 인덱스
-        let nextIndex = vcIndex + 1
-        
-        guard nextIndex < vcArray.count else {
+        guard let nextVC = vcInstance(name: "PostView") as? PostViewController else {
             return nil
+        }
+        // 다음 페이지 인덱스
+        currentIndex += 1
+        
+        // 인덱스가 0 이상이라면 그냥 놔둠
+        guard currentIndex! < posts.count else {
+            currentIndex = posts.count - 1
             
-            // 무한반복 시 - 마지막 페이지에서 1 페이지로 가야함
-            // return vcArray.first
+            // currentIndex = 0
+            // 무한반복 시 - 1페이지에서 마지막 페이지로 가야함
+            // nextVC.post = posts[currentIndex]
+            return nil
         }
         
-        guard vcArray.count > nextIndex else { return nil }
-        
-        return vcArray[nextIndex]
+        nextVC.post = posts[currentIndex]
+        return nextVC
     }
     
     

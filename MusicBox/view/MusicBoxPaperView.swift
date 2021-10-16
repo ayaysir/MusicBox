@@ -288,8 +288,7 @@ class MusicBoxPaperView: UIView {
         
         
         context.fillPath()
-//
-//
+
 //                let circles = UIBezierPath()
 //                let playingCircles = UIBezierPath()
 //

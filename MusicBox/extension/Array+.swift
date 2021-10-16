@@ -12,3 +12,10 @@ extension Array where Element == Double {
         return CGPoint(x: self[0], y: self[1])
     }
 }
+
+extension Collection {
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}

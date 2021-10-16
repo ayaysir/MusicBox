@@ -41,6 +41,8 @@
 		444D9467271328F70090F587 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9466271328F70090F587 /* UIButton+.swift */; };
 		444D946B2714787B0090F587 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946A2714787B0090F587 /* ImageManager.swift */; };
 		444D946F271727EB0090F587 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946E271727EA0090F587 /* UITextField+.swift */; };
+		444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9474271AF4FD0090F587 /* PostViewController.swift */; };
+		444D9479271B0A820090F587 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* TypeAliases.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -143,6 +145,8 @@
 		444D9466271328F70090F587 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		444D946A2714787B0090F587 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		444D946E271727EA0090F587 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		444D9474271AF4FD0090F587 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		444D9478271B0A820090F587 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
 				444D944B270F32670090F587 /* PostPageViewController.swift */,
 				444D94592711DB550090F587 /* UploadFormViewController.swift */,
+				444D9474271AF4FD0090F587 /* PostViewController.swift */,
 			);
 			path = online_community;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */,
 				44E682F326EA46340074FE46 /* LaunchScreen.storyboard */,
 				44E682F626EA46340074FE46 /* Info.plist */,
+				444D9478271B0A820090F587 /* TypeAliases.swift */,
 			);
 			path = MusicBox;
 			sourceTree = "<group>";
@@ -779,6 +785,7 @@
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
+				444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */,
 				44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */,
 				44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */,
 				449F3EA826EF3529002C874D /* TextUtil.swift in Sources */,
@@ -822,6 +829,7 @@
 				4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */,
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,
 				4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */,
+				444D9479271B0A820090F587 /* TypeAliases.swift in Sources */,
 				44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
