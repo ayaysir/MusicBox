@@ -473,11 +473,12 @@
                                     <action selector="btnActUpdate:" destination="aIW-eH-CQg" eventType="touchUpInside" id="iZg-LU-8kk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21F-K1-LRY">
-                                <rect key="frame" x="188" y="696" width="133" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21F-K1-LRY">
+                                <rect key="frame" x="222" y="697" width="81" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Delete"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete">
+                                    <color key="baseForegroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="btnActDelete:" destination="aIW-eH-CQg" eventType="touchUpInside" id="Nm4-cK-deR"/>
                                 </connections>
@@ -508,15 +509,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQT-qr-EVj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2813" y="2036"/>
+            <point key="canvasLocation" x="-2813.04347826087" y="2035.7142857142856"/>
         </scene>
         <!--Post Page View Controller-->
         <scene sceneID="eKc-IF-g7J">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="05s-Yj-ICc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="e77-6f-XQ8" customClass="PostPageViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="swo-oq-iNG"/>
                 </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="05s-Yj-ICc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2813" y="1361"/>
         </scene>

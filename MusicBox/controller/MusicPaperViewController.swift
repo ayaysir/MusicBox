@@ -29,6 +29,7 @@ class MusicPaperViewController: UIViewController {
     
     var panelView: PaperOptionPanelView!
     
+    var editMode: Bool = true
     var eraserMode: Bool = false
     var snapToGridMode: Bool = true
     
@@ -62,27 +63,24 @@ class MusicPaperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let bpm = document?.paper?.bpm {
-            self.bpm = bpm
-            print("set bpm: \(bpm)")
+        guard let paper = document?.paper else {
+            return
         }
         
-        if let colNum = document?.paper?.colNum {
-            self.colNum = colNum
-            print("set colNum: \(colNum)")
-        } else {
-            self.colNum = cst.defaultColNum
-        }
+        self.bpm = paper.bpm
+        print("set bpm: \(bpm)")
         
-        if let imBeatCount = document?.paper?.incompleteMeasureBeat {
-            self.imBeatCount = imBeatCount
-            print("set colNum: \(imBeatCount)")
-        }
+        self.colNum = paper.colNum
+        print("set colNum: \(colNum)")
         
-        if let paperCoords = document?.paper?.coords {
-            musicPaperView.data = paperCoords
-            print("set coords array: \(paperCoords.count) notes")
-        }
+        self.imBeatCount = paper.incompleteMeasureBeat
+        print("set colNum: \(imBeatCount)")
+
+        musicPaperView.data = paper.coords
+        print("set coords array: \(musicPaperView.data.count) notes")
+        
+        self.editMode = paper.isAllowOthersToEdit
+        print("EditMode", editMode, paper.isAllowOthersToEdit)
         
         util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cst.cellWidth, cellHeight: cst.cellHeight, topMargin: cst.topMargin, leftMargin: cst.leftMargin)
         let rowNum = util.noteRange.count
@@ -96,6 +94,7 @@ class MusicPaperViewController: UIViewController {
         let originalArtist = document?.paper?.originalArtist ?? "Unknown Artist"
         let paperMaker = document?.paper?.paperMaker ?? "Unknown"
         musicPaperView.setTexts(title: title, originalArtist: originalArtist, paperMaker: paperMaker)
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         self.musicPaperView.addGestureRecognizer(tapGesture)
@@ -171,6 +170,12 @@ class MusicPaperViewController: UIViewController {
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
+        
+        guard editMode else {
+            print("edit not allowed")
+            return
+        }
+        
         let touchedPoint = sender.location(in: musicPaperView)
         
         if !eraserMode {
@@ -217,7 +222,9 @@ class MusicPaperViewController: UIViewController {
     }
     
     func initPanel() {
+        
         panelView = PaperOptionPanelView()
+        panelView.setEditMode(editMode)
         panelView.delegate = self
         panelView.clipsToBounds = true
         view.addSubview(panelView)
@@ -413,7 +420,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                     scrollView.zoomScale = lastScrollViewZoomScale
                     scrollView.setContentOffset(lastScrollViewOffset, animated: false)
                 })
-                self.propertyAnimator.pausesOnCompletion = true
+                
             }
         }
     }

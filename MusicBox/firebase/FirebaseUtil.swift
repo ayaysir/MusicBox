@@ -19,7 +19,6 @@ func getFileURL(childRefStr: String, completeHandler: @escaping FileURLBlock) {
     let storage = Storage.storage()
     let storageRef = storage.reference()
     let fileRef = storageRef.child(childRefStr)
-//    let sampleImageRef = storageRef.child("PostThumbnail/\(postIdStr)/\(postIdStr).jpg")
     
     fileRef.downloadURL { url, error in
         
@@ -32,3 +31,18 @@ func getFileURL(childRefStr: String, completeHandler: @escaping FileURLBlock) {
     }
 }
 
+func getFileAndSave(childRefSTr: String, fileSaveURL: URL, completeHandler: @escaping FileURLBlock) {
+    let storage = Storage.storage()
+    let storageRef = storage.reference()
+    let fileRef = storageRef.child(childRefSTr)
+    
+    fileRef.write(toFile: fileSaveURL) { fileSaveURL, error in
+        
+        if let error = error {
+            print("An error has occured: \(error.localizedDescription)")
+            return
+        }
+        
+        completeHandler(fileSaveURL)
+    }
+}

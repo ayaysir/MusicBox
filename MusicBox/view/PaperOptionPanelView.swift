@@ -28,6 +28,8 @@ class PaperOptionPanelView: UIView {
 
     let nibName = "PaperOptionPanelView"
     
+    var editMode: Bool = true
+    
     @IBOutlet weak var txtBpm: UITextField!
     @IBOutlet weak var txtIncompleteMeasure: UITextField!
     
@@ -37,11 +39,15 @@ class PaperOptionPanelView: UIView {
     }
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
+        
+        print(#function)
         commonInit()
     }
     
     func commonInit() {
+        
         guard let view = loadViewFromNib() else { return }
         view.frame = self.bounds
         if let pattern = UIImage(named: "marble") {
@@ -50,7 +56,18 @@ class PaperOptionPanelView: UIView {
         self.addSubview(view)
     }
     
+    func setEditMode(_ mode: Bool) {
+        
+        print(#function, mode, txtBpm as Any, txtIncompleteMeasure as Any)
+        
+        if !mode {
+            
+        }
+    }
+    
     func loadViewFromNib() -> UIView? {
+        
+        print(#function)
         let nib = UINib(nibName: nibName, bundle: nil)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }

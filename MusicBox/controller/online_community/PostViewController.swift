@@ -7,6 +7,8 @@
 
 import UIKit
 import Kingfisher
+import SwiftSpinner
+import Firebase
 
 class PostViewController: UIViewController {
     
@@ -41,10 +43,35 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func btnActDownload(_ sender: Any) {
+        guard let post = post else { return }
+        let fileSaveURL = FileUtil.getDocumentsDirectory().appendingPathComponent(post.originaFileNameWithoutExt).appendingPathExtension("musicbox")
+        let childRefStr = "musicbox/\(post.postId)/\(post.originaFileNameWithoutExt).musicbox"
+        
+        SwiftSpinner.show("파일 다운로드중...")
+        getFileAndSave(childRefSTr: childRefStr, fileSaveURL: fileSaveURL) { url in
+            SwiftSpinner.hide(nil)
+            simpleYesAndNo(self, message: "파일 다운로드가 완료되었습니다. 브라우저로 이동할까요?", title: "다운로드 완료") { action in
+                self.tabBarController?.selectedIndex = 0
+            }
+        }
     }
+    
     @IBAction func btnActUpdate(_ sender: Any) {
     }
+    
     @IBAction func btnActDelete(_ sender: Any) {
+        simpleDestructiveYesAndNo(self, message: "정말 이 글을 삭제할까요?", title: "삭제") { action in
+            let ref = Database.database().reference()
+            let targetPostRef = ref.child("community").child(self.post.postId.uuidString)
+            targetPostRef.removeValue { error, ref in
+                
+                if let error = error {
+                    print("not deleted:", error.localizedDescription)
+                }
+                print("deleted:", ref)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     func getThumbnail(postIdStr: String) {

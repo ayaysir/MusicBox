@@ -93,6 +93,7 @@ class UploadFormViewController: UIViewController {
         let paperMaker = lblSelectedPaperMaker.text!
         
         let allowPaperEdit = swtPostAllowToEdit.isOn
+        print("allowPaperEdit:", allowPaperEdit)
         let uploadDate = Date()
         
         let writerUID = currentUID
@@ -110,8 +111,6 @@ class UploadFormViewController: UIViewController {
         
         let likes: [String] = []
         
-        paper.isAllowOthersToEdit = allowPaperEdit
-        
         let post = Post(postTitle: postTitle, postComment: postComment, paperTitle: paperTitle, paperArtist: paperArtist, paperMaker: paperMaker, allowPaperEdit: allowPaperEdit, uploadDate: uploadDate, writerUID: writerUID, originaFileNameWithoutExt: originalFileNameWithoutExt, preplayArr: preplayArr, bpm: bpm, likes: likes
         )
         
@@ -125,29 +124,39 @@ class UploadFormViewController: UIViewController {
                 return
             }
             
-            self.first_uploadPaper(postIdStr: postIdStr, fileName: originalFileNameWithoutExt)
+            self.first_uploadPaper(postIdStr: postIdStr)
         }
+        
+        
     }
 
 }
 
 extension UploadFormViewController {
     
-    private func first_uploadPaper(postIdStr: String, fileName originalFileNameWithoutExt: String) {
-        FirebaseFileManager.shared.setChild("musicbox/\(postIdStr)")
-        SwiftSpinner.show("종이 파일을 업로드하고 있습니다...")
-        do {
-            let fileData = try Data(contentsOf: self.selectedDocument.fileURL)
-            FirebaseFileManager.shared.upload(data: fileData, withName: "\(originalFileNameWithoutExt).musicbox") { url in
-                if url != nil {
-                    self.second_uploadThumbnail(postIdStr: postIdStr)
-                } else {
-                    SwiftSpinner.show("종이 파일 업로드 에러", animated: false)
-                }
+    private func first_uploadPaper(postIdStr: String) {
+        selectedDocument.close { [unowned self] success in
+            
+            guard success else {
+                print("close failed")
+                return
             }
-        } catch {
-            SwiftSpinner.show(error.localizedDescription, animated: false)
-            print(error.localizedDescription)
+            
+            FirebaseFileManager.shared.setChild("musicbox/\(postIdStr)")
+            SwiftSpinner.show("종이 파일을 업로드하고 있습니다...")
+            do {
+                let fileData = try Data(contentsOf: selectedDocument.fileURL)
+                FirebaseFileManager.shared.upload(data: fileData, withName: selectedDocument.fileURL.lastPathComponent) { url in
+                    if url != nil {
+                        self.second_uploadThumbnail(postIdStr: postIdStr)
+                    } else {
+                        SwiftSpinner.show("종이 파일 업로드 에러", animated: false)
+                    }
+                }
+            } catch {
+                SwiftSpinner.show(error.localizedDescription, animated: false)
+                print(error.localizedDescription)
+            }
         }
     }
     

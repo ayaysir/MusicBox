@@ -65,7 +65,8 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     
     // firebaseUID가 있는 경우에만 isAllowOthersToEdit가 유효
     var firebaseUID: String?
-    var isAllowOthersToEdit: Bool? = true
+    var isAllowOthersToEdit: Bool = true
+    var isUploaded: Bool = false
 
     var fileId: UUID = UUID()
     
