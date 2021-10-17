@@ -26,6 +26,7 @@ class PostViewController: UIViewController {
     @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
     
+    @IBOutlet weak var naviBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +38,20 @@ class PostViewController: UIViewController {
             lblPaperMaker.text = post.paperMaker
             txvComment.text = post.postComment
             
+            naviBar.topItem?.title = post.postTitle
+            
             getThumbnail(postIdStr: post.postId.uuidString)
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "UpdatePostSegue" {
+            let updateVC = segue.destination as? UpdatePostViewController
+            updateVC?.post = post
+            updateVC?.delegate = self
+            
+        }
     }
     
     @IBAction func btnActDownload(_ sender: Any) {
@@ -79,5 +91,14 @@ class PostViewController: UIViewController {
         getFileURL(childRefStr: refPath) { url in
             self.imgAlbumart.kf.setImage(with: url)
         }
+    }
+}
+
+extension PostViewController: UpdatePostVCDelegate {
+    
+    func didUpdateBtnClicked(_ controller: UpdatePostViewController, updatedPost: Post) {
+        self.naviBar.topItem?.title = updatedPost.postTitle
+        self.txvComment.text = updatedPost.postComment
+        self.post = updatedPost
     }
 }

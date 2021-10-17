@@ -43,6 +43,7 @@
 		444D946F271727EB0090F587 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946E271727EA0090F587 /* UITextField+.swift */; };
 		444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9474271AF4FD0090F587 /* PostViewController.swift */; };
 		444D9479271B0A820090F587 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* TypeAliases.swift */; };
+		44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -147,6 +148,7 @@
 		444D946E271727EA0090F587 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		444D9474271AF4FD0090F587 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		444D9478271B0A820090F587 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostViewController.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				444D944B270F32670090F587 /* PostPageViewController.swift */,
 				444D94592711DB550090F587 /* UploadFormViewController.swift */,
 				444D9474271AF4FD0090F587 /* PostViewController.swift */,
+				44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */,
 			);
 			path = online_community;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
+				44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */,
 				444D944E27105D960090F587 /* Checkbox.swift in Sources */,
 				444D945D2711E39C0090F587 /* FirebaseUtil.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */,

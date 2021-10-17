@@ -99,14 +99,7 @@ class UploadFormViewController: UIViewController {
         let writerUID = currentUID
         let originalFileNameWithoutExt = (document.fileURL.lastPathComponent as NSString).deletingPathExtension
         
-        var preplayArr: [PaperCoord] {
-            if paper.coords.count <= 16 {
-                return paper.coords
-            } else {
-                let coordsCountPercent30 = Int(Double(paper.coords.count) * 0.3)
-                return Array(paper.coords[0...coordsCountPercent30])
-            }
-        }
+        let preplayArr: [PaperCoord] = paper.coords
         let bpm: Int = paper.bpm
         
         let likes: [String] = []
