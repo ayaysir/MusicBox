@@ -37,6 +37,10 @@ extension String {
     
     static let kOriginalArtist = "artist"
     static let kColNum = "colNum"
+    
+    static let kFirebaseUID = "firebaseUID"
+    static let kAllowOthersToEdit = "allowOthersEdit"
+    static let kUploaded = "_uploaded"
 }
 
 class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
@@ -103,6 +107,10 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         coder.encode(originalArtist, forKey: .kOriginalArtist)
         coder.encode(colNum, forKey: .kColNum)
         
+        coder.encode(firebaseUID, forKey: .kFirebaseUID)
+        coder.encode(isAllowOthersToEdit, forKey: .kAllowOthersToEdit)
+        coder.encode(isUploaded, forKey: .kUploaded)
+        
         coder.encode(fileId.uuidString, forKey: .kUUIDString)
     }
     
@@ -115,6 +123,9 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         let tsLower = coder.decodeInteger(forKey: .kTimeSignatureLower)
         let tsUpper = coder.decodeInteger(forKey: .kTimeSignatureUpper)
         let colNum = coder.decodeInteger(forKey: .kColNum)
+        
+        let isAllowOthersToEdit = coder.decodeBool(forKey: .kAllowOthersToEdit)
+        let isUploaded = coder.decodeBool(forKey: .kUploaded)
         
         // not allow null
         guard
@@ -132,6 +143,8 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         // allow null
         let albumart = coder.decodeObject(forKey: .kAlbumart) as? Data
         let thumbnail = coder.decodeObject(forKey: .kThumbnail) as? Data
+        
+        let firebaseUID = coder.decodeObject(forKey: .kFirebaseUID) as? String
         
         guard let uuid = UUID(uuidString: uuidString) else { return }
         let timeSignature = TimeSignature(upper: tsUpper, lower: tsLower)
@@ -151,6 +164,10 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         
         self.originalArtist = originalArtist
         self.colNum = colNum
+        
+        self.firebaseUID = firebaseUID
+        self.isAllowOthersToEdit = isAllowOthersToEdit
+        self.isUploaded = isUploaded
         
     }
     

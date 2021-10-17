@@ -118,46 +118,59 @@ class UploadFormViewController: UIViewController {
         
         let ref = Database.database().reference(withPath: "community/\(postIdStr)")
         SwiftSpinner.show("글을 등록하고 있습니다...")
+        
+        let cachePath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        let targetDocCachePath = cachePath.appendingPathComponent(selectedDocument.fileURL.lastPathComponent)
+        let cacheDocument = PaperDocument(fileURL: targetDocCachePath)
+        
+        paper.isUploaded = true
+        paper.isAllowOthersToEdit = allowPaperEdit
+        cacheDocument.paper = paper
+        
         ref.setValue(post.dictionary) { error, ref in
             if let error = error {
                 simpleAlert(self, message: error.localizedDescription)
                 return
             }
             
-            self.first_uploadPaper(postIdStr: postIdStr)
+            self.first_uploadPaper(postIdStr: postIdStr, cacheDocument: cacheDocument)
         }
-        
-        
     }
 
 }
 
 extension UploadFormViewController {
     
-    private func first_uploadPaper(postIdStr: String) {
-        selectedDocument.close { [unowned self] success in
+    private func first_uploadPaper(postIdStr: String, cacheDocument: PaperDocument) {
+        
+        cacheDocument.open { success in
+            guard success else { return }
             
-            guard success else {
-                print("close failed")
-                return
-            }
-            
-            FirebaseFileManager.shared.setChild("musicbox/\(postIdStr)")
-            SwiftSpinner.show("종이 파일을 업로드하고 있습니다...")
-            do {
-                let fileData = try Data(contentsOf: selectedDocument.fileURL)
-                FirebaseFileManager.shared.upload(data: fileData, withName: selectedDocument.fileURL.lastPathComponent) { url in
-                    if url != nil {
-                        self.second_uploadThumbnail(postIdStr: postIdStr)
-                    } else {
-                        SwiftSpinner.show("종이 파일 업로드 에러", animated: false)
+            cacheDocument.save(to: cacheDocument.fileURL, for: .forOverwriting) { success in
+                guard success else { return }
+                
+                FirebaseFileManager.shared.setChild("musicbox/\(postIdStr)")
+                SwiftSpinner.show("종이 파일을 업로드하고 있습니다...")
+                do {
+                    let fileData = try Data(contentsOf: cacheDocument.fileURL)
+                    FirebaseFileManager.shared.upload(data: fileData, withName: cacheDocument.fileURL.lastPathComponent) { url in
+                        if url != nil {
+                            cacheDocument.close { _ in
+                                self.second_uploadThumbnail(postIdStr: postIdStr)
+                            }
+                        } else {
+                            SwiftSpinner.show("종이 파일 업로드 에러", animated: false)
+                        }
                     }
+                } catch {
+                    SwiftSpinner.show(error.localizedDescription, animated: false)
+                    print(error.localizedDescription)
                 }
-            } catch {
-                SwiftSpinner.show(error.localizedDescription, animated: false)
-                print(error.localizedDescription)
             }
         }
+            
+        
+        
     }
     
     private func second_uploadThumbnail(postIdStr: String) {
