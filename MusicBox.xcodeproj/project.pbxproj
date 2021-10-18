@@ -44,6 +44,8 @@
 		444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9474271AF4FD0090F587 /* PostViewController.swift */; };
 		444D9479271B0A820090F587 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* TypeAliases.swift */; };
 		44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */; };
+		44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5C271D906F00A0EF62 /* HeartButton.swift */; };
+		44558E5F271D94F300A0EF62 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5E271D94F300A0EF62 /* Like.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -149,6 +151,8 @@
 		444D9474271AF4FD0090F587 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		444D9478271B0A820090F587 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostViewController.swift; sourceTree = "<group>"; };
+		44558E5C271D906F00A0EF62 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
+		44558E5E271D94F300A0EF62 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -307,6 +311,7 @@
 			children = (
 				4405E97326F785350012E4F5 /* ImageWithName.swift */,
 				444D945F2711EE170090F587 /* Post.swift */,
+				44558E5E271D94F300A0EF62 /* Like.swift */,
 			);
 			path = online;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 				449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */,
 				44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */,
 				44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */,
+				44558E5C271D906F00A0EF62 /* HeartButton.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -796,6 +802,7 @@
 				444D945027106FF90090F587 /* PhotoAuth.swift in Sources */,
 				444D94652711F7720090F587 /* JSONUtil.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
+				44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */,
 				444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */,
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,
 				44AE99402705DBED00D046D1 /* Array+.swift in Sources */,
@@ -807,6 +814,7 @@
 				444D944C270F32670090F587 /* PostPageViewController.swift in Sources */,
 				444AF3A42701E5BC00BD8E38 /* DocumentViewController.swift in Sources */,
 				444D945A2711DB550090F587 /* UploadFormViewController.swift in Sources */,
+				44558E5F271D94F300A0EF62 /* Like.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* Paper.swift in Sources */,
 				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
 				444D946B2714787B0090F587 /* ImageManager.swift in Sources */,

@@ -61,14 +61,17 @@ extension UserCommunityViewController {
             }
             
             do {
+                self.posts = []
                 self.posts = try array.map { (dict: Dictionary<String, Any>) -> Post in
-                    print(dict)
                     let post = try Post(dictionary: dict)
                     return post
                 }
+                self.posts.sort { p1, p2 in
+                    p1.uploadDate < p2.uploadDate
+                }
                 self.collectionView.reloadData()
             } catch {
-                print(error.localizedDescription)
+                print("getPost Error:", error.localizedDescription)
             }
             
         }
@@ -101,7 +104,7 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "PostCell", for: indexPath) as? PostCell else {
             return UICollectionViewCell()
         }
-//        cell.imgAlbumart.image = nil
+
         let targetPost = posts[indexPath.row]
         cell.update(post: targetPost)
         cell.tag = indexPath.row
@@ -161,6 +164,9 @@ class PostCell: UICollectionViewCell {
     @IBOutlet weak var imgUserProfile: UIImageView!
     @IBOutlet weak var lblUserNickname: UILabel!
     
+    @IBOutlet weak var imgHeart: UIImageView!
+    @IBOutlet weak var lblLikeCount: UILabel!
+    
     var post: Post!
     
     override func prepareForReuse() {
@@ -171,9 +177,10 @@ class PostCell: UICollectionViewCell {
     
     func reset() {
         imgAlbumart.image = nil
-        lblTitle.text = ""
+        lblTitle.text = nil
         imgUserProfile.image = nil
         lblUserNickname.text = nil
+        lblLikeCount.text = nil
     }
     
     func update(post: Post) {
@@ -189,16 +196,14 @@ class PostCell: UICollectionViewCell {
         
         lblUserNickname.text = "\(post.writerUID)"
         lblTitle.text = post.postTitle
+        
+        lblLikeCount.text = "\(post.likes.count)"
+        
+        if let currentUID = getCurrentUserUID() {
+            let identifier = post.likes[currentUID] != nil ? "heart.fill" : "heart"
+            imgHeart.image = UIImage(systemName: identifier)
+        }
     }
-    
-//    func setAlbumartImage(image: UIImage) {
-//        DispatchQueue.main.async {
-//            self.imgAlbumart.image = image
-//        }
-//    }
-    
-    
-
 }
 
 class PostCellContentView: UIView {

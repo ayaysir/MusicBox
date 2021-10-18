@@ -133,33 +133,33 @@ class MusicPaperViewController: UIViewController {
         
         saveDocument()
         
-        let value = UIInterfaceOrientation.landscapeRight.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
+//        let value = UIInterfaceOrientation.landscapeRight.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
         
         
     }
     
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        print(UIDevice.current.orientation)
-        if UIDevice.current.orientation.isLandscape {
-            print("Landscape")
-
-        } else {
-            print("Portrait")
-        }
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscape
-    }
-    
-    
-    override var shouldAutorotate: Bool {
-        return false
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//
+//        print(UIDevice.current.orientation)
+//        if UIDevice.current.orientation.isLandscape {
+//            print("Landscape")
+//
+//        } else {
+//            print("Portrait")
+//        }
+//    }
+//
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .landscape
+//    }
+//
+//
+//    override var shouldAutorotate: Bool {
+//        return false
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         

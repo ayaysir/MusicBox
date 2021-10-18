@@ -19,14 +19,19 @@ class PostViewController: UIViewController {
     @IBOutlet weak var lblOriginalArtist: UILabel!
     @IBOutlet weak var lblPaperMaker: UILabel!
     @IBOutlet weak var txvComment: UITextView!
+    @IBOutlet weak var lblUploadedDate: UILabel!
     
     @IBOutlet weak var imgAlbumart: UIImageView!
+    
+    @IBOutlet weak var naviBar: UINavigationBar!
     
     @IBOutlet weak var btnDownload: UIButton!
     @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
     
-    @IBOutlet weak var naviBar: UINavigationBar!
+    @IBOutlet weak var btnHeart: HeartButton!
+    @IBOutlet weak var lblLikeCount: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +42,36 @@ class PostViewController: UIViewController {
             lblOriginalArtist.text = post.paperArtist
             lblPaperMaker.text = post.paperMaker
             txvComment.text = post.postComment
+            lblUploadedDate.text = "\(post.uploadDate)"
             
             naviBar.topItem?.title = post.postTitle
+
             
             getThumbnail(postIdStr: post.postId.uuidString)
+            
+            lblLikeCount.text = "\(post.likes.count)"
+            
+            if let currentUID = getCurrentUserUID() {
+                 btnHeart.setState(post.likes[currentUID] != nil)
+            }
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // 좋아요 수 실시간 갱신
+        let ref = Database.database().reference()
+        let targetPostLikesRef = ref.child("community/\(post.postId.uuidString)/likes")
+        
+        targetPostLikesRef.observe(.value) { snapshot in
+            guard let dict = snapshot.value as? Dictionary<String, Any> else {
+                self.lblLikeCount.text = "0"
+                return
+            }
+            
+            self.lblLikeCount.text = "\(dict.count)"
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -86,10 +115,67 @@ class PostViewController: UIViewController {
         }
     }
     
+    @IBAction func btnActLike(_ sender: HeartButton) {
+        
+        getLikeState { targetPostLikesRef, currentUID in
+            
+            var likeDict = Like(likeUserUID: currentUID, postID: self.post.postId.uuidString, likedDate: Date()).dictionary
+            likeDict["likedDate"] = ServerValue.timestamp()
+            
+            targetPostLikesRef.child(currentUID).setValue(likeDict)
+            print("first like success:")
+            sender.setState(true)
+        } likeStateCallback: { targetPostLikesRef, currentUID in
+            
+            var likeDict = Like(likeUserUID: currentUID, postID: self.post.postId.uuidString, likedDate: Date()).dictionary
+            likeDict["likedDate"] = ServerValue.timestamp()
+            
+            targetPostLikesRef.child(currentUID).setValue(likeDict)
+            print("like success:")
+            sender.setState(true)
+        } unlikeStateCallback: { targetPostLikesRef, currentUID in
+            
+            targetPostLikesRef.child(currentUID).removeValue { error, ref in
+                if let error = error {
+                    print("unlike failed:", error.localizedDescription)
+                    return
+                }
+                print("unlike success:")
+                sender.setState(false)
+            }
+        }
+    }
+    
+    
     func getThumbnail(postIdStr: String) {
         let refPath = "PostAlbumart/\(postIdStr)/\(postIdStr).jpg"
         getFileURL(childRefStr: refPath) { url in
             self.imgAlbumart.kf.setImage(with: url)
+        }
+    }
+    
+    typealias RefHandler = (_ targetPostLikesRef: DatabaseReference, _ currentUID: String) -> ()
+    func getLikeState(nullCallback: @escaping RefHandler, likeStateCallback: @escaping RefHandler, unlikeStateCallback: @escaping RefHandler) {
+        
+        guard let currentUID = getCurrentUserUID() else {
+            return
+        }
+        
+        let ref = Database.database().reference()
+        let targetPostLikesRef = ref.child("community/\(post.postId.uuidString)/likes")
+        
+        targetPostLikesRef.observeSingleEvent(of: .value) { snapshot in
+            
+            guard let dict = snapshot.value as? Dictionary<String, Any> else {
+                nullCallback(targetPostLikesRef, currentUID)
+                return
+            }
+            
+            if dict[currentUID] == nil {
+                likeStateCallback(targetPostLikesRef, currentUID)
+            } else {
+                unlikeStateCallback(targetPostLikesRef, currentUID)
+            }
         }
     }
 }
@@ -97,7 +183,7 @@ class PostViewController: UIViewController {
 extension PostViewController: UpdatePostVCDelegate {
     
     func didUpdateBtnClicked(_ controller: UpdatePostViewController, updatedPost: Post) {
-        self.naviBar.topItem?.title = updatedPost.postTitle
+        naviBar.topItem?.title = updatedPost.postTitle
         self.txvComment.text = updatedPost.postComment
         self.post = updatedPost
     }

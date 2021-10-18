@@ -94,7 +94,6 @@ class UploadFormViewController: UIViewController {
         
         let allowPaperEdit = swtPostAllowToEdit.isOn
         print("allowPaperEdit:", allowPaperEdit)
-        let uploadDate = Date()
         
         let writerUID = currentUID
         let originalFileNameWithoutExt = (document.fileURL.lastPathComponent as NSString).deletingPathExtension
@@ -102,9 +101,9 @@ class UploadFormViewController: UIViewController {
         let preplayArr: [PaperCoord] = paper.coords
         let bpm: Int = paper.bpm
         
-        let likes: [String] = []
+        let likes: [String: Like] = [:]
         
-        let post = Post(postTitle: postTitle, postComment: postComment, paperTitle: paperTitle, paperArtist: paperArtist, paperMaker: paperMaker, allowPaperEdit: allowPaperEdit, uploadDate: uploadDate, writerUID: writerUID, originaFileNameWithoutExt: originalFileNameWithoutExt, preplayArr: preplayArr, bpm: bpm, likes: likes
+        let post = Post(postTitle: postTitle, postComment: postComment, paperTitle: paperTitle, paperArtist: paperArtist, paperMaker: paperMaker, allowPaperEdit: allowPaperEdit, uploadDate: Date(), writerUID: writerUID, originaFileNameWithoutExt: originalFileNameWithoutExt, preplayArr: preplayArr, bpm: bpm, likes: likes
         )
         
         let postIdStr = post.postId.uuidString
@@ -120,6 +119,10 @@ class UploadFormViewController: UIViewController {
         paper.isAllowOthersToEdit = allowPaperEdit
         cacheDocument.paper = paper
         
+        var postDict = post.dictionary
+        if postDict["uploadDate"] != nil {
+            postDict["uploadDate"] = ServerValue.timestamp
+        }
         ref.setValue(post.dictionary) { error, ref in
             if let error = error {
                 simpleAlert(self, message: error.localizedDescription)
