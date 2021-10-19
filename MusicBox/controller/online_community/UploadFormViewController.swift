@@ -69,6 +69,8 @@ class UploadFormViewController: UIViewController {
 
     @IBAction func btnActUpload(_ sender: Any) {
         
+        midiManager.midiPlayer?.stop()
+        
         guard let document = selectedDocument, let paper = document.paper else {
             return
         }
@@ -140,7 +142,10 @@ extension UploadFormViewController {
     private func first_uploadPaper(postIdStr: String, cacheDocument: PaperDocument) {
         
         cacheDocument.open { success in
-            guard success else { return }
+//            guard success else {
+//                SwiftSpinner.show(duration: 3, title: "문서를 여는데 실패했습니다.", animated: false, completion: nil)
+//                return
+//            }
             
             cacheDocument.save(to: cacheDocument.fileURL, for: .forOverwriting) { success in
                 guard success else { return }
@@ -155,7 +160,7 @@ extension UploadFormViewController {
                                 self.second_uploadThumbnail(postIdStr: postIdStr)
                             }
                         } else {
-                            SwiftSpinner.show("종이 파일 업로드 에러", animated: false)
+                            SwiftSpinner.show(duration: 3, title: "오류: 종이 파일이 업로드되지 않았습니다.", animated: false, completion: nil)
                         }
                     }
                 } catch {

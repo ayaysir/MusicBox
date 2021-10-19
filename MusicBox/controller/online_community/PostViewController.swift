@@ -32,9 +32,14 @@ class PostViewController: UIViewController {
     @IBOutlet weak var btnHeart: HeartButton!
     @IBOutlet weak var lblLikeCount: UILabel!
     
+    @IBOutlet weak var btnPreplay: UIButton!
+    
+    let midiManager = MIDIManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btnPreplay.setTitle("", for: .normal)
         
         if let post = post {
             lblTitle.text = post.paperTitle
@@ -45,7 +50,6 @@ class PostViewController: UIViewController {
             lblUploadedDate.text = "\(post.uploadDate)"
             
             naviBar.topItem?.title = post.postTitle
-
             
             getThumbnail(postIdStr: post.postId.uuidString)
             
@@ -54,6 +58,9 @@ class PostViewController: UIViewController {
             if let currentUID = getCurrentUserUID() {
                  btnHeart.setState(post.likes[currentUID] != nil)
             }
+            
+            // 시퀀스 준비
+            midiManager.musicSequence = midiManager.convertPaperToMIDI(paperCoords: post.preplayArr)
         }
         
     }
@@ -145,6 +152,18 @@ class PostViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func btnActPreplay(_ sender: UIButton) {
+        if midiManager.midiPlayer!.isPlaying {
+            midiManager.midiPlayer?.stop()
+        } else {
+            midiManager.midiPlayer?.play({
+                print("midi play finished")
+                self.midiManager.midiPlayer?.currentPosition = 0
+            })
+        }
+    }
+    
     
     
     func getThumbnail(postIdStr: String) {

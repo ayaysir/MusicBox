@@ -88,10 +88,11 @@ class FileCollectionViewController: UICollectionViewController {
     
     @objc private func touchedAddButton() {
         
-        let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
-        modalVC.delegate = self
+//        let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
+//        modalVC.delegate = self
+//        presentPanModal(modalVC)
         self.dismiss(animated: true, completion: nil)
-        presentPanModal(modalVC)
+        performSegue(withIdentifier: "PaperCreateWindowSegue", sender: nil)
     }
     
     private func setGestures() {
@@ -124,7 +125,13 @@ class FileCollectionViewController: UICollectionViewController {
         AVCaptureDevice.requestAccess(for: .video) { granted in
 
         }
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PaperCreateWindowSegue" {
+            let vc = segue.destination as? CreateNewPaperViewController
+            vc?.delegate = self
+        }
     }
 }
 

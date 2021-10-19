@@ -43,3 +43,4 @@ class ImageManager {
             .eraseToAnyPublisher()
     }
 }
+

@@ -7,5 +7,15 @@
 
 import UIKit
 
-extension UIImage {
+extension UIImageView {
+    @IBInspectable var roundImage: CGFloat {
+        
+        set {
+            self.layer.cornerRadius = newValue
+        }
+        
+        get {
+            return self.roundImage
+        }
+    }
 }

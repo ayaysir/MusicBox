@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-import Kingfisher
+import Combine
 
 class UserCommunityViewController: UIViewController {
     
@@ -67,7 +67,7 @@ extension UserCommunityViewController {
                     return post
                 }
                 self.posts.sort { p1, p2 in
-                    p1.uploadDate < p2.uploadDate
+                    p1.uploadDate > p2.uploadDate
                 }
                 self.collectionView.reloadData()
             } catch {
@@ -81,17 +81,18 @@ extension UserCommunityViewController {
         print(sender.tag)
     }
     
-    private func getPostThumbImage(_ cell: PostCell, indexPath: IndexPath, postIdStr: String) {
-        
-        let refPath = "PostThumbnail/\(postIdStr)/\(postIdStr).jpg"
-        getFileURL(childRefStr: refPath) { url in
-            guard let url = url else {
-                return
-            }
-            
-            cell.imgAlbumart.kf.setImage(with: url, placeholder: UIImage(named: "sample"), options: [.cacheOriginalImage], completionHandler: nil)
-        }
-    }
+//    private func getPostThumbImage(_ cell: PostCell, indexPath: IndexPath, postIdStr: String) {
+//
+//        let refPath = "PostThumbnail/\(postIdStr)/\(postIdStr).jpg"
+//        getFileURL(childRefStr: refPath) { url in
+//            guard let url = url else {
+//                return
+//            }
+//
+////            cell.imgAlbumart.kf.setImage(with: url, placeholder: UIImage(named: "sample"), options: [.cacheOriginalImage], completionHandler: nil)
+//
+//        }
+//    }
 }
 
 extension UserCommunityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -108,7 +109,18 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         let targetPost = posts[indexPath.row]
         cell.update(post: targetPost)
         cell.tag = indexPath.row
-        getPostThumbImage(cell, indexPath: indexPath, postIdStr: targetPost.postId.uuidString)
+        
+        let postUUIDString = targetPost.postId.uuidString
+        let refPath = "PostThumbnail/\(postUUIDString)/\(postUUIDString).jpg"
+        getFileURL(childRefStr: refPath) { url in
+            guard let url = url else {
+                return
+            }
+            
+            cell.setImage(to: url)
+        }
+        
+//        getPostThumbImage(cell, indexPath: indexPath, postIdStr: targetPost.postId.uuidString)
         return cell
     }
     
@@ -167,12 +179,14 @@ class PostCell: UICollectionViewCell {
     @IBOutlet weak var imgHeart: UIImageView!
     @IBOutlet weak var lblLikeCount: UILabel!
     
+    private var subscriber: AnyCancellable?
+    
     var post: Post!
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imgAlbumart?.image = nil
-        imgAlbumart.image = UIImage(named: "sample")
+        subscriber?.cancel()
+        imgAlbumart.image = nil
     }
     
     func reset() {
@@ -203,6 +217,11 @@ class PostCell: UICollectionViewCell {
             let identifier = post.likes[currentUID] != nil ? "heart.fill" : "heart"
             imgHeart.image = UIImage(systemName: identifier)
         }
+    }
+    
+    func setImage(to url: URL) {
+        subscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "xmark.octagon"))
+                    .assign(to: \.imgAlbumart.image, on: self)
     }
 }
 
