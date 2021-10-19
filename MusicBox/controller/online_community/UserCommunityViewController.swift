@@ -117,7 +117,12 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
                 return
             }
             
+            
             cell.setImage(to: url)
+        } failedHandler: { error in
+            DispatchQueue.main.async {
+                cell.imgAlbumart.image = UIImage(named: "sample")
+            }
         }
         
 //        getPostThumbImage(cell, indexPath: indexPath, postIdStr: targetPost.postId.uuidString)
@@ -180,6 +185,10 @@ class PostCell: UICollectionViewCell {
     @IBOutlet weak var lblLikeCount: UILabel!
     
     private var subscriber: AnyCancellable?
+    private var userThumbSubscriber: AnyCancellable?
+    
+    let ref = Database.database().reference()
+    let storageRef = Storage.storage().reference()
     
     var post: Post!
     
@@ -207,8 +216,31 @@ class PostCell: UICollectionViewCell {
         
         imgUserProfile.layer.cornerRadius = imgUserProfile.bounds.size.width * 0.5
         imgUserProfile.clipsToBounds = true
+        storageRef.child("images/users/\(post.writerUID)/thumb_\(post.writerUID).jpg").downloadURL { url, error in
+            if let error = error {
+                print("get profile thumb failed:", error.localizedDescription)
+                return
+            }
+            
+            if let url = url {
+                self.userThumbSubscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "xmark.octagon")).assign(to: \.imgUserProfile.image, on: self)
+            }
+        }
         
-        lblUserNickname.text = "\(post.writerUID)"
+        
+        lblUserNickname.text = "noname"
+        ref.child("users").child(post.writerUID).child("nickname").getData { error, snapshot in
+            if let error = error {
+                print("get nickname failed:", error.localizedDescription)
+                return
+            }
+            
+            if snapshot.exists() {
+                self.lblUserNickname.text = snapshot.value as? String
+            }
+        }
+        
+        
         lblTitle.text = post.postTitle
         
         lblLikeCount.text = "\(post.likes.count)"
@@ -220,7 +252,7 @@ class PostCell: UICollectionViewCell {
     }
     
     func setImage(to url: URL) {
-        subscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "xmark.octagon"))
+        subscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "heart.fill"))
                     .assign(to: \.imgAlbumart.image, on: self)
     }
 }

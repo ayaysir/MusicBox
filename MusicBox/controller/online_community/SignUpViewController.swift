@@ -8,25 +8,30 @@
 import UIKit
 import Firebase
 import Photos
+import SwiftSpinner
 
 protocol SignUpDelegate: AnyObject {
     func didSignUpSuccess (_ controller: SignUpViewController, isSuccess: Bool, uid: String)
 }
 
 class SignUpViewController: UIViewController {
-
+    
+    @IBOutlet weak var lblPageTitle: UILabel!
+    
     @IBOutlet weak var txtUserEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtPasswordConfirm: UITextField!
     @IBOutlet weak var lblPasswordConfirmed: UILabel!
+    @IBOutlet weak var txfNickname: UITextField!
     @IBOutlet weak var pkvInteresting: UIPickerView!
     @IBOutlet weak var imgProfilePicture: UIImageView!
     
     weak var delegate: SignUpDelegate?
+    var pageMode: SignUpPageMode = .signUpMode
     
     var ref: DatabaseReference!
     
-    let interestingList = ["치킨", "피자", "탕수육"]
+    let interestingList = ["Pop", "Classical", "Soundtrack", "Rock", "Hiphop", "R&B", "Alternative", "Jazz"]
     var selectedInteresting: String!
     
     var imagePickerController = UIImagePickerController()
@@ -38,6 +43,9 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 모드에 따라 제목 변경
+        lblPageTitle.text = pageMode == .signUpMode ? "Sign Up" : "Update User Information"
         
         // 피커뷰 딜리게이트, 데이터소스 연결
         pkvInteresting.delegate = self
@@ -74,6 +82,7 @@ class SignUpViewController: UIViewController {
     
     func sendVerificationMail(authUser: User?) {
         if authUser != nil && authUser!.isEmailVerified == false {
+            SwiftSpinner.show("인증 이메일을 전송하고 있습니다...")
             authUser!.sendEmailVerification(completion: { (error) in
                 // Notify the user that the mail has sent or couldn't because of an error.
                 if error != nil {
@@ -90,6 +99,8 @@ class SignUpViewController: UIViewController {
     }
     
     func sendInfoToFirebase(withEmail userEmail: String, password userPassword: String) {
+        
+        SwiftSpinner.show("회원 정보를 전송하고 있습니다...")
         Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
             // 이메일, 비밀번호 전송
             guard let user = authResult?.user, error == nil else {
@@ -101,9 +112,13 @@ class SignUpViewController: UIViewController {
             sendVerificationMail(authUser: user)
             
             // 추가 정보 입력
-            ref.child("users").child(user.uid).setValue(["interesting": selectedInteresting])
+            let interesting = selectedInteresting ?? "None"
+            let nickname = txfNickname.text ?? "None"
+            ref.child("users").child(user.uid).child("interesting").setValue(interesting)
+            ref.child("users").child(user.uid).child("nickname").setValue(nickname)
             
             do {
+                SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
                 let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
                 
                 let images = [
@@ -111,6 +126,7 @@ class SignUpViewController: UIViewController {
                     ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "png")
                 ]
                 startUploading(images: images) {
+                    SwiftSpinner.hide(nil)
                     simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
                         self.dismiss(animated: true, completion: nil)
                         if delegate != nil {

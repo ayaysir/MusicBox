@@ -8,6 +8,10 @@
 import UIKit
 import Firebase
 
+enum SignUpPageMode {
+    case signUpMode, updateMode
+}
+
 class SignInViewController: UIViewController {
     
     @IBOutlet weak var txtUserEmail: UITextField!
@@ -15,6 +19,8 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var lblUserEmail: UILabel!
     @IBOutlet weak var lblInteresting: UILabel!
+    @IBOutlet weak var lblNickname: UILabel!
+    
     
     @IBOutlet weak var imgUserProfile: UIImageView!
     
@@ -40,6 +46,7 @@ class SignInViewController: UIViewController {
         ref = Database.database().reference()
         
         lblInteresting.text = "관심분야:"
+        lblNickname.text = "닉네임:"
         
         imgUserProfile.layer.cornerRadius = imgUserProfile.bounds.size.width * 0.5
         imgUserProfile.clipsToBounds = true
@@ -127,23 +134,28 @@ class SignInViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func btnGoToUserOnlyPage(_ sender: UIButton) {
-        performSegue(withIdentifier: "userOnlyPage", sender: nil)
-    }
-    
     @IBAction func btnActRefreshUserInfo(_ sender: UIButton) {
         Auth.auth().currentUser?.reload(completion: { error in
             self.setUserInfoView(user: Auth.auth().currentUser)
         })
-        
     }
+    
+    @IBAction func btnActSignUp(_ sender: Any) {
+        performSegue(withIdentifier: "SignUpSegue", sender: SignUpPageMode.signUpMode)
+    }
+    
+    @IBAction func btnActUpdateUserInfo(_ sender: Any) {
+        performSegue(withIdentifier: "SignUpSegue", sender: SignUpPageMode.updateMode)
+    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let signUpViewController = segue.destination as! SignUpViewController
-        if segue.identifier == "signUp" {
+        if segue.identifier == "SignUpSegue" {
             signUpViewController.delegate = self
+            let pageMode = sender as! SignUpPageMode
+            signUpViewController.pageMode = pageMode
         }
     }
 }
@@ -161,6 +173,21 @@ extension SignInViewController {
                 self.lblInteresting.text = "관심분야: \(snapshot.value ?? "-")"
             } else if let error = error {
                 self.lblInteresting.text = "관심분야: -"
+                print("get data failed:", error.localizedDescription)
+            }
+        }
+        
+        let userReff = self.ref.child("users/\(uid)/")
+        userReff.getData { error, snapshot in
+            if snapshot.exists() {
+                let dict = snapshot.value as? [String: String]
+                let interesting = dict["interesting"] ?? "-"
+                let nickname = dict["nickname"] ?? "-"
+                self.lblInteresting.text = "관심분야: \(interesting)"
+                self.lblNickname.text = "닉네임: \(nickname)"
+            } else if let error = error {
+                self.lblInteresting.text = "관심분야: -"
+                self.lblNickname.text = "닉네임: -"
                 print("get data failed:", error.localizedDescription)
             }
         }

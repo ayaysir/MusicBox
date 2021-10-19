@@ -15,7 +15,7 @@ func getCurrentUserUID() -> String? {
     return Auth.auth().currentUser?.uid
 }
 
-func getFileURL(childRefStr: String, completeHandler: @escaping FileURLBlock) {
+func getFileURL(childRefStr: String, completeHandler: @escaping FileURLBlock, failedHandler: @escaping ErrorBlock) {
     let storage = Storage.storage()
     let storageRef = storage.reference()
     let fileRef = storageRef.child(childRefStr)
@@ -23,7 +23,7 @@ func getFileURL(childRefStr: String, completeHandler: @escaping FileURLBlock) {
     fileRef.downloadURL { url, error in
         
         if let error = error {
-            print("An error has occured: \(error.localizedDescription)")
+            failedHandler(error)
             return
         }
         

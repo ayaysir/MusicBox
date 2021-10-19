@@ -170,6 +170,8 @@ class PostViewController: UIViewController {
         let refPath = "PostAlbumart/\(postIdStr)/\(postIdStr).jpg"
         getFileURL(childRefStr: refPath) { url in
             self.imgAlbumart.kf.setImage(with: url)
+        } failedHandler: { error in
+            
         }
     }
     

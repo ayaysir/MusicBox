@@ -8,4 +8,4 @@
 import UIKit
 
 typealias FileURLBlock = (_ url: URL?) -> Void
-
+typealias ErrorBlock = (_ error: Error) -> ()
