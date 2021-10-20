@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import Photos
 import SwiftSpinner
+import Kingfisher
 
 protocol SignUpDelegate: AnyObject {
     func didSignUpSuccess (_ controller: SignUpViewController, isSuccess: Bool, uid: String)
@@ -26,16 +27,23 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var pkvInteresting: UIPickerView!
     @IBOutlet weak var imgProfilePicture: UIImageView!
     
+    @IBOutlet weak var btnSubmitInfo: UIButton!
+    @IBOutlet weak var btnResetPageInfo: UIButton!
+    @IBOutlet weak var btnWithdrawMember: UIButton!
+    
     weak var delegate: SignUpDelegate?
     var pageMode: SignUpPageMode = .signUpMode
     
-    var ref: DatabaseReference!
+    var ref = Database.database().reference()
+    var storageRef = Storage.storage().reference()
     
     let interestingList = ["Pop", "Classical", "Soundtrack", "Rock", "Hiphop", "R&B", "Alternative", "Jazz"]
     var selectedInteresting: String!
     
     var imagePickerController = UIImagePickerController()
     var userProfileThumbnail: UIImage!
+    
+    var availableImageExtList = ["png", "jpg", "jpeg", "gif"]
     
     /// Here is the completion block
     typealias FileCompletionBlock = () -> Void
@@ -44,6 +52,12 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 사진, 카메라 권한 (최초 요청)
+        PHPhotoLibrary.requestAuthorization { status in
+        }
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+        }
+        
         // 모드에 따라 제목 변경
         lblPageTitle.text = pageMode == .signUpMode ? "Sign Up" : "Update User Information"
         
@@ -51,33 +65,81 @@ class SignUpViewController: UIViewController {
         pkvInteresting.delegate = self
         pkvInteresting.dataSource = self
         
+        // 사진: 이미지 피커에 딜리게이트 생성
+        imagePickerController.delegate = self
+        
         txtUserEmail.delegate = self
         txtPassword.delegate = self
         txtPasswordConfirm.delegate = self
         
-        // firebase reference 초기화
-        ref = Database.database().reference()
-        
-        selectedInteresting = interestingList[0]
         lblPasswordConfirmed.text = ""
         
-        // 사진, 카메라 권한 (최초 요청)
-        PHPhotoLibrary.requestAuthorization { status in
-        }
-        AVCaptureDevice.requestAccess(for: .video) { granted in
-        }
+        switch pageMode {
+        case .signUpMode:
+            
+            selectedInteresting = interestingList[0]
+            btnWithdrawMember.isHidden = true
+            
+            // 최초 섬네일 생성
+            do {
+                userProfileThumbnail = try resizeImage(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
+            } catch {
+                print(error)
+            }
+        case .updateMode:
         
-        // 사진: 이미지 피커에 딜리게이트 생성
-        imagePickerController.delegate = self
-        
-        // 최초 섬네일 생성
-        do {
-            userProfileThumbnail = try resizeImage(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
-        } catch {
-            print(error)
-        }
-        
+            btnWithdrawMember.isHidden = false
+            btnSubmitInfo.setTitle("Update", for: .normal)
+            
+            // 회원 정보 불러오기
+            guard let userUID = getCurrentUserUID() else {
+                return
+            }
+            guard let user = getCurrentUser() else {
+                return
+            }
+            
+            txtUserEmail.text = user.email
+            txtUserEmail.isEnabled = false
+            
+            ref.child("users/\(userUID)").getData { error, snapshot in
+                if let error = error {
+                    print("get user information failed:", error.localizedDescription)
+                    return
+                }
+                
+                if snapshot.exists() {
+                    let dict = snapshot.value as? [String: String]
+                    
+                    if let interesting = dict["interesting"] as? String {
+                        let index = self.interestingList.firstIndex(of: interesting) ?? 0
+                        self.pkvInteresting.selectRow(index, inComponent: 0, animated: true)
+                        self.selectedInteresting = interesting
+                    }
+                    
+                    self.txfNickname.text = dict["nickname"] as? String
+                }
+            }
+            
+            storageRef.child("images/users/\(userUID)/original_\(userUID).*").getMetadata { metadata, error in
+                if let error = error {
+                    print("metadata error: \(error.localizedDescription)")
+                    return
+                }
+                print("file metadata:", metadata)
+            }
+            
+            getFileURL(childRefStr: "images/users/\(userUID)/original_\(userUID).jpg") { url in
+                guard let url = url else {
+                    return
+                }
+                
+                self.imgProfilePicture.kf.setImage(with: url)
+            } failedHandler: { error in
+                
+            }
 
+        }
     }
     
     func sendVerificationMail(authUser: User?) {
@@ -123,7 +185,7 @@ class SignUpViewController: UIViewController {
                 
                 let images = [
                     ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                    ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "png")
+                    ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
                 ]
                 startUploading(images: images) {
                     SwiftSpinner.hide(nil)
@@ -208,9 +270,7 @@ extension SignUpViewController {
             let fileExt = imageInfo.fileExt
             let quality = imageInfo.compressionQuality
             
-            guard let data = fileExt == "jpg"
-                    ? image.jpegData(compressionQuality: quality)
-                    : image.pngData() else {
+            guard let data = image.jpegData(compressionQuality: quality) else {
                 return
             }
             
@@ -230,8 +290,6 @@ extension SignUpViewController {
         }
     }
 }
-
-
 
 extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     // 컴포넌트(열) 개수
