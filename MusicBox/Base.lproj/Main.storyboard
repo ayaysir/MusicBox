@@ -1329,6 +1329,9 @@
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="회원 탈퇴"/>
+                                <connections>
+                                    <action selector="btnActWithdrawal:" destination="UOQ-MV-4Qk" eventType="touchUpInside" id="HNm-Wx-tuX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ov-qZ-z76">
                                 <rect key="frame" x="331" y="791" width="52" height="30"/>

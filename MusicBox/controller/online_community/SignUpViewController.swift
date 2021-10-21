@@ -354,6 +354,53 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    @IBAction func btnActWithdrawal(_ sender: Any) {
+        guard pageMode == .updateMode else {
+            return
+        }
+        
+        simpleDestructiveYesAndNo(self, message: "정말 탈퇴하시겠습니까? 탈퇴하면 회원정보가 삭제되며 복구할 수 없습니다. 작성 글은 삭제되지 않습니다.", title: "회원 탈퇴") { action in
+            
+            guard let user = Auth.auth().currentUser else {
+                return
+            }
+            
+            self.ref.child("users/\(user.uid)").removeValue { error, ref in
+                SwiftSpinner.show("회원탈퇴를 진행중입니다...")
+                if let error = error {
+                    print("userinfo delete failed:", error.localizedDescription)
+                }
+                
+                self.storageRef.child("images/users/\(user.uid)").delete { error in
+                    if let error = error {
+                        print("Image delete failed:", error.localizedDescription)
+                    }
+                    
+                    user.delete { error in
+                        print("deleting user information:", user.uid)
+                        
+                        if let error = error {
+                            // An error happened.
+                            simpleAlert(self, message: error.localizedDescription)
+                            SwiftSpinner.hide(nil)
+                            return
+                        } else {
+                            // Account deleted.
+                            SwiftSpinner.hide {
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        }
+                    }
+                    
+                    
+                }
+            }
+            
+            
+        }
+    }
+    
+    
     @IBAction func btnActTakePhoto(_ sender: UIButton) {
         takePhoto()
     }
