@@ -19,7 +19,10 @@ func resizeImage(image: UIImage, maxSize: Int = 100) throws -> UIImage  {
     }
     
     guard image.size.width >= CGFloat(maxSize) && image.size.height >= CGFloat(maxSize) else {
-        throw ResizeImageError.sizeIsTooSmall
+        guard let newImage = UIImage(data: imageData) else {
+            throw ResizeImageError.convertFailed
+        }
+        return newImage
     }
 
     let options = [

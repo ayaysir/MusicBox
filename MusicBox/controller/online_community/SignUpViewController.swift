@@ -13,6 +13,7 @@ import Kingfisher
 
 protocol SignUpDelegate: AnyObject {
     func didSignUpSuccess (_ controller: SignUpViewController, isSuccess: Bool, uid: String)
+    func didUpdateUserInfoSuccess (_ controller: SignUpViewController, isSuccess: Bool)
 }
 
 class SignUpViewController: UIViewController {
@@ -80,12 +81,6 @@ class SignUpViewController: UIViewController {
             selectedInteresting = interestingList[0]
             btnWithdrawMember.isHidden = true
             
-            // 최초 섬네일 생성
-            do {
-                userProfileThumbnail = try resizeImage(image: #imageLiteral(resourceName: "sample"), maxSize: 200)
-            } catch {
-                print(error)
-            }
         case .updateMode:
         
             btnWithdrawMember.isHidden = false
@@ -121,24 +116,18 @@ class SignUpViewController: UIViewController {
                 }
             }
             
-            storageRef.child("images/users/\(userUID)/original_\(userUID).*").getMetadata { metadata, error in
-                if let error = error {
-                    print("metadata error: \(error.localizedDescription)")
-                    return
-                }
-                print("file metadata:", metadata)
-            }
-            
+            SwiftSpinner.show("기존 프로필 이미지를 불러오는 중입니다.")
             getFileURL(childRefStr: "images/users/\(userUID)/original_\(userUID).jpg") { url in
                 guard let url = url else {
                     return
                 }
                 
-                self.imgProfilePicture.kf.setImage(with: url)
+                self.imgProfilePicture.kf.setImage(with: url, placeholder: nil, options: nil) { result in
+                    SwiftSpinner.hide(nil)
+                }
             } failedHandler: { error in
                 
             }
-
         }
     }
     
@@ -163,46 +152,118 @@ class SignUpViewController: UIViewController {
     func sendInfoToFirebase(withEmail userEmail: String, password userPassword: String) {
         
         SwiftSpinner.show("회원 정보를 전송하고 있습니다...")
-        Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
-            // 이메일, 비밀번호 전송
-            guard let user = authResult?.user, error == nil else {
-                simpleAlert(self, message: error!.localizedDescription)
-                return
+        
+        // 추가 정보 입력
+        let interesting = selectedInteresting ?? "None"
+        let nickname = txfNickname.text ?? "None"
+        
+        do {
+            let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
+            try userProfileThumbnail = resizeImage(image: imgProfilePicture.image!, maxSize: 200)
+            
+            switch pageMode {
+            case .signUpMode:
+                Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
+                    // 이메일, 비밀번호 전송
+                    guard let user = authResult?.user, error == nil else {
+                        simpleAlert(self, message: error!.localizedDescription)
+                        return
+                    }
+                    
+                    // 이메일 인증 요청
+                    sendVerificationMail(authUser: user)
+                    
+                    ref.child("users").child(user.uid).child("interesting").setValue(interesting)
+                    ref.child("users").child(user.uid).child("nickname").setValue(nickname)
+                    
+                    let images = [
+                        ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                        ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                    ]
+                    
+                    // 이미지 업로드
+                    SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
+                    uploadUserProfileImage(images: images, user: user)
+                }
+            case .updateMode:
+                
+                guard let user = getCurrentUser() else {
+                    return
+                }
+                
+                ref.child("users").child(user.uid).child("interesting").setValue(interesting)
+                ref.child("users").child(user.uid).child("nickname").setValue(nickname)
+                
+                Auth.auth().currentUser?.updatePassword(to: userPassword, completion: { [self] error in
+                    if let error = error {
+                        simpleAlert(self, message: error.localizedDescription)
+                        return
+                    }
+                    
+                    let images = [
+                        ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                        ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                    ]
+                    
+                    // 이미지 업로드
+                    SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
+                    uploadUserProfileImage(images: images, user: user)
+                })
             }
             
-            // 이메일 인증 요청
-            sendVerificationMail(authUser: user)
+        } catch  {
+            print("Image convert failed:", error)
+            return
+        }
+        
+    }
+    
+    func sendInfoToFirebaseOnlyAdditionalInfo() {
+        guard pageMode == .updateMode else {
+            return
+        }
+        
+        guard let user = getCurrentUser() else {
+            return
+        }
+        
+        do {
+            let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
+            try userProfileThumbnail = resizeImage(image: imgProfilePicture.image!, maxSize: 200)
+            
+            SwiftSpinner.show("회원 정보를 전송하고 있습니다...")
             
             // 추가 정보 입력
             let interesting = selectedInteresting ?? "None"
             let nickname = txfNickname.text ?? "None"
+            
             ref.child("users").child(user.uid).child("interesting").setValue(interesting)
             ref.child("users").child(user.uid).child("nickname").setValue(nickname)
             
-            do {
-                SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
-                let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
-                
-                let images = [
-                    ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                    ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
-                ]
-                startUploading(images: images) {
-                    SwiftSpinner.hide(nil)
-                    simpleAlert(self, message: "\(user.email!) 님의 회원가입이 완료되었습니다.", title: "완료") { action in
-                        self.dismiss(animated: true, completion: nil)
-                        if delegate != nil {
-                            delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
-                        }
-                    }
-                }
-            } catch {
-                print(error)
-                return
-            }
+            let images = [
+                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+            ]
             
             // 이미지 업로드
+            SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
+            uploadUserProfileImage(images: images, user: user)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func uploadUserProfileImage(images: [ImageWithName], user: User) {
+        startUploading(images: images, childRefPath: "images/users") {
             
+            SwiftSpinner.hide(nil)
+            
+            simpleAlert(self, message: "\(user.email!) 님의 \(self.pageMode.rawValue) 완료되었습니다.", title: "완료") { action in
+                self.dismiss(animated: true, completion: nil)
+                if self.delegate != nil {
+                    self.delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
+                }
+            }
         }
     }
     
@@ -220,20 +281,44 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
-        guard let userEmail = txtUserEmail.text,
-              let userPassword = txtPassword.text,
-              let userPasswordConfirm = txtPasswordConfirm.text else {
-            return
-        }
         
-        guard userPassword != ""
-                && userPasswordConfirm != ""
-                && userPassword == userPasswordConfirm else {
-            simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
-            return
+        switch pageMode {
+        case .signUpMode:
+            guard let userEmail = txtUserEmail.text,
+                  let userPassword = txtPassword.text,
+                  let userPasswordConfirm = txtPasswordConfirm.text else {
+                return
+            }
+            
+            guard userPassword != ""
+                    && userPasswordConfirm != ""
+                    && userPassword == userPasswordConfirm else {
+                simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+                return
+            }
+            
+            sendInfoToFirebase(withEmail: userEmail, password: userPassword)
+        case .updateMode:
+            guard let user = getCurrentUser() else {
+                return
+            }
+            guard let newPassword = txtPassword.text,
+                  let newPasswordConfirm = txtPasswordConfirm.text else {
+                      return
+                  }
+            
+            // 비빌번호를 두 쪽 다 입력한 때
+            if newPassword != "" || newPasswordConfirm != "" {
+                guard newPassword == newPasswordConfirm else {
+                    simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+                    return
+                }
+                sendInfoToFirebase(withEmail: user.email!, password: newPassword)
+            } else {
+                // 비밀번호가 입력되지 않은 때
+                sendInfoToFirebaseOnlyAdditionalInfo()
+            }
         }
-        
-        sendInfoToFirebase(withEmail: userEmail, password: userPassword)
     }
     
     @IBAction func btnActTakePhoto(_ sender: UIButton) {
@@ -249,17 +334,17 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController {
     
-    func startUploading(images: [ImageWithName], completion: @escaping FileCompletionBlock) {
+    func startUploading(images: [ImageWithName], childRefPath: String, completion: @escaping FileCompletionBlock) {
         if images.count == 0 {
             completion()
             return;
         }
         
         block = completion
-        uploadImage(forIndex: 0, images: images)
+        uploadImage(forIndex: 0, images: images, childRefPath: childRefPath)
     }
     
-    private func uploadImage(forIndex index:Int, images: [ImageWithName]) {
+    private func uploadImage(forIndex index:Int, images: [ImageWithName], childRefPath: String) {
         
         if index < images.count {
             /// Perform uploading
@@ -276,11 +361,11 @@ extension SignUpViewController {
             
             let fileName = "\(name).\(fileExt)"
             
-            FirebaseFileManager.shared.setChild("images/users")
+            FirebaseFileManager.shared.setChild(childRefPath)
             FirebaseFileManager.shared.upload(data: data, withName: fileName, block: { (url) in
                 /// After successfully uploading call this method again by increment the **index = index + 1**
                 print(url ?? "Couldn't not upload. You can either check the error or just skip this.")
-                self.uploadImage(forIndex: index + 1, images: images)
+                self.uploadImage(forIndex: index + 1, images: images, childRefPath: childRefPath)
             })
             return;
         }
@@ -390,11 +475,6 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imgProfilePicture.image = image
-            do {
-                try userProfileThumbnail = resizeImage(image: image, maxSize: 200)
-            } catch {
-                userProfileThumbnail = image
-            }
         }
         
         dismiss(animated: true, completion: nil)

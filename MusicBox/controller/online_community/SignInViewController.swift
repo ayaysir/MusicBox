@@ -8,8 +8,9 @@
 import UIKit
 import Firebase
 
-enum SignUpPageMode {
-    case signUpMode, updateMode
+enum SignUpPageMode: String {
+    case signUpMode = "회원가입이"
+    case updateMode = "회원정보 업데이트가"
 }
 
 class SignInViewController: UIViewController {
@@ -213,6 +214,14 @@ extension SignInViewController {
 }
 
 extension SignInViewController: SignUpDelegate {
+    func didUpdateUserInfoSuccess(_ controller: SignUpViewController, isSuccess: Bool) {
+        guard let userUID = getCurrentUserUID() else {
+            return
+        }
+        getUserAdditionalInfo(uid: userUID)
+        getUserProfileImage(uid: userUID)
+    }
+    
     func didSignUpSuccess(_ controller: SignUpViewController, isSuccess: Bool, uid: String) {
         getUserAdditionalInfo(uid: uid)
         getUserProfileImage(uid: uid)

@@ -2,7 +2,7 @@
 //  ImageManager.swift
 //  MusicBox
 //
-//  Created by yoonbumtae on 2021/10/11.
+//  Created by https://stackoverflow.com/questions/35958826
 //
 
 import UIKit
