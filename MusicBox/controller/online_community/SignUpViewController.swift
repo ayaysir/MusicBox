@@ -32,6 +32,12 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var btnResetPageInfo: UIButton!
     @IBOutlet weak var btnWithdrawMember: UIButton!
     
+    // 회원정보 업데이트의 경우 리셋 기능을 위해 임시 저장
+    private var userInterestingIndex: Int?
+    private var userInterestingStr: String?
+    private var userNickname: String?
+    private var userImage: UIImage?
+    
     weak var delegate: SignUpDelegate?
     var pageMode: SignUpPageMode = .signUpMode
     
@@ -86,48 +92,7 @@ class SignUpViewController: UIViewController {
             btnWithdrawMember.isHidden = false
             btnSubmitInfo.setTitle("Update", for: .normal)
             
-            // 회원 정보 불러오기
-            guard let userUID = getCurrentUserUID() else {
-                return
-            }
-            guard let user = getCurrentUser() else {
-                return
-            }
-            
-            txtUserEmail.text = user.email
-            txtUserEmail.isEnabled = false
-            
-            ref.child("users/\(userUID)").getData { error, snapshot in
-                if let error = error {
-                    print("get user information failed:", error.localizedDescription)
-                    return
-                }
-                
-                if snapshot.exists() {
-                    let dict = snapshot.value as? [String: String]
-                    
-                    if let interesting = dict["interesting"] as? String {
-                        let index = self.interestingList.firstIndex(of: interesting) ?? 0
-                        self.pkvInteresting.selectRow(index, inComponent: 0, animated: true)
-                        self.selectedInteresting = interesting
-                    }
-                    
-                    self.txfNickname.text = dict["nickname"] as? String
-                }
-            }
-            
-            SwiftSpinner.show("기존 프로필 이미지를 불러오는 중입니다.")
-            getFileURL(childRefStr: "images/users/\(userUID)/original_\(userUID).jpg") { url in
-                guard let url = url else {
-                    return
-                }
-                
-                self.imgProfilePicture.kf.setImage(with: url, placeholder: nil, options: nil) { result in
-                    SwiftSpinner.hide(nil)
-                }
-            } failedHandler: { error in
-                
-            }
+            loadExistingUserInfo()
         }
     }
     
@@ -253,6 +218,60 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    func loadExistingUserInfo() {
+        if pageMode == .updateMode {
+            // 회원 정보 불러오기
+            guard let userUID = getCurrentUserUID() else {
+                return
+            }
+            guard let user = getCurrentUser() else {
+                return
+            }
+            
+            txtUserEmail.text = user.email
+            txtUserEmail.isEnabled = false
+            
+            ref.child("users/\(userUID)").getData { error, snapshot in
+                if let error = error {
+                    print("get user information failed:", error.localizedDescription)
+                    return
+                }
+                
+                if snapshot.exists() {
+                    let dict = snapshot.value as? [String: String]
+                    
+                    if let interesting = dict["interesting"] as? String {
+                        let index = self.interestingList.firstIndex(of: interesting) ?? 0
+                        self.pkvInteresting.selectRow(index, inComponent: 0, animated: true)
+                        self.selectedInteresting = interesting
+                        
+                        self.userInterestingIndex = index
+                        self.userInterestingStr = interesting
+                    }
+                    
+                    let nickname = dict["nickname"] as? String
+                    self.txfNickname.text = nickname
+                    self.userNickname = nickname
+                }
+            }
+            
+            
+            getFileURL(childRefStr: "images/users/\(userUID)/original_\(userUID).jpg") { url in
+                
+                SwiftSpinner.show("기존 프로필 이미지를 불러오는 중입니다.")
+                guard let url = url else {
+                    return
+                }
+                self.imgProfilePicture.kf.setImage(with: url, placeholder: nil, options: nil) { result in
+                    self.userImage = self.imgProfilePicture.image
+                    SwiftSpinner.hide(nil)
+                }
+            } failedHandler: { error in
+                SwiftSpinner.show(duration: 1.5, title: "기존 프로필 이미지를 불러오기가 실패했습니다.", animated: false, completion: nil)
+            }
+        }
+    }
+    
     func uploadUserProfileImage(images: [ImageWithName], user: User) {
         startUploading(images: images, childRefPath: "images/users") {
             
@@ -272,12 +291,26 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func btnActReset(_ sender: UIButton) {
-        txtUserEmail.text = ""
+        
         txtPassword.text = ""
         txtPasswordConfirm.text = ""
         lblPasswordConfirmed.text = ""
-        pkvInteresting.selectedRow(inComponent: 0)
-        // -- 사진 초기화 --
+        
+        switch pageMode {
+        case .signUpMode:
+            txtUserEmail.text = ""
+            txfNickname.text = ""
+            pkvInteresting.selectRow(0, inComponent: 0, animated: false)
+            selectedInteresting = interestingList[0]
+            // -- 사진 초기화 --
+            imgProfilePicture.image = UIImage(named: "sample")
+        case .updateMode:
+            txfNickname.text = userNickname
+            pkvInteresting.selectRow(userInterestingIndex ?? 0, inComponent: 0, animated: true)
+            selectedInteresting = userInterestingStr ?? interestingList[0]
+            imgProfilePicture.image = userImage
+        }
+        
     }
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
