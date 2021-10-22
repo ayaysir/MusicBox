@@ -43,7 +43,7 @@ class MusicPaperViewController: UIViewController {
     
     var midiManager: MIDIManager!
     
-    var bpm: Int = 100
+    var bpm: Double = 100
     var colNum: Int = 80
     var imBeatCount: Int = 0
     var currentFileName: String = "paper"
@@ -359,7 +359,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
     }
     
-    func didClickedBpmChange(_ view: UIView, bpm: Int) {
+    func didClickedBpmChange(_ view: UIView, bpm: Double) {
         midiManager.currentBPM = bpm
         self.bpm = bpm
         document?.paper?.bpm = bpm

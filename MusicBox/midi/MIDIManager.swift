@@ -23,7 +23,7 @@ class MIDIManager {
         }
     }
     
-    var currentBPM: Int = 100
+    var currentBPM: Double = 100
     
     /// 기본 사운드폰트 사용
     convenience init() {

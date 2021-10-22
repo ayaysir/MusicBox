@@ -24,12 +24,12 @@ struct Post: Codable {
     
     var originaFileNameWithoutExt: String
     var preplayArr: [PaperCoord]
-    var bpm: Int
+    var bpm: Double
     
     // UID 배열
     var likes: [String: Like]
     
-    internal init(postTitle: String, postComment: String, paperTitle: String, paperArtist: String, paperMaker: String, allowPaperEdit: Bool, uploadDate: Date, writerUID: String, originaFileNameWithoutExt: String, preplayArr: [PaperCoord], bpm: Int, likes: [String: Like]) {
+    internal init(postTitle: String, postComment: String, paperTitle: String, paperArtist: String, paperMaker: String, allowPaperEdit: Bool, uploadDate: Date, writerUID: String, originaFileNameWithoutExt: String, preplayArr: [PaperCoord], bpm: Double, likes: [String: Like]) {
         self.postTitle = postTitle
         self.postComment = postComment
         self.paperTitle = paperTitle

@@ -47,7 +47,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     
     static var supportsSecureCoding: Bool = true
     
-    var bpm: Int = 120
+    var bpm: Double = 120
     var coords: [PaperCoord] = []
     var timeSignature: TimeSignature = TimeSignature()
     
@@ -83,7 +83,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     }
     
     // Paper(bpm: bpm, coords: coords, timeSignature: timeSignature)
-    init(bpm: Int, coords: [PaperCoord], timeSignature: TimeSignature) {
+    init(bpm: Double, coords: [PaperCoord], timeSignature: TimeSignature) {
         self.bpm = bpm
         self.coords = coords
         self.timeSignature = timeSignature
@@ -118,7 +118,7 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
         super.init()
         
         // not nullable
-        let bpm = coder.decodeInteger(forKey: .kBPM)
+        let bpm = coder.decodeDouble(forKey: .kBPM)
         let imBeat = coder.decodeInteger(forKey: .kIncompleteMeasureBeat)
         let tsLower = coder.decodeInteger(forKey: .kTimeSignatureLower)
         let tsUpper = coder.decodeInteger(forKey: .kTimeSignatureUpper)

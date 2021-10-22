@@ -16,7 +16,7 @@ protocol PaperOptionPanelViewDelegate: AnyObject {
     func didClickedResetPaper(_ view: UIView)
     func didClickedUndo(_ view: UIView)
     func didClickedSave(_ view: UIView)
-    func didClickedBpmChange(_ view: UIView, bpm: Int)
+    func didClickedBpmChange(_ view: UIView, bpm: Double)
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int)
     func didClickedExtendPaper(_ view: UIView)
     func didClickedToggleSnapToGrid(_ view: UIView)
@@ -105,11 +105,11 @@ class PaperOptionPanelView: UIView {
             delegate?.didClickedBpmChange(self, bpm: 0)
             return
         }
-        guard let bpmInt = Int(bpmStr) else {
+        guard let bpm = Double(bpmStr) else {
             delegate?.didClickedBpmChange(self, bpm: 0)
             return
         }
-        delegate?.didClickedBpmChange(self, bpm: bpmInt)
+        delegate?.didClickedBpmChange(self, bpm: bpm)
     }
     
     @IBAction func btnActChangeIncompleteMeasure(_ sender: Any) {

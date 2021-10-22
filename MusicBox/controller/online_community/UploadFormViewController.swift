@@ -101,7 +101,7 @@ class UploadFormViewController: UIViewController {
         let originalFileNameWithoutExt = (document.fileURL.lastPathComponent as NSString).deletingPathExtension
         
         let preplayArr: [PaperCoord] = paper.coords
-        let bpm: Int = paper.bpm
+        let bpm: Double = paper.bpm
         
         let likes: [String: Like] = [:]
         

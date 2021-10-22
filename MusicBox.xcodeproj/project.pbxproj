@@ -50,6 +50,7 @@
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
 		447E116E2722E9DF00931B8C /* CreateNewPaperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */; };
+		447E117027231AB200931B8C /* BPMConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E116F27231AB200931B8C /* BPMConverter.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -161,6 +162,7 @@
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
 		447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPaperTableViewController.swift; sourceTree = "<group>"; };
+		447E116F27231AB200931B8C /* BPMConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPMConverter.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				444D944F27106FF90090F587 /* PhotoAuth.swift */,
 				444D94642711F7720090F587 /* JSONUtil.swift */,
 				444D946A2714787B0090F587 /* ImageManager.swift */,
+				447E116F27231AB200931B8C /* BPMConverter.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				444D9467271328F70090F587 /* UIButton+.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
+				447E117027231AB200931B8C /* BPMConverter.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
 				44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */,
 				444D944E27105D960090F587 /* Checkbox.swift in Sources */,
