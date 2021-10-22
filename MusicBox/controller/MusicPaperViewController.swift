@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol MusicPaperVCDelegate: AnyObject {
     func didPaperEditFinished(_ controller: MusicPaperViewController)
@@ -16,6 +17,8 @@ class MusicPaperViewController: UIViewController {
     var previousScale: CGFloat = 1.0
     
     weak var delegate: MusicPaperVCDelegate?
+
+    var player: AVAudioPlayer?
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var musicPaperView: MusicBoxPaperView!
@@ -59,6 +62,12 @@ class MusicPaperViewController: UIViewController {
     var lastScrollViewZoomScale: CGFloat!
     
     var propertyAnimator: UIViewPropertyAnimator!
+    
+    let availablePunchSounds = [
+        "zapsplat_office_stapler_single_staple_into_paper_001_66589",
+        "zapsplat_office_stapler_single_staple_into_paper_002_66590",
+        "zapsplat_office_stapler_single_staple_into_paper_003_66591"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,6 +209,9 @@ class MusicPaperViewController: UIViewController {
             }
             
             musicPaperView.data.append(coord)
+            
+            playSound()
+            
         } else {
             
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else { return }
@@ -275,6 +287,30 @@ class MusicPaperViewController: UIViewController {
         }
         panelTrailingConstraint.constant = panelMoveX
         panelTrailingConstraint.isActive = true
+    }
+    
+    func playSound() {
+        let selectedSoundIndex = Int.random(in: 0...2)
+        
+        guard let url = Bundle.main.url(forResource: availablePunchSounds[selectedSoundIndex], withExtension: "mp3") else { return }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
 }
 
@@ -364,9 +400,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedPlaySequence(_ view: UIView) {
-        
-        
-        
         if midiManager.midiPlayer!.isPlaying {
             if propertyAnimator.isRunning {
                 propertyAnimator.stopAnimation(true)
@@ -390,10 +423,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             }
             
             let endGridX = maxGridX * cst.cellWidth + cst.leftMargin
-            
-            guard let bpm = document?.paper!.bpm else {
-                return
-            }
             
             lastScrollViewOffset = scrollView.contentOffset
             lastScrollViewZoomScale = scrollView.zoomScale
@@ -426,11 +455,14 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedResetPaper(_ view: UIView) {
-        musicPaperView.data = []
+        if editMode {
+            musicPaperView.data = []
+        }
+        
     }
     
     func didClickedUndo(_ view: UIView) {
-        if musicPaperView.data.count >= 1 {
+        if editMode && musicPaperView.data.count >= 1 {
             musicPaperView.data.removeLast()
         }
         

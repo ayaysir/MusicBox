@@ -129,7 +129,7 @@ class FileCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PaperCreateWindowSegue" {
-            let vc = segue.destination as? CreateNewPaperViewController
+            let vc = segue.destination as? CreateNewPaperTableViewController
             vc?.delegate = self
         }
     }
@@ -234,7 +234,7 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
 }
 
 extension FileCollectionViewController: CreateNewPaperVCDelegate {
-    func didNewPaperCreated(_ controller: CreateNewPaperViewController, newPaper: Paper, fileNameWithoutExt: String) {
+    func didNewPaperCreated(_ controller: CreateNewPaperTableViewController, newPaper: Paper, fileNameWithoutExt: String) {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let paperViewController = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController

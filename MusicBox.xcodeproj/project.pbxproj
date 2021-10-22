@@ -46,6 +46,10 @@
 		44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */; };
 		44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5C271D906F00A0EF62 /* HeartButton.swift */; };
 		44558E5F271D94F300A0EF62 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5E271D94F300A0EF62 /* Like.swift */; };
+		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
+		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
+		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
+		447E116E2722E9DF00931B8C /* CreateNewPaperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -153,6 +157,10 @@
 		44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostViewController.swift; sourceTree = "<group>"; };
 		44558E5C271D906F00A0EF62 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		44558E5E271D94F300A0EF62 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
+		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
+		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
+		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
+		447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPaperTableViewController.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -260,6 +268,7 @@
 				444AF39D2701E26400BD8E38 /* HomeViewController.swift */,
 				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
 				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
+				447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -323,6 +332,16 @@
 				444D94622711EF950090F587 /* PaperCoord.swift */,
 			);
 			path = paper;
+			sourceTree = "<group>";
+		};
+		447E11662721C0E900931B8C /* punchsound */ = {
+			isa = PBXGroup;
+			children = (
+				447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */,
+				447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */,
+				447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */,
+			);
+			path = punchsound;
 			sourceTree = "<group>";
 		};
 		449A411F26ECD86000EE3B67 /* view */ = {
@@ -485,6 +504,7 @@
 		44F3A03426FE1E06000CE46F /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				447E11662721C0E900931B8C /* punchsound */,
 				44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */,
 				44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */,
 				44F3A03726FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 */,
@@ -646,7 +666,9 @@
 				44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */,
 				44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */,
+				447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
+				447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */,
 				44E682F226EA46340074FE46 /* Assets.xcassets in Resources */,
 				44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */,
 				44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */,
@@ -655,6 +677,7 @@
 				44F3A03A26FF72FA000CE46F /* .gitignore in Resources */,
 				44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */,
 				44A98B292703031800AE8B25 /* blank.musicbox in Resources */,
+				447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +826,7 @@
 				444D94652711F7720090F587 /* JSONUtil.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */,
+				447E116E2722E9DF00931B8C /* CreateNewPaperTableViewController.swift in Sources */,
 				444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */,
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,
 				44AE99402705DBED00D046D1 /* Array+.swift in Sources */,
