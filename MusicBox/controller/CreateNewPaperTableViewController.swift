@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 let noteNames = [
     "note_sixteenth",
@@ -46,6 +47,7 @@ class CreateNewPaperTableViewController: UITableViewController {
     @IBOutlet weak var txfOriginalArtist: UITextField!
     @IBOutlet weak var txfPaperMaker: UITextField!
     @IBOutlet weak var lblConvertedBPM: UILabel!
+    @IBOutlet weak var txvComment: UITextView!
     
     @IBOutlet weak var imgAlbumart: UIImageView!
     var thumbnailImage: UIImage?
@@ -72,6 +74,9 @@ class CreateNewPaperTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        txfBpm.delegate = self
+        txfIncompleteMeasureBeat.delegate = self
+        
         pkvBpmNote.delegate = self
         pkvBpmNote.dataSource = self
         pkvBpmNote.selectRow(4, inComponent: 0, animated: false)
@@ -93,6 +98,19 @@ class CreateNewPaperTableViewController: UITableViewController {
             print(error)
             thumbnailImage = imgAlbumart.image!
         }
+        
+        if getCurrentUser() != nil, let userUID = getCurrentUserUID() {
+            SwiftSpinner.show("Load user's nickname...")
+            getDatabaseRef().child("users/\(userUID)/nickname").getData { error, snapshot in
+                SwiftSpinner.hide(nil)
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                self.txfPaperMaker.text = (snapshot.value as? String)
+            }
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -102,10 +120,16 @@ class CreateNewPaperTableViewController: UITableViewController {
 
     @IBAction func btnActCreateNewPaper(_ sender: Any) {
         if delegate != nil {
+            
+            // 유효성 검사
+            guard validateFieldValues() else {
+                return
+            }
+            
             guard let bpmStr = lblConvertedBPM.text,
                   let title = txfTitle.text,
                   let fileName = txfFileName.text,
-                  
+                  let comment = txvComment.text,
                   let originalArtist = txfOriginalArtist.text,
                   let paperMaker = txfPaperMaker.text else {
                       print("string is nil")
@@ -128,6 +152,7 @@ class CreateNewPaperTableViewController: UITableViewController {
             paper.originalArtist = originalArtist
             paper.paperMaker = paperMaker
             paper.timeSignature = timeSignature
+            paper.comment = comment
             
             if let albumartImage = imgAlbumart.image {
                 do {
@@ -148,7 +173,6 @@ class CreateNewPaperTableViewController: UITableViewController {
              
             delegate?.didNewPaperCreated(self, newPaper: paper, fileNameWithoutExt: fileName)
             
-//            self.dismiss(animated: true, completion: nil)
             self.navigationController?.popViewController(animated: true)
         } else {
             print("CreateNewPaperVCDelegate is nil.")
@@ -181,6 +205,94 @@ class CreateNewPaperTableViewController: UITableViewController {
             return
         }
         convertTempoWithLabelChange(tempo: tempoDouble, noteDivision: noteDivision)
+    }
+    
+    func validateFieldValues() -> Bool {
+        // file name
+        guard txfFileName.text != "" else {
+            simpleAlert(self, message: "파일 이름을 입력해야 합니다.", title: "만들 수 없음") { action in
+                self.txfFileName.becomeFirstResponder()
+            }
+            
+            return false
+        }
+        
+        let regex = "^[^<>:;,?\"*|/]+$"
+        guard txfFileName.text?.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil else {
+            simpleAlert(self, message: "파일 이름 형식이 잘못되었습니다. 파일명을 다시 작성해주세요.", title: "만들 수 없음") { action in
+                self.txfFileName.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        // title
+        guard txfTitle.text! != "" else {
+            simpleAlert(self, message: "제목을 입력해야 합니다.", title: "만들 수 없음") { action in
+                self.txfTitle.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        guard txfTitle.text!.count <= 50 else {
+            simpleAlert(self, message: "제목은 50자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+                self.txfTitle.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        // bpm
+        guard let bpm = Double(txfBpm.text!) else {
+            return false
+        }
+        guard bpm >= 10 && bpm <= 400 else {
+            simpleAlert(self, message: "BPM은 10 - 400의 범위 내에서만 지정해야 합니다.", title: "만들 수 없음") { action in
+                self.txfBpm.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        // incomplete measure
+        guard let imBeat = Int(txfIncompleteMeasureBeat.text!) else {
+            return false
+        }
+        guard imBeat >= 0 && imBeat <= 7 else {
+            simpleAlert(self, message: "못갖춘마디는 16분음표에 해당하는 길이의 비트를 0 - 7 범위 내에서 지정해야 합니다.", title: "만들 수 없음") { action in
+                self.txfIncompleteMeasureBeat.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        // original artist, paper maker
+        guard txfOriginalArtist.text! != "" else {
+            simpleAlert(self, message: "아티스트 이름을 입력해야 합니다.", title: "만들 수 없음") { action in
+                self.txfOriginalArtist.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        guard txfOriginalArtist.text!.count <= 30 else {
+            simpleAlert(self, message: "아티스트 이름은 30자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+                self.txfOriginalArtist.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        guard txfPaperMaker.text!.count <= 30 else {
+            simpleAlert(self, message: "페이퍼 작성자 이름은 30자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+                self.txfPaperMaker.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        // comment
+        guard txvComment.text!.count <= 5000 else {
+            simpleAlert(self, message: "페이퍼 작성자 이름은 5000자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+                self.txvComment.becomeFirstResponder()
+            }
+            return false
+        }
+
+        return true
     }
 }
 
@@ -329,5 +441,21 @@ extension CreateNewPaperTableViewController: UIImagePickerControllerDelegate, UI
 }
 
 extension CreateNewPaperTableViewController: UITextFieldDelegate {
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case txfBpm:
+            let allowedCharacters = CharacterSet(charactersIn: "1234567890.")
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        case txfIncompleteMeasureBeat:
+            let allowedCharacters = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        default:
+            break
+        }
+        
+        return true
+    }
 }

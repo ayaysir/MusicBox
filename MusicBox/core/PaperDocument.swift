@@ -32,7 +32,17 @@ class PaperDocument: UIDocument {
             return
         }
         
-        guard let paper = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Paper.self, PaperCoord.self, Note.self, NSArray.self, NSString.self, NSNumber.self], from: data) as? Paper else {
+        let availableClasses: [AnyClass] = [
+            Paper.self,
+            PaperCoord.self,
+            Note.self,
+            NSArray.self,
+            NSString.self,
+            NSNumber.self,
+            NSData.self
+        ]
+        
+        guard let paper = try NSKeyedUnarchiver.unarchivedObject(ofClasses: availableClasses, from: data) as? Paper else {
             print("PaperDocument: Failed paper decoding")
             return
         }

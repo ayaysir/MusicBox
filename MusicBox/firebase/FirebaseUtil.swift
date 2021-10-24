@@ -46,3 +46,7 @@ func getFileAndSave(childRefSTr: String, fileSaveURL: URL, completeHandler: @esc
         completeHandler(fileSaveURL)
     }
 }
+
+func getDatabaseRef() -> DatabaseReference {
+    return Database.database().reference()
+}

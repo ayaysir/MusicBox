@@ -69,6 +69,10 @@ class MusicPaperViewController: UIViewController {
         "zapsplat_office_stapler_single_staple_into_paper_003_66591"
     ]
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
