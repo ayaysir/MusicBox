@@ -146,33 +146,18 @@ class MusicPaperViewController: UIViewController {
         
         saveDocument()
         
-//        let value = UIInterfaceOrientation.landscapeRight.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
+        // 초기 세로 위치 가운데로
+        let size = view.bounds.size
+        let yOffset = max(0, (size.height - constraintMusicPaperHeight.constant) / 2)
+        paperViewTopConstraint.constant = yOffset
+        paperViewBottomConstraint.constant = yOffset
         
+        let xOffset = max(0, (size.width - constraintMusicPaperWidth.constant) / 2)
+        paperViewLeadingConstraint.constant = xOffset
+        paperViewTrailingConstraint.constant = xOffset
         
+        view.layoutIfNeeded()
     }
-    
-    
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//
-//        print(UIDevice.current.orientation)
-//        if UIDevice.current.orientation.isLandscape {
-//            print("Landscape")
-//
-//        } else {
-//            print("Portrait")
-//        }
-//    }
-//
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return .landscape
-//    }
-//
-//
-//    override var shouldAutorotate: Bool {
-//        return false
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -180,6 +165,7 @@ class MusicPaperViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         saveDocument()
+        midiManager.midiPlayer?.stop()
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
@@ -348,6 +334,7 @@ extension MusicPaperViewController: UIScrollViewDelegate {
         paperViewTrailingConstraint.constant = xOffset
         
         view.layoutIfNeeded()
+        print("musicPaperView.frame.height", musicPaperView.frame)
     }
 }
 

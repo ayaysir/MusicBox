@@ -13,7 +13,6 @@
         <!--View Controller-->
         <scene sceneID="pby-su-6rn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eVd-Sb-lP4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="QYe-91-Mff" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ey-G3-aQp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -23,6 +22,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="recents" id="XnR-ab-qe9"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eVd-Sb-lP4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3528" y="-1681"/>
         </scene>
