@@ -306,18 +306,21 @@ class MusicPaperViewController: UIViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchedScreen))
         view.addGestureRecognizer(gestureRecognizer)
         touchedScreen(gestureRecognizer)
+        viewModePanelView.layer.cornerRadius = 10
+        
     }
     
     @objc func touchedScreen(_ sender: UITapGestureRecognizer) {
         
-        viewModePanelView.isHidden = false
-        UIView.animate(withDuration: 0.2) {
-            self.viewModePanelView.alpha = 1
-        }
-
+        print(#function)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            UIView.animate(withDuration: 0.2) {
+        viewModePanelView.isHidden = false
+        UIView.animate(withDuration: 0.4) {
+            self.viewModePanelView.alpha = 0.5
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            UIView.animate(withDuration: 0.4) {
                 self.viewModePanelView.alpha = 0
             } completion: { success in
                 self.viewModePanelView.isHidden = true
@@ -543,7 +546,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                     self.scrollView.zoomScale = newZoomScale
                 }
                 
-                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: .curveLinear, animations: { [unowned self] in
+                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: [.curveLinear, .allowUserInteraction], animations: { [unowned self] in
                     self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale
                 }, completion: { [unowned self]  position in
                     scrollView.zoomScale = lastScrollViewZoomScale
