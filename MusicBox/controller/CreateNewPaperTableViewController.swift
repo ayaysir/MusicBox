@@ -32,13 +32,28 @@ let noteRatio = [
     1
 ]
 
+let upperListTS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16]
+let lowerListTS = [2, 4, 8, 16]
+
 protocol CreateNewPaperVCDelegate: AnyObject {
     func didNewPaperCreated(_ controller: CreateNewPaperTableViewController, newPaper: Paper, fileNameWithoutExt: String)
 }
 
+protocol UpdateDocumentVCDelegate: AnyObject {
+    func didDocumentUpdated(_ controller: CreateNewPaperTableViewController, updatedDocument: PaperDocument)
+}
+
+enum PaperInfoPageMode {
+    case create, update
+}
+
 class CreateNewPaperTableViewController: UITableViewController {
     
-    weak var delegate: CreateNewPaperVCDelegate?
+    weak var createDelegate: CreateNewPaperVCDelegate?
+    weak var updateDelegate: UpdateDocumentVCDelegate?
+    
+    var pageMode: PaperInfoPageMode = .create
+    var document: PaperDocument?
     
     @IBOutlet weak var txfFileName: UITextField!
     @IBOutlet weak var txfTitle: UITextField!
@@ -55,16 +70,13 @@ class CreateNewPaperTableViewController: UITableViewController {
     @IBOutlet weak var pkvBpmNote: UIPickerView!
     @IBOutlet weak var pkvTimeSignature: UIPickerView!
     
-    var imagePickerController = UIImagePickerController()
+    @IBOutlet weak var btnSubmit: UIBarButtonItem!
     
-    let upperListTS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16]
-    let lowerListTS = [2, 4, 8, 16]
+    var imagePickerController = UIImagePickerController()
     
     var selectedUpperTS: Int = 4
     var selectedLowerTS: Int = 4
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,37 +91,82 @@ class CreateNewPaperTableViewController: UITableViewController {
         
         pkvBpmNote.delegate = self
         pkvBpmNote.dataSource = self
-        pkvBpmNote.selectRow(4, inComponent: 0, animated: false)
-        convertTempoWithLabelChange(tempo: 120, noteDivision: noteRatio[4])
         
         pkvTimeSignature.delegate = self
         pkvTimeSignature.dataSource = self
-        pkvTimeSignature.selectRow(2, inComponent: 0, animated: false)
-        pkvTimeSignature.selectRow(1, inComponent: 2, animated: false)
-
+        
         imagePickerController.delegate = self
         
-        txfBpm.delegate = self
         txfBpm.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
+        switch pageMode {
+        case .create:
+            
+            self.title = "Create a new paper"
+            btnSubmit.title = "Create"
+            
+            // BPM
+            pkvBpmNote.selectRow(4, inComponent: 0, animated: false)
+            convertTempoWithLabelChange(tempo: 120, noteDivision: noteRatio[4])
+            
+            // 박자
+            pkvTimeSignature.selectRow(2, inComponent: 0, animated: false)
+            pkvTimeSignature.selectRow(1, inComponent: 2, animated: false)
+            
+            // 기본 닉네임
+            if getCurrentUser() != nil, let userUID = getCurrentUserUID() {
+                SwiftSpinner.show("Load user's nickname...")
+                getDatabaseRef().child("users/\(userUID)/nickname").getData { error, snapshot in
+                    SwiftSpinner.hide(nil)
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    self.txfPaperMaker.text = (snapshot.value as? String)
+                }
+            }
+        case .update:
+            
+            self.title = "Update a paper"
+            btnSubmit.title = "Update"
+            
+            guard let paper = document?.paper else {
+                return
+            }
+
+            // BPM
+            pkvBpmNote.selectRow(4, inComponent: 0, animated: false)
+            convertTempoWithLabelChange(tempo: paper.bpm, noteDivision: noteRatio[4])
+            txfBpm.text = "\(paper.bpm)"
+            
+            // 박자
+            let upperIndex = upperListTS.firstIndex(of: paper.timeSignature.upper) ?? 2
+            let lowerIndex = lowerListTS.firstIndex(of: paper.timeSignature.lower) ?? 1
+            pkvTimeSignature.selectRow(upperIndex, inComponent: 0, animated: false)
+            pkvTimeSignature.selectRow(lowerIndex, inComponent: 2, animated: false)
+            
+            // 기존 정보
+            txfFileName.isEnabled = false
+            txfFileName.text = document?.fileURL.lastPathComponent.replacingOccurrences(of: ".musicbox", with: "")
+            txfTitle.text = paper.title
+            txfIncompleteMeasureBeat.text = "\(paper.incompleteMeasureBeat)"
+            txfOriginalArtist.text = paper.originalArtist
+            txfPaperMaker.text = paper.paperMaker
+            txvComment.text = paper.comment
+            
+            // 사진
+            if let imageData = paper.albumartImageData {
+                imgAlbumart.image = UIImage(data: imageData)
+            }
+        }
+        
+        // 섬네일 생성
         do {
             try thumbnailImage = resizeImage(image: imgAlbumart.image!, maxSize: 200)
         } catch  {
             print(error)
             thumbnailImage = imgAlbumart.image!
-        }
-        
-        if getCurrentUser() != nil, let userUID = getCurrentUserUID() {
-            SwiftSpinner.show("Load user's nickname...")
-            getDatabaseRef().child("users/\(userUID)/nickname").getData { error, snapshot in
-                SwiftSpinner.hide(nil)
-                
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-                self.txfPaperMaker.text = (snapshot.value as? String)
-            }
         }
     }
     
@@ -119,31 +176,37 @@ class CreateNewPaperTableViewController: UITableViewController {
     }
 
     @IBAction func btnActCreateNewPaper(_ sender: Any) {
-        if delegate != nil {
-            
-            // 유효성 검사
-            guard validateFieldValues() else {
+        
+        // 유효성 검사
+        guard validateFieldValues() else {
+            return
+        }
+        
+        guard let bpmStr = lblConvertedBPM.text,
+              let title = txfTitle.text,
+              let fileName = txfFileName.text,
+              let comment = txvComment.text,
+              let originalArtist = txfOriginalArtist.text,
+              let paperMaker = txfPaperMaker.text
+        else {
+            print("string is nil")
+            return
+        }
+        
+        guard let bpm = Double(bpmStr) else {
+            print("cannot convert string to integer.")
+            return
+        }
+        
+        let imBeat = Int(txfIncompleteMeasureBeat.text!) ?? 0
+        let timeSignature = TimeSignature(upper: selectedUpperTS, lower: selectedLowerTS)
+        
+        switch pageMode {
+        case .create:
+            guard let delegate = createDelegate else {
+                print("CreateNewPaperVCDelegate is nil.")
                 return
             }
-            
-            guard let bpmStr = lblConvertedBPM.text,
-                  let title = txfTitle.text,
-                  let fileName = txfFileName.text,
-                  let comment = txvComment.text,
-                  let originalArtist = txfOriginalArtist.text,
-                  let paperMaker = txfPaperMaker.text else {
-                      print("string is nil")
-                      return
-                  }
-            
-            guard let bpm = Double(bpmStr) else {
-                print("cannot convert string to integer.")
-                return
-            }
-            
-            let imBeat = Int(txfIncompleteMeasureBeat.text!) ?? 0
-            
-            let timeSignature = TimeSignature(upper: selectedUpperTS, lower: selectedLowerTS)
         
             let paper = Paper(bpm: bpm, coords: [], timeSignature: TimeSignature())
             
@@ -171,11 +234,51 @@ class CreateNewPaperTableViewController: UITableViewController {
                 paper.firebaseUID = firebaseUID
             }
              
-            delegate?.didNewPaperCreated(self, newPaper: paper, fileNameWithoutExt: fileName)
+            delegate.didNewPaperCreated(self, newPaper: paper, fileNameWithoutExt: fileName)
             
             self.navigationController?.popViewController(animated: true)
-        } else {
-            print("CreateNewPaperVCDelegate is nil.")
+
+        case .update:
+            guard let delegate = updateDelegate else {
+                print("UpdateDocumentVCDelegate is nil.")
+                return
+            }
+            
+            guard let document = document else {
+                return
+            }
+            
+            guard let paper = document.paper else {
+                return
+            }
+            
+            paper.title = title
+            paper.incompleteMeasureBeat = imBeat
+            paper.originalArtist = originalArtist
+            paper.paperMaker = paperMaker
+            paper.timeSignature = timeSignature
+            paper.comment = comment
+            
+            if let albumartImage = imgAlbumart.image {
+                do {
+                    let resized = try resizeImage(image: albumartImage, maxSize: 1020)
+                    paper.albumartImageData = resized.jpegData(compressionQuality: 1)
+                } catch {
+                    print(error)
+                }
+            }
+            
+            if let thumbnailImage = thumbnailImage {
+                paper.thumbnailImageData = thumbnailImage.jpegData(compressionQuality: 1)
+            }
+            
+            document.paper = paper
+            document.save(to: document.fileURL, for: .forOverwriting) { success in
+                simpleAlert(self, message: "정보 업데이트가 완료되었습니다.", title: "업데이트 완료") { action in
+                    delegate.didDocumentUpdated(self, updatedDocument: document)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         }
     }
     
@@ -186,11 +289,6 @@ class CreateNewPaperTableViewController: UITableViewController {
     @IBAction func btnActPhotoLibrary(_ sender: Any) {
         getPhotoFromLibrary()
     }
-    
-    
-//    @IBAction func btnActDismiss(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
     
     func convertTempoWithLabelChange(tempo: Double, noteDivision: Double) {
         let bpm = convertTempoToBaseQuarterNoteBPM(tempo: tempo, noteDivision: noteDivision)

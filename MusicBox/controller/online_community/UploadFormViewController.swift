@@ -258,18 +258,14 @@ extension UploadFormViewController: SelectAFileVCDelegate {
         selectAFileButtonView.isHidden = true
         self.selectedDocument = selectedDocument
         
-        if paper.title != "" {
-            txfPostTitle.text = paper.title
-        }
-        
-        if paper.comment != "" {
-            txvPostComment.text = paper.comment
-        }
+        txfPostTitle.text = paper.title
+        txvPostComment.text = paper.comment
         
         if midiManager.midiPlayer!.isPlaying {
             midiManager.midiPlayer?.stop()
         }
         
+        midiManager.currentBPM = paper.bpm
         let sequence = midiManager.convertPaperToMIDI(paperCoords: paper.coords)
         midiManager.musicSequence = sequence
         

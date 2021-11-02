@@ -27,3 +27,12 @@ class TextUtil {
         return String(array[num])
     }
 }
+
+func convertTimeToFormattedString(timeInterval interval: TimeInterval) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.unitsStyle = .positional
+    formatter.zeroFormattingBehavior = .pad
+
+    return formatter.string(from: TimeInterval(interval))!
+}

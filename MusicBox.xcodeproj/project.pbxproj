@@ -43,6 +43,7 @@
 		444D946F271727EB0090F587 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946E271727EA0090F587 /* UITextField+.swift */; };
 		444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9474271AF4FD0090F587 /* PostViewController.swift */; };
 		444D9479271B0A820090F587 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* TypeAliases.swift */; };
+		4450BCFD272706A000C21481 /* PaperInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */; };
 		44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */; };
 		44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5C271D906F00A0EF62 /* HeartButton.swift */; };
 		44558E5F271D94F300A0EF62 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5E271D94F300A0EF62 /* Like.swift */; };
@@ -155,6 +156,7 @@
 		444D946E271727EA0090F587 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		444D9474271AF4FD0090F587 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		444D9478271B0A820090F587 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfoTableViewController.swift; sourceTree = "<group>"; };
 		44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostViewController.swift; sourceTree = "<group>"; };
 		44558E5C271D906F00A0EF62 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		44558E5E271D94F300A0EF62 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
 				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
 				447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */,
+				4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				44AE993E2705DBE200D046D1 /* CGPoint+.swift in Sources */,
 				44AE99472705EA4700D046D1 /* PaperDocument.swift in Sources */,
 				44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */,
+				4450BCFD272706A000C21481 /* PaperInfoTableViewController.swift in Sources */,
 				444D94632711EF950090F587 /* PaperCoord.swift in Sources */,
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,

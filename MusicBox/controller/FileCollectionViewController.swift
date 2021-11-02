@@ -128,9 +128,17 @@ class FileCollectionViewController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PaperCreateWindowSegue" {
+        
+        switch segue.identifier {
+        case "PaperCreateWindowSegue":
             let vc = segue.destination as? CreateNewPaperTableViewController
-            vc?.delegate = self
+            vc?.createDelegate = self
+    
+        case "DetailPaperViewSegue":
+            let vc = segue.destination as? PaperInfoTableViewController
+            vc?.selectedDocument = (sender as? PaperDocument)
+        default:
+            break
         }
     }
 }
@@ -188,19 +196,7 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-            let musicPaperVC = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
-            
-            documents[indexPath.row].open { success in
-                if success {
-                    musicPaperVC.document = self.documents[indexPath.row]
-                    musicPaperVC.delegate = self
-                    self.present(musicPaperVC, animated: true, completion: nil)
-                } else {
-                    simpleAlert(self, message: "파일이 없거나 손상되었습니다.", title: "파일을 열 수 없음", handler: nil)
-                }
-            }
-            
-//        }
+        performSegue(withIdentifier: "DetailPaperViewSegue", sender: documents[indexPath.row])
     }
     
     // 사이즈 결정
