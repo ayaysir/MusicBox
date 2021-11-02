@@ -48,22 +48,7 @@ class PaperInfoTableViewController: UITableViewController {
     }
     
     @IBAction func btnActEditPaper(_ sender: Any) {
-        
-        guard let document = selectedDocument else {
-            return
-        }
-        
-        let musicPaperVC = mainStoryboard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
-        
-        document.open { success in
-            if success {
-                musicPaperVC.document = document
-                musicPaperVC.delegate = self
-                self.present(musicPaperVC, animated: true, completion: nil)
-            } else {
-                simpleAlert(self, message: "파일이 없거나 손상되었습니다.", title: "파일을 열 수 없음", handler: nil)
-            }
-        }
+        openPaper(mode: .edit)
     }
     
     @IBAction func btnActUpdatePaperinfo(_ sender: Any) {
@@ -88,7 +73,7 @@ class PaperInfoTableViewController: UITableViewController {
     }
     
     @IBAction func btnActListenPaper(_ sender: Any) {
-        
+        openPaper(mode: .view)
     }
     
     @IBAction func btnActDeleteFile(_ sender: Any) {
@@ -103,6 +88,25 @@ class PaperInfoTableViewController: UITableViewController {
                 print("midi play finished")
                 self.midiManager.midiPlayer?.currentPosition = 0
             })
+        }
+    }
+    
+    private func openPaper(mode: MusicPaperMode) {
+        guard let document = selectedDocument else {
+            return
+        }
+        
+        let musicPaperVC = mainStoryboard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
+        
+        document.open { success in
+            if success {
+                musicPaperVC.document = document
+                musicPaperVC.delegate = self
+                musicPaperVC.mode = mode
+                self.present(musicPaperVC, animated: true, completion: nil)
+            } else {
+                simpleAlert(self, message: "파일이 없거나 손상되었습니다.", title: "파일을 열 수 없음", handler: nil)
+            }
         }
     }
 }

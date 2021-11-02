@@ -7,15 +7,21 @@
 
 import UIKit
 import AVFoundation
+import SwiftSpinner
 
 protocol MusicPaperVCDelegate: AnyObject {
     func didPaperEditFinished(_ controller: MusicPaperViewController)
+}
+
+enum MusicPaperMode {
+    case edit, view
 }
 
 class MusicPaperViewController: UIViewController {
     
     var previousScale: CGFloat = 1.0
     
+    var mode: MusicPaperMode = .edit
     weak var delegate: MusicPaperVCDelegate?
 
     var player: AVAudioPlayer?
@@ -31,8 +37,9 @@ class MusicPaperViewController: UIViewController {
     @IBOutlet weak var paperViewTrailingConstraint: NSLayoutConstraint!
     
     var panelView: PaperOptionPanelView!
+    var viewModePanelView: PaperViewModePanelView!
     
-    var editMode: Bool = true
+    var allowEdit: Bool = true
     var eraserMode: Bool = false
     var snapToGridMode: Bool = true
     
@@ -92,8 +99,8 @@ class MusicPaperViewController: UIViewController {
         musicPaperView.data = paper.coords
         print("set coords array: \(musicPaperView.data.count) notes")
         
-        self.editMode = paper.isAllowOthersToEdit
-        print("EditMode", editMode, paper.isAllowOthersToEdit)
+        self.allowEdit = paper.isAllowOthersToEdit
+        print("EditMode", allowEdit, paper.isAllowOthersToEdit)
         
         util = MusicBoxUtil(highestNote: Note(note: .E, octave: 6), cellWidth: cst.cellWidth, cellHeight: cst.cellHeight, topMargin: cst.topMargin, leftMargin: cst.leftMargin)
         let rowNum = util.noteRange.count
@@ -108,9 +115,33 @@ class MusicPaperViewController: UIViewController {
         let paperMaker = document?.paper?.paperMaker ?? "Unknown"
         musicPaperView.setTexts(title: title, originalArtist: originalArtist, paperMaker: paperMaker)
         
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        self.musicPaperView.addGestureRecognizer(tapGesture)
+        switch mode {
+        case .edit:
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+            
+            if allowEdit {
+                self.musicPaperView.addGestureRecognizer(tapGesture)
+            }
+            
+            initPanel()
+            
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+                
+                guard let lastTouchedTimeInterval = self.lastTouchedTime?.timeIntervalSince1970 else {
+                    return
+                }
+                let currentTimeInterval = Date().timeIntervalSince1970
+                if self.touchTimeCheckMode && floor(currentTimeInterval) - floor(lastTouchedTimeInterval) >= 5 {
+                    print("터치되지 않은지 5초 경과")
+                    self.saveDocument()
+                    self.touchTimeCheckMode = false
+                }
+            })
+            
+            saveDocument()
+        case .view:
+            initViewModePanel()
+        }
         
         // PaperView 배경화면 설정
         if let patternImage = UIImage(named: "1. White paper with fibers") {
@@ -129,23 +160,6 @@ class MusicPaperViewController: UIViewController {
         midiManager = MIDIManager(soundbank: Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2"))
         midiManager.currentBPM = bpm
         
-        initPanel()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
-            
-            guard let lastTouchedTimeInterval = self.lastTouchedTime?.timeIntervalSince1970 else {
-                return
-            }
-            let currentTimeInterval = Date().timeIntervalSince1970
-            if self.touchTimeCheckMode && floor(currentTimeInterval) - floor(lastTouchedTimeInterval) >= 5 {
-                print("터치되지 않은지 5초 경과")
-                self.saveDocument()
-                self.touchTimeCheckMode = false
-            }
-        })
-        
-        saveDocument()
-        
         // 초기 세로 위치 가운데로
         let size = view.bounds.size
         let yOffset = max(0, (size.height - constraintMusicPaperHeight.constant) / 2)
@@ -157,6 +171,14 @@ class MusicPaperViewController: UIViewController {
         paperViewTrailingConstraint.constant = xOffset
         
         view.layoutIfNeeded()
+        
+        if mode == .view {
+            SwiftSpinner.show("재생 준비중입니다.")
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                SwiftSpinner.hide(nil)
+                self.playSequence()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -170,8 +192,13 @@ class MusicPaperViewController: UIViewController {
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
         
-        guard editMode else {
+        guard allowEdit else {
             print("edit not allowed")
+            return
+        }
+        
+        guard mode == .edit else {
+            print("View mode")
             return
         }
         
@@ -223,10 +250,10 @@ class MusicPaperViewController: UIViewController {
         touchTimeCheckMode = true
     }
     
-    func initPanel() {
+    private func initPanel() {
         
         panelView = PaperOptionPanelView()
-        panelView.setEditMode(editMode)
+        panelView.setEditMode(allowEdit)
         panelView.delegate = self
         panelView.clipsToBounds = true
         view.addSubview(panelView)
@@ -259,6 +286,43 @@ class MusicPaperViewController: UIViewController {
             panelView.txtIncompleteMeasure.text = String(imBeat)
         }
         
+    }
+    
+    private func initViewModePanel() {
+        
+        viewModePanelView = PaperViewModePanelView()
+        viewModePanelView.clipsToBounds = true
+        viewModePanelView.delegate = self
+        view.addSubview(viewModePanelView)
+        
+        viewModePanelView.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewModePanelView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120).isActive = true
+        viewModePanelView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50).isActive = true
+        
+        viewModePanelView.widthAnchor.constraint(equalToConstant: 68).isActive = true
+        viewModePanelView.heightAnchor.constraint(equalToConstant: 99).isActive = true
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchedScreen))
+        view.addGestureRecognizer(gestureRecognizer)
+        touchedScreen(gestureRecognizer)
+    }
+    
+    @objc func touchedScreen(_ sender: UITapGestureRecognizer) {
+        
+        viewModePanelView.isHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.viewModePanelView.alpha = 1
+        }
+
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            UIView.animate(withDuration: 0.2) {
+                self.viewModePanelView.alpha = 0
+            } completion: { success in
+                self.viewModePanelView.isHidden = true
+            }
+        }
     }
     
     func pullPanel() {
@@ -364,12 +428,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedBackToMain(_ view: UIView) {
-        
-        saveDocument()
-        if delegate != nil {
-            delegate!.didPaperEditFinished(self)
-        }
-        self.dismiss(animated: true, completion: nil)
+        backToMain()
     }
     
     func didClickedSetting(_ view: UIView) {
@@ -391,69 +450,18 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedPlaySequence(_ view: UIView) {
-        if midiManager.midiPlayer!.isPlaying {
-            if propertyAnimator.isRunning {
-                propertyAnimator.stopAnimation(true)
-                scrollView.zoomScale = lastScrollViewZoomScale
-                scrollView.setContentOffset(lastScrollViewOffset, animated: false)
-            }
-            midiManager.midiPlayer?.stop()
-        } else {
-            let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
-            midiManager.musicSequence = sequence
-            midiManager.midiPlayer?.play({
-                print("midi play finished")
-            })
-            
-            guard let duration = midiManager.midiPlayer?.duration else {
-                return
-            }
-            
-            let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
-                max(partialResult, coord.gridX)
-            }
-            
-            let endGridX = maxGridX * cst.cellWidth + cst.leftMargin
-            
-            lastScrollViewOffset = scrollView.contentOffset
-            lastScrollViewZoomScale = scrollView.zoomScale
-            
-            guard let coords = document?.paper?.coords else {
-                return
-            }
-            var playbackData = coords
-            
-            playbackData.sort(by: { p1, p2 in
-                p1.gridX < p2.gridX
-            })
-            
-            DispatchQueue.main.async {
-                self.scrollView.contentOffset.x = 0
-                let newZoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
-                if self.scrollView.zoomScale >= newZoomScale {
-                    self.scrollView.zoomScale = newZoomScale
-                }
-                
-                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: .curveLinear, animations: { [unowned self] in
-                    self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale
-                }, completion: { [unowned self]  position in
-                    scrollView.zoomScale = lastScrollViewZoomScale
-                    scrollView.setContentOffset(lastScrollViewOffset, animated: false)
-                })
-                
-            }
-        }
+        playSequence()
     }
     
     func didClickedResetPaper(_ view: UIView) {
-        if editMode {
+        if allowEdit {
             musicPaperView.data = []
         }
         
     }
     
     func didClickedUndo(_ view: UIView) {
-        if editMode && musicPaperView.data.count >= 1 {
+        if allowEdit && musicPaperView.data.count >= 1 {
             musicPaperView.data.removeLast()
         }
         
@@ -463,7 +471,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         saveDocument()
     }
     
-    func saveDocument() {
+    private func saveDocument() {
         let filemgr = FileManager.default
     
         guard let document = document else { return }
@@ -481,4 +489,79 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         }
         
     }
+    
+    private func backToMain() {
+        saveDocument()
+        if delegate != nil {
+            delegate!.didPaperEditFinished(self)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func playSequence() {
+        if midiManager.midiPlayer!.isPlaying {
+            if propertyAnimator.isRunning {
+                propertyAnimator.stopAnimation(true)
+                scrollView.zoomScale = lastScrollViewZoomScale
+                scrollView.setContentOffset(lastScrollViewOffset, animated: false)
+            }
+            midiManager.midiPlayer?.stop()
+        } else {
+            let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+            midiManager.musicSequence = sequence
+            midiManager.midiPlayer?.play({
+                print("midi play finished")
+            })
+            
+            DispatchQueue.main.async { [self] in
+                
+                guard let duration = midiManager.midiPlayer?.duration else {
+                    return
+                }
+                
+                let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
+                    max(partialResult, coord.gridX)
+                }
+                
+                let endGridX = maxGridX * cst.cellWidth + cst.leftMargin
+                
+                lastScrollViewOffset = scrollView.contentOffset
+                lastScrollViewZoomScale = scrollView.zoomScale
+                
+                guard let coords = document?.paper?.coords else {
+                    return
+                }
+                var playbackData = coords
+                
+                playbackData.sort(by: { p1, p2 in
+                    p1.gridX < p2.gridX
+                })
+                
+                self.scrollView.contentOffset.x = 0
+                let newZoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
+                if self.scrollView.zoomScale >= newZoomScale {
+                    self.scrollView.zoomScale = newZoomScale
+                }
+                
+                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: .curveLinear, animations: { [unowned self] in
+                    self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale
+                }, completion: { [unowned self]  position in
+                    scrollView.zoomScale = lastScrollViewZoomScale
+                    scrollView.setContentOffset(lastScrollViewOffset, animated: false)
+                })
+            }
+        }
+    }
+}
+
+extension MusicPaperViewController: PaperViewModePanelViewDelegate {
+    func didPlayButtonClicked(_ view: PaperViewModePanelView) {
+        playSequence()
+    }
+    
+    func didBackToMainClicked(_ view: PaperViewModePanelView) {
+        backToMain()
+    }
+    
+    
 }

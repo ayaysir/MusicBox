@@ -44,6 +44,8 @@
 		444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9474271AF4FD0090F587 /* PostViewController.swift */; };
 		444D9479271B0A820090F587 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* TypeAliases.swift */; };
 		4450BCFD272706A000C21481 /* PaperInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */; };
+		4450BCFF2731473800C21481 /* PaperViewModePanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4450BCFE2731473800C21481 /* PaperViewModePanelView.xib */; };
+		4450BD012731487500C21481 /* PaperViewModePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450BD002731487500C21481 /* PaperViewModePanelView.swift */; };
 		44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */; };
 		44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5C271D906F00A0EF62 /* HeartButton.swift */; };
 		44558E5F271D94F300A0EF62 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5E271D94F300A0EF62 /* Like.swift */; };
@@ -157,6 +159,8 @@
 		444D9474271AF4FD0090F587 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		444D9478271B0A820090F587 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfoTableViewController.swift; sourceTree = "<group>"; };
+		4450BCFE2731473800C21481 /* PaperViewModePanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperViewModePanelView.xib; sourceTree = "<group>"; };
+		4450BD002731487500C21481 /* PaperViewModePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewModePanelView.swift; sourceTree = "<group>"; };
 		44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostViewController.swift; sourceTree = "<group>"; };
 		44558E5C271D906F00A0EF62 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		44558E5E271D94F300A0EF62 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
@@ -356,6 +360,8 @@
 				44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */,
 				44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */,
 				44558E5C271D906F00A0EF62 /* HeartButton.swift */,
+				4450BCFE2731473800C21481 /* PaperViewModePanelView.xib */,
+				4450BD002731487500C21481 /* PaperViewModePanelView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -683,6 +689,7 @@
 				44F3A03A26FF72FA000CE46F /* .gitignore in Resources */,
 				44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */,
 				44A98B292703031800AE8B25 /* blank.musicbox in Resources */,
+				4450BCFF2731473800C21481 /* PaperViewModePanelView.xib in Resources */,
 				447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -821,6 +828,7 @@
 				44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */,
 				4450BCFD272706A000C21481 /* PaperInfoTableViewController.swift in Sources */,
 				444D94632711EF950090F587 /* PaperCoord.swift in Sources */,
+				4450BD012731487500C21481 /* PaperViewModePanelView.swift in Sources */,
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
