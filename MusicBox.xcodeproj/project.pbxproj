@@ -16,11 +16,13 @@
 		4405E97726FB77B60012E4F5 /* MIDIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4405E97626FB77B60012E4F5 /* MIDIManager.swift */; };
 		4405E97A26FB798D0012E4F5 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4405E97926FB798D0012E4F5 /* AudioKit */; };
 		440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */; };
-		440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */; };
-		440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */; };
+		440A1A2E26ECC0A000AA4135 /* OldSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */; };
+		440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */; };
 		440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */; };
 		4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417C7B027034C690086FECA /* NSCodingExample.swift */; };
 		4417C7B32703709F0086FECA /* ss.ccc in Resources */ = {isa = PBXBuildFile; fileRef = 4417C7B22703709F0086FECA /* ss.ccc */; };
+		44457929273251FD00F9A823 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457928273251FD00F9A823 /* SignInViewController.swift */; };
+		4445792B2732575B00F9A823 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445792A2732575B00F9A823 /* AuthNavigationController.swift */; };
 		444AF39E2701E26400BD8E38 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF39D2701E26400BD8E38 /* HomeViewController.swift */; };
 		444AF3A12701E35100BD8E38 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF3A02701E35100BD8E38 /* DocumentBrowserViewController.swift */; };
 		444AF3A42701E5BC00BD8E38 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF3A22701E5BB00BD8E38 /* DocumentViewController.swift */; };
@@ -131,11 +133,13 @@
 		4405E97326F785350012E4F5 /* ImageWithName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithName.swift; sourceTree = "<group>"; };
 		4405E97626FB77B60012E4F5 /* MIDIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIManager.swift; sourceTree = "<group>"; };
 		440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSignUpViewController.swift; sourceTree = "<group>"; };
+		440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSignInViewController.swift; sourceTree = "<group>"; };
 		440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
 		4417C7B027034C690086FECA /* NSCodingExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCodingExample.swift; sourceTree = "<group>"; };
 		4417C7B22703709F0086FECA /* ss.ccc */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ss.ccc; sourceTree = "<group>"; };
+		44457928273251FD00F9A823 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		4445792A2732575B00F9A823 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
 		444AF39D2701E26400BD8E38 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		444AF3A02701E35100BD8E38 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		444AF3A22701E5BB00BD8E38 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
@@ -303,14 +307,16 @@
 		444D94582711DB070090F587 /* online_community */ = {
 			isa = PBXGroup;
 			children = (
-				440A1A2D26ECC0A000AA4135 /* SignUpViewController.swift */,
-				440A1A2F26ECC0B100AA4135 /* SignInViewController.swift */,
+				440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */,
+				440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */,
 				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
 				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
 				444D944B270F32670090F587 /* PostPageViewController.swift */,
 				444D94592711DB550090F587 /* UploadFormViewController.swift */,
 				444D9474271AF4FD0090F587 /* PostViewController.swift */,
 				44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */,
+				44457928273251FD00F9A823 /* SignInViewController.swift */,
+				4445792A2732575B00F9A823 /* AuthNavigationController.swift */,
 			);
 			path = online_community;
 			sourceTree = "<group>";
@@ -818,6 +824,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44457929273251FD00F9A823 /* SignInViewController.swift in Sources */,
 				444AF3A12701E35100BD8E38 /* DocumentBrowserViewController.swift in Sources */,
 				44F3A03D2700A40A000CE46F /* ENSideMenu.swift in Sources */,
 				444D94552711C95F0090F587 /* LoadMusicboxFileList.swift in Sources */,
@@ -831,6 +838,7 @@
 				4450BD012731487500C21481 /* PaperViewModePanelView.swift in Sources */,
 				44E682ED26EA46320074FE46 /* ViewController.swift in Sources */,
 				4405E97026F780D00012E4F5 /* FirebaseFileManager.swift in Sources */,
+				4445792B2732575B00F9A823 /* AuthNavigationController.swift in Sources */,
 				44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */,
 				444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */,
 				44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */,
@@ -855,7 +863,7 @@
 				444D945A2711DB550090F587 /* UploadFormViewController.swift in Sources */,
 				44558E5F271D94F300A0EF62 /* Like.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* Paper.swift in Sources */,
-				440A1A2E26ECC0A000AA4135 /* SignUpViewController.swift in Sources */,
+				440A1A2E26ECC0A000AA4135 /* OldSignUpViewController.swift in Sources */,
 				444D946B2714787B0090F587 /* ImageManager.swift in Sources */,
 				444D9467271328F70090F587 /* UIButton+.swift in Sources */,
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
@@ -870,7 +878,7 @@
 				44F3A03126FE121A000CE46F /* MidiManager+Sequence.swift in Sources */,
 				449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */,
 				44AE99452705E9B600D046D1 /* DemoOfNSCodingAndUIDocument.swift in Sources */,
-				440A1A3026ECC0B100AA4135 /* SignInViewController.swift in Sources */,
+				440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */,
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
 				444D94602711EE170090F587 /* Post.swift in Sources */,

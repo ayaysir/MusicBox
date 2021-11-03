@@ -12,11 +12,11 @@ import SwiftSpinner
 import Kingfisher
 
 protocol SignUpDelegate: AnyObject {
-    func didSignUpSuccess (_ controller: SignUpViewController, isSuccess: Bool, uid: String)
-    func didUpdateUserInfoSuccess (_ controller: SignUpViewController, isSuccess: Bool)
+    func didSignUpSuccess (_ controller: OldSignUpViewController, isSuccess: Bool, uid: String)
+    func didUpdateUserInfoSuccess (_ controller: OldSignUpViewController, isSuccess: Bool)
 }
 
-class SignUpViewController: UIViewController {
+class OldSignUpViewController: UIViewController {
     
     @IBOutlet weak var lblPageTitle: UILabel!
     
@@ -412,7 +412,7 @@ class SignUpViewController: UIViewController {
     
 }
 
-extension SignUpViewController {
+extension OldSignUpViewController {
     
     func startUploading(images: [ImageWithName], childRefPath: String, completion: @escaping FileCompletionBlock) {
         if images.count == 0 {
@@ -456,7 +456,7 @@ extension SignUpViewController {
     }
 }
 
-extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension OldSignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     // 컴포넌트(열) 개수
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -478,7 +478,7 @@ extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-extension SignUpViewController: UITextFieldDelegate {
+extension OldSignUpViewController: UITextFieldDelegate {
     
     func setLabelPasswordConfirm(_ password: String, _ passwordConfirm: String)  {
         
@@ -524,7 +524,7 @@ extension SignUpViewController: UITextFieldDelegate {
     }
 }
 
-extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension OldSignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /*
      var imagePickerController = UIImagePickerController()
