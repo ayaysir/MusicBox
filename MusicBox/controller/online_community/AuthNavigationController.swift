@@ -9,8 +9,6 @@ import UIKit
 import Firebase
 
 class AuthNavigationController: UINavigationController {
-    
-    let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +16,7 @@ class AuthNavigationController: UINavigationController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if Auth.auth().currentUser != nil {
-            let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
-            setViewControllers([memberVC], animated: false)
-        } else {
-            let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
-            setViewControllers([loginVC], animated: false)
-        }
+        
     }
     
 

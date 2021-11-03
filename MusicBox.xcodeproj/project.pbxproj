@@ -44,7 +44,7 @@
 		444D946B2714787B0090F587 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946A2714787B0090F587 /* ImageManager.swift */; };
 		444D946F271727EB0090F587 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D946E271727EA0090F587 /* UITextField+.swift */; };
 		444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9474271AF4FD0090F587 /* PostViewController.swift */; };
-		444D9479271B0A820090F587 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* TypeAliases.swift */; };
+		444D9479271B0A820090F587 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D9478271B0A820090F587 /* GlobalVariables.swift */; };
 		4450BCFD272706A000C21481 /* PaperInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */; };
 		4450BCFF2731473800C21481 /* PaperViewModePanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4450BCFE2731473800C21481 /* PaperViewModePanelView.xib */; };
 		4450BD012731487500C21481 /* PaperViewModePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4450BD002731487500C21481 /* PaperViewModePanelView.swift */; };
@@ -78,6 +78,7 @@
 		44AE995027071EA100D046D1 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 44AE994F27071EA100D046D1 /* PanModal */; };
 		44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */; };
 		44B18C3226EF7FF900890C13 /* Paper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B18C3126EF7FF900890C13 /* Paper.swift */; };
+		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -161,7 +162,7 @@
 		444D946A2714787B0090F587 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		444D946E271727EA0090F587 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		444D9474271AF4FD0090F587 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		444D9478271B0A820090F587 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		444D9478271B0A820090F587 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfoTableViewController.swift; sourceTree = "<group>"; };
 		4450BCFE2731473800C21481 /* PaperViewModePanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperViewModePanelView.xib; sourceTree = "<group>"; };
 		4450BD002731487500C21481 /* PaperViewModePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewModePanelView.swift; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 		44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCollectionViewController.swift; sourceTree = "<group>"; };
 		44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPaperViewController.swift; sourceTree = "<group>"; };
 		44B18C3126EF7FF900890C13 /* Paper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paper.swift; sourceTree = "<group>"; };
+		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,8 +309,6 @@
 		444D94582711DB070090F587 /* online_community */ = {
 			isa = PBXGroup;
 			children = (
-				440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */,
-				440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */,
 				440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */,
 				444D9449270DF24F0090F587 /* UserCommunityViewController.swift */,
 				444D944B270F32670090F587 /* PostPageViewController.swift */,
@@ -317,6 +317,7 @@
 				44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */,
 				44457928273251FD00F9A823 /* SignInViewController.swift */,
 				4445792A2732575B00F9A823 /* AuthNavigationController.swift */,
+				44C1BA402732B28300543A74 /* SignUpTableViewController.swift */,
 			);
 			path = online_community;
 			sourceTree = "<group>";
@@ -432,6 +433,8 @@
 				444AF39F2701E33000BD8E38 /* document */,
 				44AE99442705E9B600D046D1 /* DemoOfNSCodingAndUIDocument.swift */,
 				44AE99482705EB5400D046D1 /* MIDISequenceExample.swift */,
+				440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */,
+				440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */,
 				4417C7B027034C690086FECA /* NSCodingExample.swift */,
 			);
 			path = misc;
@@ -490,7 +493,7 @@
 				440A1A2826EA48DE00AA4135 /* GoogleService-Info.plist */,
 				44E682F326EA46340074FE46 /* LaunchScreen.storyboard */,
 				44E682F626EA46340074FE46 /* Info.plist */,
-				444D9478271B0A820090F587 /* TypeAliases.swift */,
+				444D9478271B0A820090F587 /* GlobalVariables.swift */,
 			);
 			path = MusicBox;
 			sourceTree = "<group>";
@@ -871,6 +874,7 @@
 				447E117027231AB200931B8C /* BPMConverter.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
 				44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */,
+				44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */,
 				444D944E27105D960090F587 /* Checkbox.swift in Sources */,
 				444D945D2711E39C0090F587 /* FirebaseUtil.swift in Sources */,
 				449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */,
@@ -889,7 +893,7 @@
 				4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */,
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,
 				4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */,
-				444D9479271B0A820090F587 /* TypeAliases.swift in Sources */,
+				444D9479271B0A820090F587 /* GlobalVariables.swift in Sources */,
 				44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

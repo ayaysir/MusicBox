@@ -1,8 +1,8 @@
 //
-//  SignUpViewController.swift
+//  SignUpTableViewController.swift
 //  MusicBox
 //
-//  Created by yoonbumtae on 2021/09/11.
+//  Created by yoonbumtae on 2021/11/03.
 //
 
 import UIKit
@@ -11,18 +11,27 @@ import Photos
 import SwiftSpinner
 import Kingfisher
 
-protocol SignUpDelegate: AnyObject {
-    func didSignUpSuccess (_ controller: OldSignUpViewController, isSuccess: Bool, uid: String)
-    func didUpdateUserInfoSuccess (_ controller: OldSignUpViewController, isSuccess: Bool)
+let interestingList = ["Pop", "Classical", "Soundtrack", "Rock", "Hiphop", "R&B", "Alternative", "Jazz"]
+let availableImageExtList = ["png", "jpg", "jpeg", "gif"]
+
+enum SignUpPageMode: String {
+    case signUpMode, updateMode
 }
 
-class OldSignUpViewController: UIViewController {
-    
-    @IBOutlet weak var lblPageTitle: UILabel!
-    
-    @IBOutlet weak var txtUserEmail: UITextField!
-    @IBOutlet weak var txtPassword: UITextField!
-    @IBOutlet weak var txtPasswordConfirm: UITextField!
+protocol SignUpDelegate: AnyObject {
+    func didSignUpSuccess (_ controller: SignUpTableViewController, isSuccess: Bool, uid: String)
+    func didUpdateUserInfoSuccess (_ controller: SignUpTableViewController, isSuccess: Bool)
+}
+
+protocol ResignMemberDelegate: AnyObject {
+    func didResignSuccess(_ controller: SignUpTableViewController)
+}
+
+class SignUpTableViewController: UITableViewController {
+
+    @IBOutlet weak var txfUserEmail: UITextField!
+    @IBOutlet weak var txfPassword: UITextField!
+    @IBOutlet weak var txfPasswordConfirm: UITextField!
     @IBOutlet weak var lblPasswordConfirmed: UILabel!
     @IBOutlet weak var txfNickname: UITextField!
     @IBOutlet weak var pkvInteresting: UIPickerView!
@@ -39,21 +48,17 @@ class OldSignUpViewController: UIViewController {
     private var userImage: UIImage?
     
     weak var delegate: SignUpDelegate?
+    weak var resignDelegate: ResignMemberDelegate?
     var pageMode: SignUpPageMode = .signUpMode
     
     var ref = Database.database().reference()
     var storageRef = Storage.storage().reference()
     
-    let interestingList = ["Pop", "Classical", "Soundtrack", "Rock", "Hiphop", "R&B", "Alternative", "Jazz"]
     var selectedInteresting: String!
     
     var imagePickerController = UIImagePickerController()
     var userProfileThumbnail: UIImage!
     
-    var availableImageExtList = ["png", "jpg", "jpeg", "gif"]
-    
-    /// Here is the completion block
-    typealias FileCompletionBlock = () -> Void
     var block: FileCompletionBlock?
     
     override func viewDidLoad() {
@@ -66,7 +71,7 @@ class OldSignUpViewController: UIViewController {
         }
         
         // 모드에 따라 제목 변경
-        lblPageTitle.text = pageMode == .signUpMode ? "Sign Up" : "Update User Information"
+        self.title = pageMode == .signUpMode ? "Sign Up" : "Update User Information"
         
         // 피커뷰 딜리게이트, 데이터소스 연결
         pkvInteresting.delegate = self
@@ -75,9 +80,9 @@ class OldSignUpViewController: UIViewController {
         // 사진: 이미지 피커에 딜리게이트 생성
         imagePickerController.delegate = self
         
-        txtUserEmail.delegate = self
-        txtPassword.delegate = self
-        txtPasswordConfirm.delegate = self
+        txfUserEmail.delegate = self
+        txfPassword.delegate = self
+        txfPasswordConfirm.delegate = self
         
         lblPasswordConfirmed.text = ""
         
@@ -88,7 +93,7 @@ class OldSignUpViewController: UIViewController {
             btnWithdrawMember.isHidden = true
             
         case .updateMode:
-        
+            
             btnWithdrawMember.isHidden = false
             btnSubmitInfo.setTitle("Update", for: .normal)
             
@@ -96,6 +101,133 @@ class OldSignUpViewController: UIViewController {
         }
     }
     
+    @IBAction func btnActCancel(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func btnActReset(_ sender: UIButton) {
+        
+        txfPassword.text = ""
+        txfPasswordConfirm.text = ""
+        lblPasswordConfirmed.text = ""
+        
+        switch pageMode {
+        case .signUpMode:
+            txfUserEmail.text = ""
+            txfNickname.text = ""
+            pkvInteresting.selectRow(0, inComponent: 0, animated: false)
+            selectedInteresting = interestingList[0]
+            // -- 사진 초기화 --
+            imgProfilePicture.image = UIImage(named: "sample")
+        case .updateMode:
+            txfNickname.text = userNickname
+            pkvInteresting.selectRow(userInterestingIndex ?? 0, inComponent: 0, animated: true)
+            selectedInteresting = userInterestingStr ?? interestingList[0]
+            imgProfilePicture.image = userImage
+        }
+        
+    }
+    
+    @IBAction func btnActSubmit(_ sender: UIButton) {
+        
+        switch pageMode {
+        case .signUpMode:
+            guard let userEmail = txfUserEmail.text,
+                  let userPassword = txfPassword.text,
+                  let userPasswordConfirm = txfPasswordConfirm.text else {
+                return
+            }
+            
+            guard userPassword != ""
+                    && userPasswordConfirm != ""
+                    && userPassword == userPasswordConfirm else {
+                simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+                return
+            }
+            
+            sendInfoToFirebase(withEmail: userEmail, password: userPassword)
+        case .updateMode:
+            guard let user = getCurrentUser() else {
+                return
+            }
+            guard let newPassword = txfPassword.text,
+                  let newPasswordConfirm = txfPasswordConfirm.text else {
+                      return
+                  }
+            
+            // 비빌번호를 두 쪽 다 입력한 때
+            if newPassword != "" || newPasswordConfirm != "" {
+                guard newPassword == newPasswordConfirm else {
+                    simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+                    return
+                }
+                sendInfoToFirebase(withEmail: user.email!, password: newPassword)
+            } else {
+                // 비밀번호가 입력되지 않은 때
+                sendInfoToFirebaseOnlyAdditionalInfo()
+            }
+        }
+    }
+    
+    @IBAction func btnActWithdrawal(_ sender: Any) {
+        guard pageMode == .updateMode else {
+            return
+        }
+        
+        simpleDestructiveYesAndNo(self, message: "정말 탈퇴하시겠습니까? 탈퇴하면 회원정보가 삭제되며 복구할 수 없습니다. 작성 글은 삭제되지 않습니다.", title: "회원 탈퇴") { action in
+            
+            guard let user = Auth.auth().currentUser else {
+                return
+            }
+            
+            self.ref.child("users/\(user.uid)").removeValue { error, ref in
+                SwiftSpinner.show("회원탈퇴를 진행중입니다...")
+                if let error = error {
+                    print("userinfo delete failed:", error.localizedDescription)
+                }
+                
+                self.storageRef.child("images/users/\(user.uid)").delete { error in
+                    if let error = error {
+                        print("Image delete failed:", error.localizedDescription)
+                    }
+                    
+                    user.delete { error in
+                        print("deleting user information:", user.uid)
+                        
+                        if let error = error {
+                            // An error happened.
+                            SwiftSpinner.hide(nil)
+                            simpleAlert(self, message: error.localizedDescription)
+                            return
+                        } else {
+                            // Account deleted.
+                            SwiftSpinner.hide {
+//                                self.dismiss(animated: true, completion: nil)
+                                self.navigationController?.popViewController(animated: true)
+                                if let resignDelegate = self.resignDelegate {
+                                    resignDelegate.didResignSuccess(self)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func btnActTakePhoto(_ sender: UIButton) {
+        takePhoto()
+    }
+    
+    @IBAction func btnActFromLoadPhoto(_ sender: UIButton) {
+        getPhotoFromLibrary()
+    }
+
+}
+
+// MARK: - Firebase Method
+
+extension SignUpTableViewController {
     func sendVerificationMail(authUser: User?) {
         if authUser != nil && authUser!.isEmailVerified == false {
             SwiftSpinner.show("인증 이메일을 전송하고 있습니다...")
@@ -228,8 +360,8 @@ class OldSignUpViewController: UIViewController {
                 return
             }
             
-            txtUserEmail.text = user.email
-            txtUserEmail.isEnabled = false
+            txfUserEmail.text = user.email
+            txfUserEmail.isEnabled = false
             
             ref.child("users/\(userUID)").getData { error, snapshot in
                 if let error = error {
@@ -241,7 +373,7 @@ class OldSignUpViewController: UIViewController {
                     let dict = snapshot.value as? [String: String]
                     
                     if let interesting = dict["interesting"] as? String {
-                        let index = self.interestingList.firstIndex(of: interesting) ?? 0
+                        let index = interestingList.firstIndex(of: interesting) ?? 0
                         self.pkvInteresting.selectRow(index, inComponent: 0, animated: true)
                         self.selectedInteresting = interesting
                         
@@ -271,148 +403,30 @@ class OldSignUpViewController: UIViewController {
             }
         }
     }
+}
+
+// MARK: - Image Upload
+
+extension SignUpTableViewController {
     
     func uploadUserProfileImage(images: [ImageWithName], user: User) {
         startUploading(images: images, childRefPath: "images/users") {
             
             SwiftSpinner.hide(nil)
             
-            simpleAlert(self, message: "\(user.email!) 님의 \(self.pageMode.rawValue) 완료되었습니다.", title: "완료") { action in
-                self.dismiss(animated: true, completion: nil)
+            let attachText = self.pageMode == .signUpMode ? "회원가입이" : "회원정보 업데이트가"
+            
+            simpleAlert(self, message: "\(user.email!) 님의 \(attachText) 완료되었습니다.", title: "완료") { action in
+
+                self.navigationController?.popViewController(animated: true)
                 if self.delegate != nil {
                     self.delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
                 }
-            }
-        }
-    }
-    
-    @IBAction func btnActCancel(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func btnActReset(_ sender: UIButton) {
-        
-        txtPassword.text = ""
-        txtPasswordConfirm.text = ""
-        lblPasswordConfirmed.text = ""
-        
-        switch pageMode {
-        case .signUpMode:
-            txtUserEmail.text = ""
-            txfNickname.text = ""
-            pkvInteresting.selectRow(0, inComponent: 0, animated: false)
-            selectedInteresting = interestingList[0]
-            // -- 사진 초기화 --
-            imgProfilePicture.image = UIImage(named: "sample")
-        case .updateMode:
-            txfNickname.text = userNickname
-            pkvInteresting.selectRow(userInterestingIndex ?? 0, inComponent: 0, animated: true)
-            selectedInteresting = userInterestingStr ?? interestingList[0]
-            imgProfilePicture.image = userImage
-        }
-        
-    }
-    
-    @IBAction func btnActSubmit(_ sender: UIButton) {
-        
-        switch pageMode {
-        case .signUpMode:
-            guard let userEmail = txtUserEmail.text,
-                  let userPassword = txtPassword.text,
-                  let userPasswordConfirm = txtPasswordConfirm.text else {
-                return
-            }
-            
-            guard userPassword != ""
-                    && userPasswordConfirm != ""
-                    && userPassword == userPasswordConfirm else {
-                simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
-                return
-            }
-            
-            sendInfoToFirebase(withEmail: userEmail, password: userPassword)
-        case .updateMode:
-            guard let user = getCurrentUser() else {
-                return
-            }
-            guard let newPassword = txtPassword.text,
-                  let newPasswordConfirm = txtPasswordConfirm.text else {
-                      return
-                  }
-            
-            // 비빌번호를 두 쪽 다 입력한 때
-            if newPassword != "" || newPasswordConfirm != "" {
-                guard newPassword == newPasswordConfirm else {
-                    simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
-                    return
-                }
-                sendInfoToFirebase(withEmail: user.email!, password: newPassword)
-            } else {
-                // 비밀번호가 입력되지 않은 때
-                sendInfoToFirebaseOnlyAdditionalInfo()
-            }
-        }
-    }
-    
-    @IBAction func btnActWithdrawal(_ sender: Any) {
-        guard pageMode == .updateMode else {
-            return
-        }
-        
-        simpleDestructiveYesAndNo(self, message: "정말 탈퇴하시겠습니까? 탈퇴하면 회원정보가 삭제되며 복구할 수 없습니다. 작성 글은 삭제되지 않습니다.", title: "회원 탈퇴") { action in
-            
-            guard let user = Auth.auth().currentUser else {
-                return
-            }
-            
-            self.ref.child("users/\(user.uid)").removeValue { error, ref in
-                SwiftSpinner.show("회원탈퇴를 진행중입니다...")
-                if let error = error {
-                    print("userinfo delete failed:", error.localizedDescription)
-                }
                 
-                self.storageRef.child("images/users/\(user.uid)").delete { error in
-                    if let error = error {
-                        print("Image delete failed:", error.localizedDescription)
-                    }
-                    
-                    user.delete { error in
-                        print("deleting user information:", user.uid)
-                        
-                        if let error = error {
-                            // An error happened.
-                            simpleAlert(self, message: error.localizedDescription)
-                            SwiftSpinner.hide(nil)
-                            return
-                        } else {
-                            // Account deleted.
-                            SwiftSpinner.hide {
-                                self.dismiss(animated: true, completion: nil)
-                            }
-                        }
-                    }
-                    
-                    
-                }
+                
             }
-            
-            
         }
     }
-    
-    
-    @IBAction func btnActTakePhoto(_ sender: UIButton) {
-        takePhoto()
-    }
-    
-    @IBAction func btnActFromLoadPhoto(_ sender: UIButton) {
-        getPhotoFromLibrary()
-    }
-    
-    
-}
-
-extension OldSignUpViewController {
     
     func startUploading(images: [ImageWithName], childRefPath: String, completion: @escaping FileCompletionBlock) {
         if images.count == 0 {
@@ -456,7 +470,9 @@ extension OldSignUpViewController {
     }
 }
 
-extension OldSignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+// MARK: - Delegate Extensions
+
+extension SignUpTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     // 컴포넌트(열) 개수
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -478,7 +494,7 @@ extension OldSignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
 }
 
-extension OldSignUpViewController: UITextFieldDelegate {
+extension SignUpTableViewController: UITextFieldDelegate {
     
     func setLabelPasswordConfirm(_ password: String, _ passwordConfirm: String)  {
         
@@ -499,10 +515,10 @@ extension OldSignUpViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
-        case txtUserEmail:
-            txtPassword.becomeFirstResponder()
-        case txtPassword:
-            txtPasswordConfirm.becomeFirstResponder()
+        case txfUserEmail:
+            txfPassword.becomeFirstResponder()
+        case txfPassword:
+            txfPasswordConfirm.becomeFirstResponder()
         default:
             textField.resignFirstResponder()
         }
@@ -511,9 +527,9 @@ extension OldSignUpViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == txtPasswordConfirm {
-            guard let password = txtPassword.text,
-                  let passwordConfirmBefore = txtPasswordConfirm.text else {
+        if textField == txfPasswordConfirm {
+            guard let password = txfPassword.text,
+                  let passwordConfirmBefore = txfPasswordConfirm.text else {
                 return true
             }
             let passwordConfirm = string.isEmpty ? passwordConfirmBefore[0..<(passwordConfirmBefore.count - 1)] : passwordConfirmBefore + string
@@ -524,7 +540,7 @@ extension OldSignUpViewController: UITextFieldDelegate {
     }
 }
 
-extension OldSignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /*
      var imagePickerController = UIImagePickerController()

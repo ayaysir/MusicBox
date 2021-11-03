@@ -13,10 +13,21 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var txfEmail: UITextField!
     @IBOutlet weak var txfPassword: UITextField!
     
-    let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Auth.auth().currentUser != nil {
+            let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
+            self.navigationController?.setViewControllers([memberVC], animated: false)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SignUpSegue" {
+            let destVC = segue.destination as? SignUpTableViewController
+            destVC?.pageMode = .signUpMode
+            destVC?.delegate = self
+        }
     }
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
@@ -30,7 +41,8 @@ class SignInViewController: UIViewController {
             
             if authResult != nil {
                 print("로그인 되었습니다")
-                let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
+                let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController") 
+
                 self.navigationController?.setViewControllers([memberVC], animated: true)
                 
             } else {
@@ -38,7 +50,21 @@ class SignInViewController: UIViewController {
             }
         }
     }
+}
+
+extension SignInViewController: SignUpDelegate {
     
+    func changeRootController() {
+        if Auth.auth().currentUser != nil {
+            let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
+            self.navigationController?.setViewControllers([memberVC], animated: false)
+        }
+    }
     
-    
+    func didUpdateUserInfoSuccess(_ controller: SignUpTableViewController, isSuccess: Bool) {
+    }
+
+    func didSignUpSuccess(_ controller: SignUpTableViewController, isSuccess: Bool, uid: String) {
+        changeRootController()
+    }
 }

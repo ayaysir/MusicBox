@@ -26,18 +26,17 @@ class MemberProfileViewController: UIViewController {
     var ref = Database.database().reference()
     var storageRef = Storage.storage().reference()
     
-    let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
-            self.setUserInfoView(user: user)
-        }
         
+//        handle = Auth.auth().addStateDidChangeListener { auth, user in
+//            self.setUserInfoView(user: user)
+//        }
+        
+        SwiftSpinner.show("회원 정보를 로딩하고 있습니다...")
         Auth.auth().currentUser?.reload(completion: { error in
             if error != nil {
                 print(error!.localizedDescription)
@@ -48,8 +47,18 @@ class MemberProfileViewController: UIViewController {
         })
     }
     
+    @IBAction func btnActUpdateUserInfo(_ sender: Any) {
+        guard let updateVC = mainStoryboard.instantiateViewController(withIdentifier: "SignUpTableViewController") as? SignUpTableViewController else {
+            return
+        }
+        updateVC.pageMode = .updateMode
+        updateVC.resignDelegate = self
+        self.navigationController?.pushViewController(updateVC, animated: true)
+    }
+    
     @IBAction func btnActSignOut(_ sender: UIButton) {
         do {
+            SwiftSpinner.hide(nil)
             try Auth.auth().signOut()
             let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
             self.navigationController?.setViewControllers([loginVC], animated: true)
@@ -73,7 +82,6 @@ extension MemberProfileViewController {
         }
 
         self.lblUserEmail.text = user.email
-        
         self.getUserAdditionalInfo(uid: user.uid)
         
         if user.isEmailVerified {
@@ -98,7 +106,6 @@ extension MemberProfileViewController {
     
     private func getUserAdditionalInfo(uid: String) {
         let userRef = self.ref.child("users/\(uid)/")
-        SwiftSpinner.show("추가 정보를 로딩하고 있습니다...")
         userRef.getData { error, snapshot in
             if snapshot.exists() {
                 let dict = snapshot.value as? [String: String]
@@ -138,4 +145,12 @@ extension MemberProfileViewController {
         }
     }
     
+}
+
+extension MemberProfileViewController: ResignMemberDelegate {
+    func didResignSuccess(_ controller: SignUpTableViewController) {
+        SwiftSpinner.hide(nil)
+        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
+        self.navigationController?.setViewControllers([loginVC], animated: false)
+    }
 }

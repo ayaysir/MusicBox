@@ -18,8 +18,6 @@ class PaperInfoTableViewController: UITableViewController {
     
     @IBOutlet weak var btnPreplay: UIButton!
     var midiManager = MIDIManager()
-    
-    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
