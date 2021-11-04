@@ -1049,12 +1049,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7gx-oq-EyG">
-                                                    <rect key="frame" x="10" y="5" width="354" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="패스워드가 일치합니다." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="842-Mo-Mlu">
                                                     <rect key="frame" x="10" y="11" width="344" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1463,7 +1457,7 @@
                                                         <color key="baseForegroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </buttonConfiguration>
                                                     <connections>
-                                                        <action selector="btnActDeleteFile:" destination="qRt-PD-Ker" eventType="touchUpInside" id="h3u-aF-oRl"/>
+                                                        <action selector="btnActDeleteFile:" destination="qRt-PD-Ker" eventType="touchUpInside" id="Kx6-3M-HLQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

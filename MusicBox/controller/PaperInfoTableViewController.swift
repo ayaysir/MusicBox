@@ -75,7 +75,21 @@ class PaperInfoTableViewController: UITableViewController {
     }
     
     @IBAction func btnActDeleteFile(_ sender: Any) {
-        
+        simpleDestructiveYesAndNo(self, message: "정말 파일을 삭제하시겠습니까? 삭제된 파일은 복구할 수 없습니다.", title: "파일 삭제") { action in
+            guard let selectedDocument = self.selectedDocument else {
+                return
+            }
+            
+            do {
+                try FileManager.default.removeItem(at: selectedDocument.fileURL)
+                simpleAlert(self, message: "삭제되었습니다.", title: "삭제 완료") { action in
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } catch {
+                simpleAlert(self, message: "삭제하지 못했습니다. \(error.localizedDescription)")
+                return
+            }
+        }
     }
     
     @IBAction func btnActPreplay(_ sender: Any) {
@@ -121,6 +135,4 @@ extension PaperInfoTableViewController: MusicPaperVCDelegate {
         selectedDocument = controller.document
         initPaperInfo()
     }
-    
-    
 }

@@ -99,6 +99,9 @@ class SignUpTableViewController: UITableViewController {
             
             loadExistingUserInfo()
         }
+        
+        txfPassword.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        txfPasswordConfirm.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @IBAction func btnActCancel(_ sender: UIButton) {
@@ -130,18 +133,14 @@ class SignUpTableViewController: UITableViewController {
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
         
+        guard validateFieldValues() else {
+            return
+        }
+        
         switch pageMode {
         case .signUpMode:
-            guard let userEmail = txfUserEmail.text,
-                  let userPassword = txfPassword.text,
-                  let userPasswordConfirm = txfPasswordConfirm.text else {
-                return
-            }
             
-            guard userPassword != ""
-                    && userPasswordConfirm != ""
-                    && userPassword == userPasswordConfirm else {
-                simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+            guard let userEmail = txfUserEmail.text, let userPassword = txfPassword.text else {
                 return
             }
             
@@ -470,6 +469,70 @@ extension SignUpTableViewController {
     }
 }
 
+// MARK: - Validate fields
+extension SignUpTableViewController {
+    func validateFieldValues() -> Bool {
+        
+        guard let userEmail = txfUserEmail.text,
+              let userPassword = txfPassword.text,
+              let userPasswordConfirm = txfPasswordConfirm.text else {
+            return false
+        }
+        
+        switch pageMode {
+        case .signUpMode:
+            
+            guard userEmail != "" else {
+                simpleAlert(self, message: "이메일을 입력해야 합니다.", title: "만들 수 없음") { action in
+                    self.txfUserEmail.becomeFirstResponder()
+                }
+                return false
+            }
+            
+            let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            guard userEmail.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil else {
+                simpleAlert(self, message: "이메일 형식이 잘못되었습니다. 이메일을 다시 작성해주세요.", title: "만들 수 없음") { action in
+                    self.txfUserEmail.becomeFirstResponder()
+                }
+                return false
+            }
+            
+            guard userPassword != "" else {
+                simpleAlert(self, message: "패스워드를 입력해야 합니다.", title: "만들 수 없음") { action in
+                    self.txfPassword.becomeFirstResponder()
+                }
+                return false
+            }
+            
+            guard userPasswordConfirm != "" else {
+                simpleAlert(self, message: "패스워드 확인 입력해야 합니다.", title: "만들 수 없음") { action in
+                    self.txfPasswordConfirm.becomeFirstResponder()
+                }
+                return false
+            }
+            
+            guard userPassword == userPasswordConfirm else {
+                simpleAlert(self, message: "패스워드가 일치하지 않습니다.", title: "만들 수 없음") { action in
+                    self.txfPassword.becomeFirstResponder()
+                }
+                return false
+            }
+            
+        case .updateMode:
+            break
+        }
+        
+        guard txfNickname.text!.count >= 1 && txfNickname.text!.count <= 10 else {
+            simpleAlert(self, message: "닉네임은 1-10자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+                self.txfNickname.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        return true
+    }
+}
+
 // MARK: - Delegate Extensions
 
 extension SignUpTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -512,6 +575,24 @@ extension SignUpTableViewController: UITextFieldDelegate {
         }
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        switch textField {
+        case txfPassword:
+            guard let password = textField.text, let passwordConfirm = txfPasswordConfirm.text else {
+                return
+            }
+            setLabelPasswordConfirm(password, passwordConfirm)
+        case txfPasswordConfirm:
+            guard let password = txfPassword.text, let passwordConfirm = textField.text else {
+                return
+            }
+            setLabelPasswordConfirm(password, passwordConfirm)
+        default:
+            break
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
@@ -526,18 +607,21 @@ extension SignUpTableViewController: UITextFieldDelegate {
         return false
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == txfPasswordConfirm {
-            guard let password = txfPassword.text,
-                  let passwordConfirmBefore = txfPasswordConfirm.text else {
-                return true
-            }
-            let passwordConfirm = string.isEmpty ? passwordConfirmBefore[0..<(passwordConfirmBefore.count - 1)] : passwordConfirmBefore + string
-            setLabelPasswordConfirm(password, passwordConfirm)
-            
-        }
-        return true
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == txfPasswordConfirm {
+//            guard let password = txfPassword.text,
+//                  let passwordConfirmBefore = txfPasswordConfirm.text else {
+//                return true
+//            }
+//
+//            let passwordConfirm = string.isEmpty ? passwordConfirmBefore[0..<(passwordConfirmBefore.count - 1)] : passwordConfirmBefore + string
+//            setLabelPasswordConfirm(password, passwordConfirm)
+//
+//        }
+//        return true
+//    }
+    
+    
 }
 
 extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
