@@ -40,26 +40,60 @@ class FileCollectionViewController: UICollectionViewController {
             print(Date(), "loadcomplete")
         }
         
+        // When Open from WillConnectTo (앱 새로 켰을 때)
+        if OpenFromExternalAppManager.shared.isFromExternalApp {
+            openFromExternalApp(fileURL: OpenFromExternalAppManager.shared.fileURL)
+        }
+        
+        // When Open from openURLContexts (앱이 실행중인 때)
         NotificationCenter.default.addObserver(self, selector: #selector(openFromExternalApp(notification:)), name: Notification.Name(rawValue: "OpenFromExternalApp"), object: nil)
     }
     
     @objc func openFromExternalApp(notification: Notification) {
+        
+        print("noti obj type", type(of: notification.object), to: &logger)
+        
         if let fileURL = notification.object as? URL {
-            //handle the event here
-//            simpleAlert(self, message: fileURL.absoluteString)
-            let fileName = fileURL.lastPathComponent
-            let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let checkFilePath = dirPath.first!.appendingPathComponent(fileName)
-            
-            simpleAlert(self, message: "\(checkFilePath) ::: \(FileManager.default.fileExists(atPath: checkFilePath.path))", title: "result") { action in
-                if FileManager.default.fileExists(atPath: checkFilePath.path) {
-                    let newFilePath = dirPath.first!.appendingPathComponent(fileName.replacingOccurrences(of: ".musicbox", with: "") + " copy").appendingPathExtension("musicbox")
-                    let copyResult = FileManager.default.secureCopyItem(at: fileURL, to: newFilePath)
-                    simpleAlert(self, message: "copy result(file Exist): \(newFilePath) ::: \(copyResult)")
+            openFromExternalApp(fileURL: fileURL)
+        }
+        
+    }
+    
+    private func openFromExternalApp(fileURL: URL) {
+        
+        let fm = FileManager.default
+        
+        let fileName = fileURL.lastPathComponent
+        let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let checkFilePath = dirPath.first!.appendingPathComponent(fileName)
+        
+        var copyResult = false
+        simpleAlert(self, message: "\(checkFilePath) ::: \(FileManager.default.fileExists(atPath: checkFilePath.path))", title: "result") { action in
+            if FileManager.default.fileExists(atPath: checkFilePath.path) {
+                let fileNameWithoutExt = fileName.replacingOccurrences(of: ".musicbox", with: "")
+                let newFilePath = dirPath.first!.appendingPathComponent(fileNameWithoutExt + " copy").appendingPathExtension("musicbox")
+                if !fm.fileExists(atPath: newFilePath.path) {
+                    copyResult = FileManager.default.secureCopyItem(at: fileURL, to: newFilePath)
                 } else {
-                    let copyResult = FileManager.default.secureCopyItem(at: fileURL, to: checkFilePath)
-                    simpleAlert(self, message: "copy result(not Exist): \(checkFilePath) ::: \(copyResult)")
+                    var index = 1
+                    while true {
+                        let targetName = "\(fileNameWithoutExt) copy \(index)"
+                        let targetURL = dirPath.first!.appendingPathComponent(targetName).appendingPathExtension("musicbox")
+                        
+                        if fm.fileExists(atPath: targetURL.path) {
+                            index += 1
+                            continue
+                        } else {
+                            copyResult = fm.secureCopyItem(at: fileURL, to: targetURL)
+                            break
+                        }
+                    }
                 }
+                
+                simpleAlert(self, message: "copy result(file Exist): \(newFilePath) ::: \(copyResult)")
+            } else {
+                let copyResult = FileManager.default.secureCopyItem(at: fileURL, to: checkFilePath)
+                simpleAlert(self, message: "copy result(not Exist): \(checkFilePath) ::: \(copyResult)")
             }
         }
         

@@ -7,6 +7,12 @@
 
 import UIKit
 
+class OpenFromExternalAppManager {
+    static let shared = OpenFromExternalAppManager()
+    var isFromExternalApp: Bool = false
+    var fileURL: URL!
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -15,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         if connectionOptions.urlContexts.isNotEmpty {
-            assignURLToRoot(fileURL: connectionOptions.urlContexts.first?.url)
+            print("from WillConnectTo:", connectionOptions.urlContexts.first?.url, to: &logger)
+            assignURLToRootForWCT(fileURL: connectionOptions.urlContexts.first?.url)
         }
         
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -51,6 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("from openURLContexts", URLContexts.first?.url, to: &logger)
         assignURLToRoot(fileURL: URLContexts.first?.url)
     }
 
@@ -67,7 +75,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "OpenFromExternalApp"), object: fileURL)
+        print("reached this area:", to: &logger)
     }
-
+    
+    private func assignURLToRootForWCT(fileURL: URL?) {
+        
+        guard let fileURL = fileURL else {
+            print("SceneDelegate: URL is null.", to: &logger)
+            return
+        }
+        
+        guard fileURL.isFileURL else {
+            print("SceneDelegate: URL is not file url.", to: &logger)
+            return
+        }
+        
+        OpenFromExternalAppManager.shared.isFromExternalApp = true
+        OpenFromExternalAppManager.shared.fileURL = fileURL
+        
+    }
 }
 
