@@ -13,6 +13,8 @@ func loadMusicboxFileList() throws -> [PaperDocument]? {
         return nil
     }
     
+    print("document directory path:", documentDirPaths.absoluteString.replacingOccurrences(of: "file://", with: ""))
+    
     // Get the directory contents urls (including subfolders urls)
     let files = try filemgr.contentsOfDirectory(at: documentDirPaths, includingPropertiesForKeys: nil)
     let musicboxFiles = files.filter { (url: URL) in
@@ -20,8 +22,6 @@ func loadMusicboxFileList() throws -> [PaperDocument]? {
     }
 
     // if you want to filter the directory contents you can do like this:
-    print("document file list:", musicboxFiles)
-    
     return musicboxFiles.map { url in
         let document = PaperDocument(fileURL: url)
         return document

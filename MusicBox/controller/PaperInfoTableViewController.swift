@@ -15,6 +15,8 @@ class PaperInfoTableViewController: UITableViewController {
     @IBOutlet weak var lblArtist: UILabel!
     @IBOutlet weak var lblBpmAndTimeSignature: UILabel!
     @IBOutlet weak var lblSequenceTime: UILabel!
+    @IBOutlet weak var imgAlbumart: UIImageView!
+    
     
     @IBOutlet weak var btnPreplay: UIButton!
     var midiManager = MIDIManager()
@@ -43,6 +45,10 @@ class PaperInfoTableViewController: UITableViewController {
         lblBpmAndTimeSignature.text = bpmAndTSText
         
         lblSequenceTime.text = convertTimeToFormattedString(timeInterval: midiManager.midiPlayer?.duration ?? 0)
+        
+        if let imageData = paper.albumartImageData {
+            imgAlbumart.image = UIImage(data: imageData)
+        }
     }
     
     @IBAction func btnActEditPaper(_ sender: Any) {
@@ -73,6 +79,23 @@ class PaperInfoTableViewController: UITableViewController {
     @IBAction func btnActListenPaper(_ sender: Any) {
         openPaper(mode: .view)
     }
+    
+    @IBAction func btnActShare(_ sender: Any) {
+        
+        // set up activity view controller
+        var shareList = [Any]()
+        shareList.append(selectedDocument!.fileURL)
+        
+        let activityViewController = UIActivityViewController(activityItems: shareList as [Any], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [.postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToFacebook, .postToTencentWeibo]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
     
     @IBAction func btnActDeleteFile(_ sender: Any) {
         simpleDestructiveYesAndNo(self, message: "정말 파일을 삭제하시겠습니까? 삭제된 파일은 복구할 수 없습니다.", title: "파일 삭제") { action in

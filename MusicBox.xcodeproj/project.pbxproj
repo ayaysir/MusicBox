@@ -79,6 +79,9 @@
 		44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */; };
 		44B18C3226EF7FF900890C13 /* Paper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B18C3126EF7FF900890C13 /* Paper.swift */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
+		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
+		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
+		44C1BA4727357AA600543A74 /* FileManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA4627357AA600543A74 /* FileManager+.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -196,6 +199,9 @@
 		44AE99522707227900D046D1 /* CreateNewPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPaperViewController.swift; sourceTree = "<group>"; };
 		44B18C3126EF7FF900890C13 /* Paper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paper.swift; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
+		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		44C1BA4627357AA600543A74 /* FileManager+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+.swift"; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -284,6 +290,7 @@
 				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
 				447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */,
 				4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */,
+				44C1BA44273408ED00543A74 /* MainTabBarController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -383,6 +390,7 @@
 				44AE993F2705DBED00D046D1 /* Array+.swift */,
 				444D9466271328F70090F587 /* UIButton+.swift */,
 				444D946E271727EA0090F587 /* UITextField+.swift */,
+				44C1BA4627357AA600543A74 /* FileManager+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -487,6 +495,7 @@
 				440A1A2C26ECC08A00AA4135 /* controller */,
 				44E682E826EA46320074FE46 /* AppDelegate.swift */,
 				44E682EA26EA46320074FE46 /* SceneDelegate.swift */,
+				44C1BA422733F8F000543A74 /* Log.swift */,
 				44E682EC26EA46320074FE46 /* ViewController.swift */,
 				44E682EE26EA46320074FE46 /* Main.storyboard */,
 				44E682F126EA46340074FE46 /* Assets.xcassets */,
@@ -872,8 +881,10 @@
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				447E117027231AB200931B8C /* BPMConverter.swift in Sources */,
+				44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
 				44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */,
+				44C1BA432733F8F000543A74 /* Log.swift in Sources */,
 				44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */,
 				444D944E27105D960090F587 /* Checkbox.swift in Sources */,
 				444D945D2711E39C0090F587 /* FirebaseUtil.swift in Sources */,
@@ -885,6 +896,7 @@
 				440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */,
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
+				44C1BA4727357AA600543A74 /* FileManager+.swift in Sources */,
 				444D94602711EE170090F587 /* Post.swift in Sources */,
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
 				44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */,

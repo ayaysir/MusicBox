@@ -156,7 +156,6 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         let cellWidth = (width - widthPadding) / itemsPerRow
         let cellHeight = cellWidth * 1.525
         
-        print("cellSize:", cellWidth, cellHeight)
         return CGSize(width: cellWidth, height: cellHeight)
     }
     

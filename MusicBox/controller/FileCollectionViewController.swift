@@ -15,17 +15,14 @@ class FileCollectionViewController: UICollectionViewController {
     let btnAdd = UIButton()
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
-    let filemgr = FileManager.default
-    var documents: [PaperDocument] = []
+    private let filemgr = FileManager.default
+    private var documents: [PaperDocument] = []
     
-    let menuDropDown = DropDown()
-    let menuDataSource = ["곡 정보 변경", "게시판에 공유", "삭제"]
+    private let menuDropDown = DropDown()
+    private let menuDataSource = ["곡 정보 변경", "게시판에 공유", "삭제"]
     
-    var selectedCellIndexPath: IndexPath?
-    
-    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    
-    var midiManager: MIDIManager!
+    private var selectedCellIndexPath: IndexPath?
+    private var midiManager: MIDIManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +39,30 @@ class FileCollectionViewController: UICollectionViewController {
         collectionView.performBatchUpdates(nil) { result in
             print(Date(), "loadcomplete")
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(openFromExternalApp(notification:)), name: Notification.Name(rawValue: "OpenFromExternalApp"), object: nil)
+    }
+    
+    @objc func openFromExternalApp(notification: Notification) {
+        if let fileURL = notification.object as? URL {
+            //handle the event here
+//            simpleAlert(self, message: fileURL.absoluteString)
+            let fileName = fileURL.lastPathComponent
+            let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let checkFilePath = dirPath.first!.appendingPathComponent(fileName)
+            
+            simpleAlert(self, message: "\(checkFilePath) ::: \(FileManager.default.fileExists(atPath: checkFilePath.path))", title: "result") { action in
+                if FileManager.default.fileExists(atPath: checkFilePath.path) {
+                    let newFilePath = dirPath.first!.appendingPathComponent(fileName.replacingOccurrences(of: ".musicbox", with: "") + " copy").appendingPathExtension("musicbox")
+                    let copyResult = FileManager.default.secureCopyItem(at: fileURL, to: newFilePath)
+                    simpleAlert(self, message: "copy result(file Exist): \(newFilePath) ::: \(copyResult)")
+                } else {
+                    let copyResult = FileManager.default.secureCopyItem(at: fileURL, to: checkFilePath)
+                    simpleAlert(self, message: "copy result(not Exist): \(checkFilePath) ::: \(copyResult)")
+                }
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,9 +109,6 @@ class FileCollectionViewController: UICollectionViewController {
     
     @objc private func touchedAddButton() {
         
-//        let modalVC = storyBoard.instantiateViewController(withIdentifier: "CreateNewPaperViewController") as! CreateNewPaperViewController
-//        modalVC.delegate = self
-//        presentPanModal(modalVC)
         self.dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "PaperCreateWindowSegue", sender: nil)
     }
@@ -211,7 +229,6 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
         let cellWidth = (width - widthPadding) / itemsPerRow
         let cellHeight = cellWidth * 1.43
         
-        print("cellSize:", cellWidth, cellHeight)
         return CGSize(width: cellWidth, height: cellHeight)
     }
     
@@ -232,8 +249,7 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
 extension FileCollectionViewController: CreateNewPaperVCDelegate {
     func didNewPaperCreated(_ controller: CreateNewPaperTableViewController, newPaper: Paper, fileNameWithoutExt: String) {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let paperViewController = storyBoard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
+        let paperViewController = mainStoryboard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
 
         paperViewController.modalPresentationStyle = .fullScreen
         
