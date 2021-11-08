@@ -10,10 +10,44 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--You Need Login View Controller-->
+        <scene sceneID="RWY-tT-5ef">
+            <objects>
+                <viewController storyboardIdentifier="YouNeedLoginViewController" id="tUf-T4-MRk" customClass="YouNeedLoginViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Huv-4H-MqQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You need login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-Zi-9DL">
+                                <rect key="frame" x="151" y="245" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiE-A9-smL">
+                                <rect key="frame" x="139" y="315" width="137" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Go To Login Page"/>
+                                <connections>
+                                    <action selector="btnActGoToLoginPage:" destination="tUf-T4-MRk" eventType="touchUpInside" id="JtF-zb-447"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="are-AK-siM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wdH-kS-v2i"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wPe-YO-9CV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4336.231884057971" y="525"/>
+        </scene>
         <!--Main-->
         <scene sceneID="gCH-5n-oOf">
             <objects>
-                <viewController id="To5-EN-MwS" customClass="UserCommunityViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserCommunityViewController" id="To5-EN-MwS" customClass="UserCommunityViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IJA-wF-rh7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,11 +170,12 @@
                     <connections>
                         <outlet property="collectionView" destination="je2-sM-oqK" id="9wq-eO-Inh"/>
                         <segue destination="e77-6f-XQ8" kind="show" identifier="PostPageSegue" id="z9e-fl-rXO"/>
+                        <segue destination="tUf-T4-MRk" kind="show" id="ogE-Xa-aeo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="udO-9E-btg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3510" y="528"/>
+            <point key="canvasLocation" x="-3549" y="525"/>
         </scene>
         <!--Upload-->
         <scene sceneID="wve-MW-fBD">
@@ -866,6 +901,7 @@
                         <outlet property="txfEmail" destination="gct-cS-leZ" id="773-IZ-4S4"/>
                         <outlet property="txfPassword" destination="pom-kZ-P7D" id="hq1-VH-2g8"/>
                         <segue destination="Hkm-ET-XZZ" kind="show" id="PfT-9u-Kcm"/>
+                        <segue destination="EOr-1e-0ky" kind="show" id="5zb-WD-Mim"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXb-Kn-wU9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -970,7 +1006,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="35S-7t-iAK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="-208"/>
+            <point key="canvasLocation" x="-1012" y="-208"/>
+        </scene>
+        <!--Not Connected View Controller-->
+        <scene sceneID="Tzu-to-fLD">
+            <objects>
+                <viewController storyboardIdentifier="NotConnectedViewController" id="EOr-1e-0ky" customClass="NotConnectedViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eif-3m-5fC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Not connected internet." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaB-US-QxK">
+                                <rect key="frame" x="117" y="258" width="181" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdp-A6-s7U">
+                                <rect key="frame" x="20" y="305" width="374" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="retry"/>
+                                <connections>
+                                    <action selector="btnActRetryConnect:" destination="EOr-1e-0ky" eventType="touchUpInside" id="tNo-NC-FMd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0sN-bm-QYf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wsx-W9-vWh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HGL-Uo-b1s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-323.1884057971015" y="134.59821428571428"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="B1r-Si-Odw">

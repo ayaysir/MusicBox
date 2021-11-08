@@ -16,6 +16,15 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard Reachability.isConnectedToNetwork() else {
+            let notConnectedVC = mainStoryboard.instantiateViewController(withIdentifier: "NotConnectedViewController") as? NotConnectedViewController
+            notConnectedVC?.vcName = "SignInViewController"
+            
+            self.navigationController?.setViewControllers([notConnectedVC!], animated: false)
+            
+            return
+        }
+        
         if Auth.auth().currentUser != nil {
             let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
             self.navigationController?.setViewControllers([memberVC], animated: false)

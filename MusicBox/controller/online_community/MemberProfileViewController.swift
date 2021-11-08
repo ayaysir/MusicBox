@@ -32,19 +32,22 @@ class MemberProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        handle = Auth.auth().addStateDidChangeListener { auth, user in
-//            self.setUserInfoView(user: user)
-//        }
+        if Reachability.isConnectedToNetwork() {
+            SwiftSpinner.show("회원 정보를 로딩하고 있습니다...")
+            Auth.auth().currentUser?.reload(completion: { error in
+                if error != nil {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                self.setUserInfoView(user: Auth.auth().currentUser)
+            })
+        } else {
+            simpleAlert(self, message: "not connected")
+            return
+        }
         
-        SwiftSpinner.show("회원 정보를 로딩하고 있습니다...")
-        Auth.auth().currentUser?.reload(completion: { error in
-            if error != nil {
-                print(error!.localizedDescription)
-                return
-            }
-            
-            self.setUserInfoView(user: Auth.auth().currentUser)
-        })
+        
     }
     
     @IBAction func btnActUpdateUserInfo(_ sender: Any) {

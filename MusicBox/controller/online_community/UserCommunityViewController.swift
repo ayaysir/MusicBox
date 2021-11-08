@@ -18,6 +18,7 @@ class UserCommunityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -25,6 +26,20 @@ class UserCommunityViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        guard Reachability.isConnectedToNetwork() else {
+            let notConnectedVC = mainStoryboard.instantiateViewController(withIdentifier: "NotConnectedViewController") as? NotConnectedViewController
+            notConnectedVC?.vcName = "UserCommunityViewController"
+            
+            self.navigationController?.setViewControllers([notConnectedVC!], animated: false)
+            return
+        }
+        
+        guard Auth.auth().currentUser != nil else {
+            let needLoginVC = mainStoryboard.instantiateViewController(withIdentifier: "YouNeedLoginViewController")
+            self.navigationController?.setViewControllers([needLoginVC], animated: false)
+            return
+        }
         
         getPostList()
     }
