@@ -67,14 +67,21 @@ class FileCollectionViewController: UICollectionViewController {
         let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let checkFilePath = dirPath.first!.appendingPathComponent(fileName)
         
+        print("\(Date())::: LoadFile ::: \(checkFilePath) ::: fileExist: \(FileManager.default.fileExists(atPath: checkFilePath.path))")
+        
         var copyResult = false
-        simpleAlert(self, message: "\(checkFilePath) ::: \(FileManager.default.fileExists(atPath: checkFilePath.path))", title: "result") { action in
+        simpleYesAndNo(self, message: "\(fileName) 파일을 불러오시겠습니까? '예'를 선택하면 파일이 문서 디렉토리에 복사됩니다.", title: "파일 불러오기") { action in
             if FileManager.default.fileExists(atPath: checkFilePath.path) {
                 let fileNameWithoutExt = fileName.replacingOccurrences(of: ".musicbox", with: "")
                 let newFilePath = dirPath.first!.appendingPathComponent(fileNameWithoutExt + " copy").appendingPathExtension("musicbox")
+                var finalFilePath: URL!
+                
                 if !fm.fileExists(atPath: newFilePath.path) {
+                    // 기존 파일이 존재하며, copy 파일은 없는 경우
+                    print("\(Date())::: copy result(case 1): \(newFilePath) ::: \(copyResult)", to: &logger)
                     copyResult = FileManager.default.secureCopyItem(at: fileURL, to: newFilePath)
                 } else {
+                    // 기존 파일이 존재하며, copy 파일도 이미 존재하는 경우
                     var index = 1
                     while true {
                         let targetName = "\(fileNameWithoutExt) copy \(index)"
@@ -85,16 +92,34 @@ class FileCollectionViewController: UICollectionViewController {
                             continue
                         } else {
                             copyResult = fm.secureCopyItem(at: fileURL, to: targetURL)
+                            finalFilePath = targetURL
                             break
                         }
                     }
                 }
                 
-                simpleAlert(self, message: "copy result(file Exist): \(newFilePath) ::: \(copyResult)")
+                guard let finalFilePath = finalFilePath else {
+                    return
+                }
+                
+                print("\(Date())::: copy result(case 2): \(finalFilePath) ::: \(copyResult)", to: &logger)
+                let receivedDocument = PaperDocument(fileURL: finalFilePath)
+                receivedDocument.open { success in
+                    self.performSegue(withIdentifier: "DetailPaperViewSegue", sender: receivedDocument)
+                }
+                
+                
             } else {
+                // 새로운 파일인 경우
                 let copyResult = FileManager.default.secureCopyItem(at: fileURL, to: checkFilePath)
-                simpleAlert(self, message: "copy result(not Exist): \(checkFilePath) ::: \(copyResult)")
+                print("\(Date())::: copy result(case 3): \(checkFilePath) ::: \(copyResult)")
+                let receivedDocument = PaperDocument(fileURL: checkFilePath)
+                
+                receivedDocument.open { success in
+                    self.performSegue(withIdentifier: "DetailPaperViewSegue", sender: receivedDocument)
+                }
             }
+
         }
         
     }

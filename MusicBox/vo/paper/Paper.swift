@@ -54,10 +54,6 @@ class Paper: NSObject, NSCoding, NSSecureCoding, Codable {
     var colNum: Int = 80
     
     var incompleteMeasureBeat: Int = 0
-
-//    var albumartURL: URL?
-//    var albumartBase64: String?
-//    var thumbnailBase64: String?
     
     var albumartImageData: Data?
     var thumbnailImageData: Data?
