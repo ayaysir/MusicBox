@@ -144,7 +144,9 @@ class MusicPaperViewController: UIViewController {
         }
         
         // PaperView 배경화면 설정
-        if let patternImage = UIImage(named: "1. White paper with fibers") {
+        let patternName = UserDefaults.standard.string(forKey: .cfgPaperTextureName) ?? "Paper: White paper with fibers"
+        
+        if let patternImage = UIImage(named: patternName) {
             let pattern = UIColor(patternImage: patternImage)
             musicPaperView.backgroundColor = pattern
         }

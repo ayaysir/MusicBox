@@ -289,29 +289,6 @@ class MusicBoxPaperView: UIView {
         
         context.fillPath()
 
-//                let circles = UIBezierPath()
-//                let playingCircles = UIBezierPath()
-//
-//        for coord in data {
-//            let arcX = cst.leftMargin + coord.gridX! * cst.cellWidth
-//            let arcY = cst.topMargin + coord.gridY!.cgFloat * cst.cellHeight
-//            let arcCenter = CGPoint(x: arcX, y: arcY)
-//            circles.addArc(withCenter: arcCenter, radius: cst.circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-//            circles.close()
-//        }
-//
-//        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
-//            UIColor(patternImage: backgroundPatternImage).set()
-//        } else {
-//            UIColor.black.set()
-//        }
-//
-//        context.addPath(circles.cgPath)
-//
-//        context.setFillColor(CGColor(red: 255, green: 0, blue: 0, alpha: 1))
-//        context.addPath(playingCircles.cgPath)
-//        context.fillPath()
-
         isFirstRun = false
         
     }
