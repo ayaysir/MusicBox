@@ -2088,10 +2088,10 @@
             </objects>
             <point key="canvasLocation" x="-4261" y="-1793"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Setting Table View Controller-->
         <scene sceneID="5ra-oJ-6UC">
             <objects>
-                <tableViewController id="tvW-j5-NLr" sceneMemberID="viewController">
+                <tableViewController id="tvW-j5-NLr" customClass="SettingTableViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="myk-dk-vY3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2114,9 +2114,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="pD0-i5-lXB" kind="show" id="Apz-v2-bzx"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="BYq-qV-IFy" style="IBUITableViewCellStyleDefault" id="DbK-c1-7Nl">
                                         <rect key="frame" x="20" y="93" width="374" height="43.5"/>
@@ -2258,6 +2255,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Vei-QA-745"/>
+                    <connections>
+                        <segue destination="pD0-i5-lXB" kind="show" identifier="TextureSegue" id="FuI-zT-2fC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVU-Z5-ZvP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2278,7 +2278,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PaperCell" id="vmI-sA-ugh" customClass="PaperTextureCell" customModule="MusicBox" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PaperCell" id="vmI-sA-ugh" customClass="TextureCell" customModule="MusicBox" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Oza-zw-fzg">

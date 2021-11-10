@@ -16,3 +16,12 @@ let PAPER_TEXTURE_LIST = [
     "Paper: Uneven white handmade paper",
     "Paper: White paper with fibers",
 ]
+
+let BG_TEXTURE_LIST = [
+    "Background: Melamine-wood-1",
+    "Background: Melamine-wood-2",
+    "Background: Melamine-wood-3",
+    "Background: Melamine-wood-4",
+    "Background: Melamine-wood-5",
+    "Background: Melamine-wood-6",
+]

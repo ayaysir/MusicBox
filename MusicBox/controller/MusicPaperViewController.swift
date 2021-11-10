@@ -152,8 +152,10 @@ class MusicPaperViewController: UIViewController {
         }
         
         // scrollView 배경화면 설정
-        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
-            let pattern = UIColor(patternImage: backgroundPatternImage)
+        let bgPatternName = UserDefaults.standard.string(forKey: .cfgBackgroundTextureName) ?? "Background: Melamine-wood-2"
+        
+        if let bgPatternImage = UIImage(named: bgPatternName) {
+            let pattern = UIColor(patternImage: bgPatternImage)
             scrollView.backgroundColor = pattern
         }
         

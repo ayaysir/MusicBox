@@ -88,6 +88,7 @@
 		44C1BA54273C04D500543A74 /* TextureCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA53273C04D500543A74 /* TextureCollectionViewController.swift */; };
 		44C1BA56273C061900543A74 /* String+ConfigKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA55273C061900543A74 /* String+ConfigKeys.swift */; };
 		44C1BA58273C07B300543A74 /* AppConfigVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA57273C07B300543A74 /* AppConfigVariables.swift */; };
+		44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA59273C23E900543A74 /* SettingTableViewController.swift */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -214,6 +215,7 @@
 		44C1BA53273C04D500543A74 /* TextureCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureCollectionViewController.swift; sourceTree = "<group>"; };
 		44C1BA55273C061900543A74 /* String+ConfigKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ConfigKeys.swift"; sourceTree = "<group>"; };
 		44C1BA57273C07B300543A74 /* AppConfigVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigVariables.swift; sourceTree = "<group>"; };
+		44C1BA59273C23E900543A74 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				44C1BA53273C04D500543A74 /* TextureCollectionViewController.swift */,
+				44C1BA59273C23E900543A74 /* SettingTableViewController.swift */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				44C1BA56273C061900543A74 /* String+ConfigKeys.swift in Sources */,
 				44C1BA4727357AA600543A74 /* FileManager+.swift in Sources */,
 				444D94602711EE170090F587 /* Post.swift in Sources */,
+				44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */,
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
 				44C1BA54273C04D500543A74 /* TextureCollectionViewController.swift in Sources */,
 				44C1BA4D27395AF900543A74 /* NotConnectedViewController.swift in Sources */,

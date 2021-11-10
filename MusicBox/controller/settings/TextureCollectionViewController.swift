@@ -16,18 +16,14 @@ class TextureCollectionViewController: UICollectionViewController {
     }
     
     var category: Category = .paper
+    let configStore = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         switch category {
         case .paper:
             self.title = "Select a Paper Pattern"
@@ -38,22 +34,20 @@ class TextureCollectionViewController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        let storedPatternName = UserDefaults.standard.string(forKey: .cfgPaperTextureName) ?? ""
-        let patternIndex = PAPER_TEXTURE_LIST.firstIndex(of: storedPatternName) ?? PAPER_TEXTURE_LIST.count - 1
-        
-        self.collectionView.selectItem(at: IndexPath(row: patternIndex, section: 0), animated: false, scrollPosition: .left)
+        switch category {
+        case .paper:
+            let storedPatternName = configStore.string(forKey: .cfgPaperTextureName) ?? ""
+            let patternIndex = PAPER_TEXTURE_LIST.firstIndex(of: storedPatternName) ?? PAPER_TEXTURE_LIST.count - 1
+            
+            self.collectionView.selectItem(at: IndexPath(row: patternIndex, section: 0), animated: false, scrollPosition: .left)
+        case .background:
+            let storedPatternName = configStore.string(forKey: .cfgBackgroundTextureName) ?? ""
+            let patternIndex = BG_TEXTURE_LIST.firstIndex(of: storedPatternName) ?? 1
+            
+            self.collectionView.selectItem(at: IndexPath(row: patternIndex, section: 0), animated: false, scrollPosition: .left)
+        }
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -65,14 +59,23 @@ class TextureCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return PAPER_TEXTURE_LIST.count
+        switch category {
+        case .paper:
+            return PAPER_TEXTURE_LIST.count
+        case .background:
+            return BG_TEXTURE_LIST.count
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PaperTextureCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TextureCell
     
-        // Configure the cell
-        cell.update(assetName: PAPER_TEXTURE_LIST[indexPath.row])
+        switch category {
+        case .paper:
+            cell.update(assetName: PAPER_TEXTURE_LIST[indexPath.row])
+        case .background:
+            cell.update(assetName: BG_TEXTURE_LIST[indexPath.row])
+        }
 
         return cell
     }
@@ -96,8 +99,13 @@ class TextureCollectionViewController: UICollectionViewController {
         }
         
         // save to UserDefaults
-        UserDefaults.standard.set(PAPER_TEXTURE_LIST[indexPath.row], forKey: .cfgPaperTextureName)
-
+        switch category {
+        case .paper:
+            configStore.set(PAPER_TEXTURE_LIST[indexPath.row], forKey: .cfgPaperTextureName)
+        case .background:
+            configStore.set(BG_TEXTURE_LIST[indexPath.row], forKey: .cfgBackgroundTextureName)
+        }
+        
         cell.isSelected = true
     }
     
@@ -126,7 +134,7 @@ class TextureCollectionViewController: UICollectionViewController {
 
 }
 
-class PaperTextureCell: UICollectionViewCell {
+class TextureCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {

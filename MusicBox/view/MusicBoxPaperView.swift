@@ -280,12 +280,14 @@ class MusicBoxPaperView: UIView {
             context.addPath(circle.cgPath)
         }
         
-        if let backgroundPatternImage = UIImage(named: "Melamine-wood-2") {
+        // 구멍 배경 이미지
+        let bgPatternName = UserDefaults.standard.string(forKey: .cfgBackgroundTextureName) ?? "Background: Melamine-wood-2"
+        
+        if let backgroundPatternImage = UIImage(named: bgPatternName) {
             UIColor(patternImage: backgroundPatternImage).set()
         } else {
             UIColor.black.set()
         }
-        
         
         context.fillPath()
 
