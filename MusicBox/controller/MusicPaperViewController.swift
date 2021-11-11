@@ -192,6 +192,7 @@ class MusicPaperViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         saveDocument()
         midiManager.midiPlayer?.stop()
+        midiManager.midiPlayer.
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {

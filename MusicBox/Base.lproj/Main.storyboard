@@ -2088,7 +2088,7 @@
             </objects>
             <point key="canvasLocation" x="-4261" y="-1793"/>
         </scene>
-        <!--Setting Table View Controller-->
+        <!--Settings & Help-->
         <scene sceneID="5ra-oJ-6UC">
             <objects>
                 <tableViewController id="tvW-j5-NLr" customClass="SettingTableViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
@@ -2254,14 +2254,87 @@
                             <outlet property="delegate" destination="tvW-j5-NLr" id="8EO-ua-2oN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Vei-QA-745"/>
+                    <navigationItem key="navigationItem" title="Settings &amp; Help" id="Vei-QA-745"/>
                     <connections>
                         <segue destination="pD0-i5-lXB" kind="show" identifier="TextureSegue" id="FuI-zT-2fC"/>
+                        <segue destination="0Uv-aZ-NbT" kind="show" identifier="MIDISegue" id="Xv9-gf-4wL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVU-Z5-ZvP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3549" y="-1793"/>
+        </scene>
+        <!--Audio/MIDI Settings-->
+        <scene sceneID="pVK-0d-0C0">
+            <objects>
+                <tableViewController id="0Uv-aZ-NbT" customClass="AudioMIDISettingTableViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="AYy-7C-0Fl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Duration of Each Note during Playback" id="e3K-Ka-PsI">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="ruH-1n-IPu">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ruH-1n-IPu" id="765-Hh-yfY">
+                                            <rect key="frame" x="0.0" y="0.0" width="373.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-jG-g7E">
+                                                    <rect key="frame" x="20" y="8" width="278" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="sldActChangeDuration:" destination="0Uv-aZ-NbT" eventType="valueChanged" id="z1y-vH-h44"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gye-s7-G6Y">
+                                                    <rect key="frame" x="304" y="11" width="62" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="MIDI Instrument Patch" id="baI-H0-blY">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="212" id="Jqy-2T-fIH">
+                                        <rect key="frame" x="0.0" y="155" width="414" height="212"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jqy-2T-fIH" id="75D-2L-mPW">
+                                            <rect key="frame" x="0.0" y="0.0" width="373.5" height="212"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47c-CY-G7r">
+                                                    <rect key="frame" x="20" y="25" width="335" height="162"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="0Uv-aZ-NbT" id="XSg-jM-OPN"/>
+                            <outlet property="delegate" destination="0Uv-aZ-NbT" id="9bD-P5-ldO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Audio/MIDI Settings" id="Ued-8k-jF0"/>
+                    <connections>
+                        <outlet property="lblDuration" destination="gye-s7-G6Y" id="G9T-h1-hkf"/>
+                        <outlet property="pkvInstrumentPatch" destination="47c-CY-G7r" id="KdG-iZ-Gsv"/>
+                        <outlet property="sldDuration" destination="ndu-jG-g7E" id="XAe-4r-0Gl"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37O-ku-3hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2807.2463768115945" y="-2439.5089285714284"/>
         </scene>
         <!--Select A Paper Texture-->
         <scene sceneID="ff2-b0-yAd">

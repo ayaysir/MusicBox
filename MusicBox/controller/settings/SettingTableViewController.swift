@@ -15,12 +15,16 @@ class SettingTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TextureSegue" {
+        
+        switch segue.identifier {
+        case "TextureSegue":
             let category = sender as! String
             let vc = segue.destination as! TextureCollectionViewController
             vc.category = category == "paper" ? .paper : .background
-            
+        default:
+            break
         }
+        
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -32,7 +36,7 @@ class SettingTableViewController: UITableViewController {
             case 1:
                 performSegue(withIdentifier: "TextureSegue", sender: "background")
             case 2:
-                break
+                performSegue(withIdentifier: "MIDISegue", sender: nil)
             default:
                 break
             }
