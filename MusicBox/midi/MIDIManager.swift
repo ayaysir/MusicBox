@@ -40,6 +40,13 @@ class MIDIManager {
         self.musicPlayer = createMusicPlayer(musicSequence)
     }
     
+    deinit {
+        self.soundbank = nil
+        self.musicSequence = nil
+        self.musicPlayer = nil
+        self.midiPlayer = nil
+    }
+    
     func createAVMIDIPlayer(sequence musicSequence: MusicSequence) {
         
         guard let bankURL = soundbank else {

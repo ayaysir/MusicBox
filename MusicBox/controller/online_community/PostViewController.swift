@@ -92,8 +92,47 @@ class PostViewController: UIViewController {
     
     @IBAction func btnActDownload(_ sender: Any) {
         guard let post = post else { return }
-        let fileSaveURL = FileUtil.getDocumentsDirectory().appendingPathComponent(post.originaFileNameWithoutExt).appendingPathExtension("musicbox")
+        
         let childRefStr = "musicbox/\(post.postId)/\(post.originaFileNameWithoutExt).musicbox"
+        
+        let fm = FileManager.default
+        
+        let dirPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let checkFilePath = dirPath.first!.appendingPathComponent(post.originaFileNameWithoutExt).appendingPathExtension("musicbox")
+        
+        var fileSaveURL = FileUtil.getDocumentsDirectory().appendingPathComponent(post.originaFileNameWithoutExt).appendingPathExtension("musicbox")
+        
+        if FileManager.default.fileExists(atPath: checkFilePath.path) {
+            let fileNameWithoutExt = post.originaFileNameWithoutExt
+            let newFilePath = dirPath.first!.appendingPathComponent(fileNameWithoutExt + " copy").appendingPathExtension("musicbox")
+            
+            if !fm.fileExists(atPath: newFilePath.path) {
+                // 기존 파일이 존재하며, copy 파일은 없는 경우
+                print("\(Date())::: Firebase copy result(case 1): \(newFilePath)", to: &logger)
+                fileSaveURL = newFilePath
+            } else {
+                // 기존 파일이 존재하며, copy 파일도 이미 존재하는 경우
+                var index = 1
+                while true {
+                    let targetName = "\(fileNameWithoutExt) copy \(index)"
+                    let targetURL = dirPath.first!.appendingPathComponent(targetName).appendingPathExtension("musicbox")
+                    
+                    if fm.fileExists(atPath: targetURL.path) {
+                        index += 1
+                        continue
+                    } else {
+                        fileSaveURL = targetURL
+                        break
+                    }
+                }
+            }
+            
+            print("\(Date())::: Firebase copy result(case 2): \(fileSaveURL)", to: &logger)
+            
+        } else {
+            // 새로운 파일인 경우
+            print("\(Date())::: Firebase copy result(case 3): \(checkFilePath)")
+        }
         
         SwiftSpinner.show("파일 다운로드중...")
         getFileAndSave(childRefSTr: childRefStr, fileSaveURL: fileSaveURL) { url in

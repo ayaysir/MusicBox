@@ -131,7 +131,7 @@
                                                 <constraint firstItem="XzG-lz-myO" firstAttribute="top" secondItem="cSb-pN-a9a" secondAttribute="bottom" constant="10" id="osa-H8-mhc"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="200" height="305"/>
                                         <connections>
                                             <outlet property="imgAlbumart" destination="cSb-pN-a9a" id="pCG-G3-fvx"/>

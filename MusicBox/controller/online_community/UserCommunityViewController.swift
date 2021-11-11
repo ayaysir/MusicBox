@@ -95,19 +95,6 @@ extension UserCommunityViewController {
     @objc func getPost(sender: UIButton) {
         print(sender.tag)
     }
-    
-//    private func getPostThumbImage(_ cell: PostCell, indexPath: IndexPath, postIdStr: String) {
-//
-//        let refPath = "PostThumbnail/\(postIdStr)/\(postIdStr).jpg"
-//        getFileURL(childRefStr: refPath) { url in
-//            guard let url = url else {
-//                return
-//            }
-//
-////            cell.imgAlbumart.kf.setImage(with: url, placeholder: UIImage(named: "sample"), options: [.cacheOriginalImage], completionHandler: nil)
-//
-//        }
-//    }
 }
 
 extension UserCommunityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -132,7 +119,6 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
                 return
             }
             
-            
             cell.setImage(to: url)
         } failedHandler: { error in
             DispatchQueue.main.async {
@@ -140,7 +126,6 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
             }
         }
         
-//        getPostThumbImage(cell, indexPath: indexPath, postIdStr: targetPost.postId.uuidString)
         return cell
     }
     
