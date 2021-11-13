@@ -40,8 +40,24 @@ class MusicPaperViewController: UIViewController {
     var viewModePanelView: PaperViewModePanelView!
     
     var allowEdit: Bool = true
-    var eraserMode: Bool = false
-    var snapToGridMode: Bool = true
+    var eraserMode: Bool! {
+        didSet {
+            if eraserMode {
+                panelView.btnEraser.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+            } else {
+                panelView.btnEraser.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+            }
+        }
+    }
+    var snapToGridMode: Bool! {
+        didSet {
+            if snapToGridMode {
+                panelView.btnSnapToGrid.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+            } else {
+                panelView.btnSnapToGrid.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+            }
+        }
+    }
     
     var util: MusicBoxUtil!
     var noteRange: [Note]!
@@ -62,7 +78,7 @@ class MusicPaperViewController: UIViewController {
     var timer: Timer?
     
     var isPanelCollapsed: Bool = true
-    var panelMoveX: CGFloat = 324
+    var panelMoveX: CGFloat = 316
     var panelTrailingConstraint: NSLayoutConstraint!
     
     var lastScrollViewOffset: CGPoint!
@@ -139,6 +155,9 @@ class MusicPaperViewController: UIViewController {
             })
             
             saveDocument()
+            
+            eraserMode = false
+            snapToGridMode = true
         case .view:
             initViewModePanel()
         }
@@ -221,6 +240,7 @@ class MusicPaperViewController: UIViewController {
             let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
             let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
 
+            playPunchSound()
             
             // 중복된 노트 제거
             for another in musicPaperView.data {
@@ -231,11 +251,10 @@ class MusicPaperViewController: UIViewController {
             
             musicPaperView.data.append(coord)
             
-            playSound()
-            
         } else {
             
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else { return }
+            
             let filtered = musicPaperView.data.filter { coord in
                 let absoulteCircleBounds = CGRect(x: cst.leftMargin + coord.gridX * cst.cellWidth - cst.circleRadius,
                                           y: cst.topMargin + coord.gridY.cgFloat * cst.cellHeight - cst.circleRadius,
@@ -245,6 +264,9 @@ class MusicPaperViewController: UIViewController {
                     return false
                 }
                 return true
+            }
+            if filtered.count != musicPaperView.data.count {
+                playEraserSound()
             }
             musicPaperView.data = filtered
         }
@@ -350,10 +372,39 @@ class MusicPaperViewController: UIViewController {
         panelTrailingConstraint.isActive = true
     }
     
-    func playSound() {
+    func playPunchSound() {
         let selectedSoundIndex = Int.random(in: 0...2)
         
-        guard let url = Bundle.main.url(forResource: availablePunchSounds[selectedSoundIndex], withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: availablePunchSounds[selectedSoundIndex], withExtension: "mp3") else {
+            return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            /* iOS 10 and earlier require the following line:
+             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func playEraserSound() {
+        // zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009
+        
+        let soundName = "zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009"
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else {
+            return
+        }
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)

@@ -33,6 +33,11 @@ class PaperOptionPanelView: UIView {
     @IBOutlet weak var txtBpm: UITextField!
     @IBOutlet weak var txtIncompleteMeasure: UITextField!
     
+    @IBOutlet weak var btnCollapsePanel: UIButton!
+    @IBOutlet weak var btnEraser: UIButton!
+    @IBOutlet weak var btnPlay: UIButton!
+    @IBOutlet weak var btnSnapToGrid: UIButton!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()

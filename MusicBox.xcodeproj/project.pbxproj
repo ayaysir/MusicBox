@@ -90,6 +90,7 @@
 		44C1BA58273C07B300543A74 /* AppConfigVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA57273C07B300543A74 /* AppConfigVariables.swift */; };
 		44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA59273C23E900543A74 /* SettingTableViewController.swift */; };
 		44C1BA5C273D506C00543A74 /* AudioMIDISettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA5B273D506C00543A74 /* AudioMIDISettingTableViewController.swift */; };
+		44C1BA5F2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C1BA5E2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -218,6 +219,7 @@
 		44C1BA57273C07B300543A74 /* AppConfigVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigVariables.swift; sourceTree = "<group>"; };
 		44C1BA59273C23E900543A74 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA5B273D506C00543A74 /* AudioMIDISettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMIDISettingTableViewController.swift; sourceTree = "<group>"; };
+		44C1BA5E2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -488,6 +490,14 @@
 			path = settings;
 			sourceTree = "<group>";
 		};
+		44C1BA5D273FFFF300543A74 /* erasersound */ = {
+			isa = PBXGroup;
+			children = (
+				44C1BA5E2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 */,
+			);
+			path = erasersound;
+			sourceTree = "<group>";
+		};
 		44E682DC26EA46310074FE46 = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +576,7 @@
 		44F3A03426FE1E06000CE46F /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				44C1BA5D273FFFF300543A74 /* erasersound */,
 				447E11662721C0E900931B8C /* punchsound */,
 				44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */,
 				44F3A03226FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 */,
@@ -730,6 +741,7 @@
 				44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */,
 				447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
+				44C1BA5F2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 in Resources */,
 				447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */,
 				44E682F226EA46340074FE46 /* Assets.xcassets in Resources */,
 				44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */,

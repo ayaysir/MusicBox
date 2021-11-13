@@ -10,6 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaperOptionPanelView" customModule="MusicBox" customModuleProvider="target">
             <connections>
+                <outlet property="btnCollapsePanel" destination="k7L-qn-r9K" id="7cZ-cT-OBq"/>
+                <outlet property="btnEraser" destination="V0o-v8-LpO" id="htW-PQ-6rP"/>
+                <outlet property="btnPlay" destination="G12-z7-Pm4" id="sSr-LN-ywO"/>
+                <outlet property="btnSnapToGrid" destination="gaQ-Zi-vPf" id="4N3-at-xfu"/>
                 <outlet property="txtBpm" destination="Acj-x8-XuG" id="N1U-yx-Fzj"/>
                 <outlet property="txtIncompleteMeasure" destination="0Ma-09-hy6" id="RpJ-as-Ycf"/>
             </connections>
@@ -19,75 +23,94 @@
             <rect key="frame" x="0.0" y="0.0" width="380" height="320"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="j2I-I1-FDJ">
-                    <rect key="frame" x="8" y="8" width="52" height="297.5"/>
+                    <rect key="frame" x="8" y="8" width="52" height="305"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7L-qn-r9K">
                             <rect key="frame" x="0.0" y="0.0" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="BPR-u4-UPL"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="gearshape.fill" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                            <state key="normal" image="keyboard.onehanded.left" catalog="system" backgroundImage="button border space">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                             </state>
                             <connections>
                                 <action selector="btnActOpenPanel:" destination="-1" eventType="touchUpInside" id="AIM-8x-bZ5"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0o-v8-LpO">
-                            <rect key="frame" x="0.0" y="45" width="52" height="34"/>
+                            <rect key="frame" x="0.0" y="45" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="GH6-Yv-x2z"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="drop.circle" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
-                            </state>
+                            <state key="normal" image="eraser white icon" backgroundImage="button border space"/>
                             <connections>
                                 <action selector="btnActEraser:" destination="-1" eventType="touchUpInside" id="EjH-NT-ae8"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdD-GL-Gt5">
-                            <rect key="frame" x="0.0" y="89" width="52" height="31.5"/>
+                            <rect key="frame" x="0.0" y="90" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="PhH-o3-Lcx"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="arrow.uturn.backward" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                            <state key="normal" image="arrow.counterclockwise" catalog="system" backgroundImage="button border space">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                             </state>
                             <connections>
                                 <action selector="btnActUndo:" destination="-1" eventType="touchUpInside" id="Vps-bT-zbF"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G12-z7-Pm4">
-                            <rect key="frame" x="0.0" y="130.5" width="52" height="30"/>
+                            <rect key="frame" x="0.0" y="135" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="jHv-dS-TLK"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="play.fill" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                            <state key="normal" image="play.fill" catalog="system" backgroundImage="button border space">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                             </state>
                             <connections>
                                 <action selector="btnActPlaySequence:" destination="-1" eventType="touchUpInside" id="0S1-Ti-Gsl"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaQ-Zi-vPf">
-                            <rect key="frame" x="0.0" y="170.5" width="52" height="35"/>
+                            <rect key="frame" x="0.0" y="180" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="A5F-aH-qCb"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="arrowtriangle.right.fill.and.line.vertical.and.arrowtriangle.left.fill" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                            <state key="normal" image="arrowtriangle.right.fill.and.line.vertical.and.arrowtriangle.left.fill" catalog="system" backgroundImage="button border space">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                             </state>
                             <connections>
                                 <action selector="btnActToggleSnapToGrid:" destination="-1" eventType="touchUpInside" id="Zdg-it-4Ao"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOQ-h9-Hpj">
-                            <rect key="frame" x="0.0" y="215.5" width="52" height="41"/>
+                            <rect key="frame" x="0.0" y="225" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="rQ8-bj-UTT"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="arrow.right.doc.on.clipboard" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                            <state key="normal" image="rectangle.righthalf.inset.filled.arrow.right" catalog="system" backgroundImage="button border space">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                             </state>
                             <connections>
                                 <action selector="btnActExtendPaper:" destination="-1" eventType="touchUpInside" id="QjT-PL-Hi4"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qna-uA-8FF">
-                            <rect key="frame" x="0.0" y="266.5" width="52" height="31"/>
+                            <rect key="frame" x="0.0" y="270" width="52" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="HS3-K7-Vw9"/>
+                            </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" image="dock.arrow.up.rectangle" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                            <state key="normal" image="dock.arrow.up.rectangle" catalog="system" backgroundImage="button border space">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                             </state>
                             <connections>
                                 <action selector="btnActSave:" destination="-1" eventType="touchUpInside" id="WQe-cV-UL8"/>
@@ -98,116 +121,178 @@
                         <constraint firstAttribute="width" constant="52" id="ObM-s5-rAZ"/>
                     </constraints>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OtZ-xp-rt1">
-                    <rect key="frame" x="67.5" y="8" width="300" height="139.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="S9W-d3-kJs">
+                    <rect key="frame" x="67.5" y="8" width="125" height="305"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVE-fn-Kvn">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="30.5"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title=" Erase All Note" image="xmark.seal" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
-                            </state>
-                            <connections>
-                                <action selector="btnActReset:" destination="-1" eventType="touchUpInside" id="xcU-cz-6qt"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hl-l0-ca9">
-                            <rect key="frame" x="0.0" y="35.5" width="300" height="26"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title=" Back to the Main Menu" image="arrow.backward.square.fill" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
-                            </state>
-                            <connections>
-                                <action selector="btnActBackToMain:" destination="-1" eventType="touchUpInside" id="x5l-4w-8eH"/>
-                            </connections>
-                        </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBH-Fk-4zi">
-                            <rect key="frame" x="0.0" y="66.5" width="300" height="34"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bpm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hO-sf-82e">
-                                    <rect key="frame" x="0.0" y="0.0" width="34.5" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acj-x8-XuG">
-                                    <rect key="frame" x="34.5" y="0.0" width="214.5" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="wanryoAccesory" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </textField>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuA-Ed-OJv">
-                                    <rect key="frame" x="249" y="0.0" width="51" height="34"/>
-                                    <state key="normal" title="change">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btnActChangeBPM:" destination="-1" eventType="touchUpInside" id="ZtP-kz-Vd1"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTd-7R-MGS">
-                            <rect key="frame" x="0.0" y="105.5" width="300" height="34"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="im" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHO-L6-IYu">
-                                    <rect key="frame" x="0.0" y="0.0" width="18.5" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-09-hy6">
-                                    <rect key="frame" x="18.5" y="0.0" width="32" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="wanryoAccesory" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </textField>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSi-yf-se9">
-                                    <rect key="frame" x="50.5" y="0.0" width="249.5" height="34"/>
-                                    <state key="normal" title="change">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btnActChangeIncompleteMeasure:" destination="-1" eventType="touchUpInside" id="nff-Th-VL1"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push/Pull Detail Menu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rL-sP-SWD">
+                            <rect key="frame" x="0.0" y="0.0" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="en5-b8-0pI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eraser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAr-BT-FlB">
+                            <rect key="frame" x="0.0" y="45" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="Vms-uT-84d"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Undo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIY-cO-ScE">
+                            <rect key="frame" x="0.0" y="90" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="skL-2v-XEK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play/Stop Sequence" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0w9-ZK-Xrf">
+                            <rect key="frame" x="0.0" y="135" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="F9v-4A-aOi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap to Grid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlT-Jm-MPt">
+                            <rect key="frame" x="0.0" y="180" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="17t-L5-w8d"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expand Paper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSd-8n-KLj">
+                            <rect key="frame" x="0.0" y="225" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="I4b-sU-xF3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save the Paper File" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0Z-rU-i4K">
+                            <rect key="frame" x="0.0" y="270" width="125" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="FjB-on-Rvb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="300" id="XD3-LU-eJG"/>
-                    </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVE-fn-Kvn">
+                    <rect key="frame" x="200" y="18" width="300" height="30.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title=" Erase All Note" image="xmark.seal" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                    </state>
+                    <connections>
+                        <action selector="btnActReset:" destination="-1" eventType="touchUpInside" id="xcU-cz-6qt"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hl-l0-ca9">
+                    <rect key="frame" x="200" y="57" width="300" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title=" Back to the Main Menu" image="arrow.backward.square.fill" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                    </state>
+                    <connections>
+                        <action selector="btnActBackToMain:" destination="-1" eventType="touchUpInside" id="x5l-4w-8eH"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="bpm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hO-sf-82e">
+                    <rect key="frame" x="208" y="109" width="34.5" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Acj-x8-XuG">
+                    <rect key="frame" x="208" y="141" width="118" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="wanryoAccesory" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XuA-Ed-OJv">
+                    <rect key="frame" x="334" y="145" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="change">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="btnActChangeBPM:" destination="-1" eventType="touchUpInside" id="ZtP-kz-Vd1"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-09-hy6">
+                    <rect key="frame" x="242" y="198" width="126" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="wanryoAccesory" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="im" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHO-L6-IYu">
+                    <rect key="frame" x="214" y="205" width="103" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSi-yf-se9">
+                    <rect key="frame" x="214" y="240" width="124" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="change">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="btnActChangeIncompleteMeasure:" destination="-1" eventType="touchUpInside" id="nff-Th-VL1"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="F3C-DG-wjk"/>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="OtZ-xp-rt1" firstAttribute="leading" secondItem="j2I-I1-FDJ" secondAttribute="trailing" constant="7.5" id="4oQ-wm-iWQ"/>
                 <constraint firstAttribute="width" constant="380" id="8ac-JJ-7so"/>
+                <constraint firstItem="S9W-d3-kJs" firstAttribute="leading" secondItem="j2I-I1-FDJ" secondAttribute="trailing" constant="7.5" id="BLi-9z-eR8"/>
                 <constraint firstAttribute="height" constant="320" id="pUV-9W-c4v"/>
+                <constraint firstItem="S9W-d3-kJs" firstAttribute="top" secondItem="j2I-I1-FDJ" secondAttribute="top" id="tej-jV-IG5"/>
                 <constraint firstItem="j2I-I1-FDJ" firstAttribute="leading" secondItem="F3C-DG-wjk" secondAttribute="leading" constant="8" id="u7R-th-ox0"/>
                 <constraint firstItem="j2I-I1-FDJ" firstAttribute="top" secondItem="F3C-DG-wjk" secondAttribute="top" constant="8" id="yyR-ZN-9et"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="86.875" y="-729.375"/>
+            <point key="canvasLocation" x="67.5" y="-639.375"/>
         </view>
     </objects>
     <resources>
         <image name="arrow.backward.square.fill" catalog="system" width="128" height="114"/>
-        <image name="arrow.right.doc.on.clipboard" catalog="system" width="116" height="128"/>
-        <image name="arrow.uturn.backward" catalog="system" width="128" height="112"/>
+        <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="arrowtriangle.right.fill.and.line.vertical.and.arrowtriangle.left.fill" catalog="system" width="128" height="89"/>
+        <image name="button border space" width="188" height="137"/>
         <image name="dock.arrow.up.rectangle" catalog="system" width="128" height="93"/>
-        <image name="drop.circle" catalog="system" width="128" height="121"/>
-        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="eraser white icon" width="188" height="137"/>
+        <image name="keyboard.onehanded.left" catalog="system" width="128" height="79"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="rectangle.righthalf.inset.filled.arrow.right" catalog="system" width="128" height="93"/>
         <image name="xmark.seal" catalog="system" width="128" height="128"/>
     </resources>
 </document>
