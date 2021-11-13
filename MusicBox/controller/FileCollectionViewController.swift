@@ -9,6 +9,7 @@ import UIKit
 import PanModal
 import DropDown
 import Photos
+import SwiftSpinner
 
 class FileCollectionViewController: UICollectionViewController {
 
@@ -104,6 +105,7 @@ class FileCollectionViewController: UICollectionViewController {
                 
                 print("\(Date())::: copy result(case 2): \(finalFilePath) ::: \(copyResult)", to: &logger)
                 let receivedDocument = PaperDocument(fileURL: finalFilePath)
+                
                 receivedDocument.open { success in
                     self.performSegue(withIdentifier: "DetailPaperViewSegue", sender: receivedDocument)
                 }

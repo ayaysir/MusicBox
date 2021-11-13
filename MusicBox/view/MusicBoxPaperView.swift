@@ -39,11 +39,7 @@ class MusicBoxPaperView: UIView {
     // draw 주요 정보 저장
     var boxOutline: CGRect!
 
-    var data: [PaperCoord] = [] {
-        didSet {
-            self.setNeedsDisplay()
-        }
-    }
+    var data: [PaperCoord] = []
     
     var currentPlayingBeat: Int = 8 {
         didSet{
@@ -101,6 +97,28 @@ class MusicBoxPaperView: UIView {
     func reloadPaper() {
         self.configure(rowNum: self.rowNum, colNum: self.colNum, util: util, gridInfo: paperGrid)
         self.setNeedsDisplay()
+    }
+    
+    func addNote(appendCoord: PaperCoord) {
+        
+        data.append(appendCoord)
+        
+        if data.count > 0 {
+            let arcX = cst.leftMargin + appendCoord.gridX! * cst.cellWidth
+            let arcY = cst.topMargin + appendCoord.gridY!.cgFloat * cst.cellHeight
+            let arcRect = CGRect(x: arcX - cst.circleRadius * 2, y: arcY - cst.circleRadius * 2, width: cst.circleRadius * 4, height: cst.circleRadius * 4)
+            self.setNeedsDisplay(arcRect)
+        } else {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    func eraseSpecificNote(deletedCoord: PaperCoord, fullData: [PaperCoord]) {
+        let arcX = cst.leftMargin + deletedCoord.gridX! * cst.cellWidth
+        let arcY = cst.topMargin + deletedCoord.gridY!.cgFloat * cst.cellHeight
+        let arcRect = CGRect(x: arcX - cst.circleRadius * 2, y: arcY - cst.circleRadius * 2, width: cst.circleRadius * 4, height: cst.circleRadius * 4)
+        self.setNeedsDisplay(arcRect)
+        self.data = fullData
     }
 
     override func draw(_ rect: CGRect) {

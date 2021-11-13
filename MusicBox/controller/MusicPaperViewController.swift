@@ -77,7 +77,15 @@ class MusicPaperViewController: UIViewController {
     var touchTimeCheckMode: Bool!
     var timer: Timer?
     
-    var isPanelCollapsed: Bool = true
+    var isPanelCollapsed: Bool = true {
+        didSet {
+            if isPanelCollapsed {
+                panelView.btnCollapsePanel.setImage(UIImage(systemName: "keyboard.onehanded.left"), for: .normal)
+            } else {
+                panelView.btnCollapsePanel.setImage(UIImage(systemName: "keyboard.onehanded.right"), for: .normal)
+            }
+        }
+    }
     var panelMoveX: CGFloat = 316
     var panelTrailingConstraint: NSLayoutConstraint!
     
@@ -249,18 +257,21 @@ class MusicPaperViewController: UIViewController {
                 }
             }
             
-            musicPaperView.data.append(coord)
+//            musicPaperView.data.append(coord)
+            musicPaperView.addNote(appendCoord: coord)
             
         } else {
             
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else { return }
             
+            var deletedCoord: PaperCoord?
             let filtered = musicPaperView.data.filter { coord in
                 let absoulteCircleBounds = CGRect(x: cst.leftMargin + coord.gridX * cst.cellWidth - cst.circleRadius,
                                           y: cst.topMargin + coord.gridY.cgFloat * cst.cellHeight - cst.circleRadius,
                                           width: cst.circleRadius * 2,
                                           height: cst.circleRadius * 2)
                 if coord.musicNote.equalTo(rhs: note) && absoulteCircleBounds.contains(touchedPoint) {
+                    deletedCoord = coord
                     return false
                 }
                 return true
@@ -268,7 +279,11 @@ class MusicPaperViewController: UIViewController {
             if filtered.count != musicPaperView.data.count {
                 playEraserSound()
             }
-            musicPaperView.data = filtered
+//            musicPaperView.data = filtered
+            if let deletedCoord = deletedCoord {
+                musicPaperView.eraseSpecificNote(deletedCoord: deletedCoord, fullData: filtered)
+            }
+            
         }
         
         // 마지막 터치된 시점으로부터
@@ -461,6 +476,16 @@ extension MusicPaperViewController: UIScrollViewDelegate {
 }
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
+    func didClickedShrinkPaper(_ view: UIView) {
+        if self.colNum > cst.defaultColNum {
+            self.colNum -= cst.defaultColNum
+            document?.paper?.colNum = colNum
+            musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
+            constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
+        }
+        
+    }
+    
     func didClickedToggleSnapToGrid(_ view: UIView) {
         snapToGridMode = !snapToGridMode
     }
@@ -564,12 +589,18 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 scrollView.setContentOffset(lastScrollViewOffset, animated: false)
             }
             midiManager.midiPlayer?.stop()
+            self.panelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+            
         } else {
             let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
             midiManager.musicSequence = sequence
             midiManager.midiPlayer?.play({
                 print("midi play finished")
             })
+            
+            self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
             
             DispatchQueue.main.async { [self] in
                 

@@ -19,6 +19,7 @@ protocol PaperOptionPanelViewDelegate: AnyObject {
     func didClickedBpmChange(_ view: UIView, bpm: Double)
     func didIncompleteMeasureChange(_ view: UIView, numOf16beat: Int)
     func didClickedExtendPaper(_ view: UIView)
+    func didClickedShrinkPaper(_ view: UIView)
     func didClickedToggleSnapToGrid(_ view: UIView)
 }
 
@@ -132,6 +133,11 @@ class PaperOptionPanelView: UIView {
     @IBAction func btnActExtendPaper(_ sender: Any) {
         delegate?.didClickedExtendPaper(self)
     }
+    
+    @IBAction func btnActShrinkPaper(_ sender: Any) {
+        delegate?.didClickedShrinkPaper(self)
+    }
+    
     
     @IBAction func btnActToggleSnapToGrid(_ sender: Any) {
         delegate?.didClickedToggleSnapToGrid(self)
