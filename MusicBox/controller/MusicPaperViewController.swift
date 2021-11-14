@@ -18,7 +18,6 @@ enum MusicPaperMode {
 }
 
 class MusicPaperViewController: UIViewController {
-    
     var previousScale: CGFloat = 1.0
     
     var mode: MusicPaperMode = .edit
@@ -76,6 +75,7 @@ class MusicPaperViewController: UIViewController {
     var lastTouchedTime: Date?
     var touchTimeCheckMode: Bool!
     var timer: Timer?
+    var isNowPlaying: Bool = false
     
     var isPanelCollapsed: Bool = true {
         didSet {
@@ -106,6 +106,8 @@ class MusicPaperViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SwiftSpinner.show("load")
         
         guard let paper = document?.paper else {
             return
@@ -213,7 +215,10 @@ class MusicPaperViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        SwiftSpinner.hide(nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -477,13 +482,26 @@ extension MusicPaperViewController: UIScrollViewDelegate {
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedShrinkPaper(_ view: UIView) {
-        if self.colNum > cst.defaultColNum {
-            self.colNum -= cst.defaultColNum
-            document?.paper?.colNum = colNum
-            musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
-            constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
-        }
         
+        if self.colNum > cst.defaultColNum {
+            simpleDestructiveYesAndNo(self, message: "정말 종이를 축소하시겠습니까? 이 작업은 복구할 수 없습니다.", title: "종이 축소") { [self] action in
+                SwiftSpinner.show("processing...")
+                self.colNum -= cst.defaultColNum
+                document?.paper?.colNum = colNum
+                musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
+                constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
+                
+                // 자른 부분 날리기
+                let threshold = Double(self.colNum)
+                musicPaperView.data = musicPaperView.data.filter { coord in
+                    return coord.gridX! < threshold
+                }
+//                musicPaperView.setNeedsDisplay()
+                SwiftSpinner.hide(nil)
+            }
+        } else {
+            simpleAlert(self, message: "더 이상 줄일 수 없습니다.", title: "불가능", handler: nil)
+        }
     }
     
     func didClickedToggleSnapToGrid(_ view: UIView) {
@@ -493,7 +511,9 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedExtendPaper(_ view: UIView) {
         self.colNum += cst.defaultColNum
         document?.paper?.colNum = colNum
-        musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
+//        musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
+        
+        musicPaperView.expandPaper(expandedColNum: colNum)
         constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
     }
     
@@ -538,16 +558,19 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     
     func didClickedResetPaper(_ view: UIView) {
         if allowEdit {
-            musicPaperView.data = []
+            simpleDestructiveYesAndNo(self, message: "정말 모든 노트를 제거하시겠습니까? 이 작업은 복구할 수 없습니다.", title: "모든 노트 제거") { action in
+                self.musicPaperView.data = []
+                
+                // ??
+                self.musicPaperView.setNeedsDisplay()
+            }
         }
-        
     }
     
     func didClickedUndo(_ view: UIView) {
         if allowEdit && musicPaperView.data.count >= 1 {
             musicPaperView.data.removeLast()
         }
-        
     }
     
     func didClickedSave(_ view: UIView) {
@@ -582,25 +605,47 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     private func playSequence() {
-        if midiManager.midiPlayer!.isPlaying {
+        if midiManager.midiPlayer!.isPlaying || isNowPlaying {
             if propertyAnimator.isRunning {
                 propertyAnimator.stopAnimation(true)
                 scrollView.zoomScale = lastScrollViewZoomScale
                 scrollView.setContentOffset(lastScrollViewOffset, animated: false)
             }
             midiManager.midiPlayer?.stop()
-            self.panelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+            isNowPlaying = false
+            
+            switch mode {
+            case .edit:
+                self.panelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+            case .view:
+                self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            }
             
         } else {
             let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
             midiManager.musicSequence = sequence
+            isNowPlaying = true
             midiManager.midiPlayer?.play({
                 print("midi play finished")
+                DispatchQueue.main.async {
+                    switch self.mode {
+                    case .edit:
+                        self.panelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                        self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+                    case .view:
+                        self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                    }
+                }
             })
             
-            self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+            switch mode {
+            case .edit:
+                self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+                self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+            case .view:
+                self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            }
             
             DispatchQueue.main.async { [self] in
                 

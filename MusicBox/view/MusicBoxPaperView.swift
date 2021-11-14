@@ -47,6 +47,10 @@ class MusicBoxPaperView: UIView {
         }
     }
     
+    override class var layerClass: AnyClass {
+        return CATiledLayer.self
+    }
+    
     var title: String = "Toccata & Fugue In D Minor - II. Fugue - BWV 538"
     var originalArtist: String = "J. S. Bach"
     var paperMaker: String = "Paper Man"
@@ -54,7 +58,6 @@ class MusicBoxPaperView: UIView {
     var fontPalatio: UIFont!
     var fontAlpha: CGFloat = 0.8
     var paperGrid: GridInfo = GridInfo()
-    
     
     let cst = PaperConstant.shared
     
@@ -68,19 +71,37 @@ class MusicBoxPaperView: UIView {
     
     func configure(rowNum: Int, colNum: Int, util: MusicBoxUtil, gridInfo: GridInfo) {
         
+        
         self.rowNum = rowNum
         self.colNum = colNum
         
         let boxWidth = cst.cellWidth * (colNum + imBeatCount).cgFloat
         let boxHeight = cst.cellHeight * (rowNum - 1).cgFloat
         self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
-
+        (self.layer as! CATiledLayer).tileSize = CGSize(width: 10000, height: boxHeight + cst.topMargin * 2)
+        
         self.util = util
         self.paperGrid = gridInfo
         
         fontPalatio = UIFont(name: "Palatio", size: 30) ?? UIFont()
         
         self.setNeedsDisplay()
+        
+    }
+    
+    func expandPaper(expandedColNum: Int) {
+        
+        let colStart = self.colNum
+        let colDiff = expandedColNum - self.colNum
+        self.colNum = expandedColNum
+        
+        let boxWidth = cst.cellWidth * (colNum + imBeatCount).cgFloat
+        let boxHeight = cst.cellHeight * (rowNum - 1).cgFloat
+        self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
+        
+        let redrawStartX = cst.leftMargin + cst.cellWidth * colStart.cgFloat
+        let redrawBox = CGRect(x: redrawStartX, y: cst.topMargin, width: (colDiff + imBeatCount).cgFloat * cst.cellWidth, height: boxHeight)
+        self.setNeedsDisplay(redrawBox)
     }
     
     func setTexts(title: String?, originalArtist: String?, paperMaker: String?) {

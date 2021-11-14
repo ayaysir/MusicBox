@@ -75,7 +75,7 @@
                                 <action selector="btnActPlaySequence:" destination="-1" eventType="touchUpInside" id="0S1-Ti-Gsl"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaQ-Zi-vPf">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaQ-Zi-vPf">
                             <rect key="frame" x="0.0" y="180" width="52" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="A5F-aH-qCb"/>
@@ -89,7 +89,7 @@
                                 <action selector="btnActToggleSnapToGrid:" destination="-1" eventType="touchUpInside" id="Zdg-it-4Ao"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOQ-h9-Hpj">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOQ-h9-Hpj">
                             <rect key="frame" x="0.0" y="225" width="52" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="rQ8-bj-UTT"/>
