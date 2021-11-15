@@ -15,7 +15,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.bgsmm.musicbox</string>
+				<string>com.bgsmm.format.musicbox</string>
 			</array>
 		</dict>
 		<dict/>
@@ -101,7 +101,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.bgsmm.musicbox</string>
+			<string>com.bgsmm.format.musicbox</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -124,7 +124,7 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.bgsmm.musicbox</string>
+			<string>com.bgsmm.format.musicbox</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -134,5 +134,24 @@
 			</dict>
 		</dict>
 	</array>
+    <key>NSExtensionAttributes</key>
+    <!-- https://pspdfkit.com/blog/2016/hiding-action-share-extensions-in-your-own-apps/ -->
+    <dict>
+        <key>NSExtensionActivationRule</key>
+        <string>
+        SUBQUERY (
+            extensionItems,
+            $extensionItem,
+                SUBQUERY (
+                    $extensionItem.attachments,
+                    $attachment,
+                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.bgsmm.format.musicbox" OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.data" OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.content")
+                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "your.unique.uti.here")
+                ).@count == $extensionItem.attachments.@count
+        ).@count == 1
+        </string>
+    </dict>
 </dict>
 </plist>

@@ -80,17 +80,32 @@ class PaperInfoTableViewController: UITableViewController {
         openPaper(mode: .view)
     }
     
-    @IBAction func btnActShare(_ sender: Any) {
+    @IBAction func btnActShare(_ sender: UIButton) {
         
         // set up activity view controller
-        var shareList = [Any]()
-        shareList.append(selectedDocument!.fileURL)
+//        var shareList = [Any]()
+//        shareList.append(selectedDocument!.fileURL)
         
-        let activityViewController = UIActivityViewController(activityItems: shareList as [Any], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        let activityViewController = UIActivityViewController(activityItems: [/* Items to be shared, */ selectedDocument!.fileURL, ActionExtensionBlockerItem()], applicationActivities: nil)
+
+//        let activityViewController = UIActivityViewController(activityItems: shareList as [Any], applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+                activityViewController.popoverPresentationController?.sourceView = self.view
+            activityViewController.popoverPresentationController?.sourceRect = sender.frame
+            }
         
         // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [.postToVimeo, .postToWeibo, .postToFlickr, .postToTwitter, .postToFacebook, .postToTencentWeibo]
+        activityViewController.excludedActivityTypes = [
+            .postToVimeo,
+            .postToWeibo,
+            .postToFlickr,
+            .postToTwitter,
+            .postToFacebook,
+            .postToTencentWeibo,
+            UIActivity.ActivityType(rawValue: "com.bgsmm.MusicBox")
+        ]
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)

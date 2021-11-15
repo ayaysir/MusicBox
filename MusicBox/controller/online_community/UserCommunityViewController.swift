@@ -49,6 +49,11 @@ class UserCommunityViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PostPageSegue" {
             guard let vc = segue.destination as? PostPageViewController,
@@ -150,7 +155,14 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         // 160 : 280 = 1.75
         let width = collectionView.frame.width
         
-        let itemsPerRow: CGFloat = 2
+        var itemsPerRow: CGFloat {
+            if view.bounds.width <= 500 {
+                return 2
+            } else {
+                return floor(view.bounds.width / 200)
+            }
+        }
+        
         let widthPadding = sectionInsets.left * (itemsPerRow + 1)
         
         let cellWidth = (width - widthPadding) / itemsPerRow

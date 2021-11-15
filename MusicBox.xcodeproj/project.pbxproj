@@ -51,6 +51,7 @@
 		44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */; };
 		44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5C271D906F00A0EF62 /* HeartButton.swift */; };
 		44558E5F271D94F300A0EF62 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5E271D94F300A0EF62 /* Like.swift */; };
+		445B5A4B27429E1F0003A437 /* ActionExtensionBlockerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
@@ -181,6 +182,7 @@
 		44558E5A271C7EA500A0EF62 /* UpdatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostViewController.swift; sourceTree = "<group>"; };
 		44558E5C271D906F00A0EF62 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		44558E5E271D94F300A0EF62 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
+		445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionBlockerItem.swift; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				444D9466271328F70090F587 /* UIButton+.swift */,
 				444D946E271727EA0090F587 /* UITextField+.swift */,
 				44C1BA4627357AA600543A74 /* FileManager+.swift */,
+				445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				449F3E9A26EF1B1C002C874D /* MusicPaperViewController.swift in Sources */,
 				44AE99452705E9B600D046D1 /* DemoOfNSCodingAndUIDocument.swift in Sources */,
 				440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */,
+				445B5A4B27429E1F0003A437 /* ActionExtensionBlockerItem.swift in Sources */,
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
 				44C1BA56273C061900543A74 /* String+ConfigKeys.swift in Sources */,

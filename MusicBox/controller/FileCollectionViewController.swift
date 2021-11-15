@@ -50,6 +50,11 @@ class FileCollectionViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(openFromExternalApp(notification:)), name: Notification.Name(rawValue: "OpenFromExternalApp"), object: nil)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionViewLayout.invalidateLayout()
+    }
+
     @objc func openFromExternalApp(notification: Notification) {
         
         print("noti obj type", type(of: notification.object), to: &logger)
@@ -283,8 +288,14 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
         
         // 140 : 200 = 1.43
         let width = collectionView.frame.width
+        var itemsPerRow: CGFloat {
+            if view.bounds.width <= 500 {
+                return 2
+            } else {
+                return floor(view.bounds.width / 200)
+            }
+        }
         
-        let itemsPerRow: CGFloat = 2
         let widthPadding = sectionInsets.left * (itemsPerRow + 1)
         
         let cellWidth = (width - widthPadding) / itemsPerRow
@@ -396,6 +407,9 @@ class FileCollectionViewCell: UICollectionViewCell {
     }
     
     func update(document: PaperDocument?) {
+        
+        let fontSize = lblTitle.bounds.height * 0.83
+        lblTitle.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         
         self.document = document
         guard document != nil, let paper = document!.paper else { return }

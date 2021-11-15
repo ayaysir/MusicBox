@@ -432,8 +432,8 @@ extension CreateNewPaperTableViewController: UIPickerViewDelegate, UIPickerViewD
             guard let noteImage = UIImage(named: noteNames[row]) else {
                 return UIImageView()
             }
-            
-            let imageView = UIImageView(image: noteImage)
+            let tinted = noteImage.withTintColor(UIColor(named: "color-basic")!)
+            let imageView = UIImageView(image: tinted)
             
             if noteNames[row] != "note_whole" {
                 let height: CGFloat = 25
@@ -489,6 +489,10 @@ extension CreateNewPaperTableViewController: UIPickerViewDelegate, UIPickerViewD
                 break
             }
         }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        30
     }
     
 }

@@ -20,36 +20,45 @@
             <rect key="frame" x="0.0" y="0.0" width="68" height="99"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TcT-k7-CKG">
-                    <rect key="frame" x="0.0" y="0.0" width="67.5" height="99"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zha-sB-PIS">
-                            <rect key="frame" x="0.0" y="0.0" width="67.5" height="49.5"/>
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="btnActPlay:" destination="-1" eventType="touchUpInside" id="Uw9-dR-gbB"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXm-FR-5o2">
-                            <rect key="frame" x="0.0" y="49.5" width="67.5" height="49.5"/>
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="chevron.left.circle.fill" catalog="system">
-                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="btnActBack:" destination="-1" eventType="touchUpInside" id="Yz8-CH-OZI"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXm-FR-5o2">
+                    <rect key="frame" x="0.0" y="49" width="68" height="49.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49.5" id="lfp-MM-7DL"/>
+                    </constraints>
+                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="chevron.left.circle.fill" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="btnActBack:" destination="-1" eventType="touchUpInside" id="Yz8-CH-OZI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zha-sB-PIS">
+                    <rect key="frame" x="0.0" y="0.0" width="68" height="49.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49.5" id="P77-af-d2s"/>
+                    </constraints>
+                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="play.fill" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="30"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="btnActPlay:" destination="-1" eventType="touchUpInside" id="Uw9-dR-gbB"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UXm-FR-5o2" secondAttribute="trailing" id="5Vl-QZ-nAC"/>
+                <constraint firstItem="UXm-FR-5o2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RVT-j7-C78"/>
+                <constraint firstItem="Zha-sB-PIS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="TDU-j4-ZRZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="UXm-FR-5o2" secondAttribute="bottom" constant="0.5" id="fAj-NU-yXx"/>
+                <constraint firstItem="Zha-sB-PIS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="yJt-p6-9cU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Zha-sB-PIS" secondAttribute="trailing" id="yOP-qr-c0K"/>
+            </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
