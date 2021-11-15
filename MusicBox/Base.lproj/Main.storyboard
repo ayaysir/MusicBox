@@ -1400,15 +1400,17 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="LGn-Xg-o2f">
                                                     <rect key="frame" x="186" y="26" width="45.5" height="20.5"/>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZX-ch-Cls">
-                                                    <rect key="frame" x="110" y="120.5" width="50" height="49.5"/>
+                                                <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZX-ch-Cls">
+                                                    <rect key="frame" x="132" y="143" width="28" height="27"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" systemColor="systemPinkColor"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Button" image="play.circle.fill" catalog="system">
+                                                    <state key="normal" image="play.circle.fill" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                     </state>
-                                                    <buttonConfiguration key="configuration" style="filled" image="play.circle.fill" catalog="system">
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
-                                                    </buttonConfiguration>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="circleButton" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="btnActPreplay:" destination="qRt-PD-Ker" eventType="touchUpInside" id="yQ1-4w-hyB"/>
                                                         <action selector="btnActPreplay:" destination="aIW-eH-CQg" eventType="touchUpInside" id="ycJ-ol-dXf"/>
@@ -1428,7 +1430,6 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="WZX-ch-Cls" firstAttribute="height" secondItem="yGE-g0-uz2" secondAttribute="height" multiplier="0.32" id="1fN-su-Xek"/>
                                                 <constraint firstItem="m8N-KV-55l" firstAttribute="leading" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="16" id="6jZ-Dy-HMD"/>
                                                 <constraint firstItem="yGE-g0-uz2" firstAttribute="centerY" secondItem="a7K-eV-V6N" secondAttribute="centerY" id="Mxb-5S-B0m"/>
                                                 <constraint firstItem="m8N-KV-55l" firstAttribute="top" secondItem="lnS-u4-1Ny" secondAttribute="bottom" constant="-0.5" id="O8f-0M-7qj"/>
@@ -1438,7 +1439,6 @@
                                                 <constraint firstItem="WZX-ch-Cls" firstAttribute="bottom" secondItem="yGE-g0-uz2" secondAttribute="bottom" constant="-10" id="YRl-yP-4vy"/>
                                                 <constraint firstAttribute="trailing" secondItem="lnS-u4-1Ny" secondAttribute="trailing" constant="26" id="ayV-bY-89J"/>
                                                 <constraint firstAttribute="trailing" secondItem="8bA-MP-XPo" secondAttribute="trailing" constant="26" id="dQW-DK-XbD"/>
-                                                <constraint firstItem="WZX-ch-Cls" firstAttribute="width" secondItem="yGE-g0-uz2" secondAttribute="width" multiplier="0.333333" id="eEc-uO-Gqe"/>
                                                 <constraint firstItem="yGE-g0-uz2" firstAttribute="top" secondItem="a7K-eV-V6N" secondAttribute="top" constant="26" id="elu-xE-MUX"/>
                                                 <constraint firstItem="8bA-MP-XPo" firstAttribute="leading" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="16" id="gem-Jv-OeY"/>
                                                 <constraint firstAttribute="trailing" secondItem="qU3-3B-hml" secondAttribute="trailing" constant="26" id="hhH-6t-mQs"/>

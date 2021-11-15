@@ -80,9 +80,9 @@ class MusicPaperViewController: UIViewController {
     var isPanelCollapsed: Bool = true {
         didSet {
             if isPanelCollapsed {
-                panelView.btnCollapsePanel.setImage(UIImage(systemName: "keyboard.onehanded.left"), for: .normal)
+                panelView.btnCollapsePanel.setImage(UIImage(named: "hand pull"), for: .normal)
             } else {
-                panelView.btnCollapsePanel.setImage(UIImage(systemName: "keyboard.onehanded.right"), for: .normal)
+                panelView.btnCollapsePanel.setImage(UIImage(named: "hand push"), for: .normal)
             }
         }
     }

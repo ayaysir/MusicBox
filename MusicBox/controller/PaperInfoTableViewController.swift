@@ -27,6 +27,10 @@ class PaperInfoTableViewController: UITableViewController {
         initPaperInfo()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        midiManager.midiPlayer?.stop()
+    }
+    
     func initPaperInfo() {
         guard let paper = selectedDocument?.paper else {
             return
