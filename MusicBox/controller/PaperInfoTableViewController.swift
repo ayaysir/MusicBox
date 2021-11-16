@@ -17,6 +17,10 @@ class PaperInfoTableViewController: UITableViewController {
     @IBOutlet weak var lblSequenceTime: UILabel!
     @IBOutlet weak var imgAlbumart: UIImageView!
     
+    @IBOutlet weak var btnEditPaper: UIButton!
+    @IBOutlet weak var btnUpdateInformation: UIButton!
+    @IBOutlet weak var btnShare: UIButton!
+    @IBOutlet weak var btnViewMode: UIButton!
     
     @IBOutlet weak var btnPreplay: UIButton!
     var midiManager = MIDIManager()
@@ -25,13 +29,33 @@ class PaperInfoTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = selectedDocument?.fileURL.lastPathComponent
         initPaperInfo()
+        initButtonsAppearance()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         midiManager.midiPlayer?.stop()
     }
     
-    func initPaperInfo() {
+    private func initButtonsAppearance() {
+        
+        let leftMargin: CGFloat = 3
+        
+        if #available(iOS 15.0, *) {
+            btnShare.configuration?.imagePadding = leftMargin
+            btnUpdateInformation.configuration?.imagePadding = leftMargin
+            btnEditPaper.configuration?.imagePadding = leftMargin
+            btnViewMode.configuration?.imagePadding = leftMargin
+            
+        } else {
+            // Fallback on earlier versions
+            btnShare.titleEdgeInsets.left = leftMargin
+            btnUpdateInformation.titleEdgeInsets.left = leftMargin
+            btnEditPaper.titleEdgeInsets.left = leftMargin
+            btnViewMode.titleEdgeInsets.left = leftMargin
+        }
+    }
+    
+    private func initPaperInfo() {
         guard let paper = selectedDocument?.paper else {
             return
         }

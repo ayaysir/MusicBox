@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -1465,7 +1466,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chy-Z8-v56">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="40"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Edit Paper"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Edit Paper">
+                                                        <imageReference key="image" image="pencil.and.ellipsis.rectangle" catalog="system" symbolScale="small"/>
+                                                    </buttonConfiguration>
                                                     <connections>
                                                         <action selector="btnActEditPaper:" destination="qRt-PD-Ker" eventType="touchUpInside" id="s8W-9b-4Ha"/>
                                                     </connections>
@@ -1489,7 +1492,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAA-jg-fq4">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="40"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Update Paper Information"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Update Paper Information">
+                                                        <imageReference key="image" image="doc.plaintext" catalog="system" symbolScale="small"/>
+                                                    </buttonConfiguration>
                                                     <connections>
                                                         <action selector="btnActUpdatePaperinfo:" destination="qRt-PD-Ker" eventType="touchUpInside" id="9ci-z7-M55"/>
                                                     </connections>
@@ -1513,7 +1518,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5L-eq-RQG">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="40"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Listening to the Music Box"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Listening to the Music Box">
+                                                        <imageReference key="image" image="speaker.2.fill" catalog="system" symbolScale="small"/>
+                                                    </buttonConfiguration>
                                                     <connections>
                                                         <action selector="btnActListenPaper:" destination="qRt-PD-Ker" eventType="touchUpInside" id="vLI-q4-gXM"/>
                                                     </connections>
@@ -1536,10 +1543,13 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5W-ns-hpF">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="40"/>
-                                                    <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <color key="tintColor" systemColor="systemPurpleColor"/>
+                                                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system" title="Share">
-                                                        <color key="baseForegroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Share">
+                                                        <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="small"/>
+                                                        <color key="baseForegroundColor" systemColor="systemPurpleColor"/>
                                                     </buttonConfiguration>
                                                     <connections>
                                                         <action selector="btnActShare:" destination="qRt-PD-Ker" eventType="touchUpInside" id="RNY-CH-knv"/>
@@ -1590,7 +1600,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Dynamic Paper Title" id="JvR-8x-ej1"/>
                     <connections>
+                        <outlet property="btnEditPaper" destination="Chy-Z8-v56" id="0HI-5h-8Ae"/>
                         <outlet property="btnPreplay" destination="WZX-ch-Cls" id="rkf-sk-sO8"/>
+                        <outlet property="btnShare" destination="R5W-ns-hpF" id="oPa-Rx-rW7"/>
+                        <outlet property="btnUpdateInformation" destination="FAA-jg-fq4" id="BNG-U9-r6a"/>
+                        <outlet property="btnViewMode" destination="s5L-eq-RQG" id="g31-bH-O59"/>
                         <outlet property="imgAlbumart" destination="yGE-g0-uz2" id="Jpq-m7-4EX"/>
                         <outlet property="lblArtist" destination="8bA-MP-XPo" id="Ocl-Nq-oYg"/>
                         <outlet property="lblBpmAndTimeSignature" destination="lnS-u4-1Ny" id="6s2-28-GXP"/>
@@ -2471,11 +2485,14 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="81"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="sample" width="1024" height="768"/>
+        <image name="speaker.2.fill" catalog="system" width="128" height="90"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.arrow.up.circle.fill" catalog="system" width="128" height="121"/>
         <image name="steel" width="89" height="1674"/>
@@ -2500,6 +2517,9 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -153,6 +153,21 @@ class FileCollectionViewController: UICollectionViewController {
         
         let buttonWidth: CGFloat = 67
         
+        // 그림자
+        let shadowColor: UIColor = {
+            if let basicColor = UIColor(named: "color-basic") {
+                return basicColor
+            } else {
+                return UIColor.label
+            }
+        }()
+        
+        btnAdd.layer.shadowColor = shadowColor.cgColor
+        btnAdd.layer.shadowOpacity = 0.5
+        btnAdd.layer.shadowOffset = CGSize(width: 2, height: 2)
+        btnAdd.layer.shadowRadius = 6
+        btnAdd.layer.masksToBounds = false
+        
         self.view.addSubview(btnAdd)
         let guide = self.view.safeAreaLayoutGuide
         btnAdd.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
@@ -165,12 +180,12 @@ class FileCollectionViewController: UICollectionViewController {
         let insetValue: CGFloat = 10
         
         btnAdd.layer.cornerRadius = buttonWidth * 0.5
-        btnAdd.clipsToBounds = true
+//        btnAdd.clipsToBounds = true
         
         btnAdd.imageEdgeInsets = UIEdgeInsets(top: insetValue, left: insetValue, bottom: insetValue * 2, right: insetValue * 2)
         
-        print(btnAdd.bounds) // (0.0, 0.0, 0.0, 0.0)
         btnAdd.addTarget(self, action: #selector(touchedAddButton), for: .touchUpInside)
+        
     }
     
     @objc private func touchedAddButton() {
