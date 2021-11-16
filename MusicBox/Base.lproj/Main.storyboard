@@ -145,13 +145,21 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddb-aL-Ygj">
-                                <rect key="frame" x="257" y="653" width="89" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddb-aL-Ygj">
+                                <rect key="frame" x="327" y="726" width="67" height="67"/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="0lc-6U-LU8"/>
+                                    <constraint firstAttribute="width" secondItem="Ddb-aL-Ygj" secondAttribute="height" multiplier="1:1" id="YEt-Kq-wTm"/>
+                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="40"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleButton" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="Hh2-PP-4wj" kind="show" id="pTI-xS-8Nw"/>
                                 </connections>
@@ -160,7 +168,9 @@
                         <viewLayoutGuide key="safeArea" id="TdS-j4-yjk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="TdS-j4-yjk" firstAttribute="trailing" secondItem="Ddb-aL-Ygj" secondAttribute="trailing" constant="20" id="G6x-d9-R46"/>
                             <constraint firstItem="TdS-j4-yjk" firstAttribute="bottom" secondItem="je2-sM-oqK" secondAttribute="bottom" id="IYA-fR-TpU"/>
+                            <constraint firstItem="TdS-j4-yjk" firstAttribute="bottom" secondItem="Ddb-aL-Ygj" secondAttribute="bottom" constant="20" id="Vpp-PQ-RQW"/>
                             <constraint firstItem="TdS-j4-yjk" firstAttribute="trailing" secondItem="je2-sM-oqK" secondAttribute="trailing" id="ggt-RD-JqH"/>
                             <constraint firstItem="je2-sM-oqK" firstAttribute="top" secondItem="TdS-j4-yjk" secondAttribute="top" id="qV0-P5-3kO"/>
                             <constraint firstItem="je2-sM-oqK" firstAttribute="leading" secondItem="TdS-j4-yjk" secondAttribute="leading" id="x5h-p1-JUl"/>
@@ -169,6 +179,7 @@
                     <navigationItem key="navigationItem" title="Main" largeTitleDisplayMode="never" id="pUf-n2-O71"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="btnAddPost" destination="Ddb-aL-Ygj" id="m7k-2K-faa"/>
                         <outlet property="collectionView" destination="je2-sM-oqK" id="9wq-eO-Inh"/>
                         <segue destination="e77-6f-XQ8" kind="show" identifier="PostPageSegue" id="z9e-fl-rXO"/>
                         <segue destination="tUf-T4-MRk" kind="show" id="ogE-Xa-aeo"/>
@@ -2273,7 +2284,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Send a Report &amp; Links" id="bos-Xg-8QN">
+                            <tableViewSection headerTitle="Links" id="bos-Xg-8QN">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Haz-Hy-cDF" style="IBUITableViewCellStyleDefault" id="Iue-tJ-nwc">
                                         <rect key="frame" x="20" y="460.5" width="374" height="43.5"/>
@@ -2299,7 +2310,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Gir Repository" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dOp-0X-WqI">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="GitHub Repository" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dOp-0X-WqI">
                                                     <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
@@ -2331,29 +2342,28 @@
         <scene sceneID="pVK-0d-0C0">
             <objects>
                 <tableViewController id="0Uv-aZ-NbT" customClass="AudioMIDISettingTableViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="AYy-7C-0Fl">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="AYy-7C-0Fl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Duration of Each Note during Playback" id="e3K-Ka-PsI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="ruH-1n-IPu">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ruH-1n-IPu" id="765-Hh-yfY">
-                                            <rect key="frame" x="0.0" y="0.0" width="373.5" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-jG-g7E">
-                                                    <rect key="frame" x="20" y="8" width="278" height="30"/>
+                                                    <rect key="frame" x="20" y="8" width="258" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="sldActChangeDuration:" destination="0Uv-aZ-NbT" eventType="valueChanged" id="z1y-vH-h44"/>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gye-s7-G6Y">
-                                                    <rect key="frame" x="304" y="11" width="62" height="21"/>
+                                                    <rect key="frame" x="284" y="11" width="50" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                                     <nil key="textColor"/>
@@ -2367,16 +2377,44 @@
                             <tableViewSection headerTitle="MIDI Instrument Patch" id="baI-H0-blY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="212" id="Jqy-2T-fIH">
-                                        <rect key="frame" x="0.0" y="155" width="414" height="212"/>
+                                        <rect key="frame" x="20" y="143" width="374" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jqy-2T-fIH" id="75D-2L-mPW">
-                                            <rect key="frame" x="0.0" y="0.0" width="373.5" height="212"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333.5" height="212"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47c-CY-G7r">
-                                                    <rect key="frame" x="20" y="25" width="335" height="162"/>
+                                                    <rect key="frame" x="20" y="25" width="295" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Play sound in silent mode" footerTitle="Restart the app for this change to take effect." id="rKE-8v-qa2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="I0g-u1-Q6x">
+                                        <rect key="frame" x="20" y="412.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I0g-u1-Q6x" id="oh6-2h-Qgi">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="Play sound in silent mode" translatesAutoresizingMaskIntoConstraints="NO" id="gRE-GL-iWY">
+                                                    <rect key="frame" x="20" y="6" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="swtActChangePlayInSilentMode:" destination="0Uv-aZ-NbT" eventType="valueChanged" id="4JX-p2-0Zx"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Play sound in silent mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oV0-QR-5uU">
+                                                    <rect key="frame" x="83" y="11" width="247" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2393,6 +2431,7 @@
                         <outlet property="lblDuration" destination="gye-s7-G6Y" id="G9T-h1-hkf"/>
                         <outlet property="pkvInstrumentPatch" destination="47c-CY-G7r" id="KdG-iZ-Gsv"/>
                         <outlet property="sldDuration" destination="ndu-jG-g7E" id="XAe-4r-0Gl"/>
+                        <outlet property="swtPlayInSilentMode" destination="gRE-GL-iWY" id="VYS-vE-rW8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37O-ku-3hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2491,6 +2530,7 @@
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sample" width="1024" height="768"/>
         <image name="speaker.2.fill" catalog="system" width="128" height="90"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>

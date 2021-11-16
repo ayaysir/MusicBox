@@ -13,5 +13,5 @@ extension String {
     static let cfgBackgroundTextureName = "cfgBackgroundTextureName"
     static let cfgDurationOfNoteSound = "cfgDurationOfNoteSound"
     static let cfgInstrumentPatch = "cfgInstrumentPatch"
-    
+    static let cfgPlayInSilentMode = "cfgPlayInSilentMode"
 }

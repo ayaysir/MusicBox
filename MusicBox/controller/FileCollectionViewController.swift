@@ -155,7 +155,7 @@ class FileCollectionViewController: UICollectionViewController {
         
         // 그림자
         let shadowColor: UIColor = {
-            if let basicColor = UIColor(named: "color-basic") {
+            if let basicColor = UIColor(named: "color-button-shadow") {
                 return basicColor
             } else {
                 return UIColor.label

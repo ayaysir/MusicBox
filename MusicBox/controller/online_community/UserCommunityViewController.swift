@@ -12,6 +12,7 @@ import Combine
 class UserCommunityViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var btnAddPost: UIButton!
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     var posts: [Post] = []
@@ -21,6 +22,22 @@ class UserCommunityViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        btnAddPost.setTitle("", for: .normal)
+        // 그림자
+        let shadowColor: UIColor = {
+            if let basicColor = UIColor(named: "color-button-shadow") {
+                return basicColor
+            } else {
+                return UIColor.label
+            }
+        }()
+        
+        btnAddPost.layer.shadowColor = shadowColor.cgColor
+        btnAddPost.layer.shadowOpacity = 0.5
+        btnAddPost.layer.shadowOffset = CGSize(width: 2, height: 2)
+        btnAddPost.layer.shadowRadius = 6
+        btnAddPost.layer.masksToBounds = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

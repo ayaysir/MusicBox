@@ -12,6 +12,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
     @IBOutlet weak var sldDuration: UISlider!
     @IBOutlet weak var pkvInstrumentPatch: UIPickerView!
     @IBOutlet weak var lblDuration: UILabel!
+    @IBOutlet weak var swtPlayInSilentMode: UISwitch!
     
     let configStore = UserDefaults.standard
     
@@ -37,6 +38,10 @@ class AudioMIDISettingTableViewController: UITableViewController {
             return patch.number == patchNumber
         } ?? 10
         pkvInstrumentPatch.selectRow(patchArrayIndex, inComponent: 0, animated: true)
+        
+        let playInSilentMode = configStore.bool(forKey: .cfgPlayInSilentMode)
+        swtPlayInSilentMode.isOn = playInSilentMode
+        
     }
     
     @IBAction func sldActChangeDuration(_ sender: UISlider) {
@@ -47,6 +52,11 @@ class AudioMIDISettingTableViewController: UITableViewController {
         // set UserDefaults value
         configStore.set(intValue, forKey: .cfgDurationOfNoteSound)
     }
+    
+    @IBAction func swtActChangePlayInSilentMode(_ sender: UISwitch) {
+        configStore.set(sender.isOn, forKey: .cfgPlayInSilentMode)
+    }
+    
     
 }
 
