@@ -14,4 +14,7 @@ typealias ErrorBlock = (_ error: Error) -> ()
 typealias FileCompletionBlock = () -> Void
 var block: FileCompletionBlock?
 
+typealias VoidBlock = () -> Void
+typealias StringBlock = (_ string: String?) -> Void
+
 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)

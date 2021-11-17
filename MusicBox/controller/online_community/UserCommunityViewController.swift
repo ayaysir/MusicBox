@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import Combine
+import SwiftSpinner
 
 class UserCommunityViewController: UIViewController {
     
@@ -86,11 +87,12 @@ class UserCommunityViewController: UIViewController {
 extension UserCommunityViewController {
     
     func getPostList() {
+        SwiftSpinner.show("Loading post list...")
         let ref = Database.database().reference(withPath: "community")
         ref.observe(.value) { (snapshot: DataSnapshot) in
             
             guard let snapshotDict = snapshot.value as? Dictionary<String, Any> else {
-                print("글이 없습니다.")
+                SwiftSpinner.show(duration: 2, title: "There are no articles.", animated: false, completion: nil)
                 return
             }
             let array = snapshotDict.map { (key: String, value: Any) in
@@ -106,16 +108,21 @@ extension UserCommunityViewController {
                 self.posts.sort { p1, p2 in
                     p1.uploadDate > p2.uploadDate
                 }
-                self.collectionView.reloadData()
+                
+                SwiftSpinner.hide {
+                    self.collectionView.reloadData()
+                }
+                
             } catch {
                 print("getPost Error:", error.localizedDescription)
+                SwiftSpinner.show(duration: 2, title: "getPost Error: \(error.localizedDescription)", animated: false, completion: nil)
             }
             
         }
     }
     
     @objc func getPost(sender: UIButton) {
-        print(sender.tag)
+        
     }
 }
 

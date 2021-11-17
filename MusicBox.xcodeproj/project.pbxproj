@@ -52,6 +52,8 @@
 		44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5C271D906F00A0EF62 /* HeartButton.swift */; };
 		44558E5F271D94F300A0EF62 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44558E5E271D94F300A0EF62 /* Like.swift */; };
 		445B5A4B27429E1F0003A437 /* ActionExtensionBlockerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */; };
+		445B5A4D27451FD10003A437 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4C27451FD00003A437 /* UIView+.swift */; };
+		445B5A4F2745272C0003A437 /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4E2745272B0003A437 /* ColorUtil.swift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
@@ -183,6 +185,8 @@
 		44558E5C271D906F00A0EF62 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		44558E5E271D94F300A0EF62 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionBlockerItem.swift; sourceTree = "<group>"; };
+		445B5A4C27451FD00003A437 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		445B5A4E2745272B0003A437 /* ColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 				444D946E271727EA0090F587 /* UITextField+.swift */,
 				44C1BA4627357AA600543A74 /* FileManager+.swift */,
 				445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */,
+				445B5A4C27451FD00003A437 /* UIView+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -458,6 +463,7 @@
 				444D946A2714787B0090F587 /* ImageManager.swift */,
 				447E116F27231AB200931B8C /* BPMConverter.swift */,
 				44C1BA482739578300543A74 /* Reachability.swift */,
+				445B5A4E2745272B0003A437 /* ColorUtil.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -932,6 +938,7 @@
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				447E117027231AB200931B8C /* BPMConverter.swift in Sources */,
 				44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */,
+				445B5A4F2745272C0003A437 /* ColorUtil.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
 				44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */,
 				44C1BA432733F8F000543A74 /* Log.swift in Sources */,
@@ -952,6 +959,7 @@
 				44C1BA4727357AA600543A74 /* FileManager+.swift in Sources */,
 				444D94602711EE170090F587 /* Post.swift in Sources */,
 				44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */,
+				445B5A4D27451FD10003A437 /* UIView+.swift in Sources */,
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
 				44C1BA54273C04D500543A74 /* TextureCollectionViewController.swift in Sources */,
 				44C1BA4D27395AF900543A74 /* NotConnectedViewController.swift in Sources */,

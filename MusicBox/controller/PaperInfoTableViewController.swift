@@ -110,15 +110,9 @@ class PaperInfoTableViewController: UITableViewController {
     
     @IBAction func btnActShare(_ sender: UIButton) {
         
-        // set up activity view controller
-//        var shareList = [Any]()
-//        shareList.append(selectedDocument!.fileURL)
-        
         let activityViewController = UIActivityViewController(activityItems: [/* Items to be shared, */ selectedDocument!.fileURL, ActionExtensionBlockerItem()], applicationActivities: nil)
-
-//        let activityViewController = UIActivityViewController(activityItems: shareList as [Any], applicationActivities: nil)
-//        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
+        // so that iPads won't crash
         if UIDevice.current.userInterfaceIdiom == .pad {
                 activityViewController.popoverPresentationController?.sourceView = self.view
             activityViewController.popoverPresentationController?.sourceRect = sender.frame
@@ -158,13 +152,17 @@ class PaperInfoTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func btnActPreplay(_ sender: Any) {
+    @IBAction func btnActPreplay(_ sender: UIButton) {
         if midiManager.midiPlayer!.isPlaying {
             midiManager.midiPlayer?.stop()
         } else {
+            sender.setImage(UIImage(systemName: "stop.circle.fill"), for: .normal)
             midiManager.midiPlayer?.play({
                 print("midi play finished")
                 self.midiManager.midiPlayer?.currentPosition = 0
+                DispatchQueue.main.async {
+                    sender.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+                }
             })
         }
     }

@@ -27,7 +27,9 @@ class PostPageViewController: UIPageViewController {
         guard let postViewVC = vcInstance(name: "PostView") as? PostViewController else {
             return
         }
+        
         let currentPost = posts[currentIndex]
+        self.title = currentPost.postTitle
         postViewVC.post = currentPost
         setViewControllers([postViewVC], direction: .forward, animated: true, completion: nil)
         

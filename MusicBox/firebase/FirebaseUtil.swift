@@ -50,3 +50,19 @@ func getFileAndSave(childRefSTr: String, fileSaveURL: URL, completeHandler: @esc
 func getDatabaseRef() -> DatabaseReference {
     return Database.database().reference()
 }
+
+func getNickname(of uid: String, completeHandler: @escaping StringBlock) {
+    let ref = Database.database().reference()
+    ref.child("users").child(uid).child("nickname").getData { error, snapshot in
+        if let error = error {
+            print("get nickname failed:", error.localizedDescription)
+            return
+        }
+        
+        if snapshot.exists() {
+//            self.lblUserNickname.text = snapshot.value as? String
+            let snapshotText = snapshot.value as? String
+            completeHandler(snapshotText)
+        }
+    }
+}

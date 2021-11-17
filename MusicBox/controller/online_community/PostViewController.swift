@@ -43,13 +43,22 @@ class PostViewController: UIViewController {
         
         if let post = post {
             lblTitle.text = post.paperTitle
-            lblPostWriter.text = post.writerUID
-            lblOriginalArtist.text = post.paperArtist
-            lblPaperMaker.text = post.paperMaker
+            
+            getNickname(of: post.writerUID) { nickname in
+                let nicknameText: String = {
+                    if let nickname = nickname, nickname != "" {
+                        return "Posting by \(nickname)"
+                    } else {
+                        return "Posting by unknown"
+                    }
+                }()
+                self.lblPostWriter.text = nicknameText
+            }
+            
+            lblOriginalArtist.text = "Composed by \(post.paperArtist.unknown)"
+            lblPaperMaker.text = "Paper made by \(post.paperMaker)"
             txvComment.text = post.postComment
             lblUploadedDate.text = "\(post.uploadDate)"
-            
-            naviBar.topItem?.title = post.postTitle
             
             getThumbnail(postIdStr: post.postId.uuidString)
             
@@ -60,9 +69,26 @@ class PostViewController: UIViewController {
             }
             
             // 시퀀스 준비
+            midiManager.currentBPM = post.bpm
             midiManager.musicSequence = midiManager.convertPaperToMIDI(paperCoords: post.preplayArr)
         }
         
+        // 권한 설정
+        if getCurrentUserUID() == post.writerUID {
+            btnDelete.isHidden = false
+            btnUpdate.isHidden = false
+        } else {
+            btnDelete.isHidden = true
+            btnUpdate.isHidden = true
+        }
+        
+        // 텍스트 효과
+        let glowColor = UIColor255(red: 30, green: 238, blue: 86)
+    
+        btnDownload.doGlowAnimation(withColor: glowColor)
+        btnDownload.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
+        btnUpdate.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btnDelete.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     }
     
     override func viewWillAppear(_ animated: Bool) {
