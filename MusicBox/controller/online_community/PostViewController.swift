@@ -40,6 +40,11 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         
         btnPreplay.setTitle("", for: .normal)
+        DispatchQueue.main.async  { [self] in
+            let buttonWidth = btnPreplay.bounds.width
+            btnPreplay.layer.cornerRadius = buttonWidth * 0.5
+            btnPreplay.setImage(makeSymbol(), for: .normal)
+        }
         
         if let post = post {
             lblTitle.text = post.paperTitle
@@ -169,9 +174,6 @@ class PostViewController: UIViewController {
         }
     }
     
-    @IBAction func btnActUpdate(_ sender: Any) {
-    }
-    
     @IBAction func btnActDelete(_ sender: Any) {
         simpleDestructiveYesAndNo(self, message: "정말 이 글을 삭제할까요?", title: "삭제") { action in
             let ref = Database.database().reference()
@@ -219,12 +221,19 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func btnActPreplay(_ sender: UIButton) {
+        
         if midiManager.midiPlayer!.isPlaying {
             midiManager.midiPlayer?.stop()
         } else {
+            DispatchQueue.main.async {
+                self.btnPreplay.setImage(self.makeSymbol(systemName: "stop.circle.fill"), for: .normal)
+            }
             midiManager.midiPlayer?.play({
                 print("midi play finished")
                 self.midiManager.midiPlayer?.currentPosition = 0
+                DispatchQueue.main.async {
+                    self.btnPreplay.setImage(self.makeSymbol(systemName: "play.circle.fill"), for: .normal)
+                }
             })
         }
     }
@@ -263,6 +272,16 @@ class PostViewController: UIViewController {
                 unlikeStateCallback(targetPostLikesRef, currentUID)
             }
         }
+    }
+    
+    func makeSymbol(systemName: String = "play.circle.fill") -> UIImage? {
+        // newImageWidth / 226 = x.xxx
+        let imageWidth = imgAlbumart.bounds.width
+        let multiplier: CGFloat = imageWidth / 226
+        let pointSize = multiplier * 30
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize:  pointSize >= 30 ? pointSize : 30, weight: .bold, scale: .large)
+        return UIImage(systemName: systemName, withConfiguration: largeConfig)
     }
 }
 

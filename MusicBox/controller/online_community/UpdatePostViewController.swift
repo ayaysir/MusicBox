@@ -36,7 +36,7 @@ class UpdatePostViewController: UIViewController {
         txvPostComment.text = post.postComment
     }
     
-    @IBAction func btnActUpdate(_ sender: Any) {
+    @IBAction func barBtnActUpdate(_ sender: Any) {
         if let delegate = delegate {
             post.postTitle = txfPostTitle.text ?? post.postTitle
             post.postComment = txvPostComment.text
@@ -52,6 +52,4 @@ class UpdatePostViewController: UIViewController {
             }
         }
     }
-    
-
 }

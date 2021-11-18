@@ -190,7 +190,7 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         let widthPadding = sectionInsets.left * (itemsPerRow + 1)
         
         let cellWidth = (width - widthPadding) / itemsPerRow
-        let cellHeight = cellWidth * 1.525
+        let cellHeight = cellWidth * 1.5
         
         return CGSize(width: cellWidth, height: cellHeight)
     }
