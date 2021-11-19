@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 typealias FileURLBlock = (_ url: URL?) -> Void
 typealias ErrorBlock = (_ error: Error) -> ()
@@ -16,5 +17,7 @@ var block: FileCompletionBlock?
 
 typealias VoidBlock = () -> Void
 typealias StringBlock = (_ string: String?) -> Void
+
+typealias RefHandler = (_ targetPostLikesRef: DatabaseReference, _ currentUID: String) -> ()
 
 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)

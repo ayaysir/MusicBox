@@ -175,6 +175,11 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func btnActDelete(_ sender: Any) {
+        
+        guard getCurrentUserUID() == post.writerUID else {
+            return
+        }
+        
         simpleDestructiveYesAndNo(self, message: "정말 이 글을 삭제할까요?", title: "삭제") { action in
             let ref = Database.database().reference()
             let targetPostRef = ref.child("community").child(self.post.postId.uuidString)
@@ -249,7 +254,7 @@ class PostViewController: UIViewController {
         }
     }
     
-    typealias RefHandler = (_ targetPostLikesRef: DatabaseReference, _ currentUID: String) -> ()
+    
     func getLikeState(nullCallback: @escaping RefHandler, likeStateCallback: @escaping RefHandler, unlikeStateCallback: @escaping RefHandler) {
         
         guard let currentUID = getCurrentUserUID() else {

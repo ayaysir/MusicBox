@@ -142,10 +142,6 @@ extension UploadFormViewController {
     private func first_uploadPaper(postIdStr: String, cacheDocument: PaperDocument) {
         
         cacheDocument.open { success in
-//            guard success else {
-//                SwiftSpinner.show(duration: 3, title: "문서를 여는데 실패했습니다.", animated: false, completion: nil)
-//                return
-//            }
             
             cacheDocument.save(to: cacheDocument.fileURL, for: .forOverwriting) { success in
                 guard success else { return }

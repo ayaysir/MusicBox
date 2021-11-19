@@ -487,7 +487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZp-8E-cGV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2542.0289855072465" y="527.67857142857144"/>
+            <point key="canvasLocation" x="-2872" y="427"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="bw5-dY-DBr">
@@ -552,7 +552,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steel" translatesAutoresizingMaskIntoConstraints="NO" id="RjF-lD-1mK">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="RjF-lD-1mK">
                                                 <rect key="frame" x="82" y="117" width="226" height="226"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="RjF-lD-1mK" secondAttribute="height" multiplier="1:1" id="Gzu-h7-BbN"/>
@@ -2511,7 +2511,7 @@
                                         <rect key="frame" x="20" y="49" width="350" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ruH-1n-IPu" id="765-Hh-yfY">
-                                            <rect key="frame" x="0.0" y="0.0" width="306" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-jG-g7E">
@@ -2694,7 +2694,6 @@
         <image name="sample" width="1024" height="768"/>
         <image name="speaker.2.fill" catalog="system" width="128" height="90"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
-        <image name="steel" width="89" height="1674"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
