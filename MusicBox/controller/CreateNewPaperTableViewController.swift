@@ -86,6 +86,12 @@ class CreateNewPaperTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        txfFileName.delegate = self
+        txfTitle.delegate = self
+        
+        txfOriginalArtist.delegate = self
+        txfPaperMaker.delegate = self
+        
         txfBpm.delegate = self
         txfIncompleteMeasureBeat.delegate = self
         
@@ -554,6 +560,28 @@ extension CreateNewPaperTableViewController: UITextFieldDelegate {
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case txfFileName:
+            txfTitle.becomeFirstResponder()
+        case txfTitle:
+            txfBpm.becomeFirstResponder()
+        case txfBpm:
+            txfIncompleteMeasureBeat.becomeFirstResponder()
+        case txfIncompleteMeasureBeat:
+            txfOriginalArtist.becomeFirstResponder()
+        case txfOriginalArtist:
+            txfPaperMaker.becomeFirstResponder()
+        case txfPaperMaker:
+            txvComment.becomeFirstResponder()
         default:
             break
         }

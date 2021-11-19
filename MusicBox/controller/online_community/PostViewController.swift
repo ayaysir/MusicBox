@@ -34,6 +34,8 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var btnPreplay: UIButton!
     
+    @IBOutlet weak var cnstViewHeight: NSLayoutConstraint!
+    
     let midiManager = MIDIManager()
     
     override func viewDidLoad() {
@@ -44,6 +46,11 @@ class PostViewController: UIViewController {
             let buttonWidth = btnPreplay.bounds.width
             btnPreplay.layer.cornerRadius = buttonWidth * 0.5
             btnPreplay.setImage(makeSymbol(), for: .normal)
+            
+            let afterHeight = txvComment.frame.maxY + 10
+            if afterHeight > cnstViewHeight.constant {
+                cnstViewHeight.constant = afterHeight
+            }
         }
         
         if let post = post {
@@ -61,7 +68,7 @@ class PostViewController: UIViewController {
             }
             
             lblOriginalArtist.text = "Composed by \(post.paperArtist.unknown)"
-            lblPaperMaker.text = "Paper made by \(post.paperMaker)"
+            lblPaperMaker.text = "Paper made by \(post.paperMaker.unknown)"
             txvComment.text = post.postComment
             lblUploadedDate.text = "\(post.uploadDate)"
             
@@ -291,9 +298,13 @@ class PostViewController: UIViewController {
 }
 
 extension PostViewController: UpdatePostVCDelegate {
+    func didUpdatePermissionDenied(_ controller: UpdatePostViewController) {
+        print("permisson denied. Real Writer UID: \(post.writerUID), Access User UID: \(getCurrentUserUID() ?? "unknown")")
+    }
     
     func didUpdateBtnClicked(_ controller: UpdatePostViewController, updatedPost: Post) {
-        naviBar.topItem?.title = updatedPost.postTitle
+        let parent = self.parent as? PostPageViewController
+        parent?.title = updatedPost.postTitle
         self.txvComment.text = updatedPost.postComment
         self.post = updatedPost
     }

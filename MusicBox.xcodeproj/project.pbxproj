@@ -54,6 +54,8 @@
 		445B5A4B27429E1F0003A437 /* ActionExtensionBlockerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */; };
 		445B5A4D27451FD10003A437 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4C27451FD00003A437 /* UIView+.swift */; };
 		445B5A4F2745272C0003A437 /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4E2745272B0003A437 /* ColorUtil.swift */; };
+		446279042747FC340004D95D /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */; };
+		446279072747FE810004D95D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 446279062747FE810004D95D /* IQKeyboardManagerSwift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
@@ -187,6 +189,7 @@
 		445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionBlockerItem.swift; sourceTree = "<group>"; };
 		445B5A4C27451FD00003A437 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		445B5A4E2745272B0003A437 /* ColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
+		446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4405E97A26FB798D0012E4F5 /* AudioKit in Frameworks */,
+				446279072747FE810004D95D /* IQKeyboardManagerSwift in Frameworks */,
 				5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */,
 				44AE995027071EA100D046D1 /* PanModal in Frameworks */,
 			);
@@ -464,6 +468,7 @@
 				447E116F27231AB200931B8C /* BPMConverter.swift */,
 				44C1BA482739578300543A74 /* Reachability.swift */,
 				445B5A4E2745272B0003A437 /* ColorUtil.swift */,
+				446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -650,6 +655,7 @@
 			packageProductDependencies = (
 				4405E97926FB798D0012E4F5 /* AudioKit */,
 				44AE994F27071EA100D046D1 /* PanModal */,
+				446279062747FE810004D95D /* IQKeyboardManagerSwift */,
 			);
 			productName = MusicBox;
 			productReference = 44E682E526EA46320074FE46 /* MusicBox.app */;
@@ -728,6 +734,7 @@
 			packageReferences = (
 				4405E97826FB798D0012E4F5 /* XCRemoteSwiftPackageReference "AudioKit" */,
 				44AE994E27071EA100D046D1 /* XCRemoteSwiftPackageReference "PanModal" */,
+				446279052747FE810004D95D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 44E682E626EA46320074FE46 /* Products */;
 			projectDirPath = "";
@@ -937,6 +944,7 @@
 				44C1BA58273C07B300543A74 /* AppConfigVariables.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
 				447E117027231AB200931B8C /* BPMConverter.swift in Sources */,
+				446279042747FC340004D95D /* KeyboardLayoutConstraint.swift in Sources */,
 				44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */,
 				445B5A4F2745272C0003A437 /* ColorUtil.swift in Sources */,
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
@@ -1327,6 +1335,14 @@
 				minimumVersion = 5.2.1;
 			};
 		};
+		446279052747FE810004D95D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		44AE994E27071EA100D046D1 /* XCRemoteSwiftPackageReference "PanModal" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/slackhq/PanModal.git";
@@ -1342,6 +1358,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4405E97826FB798D0012E4F5 /* XCRemoteSwiftPackageReference "AudioKit" */;
 			productName = AudioKit;
+		};
+		446279062747FE810004D95D /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 446279052747FE810004D95D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		44AE994F27071EA100D046D1 /* PanModal */ = {
 			isa = XCSwiftPackageProductDependency;

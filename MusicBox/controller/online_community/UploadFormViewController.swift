@@ -36,6 +36,8 @@ class UploadFormViewController: UIViewController {
         
         btnPreplay.circleButton = true
         btnPreplay.setTitle("", for: .normal)
+        
+        txfPostTitle.delegate = self
 
     }
     
@@ -266,6 +268,17 @@ extension UploadFormViewController: SelectAFileVCDelegate {
         midiManager.musicSequence = sequence
         
     }
-    
-    
+}
+
+extension UploadFormViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case txfPostTitle:
+            txvPostComment.becomeFirstResponder()
+        default:
+            break
+        }
+        
+        return true
+    }
 }

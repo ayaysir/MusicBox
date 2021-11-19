@@ -10,6 +10,7 @@ import Firebase
 
 protocol UpdatePostVCDelegate: AnyObject {
     func didUpdateBtnClicked(_ controller: UpdatePostViewController, updatedPost: Post)
+    func didUpdatePermissionDenied(_ controller: UpdatePostViewController)
 }
 
 class UpdatePostViewController: UIViewController {
@@ -27,6 +28,12 @@ class UpdatePostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard getCurrentUserUID() == post.writerUID else {
+            delegate?.didUpdatePermissionDenied(self)
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
 
         lblPaperMaker.text = post.paperMaker
         lblArtist.text = post.paperArtist
@@ -34,6 +41,8 @@ class UpdatePostViewController: UIViewController {
     
         txfPostTitle.text = post.postTitle
         txvPostComment.text = post.postComment
+        
+        txfPostTitle.delegate = self
     }
     
     @IBAction func barBtnActUpdate(_ sender: Any) {
@@ -51,5 +60,18 @@ class UpdatePostViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+}
+
+extension UpdatePostViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case txfPostTitle:
+            txvPostComment.becomeFirstResponder()
+        default:
+            break
+        }
+        
+        return true
     }
 }
