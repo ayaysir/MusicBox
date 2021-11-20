@@ -156,9 +156,13 @@ class MusicPaperViewController: UIViewController {
                 guard let lastTouchedTimeInterval = self.lastTouchedTime?.timeIntervalSince1970 else {
                     return
                 }
+                
                 let currentTimeInterval = Date().timeIntervalSince1970
-                if self.touchTimeCheckMode && floor(currentTimeInterval) - floor(lastTouchedTimeInterval) >= 5 {
-                    print("터치되지 않은지 5초 경과")
+                
+                // 저장된 자동저장 간격 불러오기
+                let autosaveInterval = UserDefaults.standard.integer(forKey: .cfgAutosaveInterval)
+                if self.touchTimeCheckMode && floor(currentTimeInterval) - floor(lastTouchedTimeInterval) >= autosaveInterval.cgFloat {
+                    print("터치되지 않은지 \(autosaveInterval)초 경과")
                     self.saveDocument()
                     self.touchTimeCheckMode = false
                 }

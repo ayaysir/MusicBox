@@ -56,6 +56,8 @@
 		445B5A4F2745272C0003A437 /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445B5A4E2745272B0003A437 /* ColorUtil.swift */; };
 		446279042747FC340004D95D /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */; };
 		446279072747FE810004D95D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 446279062747FE810004D95D /* IQKeyboardManagerSwift */; };
+		446279092748D9430004D95D /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446279082748D9430004D95D /* iOSDevCenters+GIF.swift */; };
+		4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790A274907130004D95D /* ArchiveNavigationController.swift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
@@ -190,6 +192,8 @@
 		445B5A4C27451FD00003A437 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		445B5A4E2745272B0003A437 /* ColorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
 		446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
+		446279082748D9430004D95D /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
+		4462790A274907130004D95D /* ArchiveNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNavigationController.swift; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				44C1BA402732B28300543A74 /* SignUpTableViewController.swift */,
 				44C1BA4C27395AF900543A74 /* NotConnectedViewController.swift */,
 				44C1BA4E273961EA00543A74 /* YouNeedLoginViewController.swift */,
+				4462790A274907130004D95D /* ArchiveNavigationController.swift */,
 			);
 			path = online_community;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 				44C1BA482739578300543A74 /* Reachability.swift */,
 				445B5A4E2745272B0003A437 /* ColorUtil.swift */,
 				446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */,
+				446279082748D9430004D95D /* iOSDevCenters+GIF.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -928,6 +934,7 @@
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,
 				44AE99402705DBED00D046D1 /* Array+.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
+				4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */,
 				444D946F271727EB0090F587 /* UITextField+.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
 				44AE99492705EB5400D046D1 /* MIDISequenceExample.swift in Sources */,
@@ -969,6 +976,7 @@
 				44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */,
 				445B5A4D27451FD10003A437 /* UIView+.swift in Sources */,
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
+				446279092748D9430004D95D /* iOSDevCenters+GIF.swift in Sources */,
 				44C1BA54273C04D500543A74 /* TextureCollectionViewController.swift in Sources */,
 				44C1BA4D27395AF900543A74 /* NotConnectedViewController.swift in Sources */,
 				44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */,

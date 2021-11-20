@@ -56,6 +56,7 @@ class UserCommunityViewController: UIViewController {
         guard Auth.auth().currentUser != nil else {
             let needLoginVC = mainStoryboard.instantiateViewController(withIdentifier: "YouNeedLoginViewController")
             self.navigationController?.setViewControllers([needLoginVC], animated: false)
+            
             return
         }
         
@@ -69,7 +70,7 @@ class UserCommunityViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -230,7 +231,7 @@ class PostCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         subscriber?.cancel()
-        imgAlbumart.image = nil
+        imgAlbumart.image = UIImage(named: "loading-icon-static")
     }
     
     func reset() {

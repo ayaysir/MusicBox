@@ -13,8 +13,14 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var txfEmail: UITextField!
     @IBOutlet weak var txfPassword: UITextField!
     
+    @IBOutlet weak var viewLoginForm: UIView!
+    @IBOutlet weak var cnstLoginFormWidth: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        txfEmail.delegate = self
+        txfPassword.delegate = self
         
         guard Reachability.isConnectedToNetwork() else {
             let notConnectedVC = mainStoryboard.instantiateViewController(withIdentifier: "NotConnectedViewController") as? NotConnectedViewController
@@ -31,6 +37,15 @@ class SignInViewController: UIViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        if UIDevice.current.model.hasPrefix("iPad") {
+             print("it is an iPad")
+        } else {
+             
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SignUpSegue" {
             let destVC = segue.destination as? SignUpTableViewController
@@ -40,6 +55,13 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
+        submitLoginInfo()
+    }
+}
+
+extension SignInViewController {
+    
+    func submitLoginInfo() {
         guard let userEmail = txfEmail.text,
               let userPassword = txfPassword.text
         else {
@@ -50,7 +72,7 @@ class SignInViewController: UIViewController {
             
             if authResult != nil {
                 print("로그인 되었습니다")
-                let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController") 
+                let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
 
                 self.navigationController?.setViewControllers([memberVC], animated: true)
                 
@@ -75,5 +97,21 @@ extension SignInViewController: SignUpDelegate {
 
     func didSignUpSuccess(_ controller: SignUpTableViewController, isSuccess: Bool, uid: String) {
         changeRootController()
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case txfEmail:
+            txfPassword.becomeFirstResponder()
+        case txfPassword:
+            submitLoginInfo()
+        default:
+            break
+        }
+        
+        return true
     }
 }

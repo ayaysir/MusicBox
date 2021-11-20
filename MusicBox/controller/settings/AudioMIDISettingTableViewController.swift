@@ -13,6 +13,9 @@ class AudioMIDISettingTableViewController: UITableViewController {
     @IBOutlet weak var pkvInstrumentPatch: UIPickerView!
     @IBOutlet weak var lblDuration: UILabel!
     @IBOutlet weak var swtPlayInSilentMode: UISwitch!
+    @IBOutlet weak var sldAutosaveInterval: UISlider!
+    @IBOutlet weak var lblAutosaveInterval: UILabel!
+    
     
     let configStore = UserDefaults.standard
     
@@ -24,7 +27,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        // 저장값 불러오기
+        // 노트 재생시간 저장값 불러오기
         var duration = configStore.integer(forKey: .cfgDurationOfNoteSound)
         if duration <= 0 {
             duration = 8
@@ -32,6 +35,15 @@ class AudioMIDISettingTableViewController: UITableViewController {
         
         sldDuration.setValue(Float(duration), animated: false)
         lblDuration.text = "\(duration)"
+        
+        // 자동저장 간격 저장값 불러오기
+        var autosaveInterval = configStore.integer(forKey: .cfgAutosaveInterval)
+        if autosaveInterval <= 0 {
+            autosaveInterval = 5
+        }
+        
+        sldAutosaveInterval.setValue(Float(autosaveInterval), animated: false)
+        lblAutosaveInterval.text = "\(autosaveInterval)"
         
         let patchNumber = configStore.integer(forKey: .cfgInstrumentPatch)
         let patchArrayIndex = INST_LIST.firstIndex { patch in
@@ -52,6 +64,15 @@ class AudioMIDISettingTableViewController: UITableViewController {
         // set UserDefaults value
         configStore.set(intValue, forKey: .cfgDurationOfNoteSound)
     }
+    
+    @IBAction func sldActChangeAutosaveInterval(_ sender: UISlider) {
+        let intValue = Int(sender.value)
+        sender.setValue(Float(intValue), animated: false)
+        lblAutosaveInterval.text = "\(intValue)"
+        
+        configStore.set(intValue, forKey: .cfgAutosaveInterval)
+    }
+    
     
     @IBAction func swtActChangePlayInSilentMode(_ sender: UISwitch) {
         configStore.set(sender.isOn, forKey: .cfgPlayInSilentMode)

@@ -14,4 +14,5 @@ extension String {
     static let cfgDurationOfNoteSound = "cfgDurationOfNoteSound"
     static let cfgInstrumentPatch = "cfgInstrumentPatch"
     static let cfgPlayInSilentMode = "cfgPlayInSilentMode"
+    static let cfgAutosaveInterval = "cfgAutosaveInterval"
 }
