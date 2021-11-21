@@ -9,8 +9,11 @@ import UIKit
 import Kingfisher
 import SwiftSpinner
 import Firebase
+import GoogleMobileAds
 
 class PostViewController: UIViewController {
+    
+    private var bannerView: GADBannerView!
     
     var post: Post!
     
@@ -23,8 +26,6 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var imgAlbumart: UIImageView!
     
-    @IBOutlet weak var naviBar: UINavigationBar!
-    
     @IBOutlet weak var btnDownload: UIButton!
     @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
@@ -35,6 +36,7 @@ class PostViewController: UIViewController {
     @IBOutlet weak var btnPreplay: UIButton!
     
     @IBOutlet weak var cnstViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var cnstScrollViewBottom: NSLayoutConstraint!
     
     let midiManager = MIDIManager()
     
@@ -101,6 +103,10 @@ class PostViewController: UIViewController {
         btnDownload.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
         btnUpdate.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btnDelete.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        
+        // banner
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -307,5 +313,11 @@ extension PostViewController: UpdatePostVCDelegate {
         parent?.title = updatedPost.postTitle
         self.txvComment.text = updatedPost.postComment
         self.post = updatedPost
+    }
+}
+
+extension PostViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        cnstScrollViewBottom.constant += bannerView.adSize.size.height
     }
 }

@@ -58,11 +58,13 @@
 		446279072747FE810004D95D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 446279062747FE810004D95D /* IQKeyboardManagerSwift */; };
 		446279092748D9430004D95D /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446279082748D9430004D95D /* iOSDevCenters+GIF.swift */; };
 		4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790A274907130004D95D /* ArchiveNavigationController.swift */; };
+		4462790D274940130004D95D /* OnlyFirstrun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790C274940130004D95D /* OnlyFirstrun.swift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
 		447E116E2722E9DF00931B8C /* CreateNewPaperTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */; };
 		447E117027231AB200931B8C /* BPMConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E116F27231AB200931B8C /* BPMConverter.swift */; };
+		448902A327495261001815FE /* AdsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448902A227495261001815FE /* AdsExtensions.swift */; };
 		449A412126ECD87E00EE3B67 /* MusicBoxPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */; };
 		449A412426ECE90200EE3B67 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412326ECE90200EE3B67 /* Int+.swift */; };
 		449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */; };
@@ -194,11 +196,13 @@
 		446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		446279082748D9430004D95D /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
 		4462790A274907130004D95D /* ArchiveNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNavigationController.swift; sourceTree = "<group>"; };
+		4462790C274940130004D95D /* OnlyFirstrun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstrun.swift; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
 		447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPaperTableViewController.swift; sourceTree = "<group>"; };
 		447E116F27231AB200931B8C /* BPMConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPMConverter.swift; sourceTree = "<group>"; };
+		448902A227495261001815FE /* AdsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsExtensions.swift; sourceTree = "<group>"; };
 		449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxPaperView.swift; sourceTree = "<group>"; };
 		449A412326ECE90200EE3B67 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		449A412626ECF84700EE3B67 /* MusicBoxGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxGrid.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 			children = (
 				444D945C2711E39C0090F587 /* FirebaseUtil.swift */,
 				4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */,
+				448902A227495261001815FE /* AdsExtensions.swift */,
 			);
 			path = firebase;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 				44E682F326EA46340074FE46 /* LaunchScreen.storyboard */,
 				44E682F626EA46340074FE46 /* Info.plist */,
 				444D9478271B0A820090F587 /* GlobalVariables.swift */,
+				4462790C274940130004D95D /* OnlyFirstrun.swift */,
 			);
 			path = MusicBox;
 			sourceTree = "<group>";
@@ -936,6 +942,7 @@
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
 				4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */,
 				444D946F271727EB0090F587 /* UITextField+.swift in Sources */,
+				4462790D274940130004D95D /* OnlyFirstrun.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
 				44AE99492705EB5400D046D1 /* MIDISequenceExample.swift in Sources */,
 				44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */,
@@ -986,6 +993,7 @@
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,
 				4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */,
 				444D9479271B0A820090F587 /* GlobalVariables.swift in Sources */,
+				448902A327495261001815FE /* AdsExtensions.swift in Sources */,
 				44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

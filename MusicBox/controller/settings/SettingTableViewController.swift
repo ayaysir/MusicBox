@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class SettingTableViewController: UITableViewController {
 
+    private var bannerView: GADBannerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        bannerView = setupBannerAds(self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -9,11 +9,20 @@ import UIKit
 import Firebase
 import Combine
 import SwiftSpinner
+import GoogleMobileAds
 
 class UserCommunityViewController: UIViewController {
     
+    private var bannerView: GADBannerView!
+    var shouldShowFooter: Bool = false {
+        didSet {
+            collectionView?.collectionViewLayout.invalidateLayout()
+        }
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnAddPost: UIButton!
+    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     var posts: [Post] = []
@@ -39,6 +48,9 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.shadowOffset = CGSize(width: 2, height: 2)
         btnAddPost.layer.shadowRadius = 6
         btnAddPost.layer.masksToBounds = false
+        
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,8 +176,11 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
             return headerView
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "spaceForBanner", for: indexPath)
+            return footerView
         default:
-            return UICollectionReusableView()
+            assert(false)
         }
     }
     
@@ -208,6 +223,22 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
         return sectionInsets.left
     }
 
+    // banner
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if shouldShowFooter {
+            return CGSize(width: collectionView.bounds.width, height: bannerView.adSize.size.height)
+        }
+        else {
+            return CGSize(width: collectionView.bounds.width, height: 0)
+        }
+    }
+}
+
+extension UserCommunityViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        buttonBottomConstraint.constant += bannerView.adSize.size.height
+        shouldShowFooter = true
+    }
 }
 
 class PostCell: UICollectionViewCell {
@@ -296,3 +327,4 @@ class PostCell: UICollectionViewCell {
 class PostCellContentView: UIView {
     
 }
+

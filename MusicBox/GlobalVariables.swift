@@ -21,3 +21,6 @@ typealias StringBlock = (_ string: String?) -> Void
 typealias RefHandler = (_ targetPostLikesRef: DatabaseReference, _ currentUID: String) -> ()
 
 let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+/// 배너 광고 높이
+let adBannerHeight: CGFloat = 50

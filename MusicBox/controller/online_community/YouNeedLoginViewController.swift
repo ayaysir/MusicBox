@@ -7,13 +7,17 @@
 
 import UIKit
 import Firebase
+import GoogleMobileAds
 
 class YouNeedLoginViewController: UIViewController {
+    
+    private var bannerView: GADBannerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,6 +30,10 @@ class YouNeedLoginViewController: UIViewController {
     @IBAction func btnActGoToLoginPage(_ sender: Any) {
         self.tabBarController?.selectedIndex = 2
     }
-    
+}
 
+extension YouNeedLoginViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        
+    }
 }

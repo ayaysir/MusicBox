@@ -10,6 +10,7 @@ import Firebase
 import Photos
 import SwiftSpinner
 import Kingfisher
+import GoogleMobileAds
 
 let interestingList = ["Pop", "Classical", "Soundtrack", "Rock", "Hiphop", "R&B", "Alternative", "Jazz"]
 let availableImageExtList = ["png", "jpg", "jpeg", "gif"]
@@ -28,6 +29,8 @@ protocol ResignMemberDelegate: AnyObject {
 }
 
 class SignUpTableViewController: UITableViewController {
+    
+    private var bannerView: GADBannerView!
 
     @IBOutlet weak var txfUserEmail: UITextField!
     @IBOutlet weak var txfPassword: UITextField!
@@ -40,6 +43,8 @@ class SignUpTableViewController: UITableViewController {
     @IBOutlet weak var btnSubmitInfo: UIButton!
     @IBOutlet weak var btnResetPageInfo: UIButton!
     @IBOutlet weak var btnWithdrawMember: UIButton!
+    
+    @IBOutlet weak var cellResignMember: UITableViewCell!
     
     // 회원정보 업데이트의 경우 리셋 기능을 위해 임시 저장
     private var userInterestingIndex: Int?
@@ -91,10 +96,12 @@ class SignUpTableViewController: UITableViewController {
             
             selectedInteresting = interestingList[0]
             btnWithdrawMember.isHidden = true
+            cellResignMember.isHidden = true
             
         case .updateMode:
             
             btnWithdrawMember.isHidden = false
+            cellResignMember.isHidden = false
             btnSubmitInfo.setTitle("Update", for: .normal)
             
             loadExistingUserInfo()
@@ -102,6 +109,9 @@ class SignUpTableViewController: UITableViewController {
         
         txfPassword.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         txfPasswordConfirm.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     @IBAction func btnActCancel(_ sender: UIButton) {
@@ -132,40 +142,11 @@ class SignUpTableViewController: UITableViewController {
     }
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
-        
-        guard validateFieldValues() else {
-            return
-        }
-        
-        switch pageMode {
-        case .signUpMode:
-            
-            guard let userEmail = txfUserEmail.text, let userPassword = txfPassword.text else {
-                return
-            }
-            
-            sendInfoToFirebase(withEmail: userEmail, password: userPassword)
-        case .updateMode:
-            guard let user = getCurrentUser() else {
-                return
-            }
-            guard let newPassword = txfPassword.text,
-                  let newPasswordConfirm = txfPasswordConfirm.text else {
-                      return
-                  }
-            
-            // 비빌번호를 두 쪽 다 입력한 때
-            if newPassword != "" || newPasswordConfirm != "" {
-                guard newPassword == newPasswordConfirm else {
-                    simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
-                    return
-                }
-                sendInfoToFirebase(withEmail: user.email!, password: newPassword)
-            } else {
-                // 비밀번호가 입력되지 않은 때
-                sendInfoToFirebaseOnlyAdditionalInfo()
-            }
-        }
+        submit()
+    }
+    
+    @IBAction func barBtnActSubmit(_ sender: Any) {
+        submit()
     }
     
     @IBAction func btnActWithdrawal(_ sender: Any) {
@@ -227,6 +208,43 @@ class SignUpTableViewController: UITableViewController {
 // MARK: - Firebase Method
 
 extension SignUpTableViewController {
+    
+    private func submit() {
+        guard validateFieldValues() else {
+            return
+        }
+        
+        switch pageMode {
+        case .signUpMode:
+            
+            guard let userEmail = txfUserEmail.text, let userPassword = txfPassword.text else {
+                return
+            }
+            
+            sendInfoToFirebase(withEmail: userEmail, password: userPassword)
+        case .updateMode:
+            guard let user = getCurrentUser() else {
+                return
+            }
+            guard let newPassword = txfPassword.text,
+                  let newPasswordConfirm = txfPasswordConfirm.text else {
+                      return
+                  }
+            
+            // 비빌번호를 두 쪽 다 입력한 때
+            if newPassword != "" || newPasswordConfirm != "" {
+                guard newPassword == newPasswordConfirm else {
+                    simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+                    return
+                }
+                sendInfoToFirebase(withEmail: user.email!, password: newPassword)
+            } else {
+                // 비밀번호가 입력되지 않은 때
+                sendInfoToFirebaseOnlyAdditionalInfo()
+            }
+        }
+    }
+    
     func sendVerificationMail(authUser: User?) {
         if authUser != nil && authUser!.isEmailVerified == false {
             SwiftSpinner.show("인증 이메일을 전송하고 있습니다...")
@@ -606,22 +624,6 @@ extension SignUpTableViewController: UITextFieldDelegate {
         
         return false
     }
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if textField == txfPasswordConfirm {
-//            guard let password = txfPassword.text,
-//                  let passwordConfirmBefore = txfPasswordConfirm.text else {
-//                return true
-//            }
-//
-//            let passwordConfirm = string.isEmpty ? passwordConfirmBefore[0..<(passwordConfirmBefore.count - 1)] : passwordConfirmBefore + string
-//            setLabelPasswordConfirm(password, passwordConfirm)
-//
-//        }
-//        return true
-//    }
-    
-    
 }
 
 extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -658,5 +660,12 @@ extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigati
         }
         
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SignUpTableViewController: GADBannerViewDelegate {
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        
     }
 }

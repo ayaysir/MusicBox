@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftSpinner
+import GoogleMobileAds
 
 let noteNames = [
     "note_sixteenth",
@@ -48,6 +49,8 @@ enum PaperInfoPageMode {
 }
 
 class CreateNewPaperTableViewController: UITableViewController {
+    
+    private var bannerView: GADBannerView!
     
     weak var createDelegate: CreateNewPaperVCDelegate?
     weak var updateDelegate: UpdateDocumentVCDelegate?
@@ -174,6 +177,9 @@ class CreateNewPaperTableViewController: UITableViewController {
             print(error)
             thumbnailImage = imgAlbumart.image!
         }
+        
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -587,5 +593,11 @@ extension CreateNewPaperTableViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension CreateNewPaperTableViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        
     }
 }

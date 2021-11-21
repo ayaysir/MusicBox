@@ -10,10 +10,19 @@ import PanModal
 import DropDown
 import Photos
 import SwiftSpinner
+import GoogleMobileAds
 
 class FileCollectionViewController: UICollectionViewController {
+    
+    private var bannerView: GADBannerView!
+    var shouldShowFooter: Bool = false {
+        didSet {
+            collectionView?.collectionViewLayout.invalidateLayout()
+        }
+    }
 
     let btnAdd = UIButton()
+    var bottomAnchorConstarint: NSLayoutConstraint!
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     
     private let filemgr = FileManager.default
@@ -48,6 +57,10 @@ class FileCollectionViewController: UICollectionViewController {
         
         // When Open from openURLContexts (앱이 실행중인 때)
         NotificationCenter.default.addObserver(self, selector: #selector(openFromExternalApp(notification:)), name: Notification.Name(rawValue: "OpenFromExternalApp"), object: nil)
+        
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -171,7 +184,10 @@ class FileCollectionViewController: UICollectionViewController {
         self.view.addSubview(btnAdd)
         let guide = self.view.safeAreaLayoutGuide
         btnAdd.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -20).isActive = true
-        btnAdd.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -20).isActive = true
+        
+        bottomAnchorConstarint = btnAdd.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -20)
+        bottomAnchorConstarint.isActive = true
+        
         btnAdd.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         btnAdd.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         
@@ -331,6 +347,27 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
         return sectionInsets.left
     }
     
+    // 배너 광고 공간
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "spaceForBanner", for: indexPath)
+            return footerView
+        default:
+            assert(false)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if shouldShowFooter {
+            return CGSize(width: collectionView.bounds.width, height: bannerView.adSize.size.height)
+        }
+        else {
+            return CGSize(width: collectionView.bounds.width, height: 0)
+        }
+    }
+    
+    
 }
 
 extension FileCollectionViewController: CreateNewPaperVCDelegate {
@@ -403,6 +440,18 @@ extension FileCollectionViewController: MusicPaperVCDelegate {
         reloadAndRefresh()
     }
     
+}
+
+extension FileCollectionViewController: GADBannerViewDelegate {
+    // GADBannerViewDelegate
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("GAD: \(#function)")
+        // 광고에 따른 제약 변경
+        let height = bannerView.adSize.size.height
+        bottomAnchorConstarint.constant -= height
+        shouldShowFooter = true
+        
+    }
 }
 
 class FileCollectionViewCell: UICollectionViewCell {

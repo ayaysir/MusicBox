@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class AudioMIDISettingTableViewController: UITableViewController {
+    
+    private var bannerView: GADBannerView!
 
     @IBOutlet weak var sldDuration: UISlider!
     @IBOutlet weak var pkvInstrumentPatch: UIPickerView!
@@ -23,6 +26,8 @@ class AudioMIDISettingTableViewController: UITableViewController {
         super.viewDidLoad()
         pkvInstrumentPatch.delegate = self
         pkvInstrumentPatch.dataSource = self
+        
+        bannerView = setupBannerAds(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

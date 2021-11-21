@@ -8,8 +8,11 @@
 import UIKit
 import Firebase
 import SwiftSpinner
+import GoogleMobileAds
 
 class UploadFormViewController: UIViewController {
+    
+    private var bannerView: GADBannerView!
     
     @IBOutlet weak var lblSelectedPaperMaker: UILabel!
     @IBOutlet weak var lblSelectedArtist: UILabel!
@@ -21,6 +24,8 @@ class UploadFormViewController: UIViewController {
     @IBOutlet weak var txfPostTitle: UITextField!
     @IBOutlet weak var txvPostComment: UITextView!
     @IBOutlet weak var swtPostAllowToEdit: UISwitch!
+    
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var btnPreplay: UIButton!
     
@@ -39,6 +44,8 @@ class UploadFormViewController: UIViewController {
         
         txfPostTitle.delegate = self
 
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,7 +77,14 @@ class UploadFormViewController: UIViewController {
     }
 
     @IBAction func btnActUpload(_ sender: Any) {
-        
+        upload()
+    }
+    
+    @IBAction func barBtnActSubmit(_ sender: Any) {
+        upload()
+    }
+    
+    private func upload() {
         midiManager.midiPlayer?.stop()
         
         guard let document = selectedDocument, let paper = document.paper else {
@@ -280,5 +294,11 @@ extension UploadFormViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension UploadFormViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        scrollViewBottomConstraint.constant += bannerView.adSize.size.height
     }
 }

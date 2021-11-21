@@ -8,8 +8,11 @@
 import UIKit
 import Firebase
 import SwiftSpinner
+import GoogleMobileAds
 
 class MemberProfileViewController: UIViewController {
+    
+    private var bannerView: GADBannerView!
     
     @IBOutlet weak var lblUserEmail: UILabel!
     @IBOutlet weak var lblNickname: UILabel!
@@ -20,6 +23,8 @@ class MemberProfileViewController: UIViewController {
     @IBOutlet weak var lblEmailVerified: UILabel!
     @IBOutlet weak var btnRefreshUserInfo: UIButton!
     
+    @IBOutlet weak var alignXConstraint: NSLayoutConstraint!
+    
     var handle: AuthStateDidChangeListenerHandle!
     
     // firebase ref
@@ -28,12 +33,20 @@ class MemberProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
+        
+        DispatchQueue.main.async {
+            let realWidth = self.imgUserProfile.bounds.width
+            self.imgUserProfile.layer.cornerRadius = realWidth * 0.5
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         if Reachability.isConnectedToNetwork() {
-            SwiftSpinner.show("회원 정보를 로딩하고 있습니다...")
+            SwiftSpinner.show("Loading user information...")
             Auth.auth().currentUser?.reload(completion: { error in
                 if error != nil {
                     print(error!.localizedDescription)
@@ -43,10 +56,11 @@ class MemberProfileViewController: UIViewController {
                 self.setUserInfoView(user: Auth.auth().currentUser)
             })
         } else {
-            simpleAlert(self, message: "not connected")
+            simpleAlert(self, message: "Not connected.")
             return
         }
         
+        btnRefreshUserInfo.setTitle("", for: .normal)
         
     }
     
@@ -66,7 +80,7 @@ class MemberProfileViewController: UIViewController {
             let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
             self.navigationController?.setViewControllers([loginVC], animated: true)
         } catch {
-            simpleAlert(self, message: "로그아웃에 실패하였습니다. \(error.localizedDescription)")
+            simpleAlert(self, message: "Sign out failed: \(error.localizedDescription)")
         }
     }
     
@@ -96,11 +110,11 @@ extension MemberProfileViewController {
     
     private func changeEmailVerified(_ isVerified: Bool) {
         if isVerified {
-            lblEmailVerified.text = "이메일 인증이 완료되었습니다."
+            lblEmailVerified.text = "Email has been verified."
             imgEmailVerified.image = UIImage(systemName: "checkmark.circle.fill")
             imgEmailVerified.tintColor = .green
         } else {
-            lblEmailVerified.text = "이메일이 인증되지 않았습니다."
+            lblEmailVerified.text = "Email is not verified."
             imgEmailVerified.image = UIImage(systemName: "xmark.circle.fill")
             imgEmailVerified.tintColor = .systemGray3
         }
@@ -114,12 +128,12 @@ extension MemberProfileViewController {
                 let dict = snapshot.value as? [String: String]
                 let interesting = dict["interesting"] ?? "-"
                 let nickname = dict["nickname"] ?? "-"
-                self.lblInteresting.text = "관심분야: \(interesting)"
-                self.lblNickname.text = "닉네임: \(nickname)"
+                self.lblInteresting.text = "Interesting: \(interesting)"
+                self.lblNickname.text = "Nickname: \(nickname)"
                 
             } else if let error = error {
-                self.lblInteresting.text = "관심분야: -"
-                self.lblNickname.text = "닉네임: -"
+                self.lblInteresting.text = "Interesting: -"
+                self.lblNickname.text = "Nickname: -"
                 print("get data failed:", error.localizedDescription)
             }
             
@@ -131,14 +145,14 @@ extension MemberProfileViewController {
         
         let sampleImageRef = storageRef.child("images/users/\(uid)/thumb_\(uid).jpg")
         
-        SwiftSpinner.show("프로필 사진을 로딩하고 있습니다...")
+        SwiftSpinner.show("Loading user's profile photo...")
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         sampleImageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 // Uh-oh, an error occurred!
                 print("download error", error.localizedDescription)
-                SwiftSpinner.show(duration: 3, title: "프로필 사진 로딩에 실패하였습니다.", animated: false, completion: nil)
+                SwiftSpinner.show(duration: 3, title: "Failed to load profile photo.", animated: false, completion: nil)
             } else {
                 // Data for "images/island.jpg" is returned
                 let image = UIImage(data: data!)
@@ -155,5 +169,12 @@ extension MemberProfileViewController: ResignMemberDelegate {
         SwiftSpinner.hide(nil)
         let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
         self.navigationController?.setViewControllers([loginVC], animated: false)
+    }
+}
+
+extension MemberProfileViewController: GADBannerViewDelegate {
+    
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        alignXConstraint.constant -= bannerView.adSize.size.height
     }
 }

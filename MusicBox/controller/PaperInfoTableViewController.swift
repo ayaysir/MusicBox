@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class PaperInfoTableViewController: UITableViewController {
+    
+    private var bannerView: GADBannerView!
     
     var selectedDocument: PaperDocument?
     
@@ -30,6 +33,9 @@ class PaperInfoTableViewController: UITableViewController {
         self.title = selectedDocument?.fileURL.lastPathComponent
         initPaperInfo()
         initButtonsAppearance()
+        
+        bannerView = setupBannerAds(self)
+        bannerView.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -198,5 +204,11 @@ extension PaperInfoTableViewController: MusicPaperVCDelegate {
     func didPaperEditFinished(_ controller: MusicPaperViewController) {
         selectedDocument = controller.document
         initPaperInfo()
+    }
+}
+
+extension PaperInfoTableViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        
     }
 }

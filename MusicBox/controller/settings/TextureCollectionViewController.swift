@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 private let reuseIdentifier = "PaperCell"
 
 class TextureCollectionViewController: UICollectionViewController {
+    
+    private var bannerView: GADBannerView!
     
     enum Category {
         case paper, background
@@ -20,6 +23,8 @@ class TextureCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView = setupBannerAds(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
