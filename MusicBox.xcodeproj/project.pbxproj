@@ -59,6 +59,7 @@
 		446279092748D9430004D95D /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446279082748D9430004D95D /* iOSDevCenters+GIF.swift */; };
 		4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790A274907130004D95D /* ArchiveNavigationController.swift */; };
 		4462790D274940130004D95D /* OnlyFirstrun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790C274940130004D95D /* OnlyFirstrun.swift */; };
+		44675A5E274B9398008E9428 /* AdInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44675A5D274B9398008E9428 /* AdInfo.swift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
@@ -197,6 +198,7 @@
 		446279082748D9430004D95D /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
 		4462790A274907130004D95D /* ArchiveNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNavigationController.swift; sourceTree = "<group>"; };
 		4462790C274940130004D95D /* OnlyFirstrun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstrun.swift; sourceTree = "<group>"; };
+		44675A5D274B9398008E9428 /* AdInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdInfo.swift; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				444D945C2711E39C0090F587 /* FirebaseUtil.swift */,
 				4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */,
 				448902A227495261001815FE /* AdsExtensions.swift */,
+				44675A5D274B9398008E9428 /* AdInfo.swift */,
 			);
 			path = firebase;
 			sourceTree = "<group>";
@@ -964,6 +967,7 @@
 				44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */,
 				44558E5B271C7EA500A0EF62 /* UpdatePostViewController.swift in Sources */,
 				44C1BA432733F8F000543A74 /* Log.swift in Sources */,
+				44675A5E274B9398008E9428 /* AdInfo.swift in Sources */,
 				44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */,
 				444D944E27105D960090F587 /* Checkbox.swift in Sources */,
 				444D945D2711E39C0090F587 /* FirebaseUtil.swift in Sources */,
