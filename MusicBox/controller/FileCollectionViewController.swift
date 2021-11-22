@@ -58,7 +58,7 @@ class FileCollectionViewController: UICollectionViewController {
         // When Open from openURLContexts (앱이 실행중인 때)
         NotificationCenter.default.addObserver(self, selector: #selector(openFromExternalApp(notification:)), name: Notification.Name(rawValue: "OpenFromExternalApp"), object: nil)
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
         bannerView.delegate = self
         
     }

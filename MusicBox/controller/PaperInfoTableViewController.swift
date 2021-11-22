@@ -34,7 +34,7 @@ class PaperInfoTableViewController: UITableViewController {
         initPaperInfo()
         initButtonsAppearance()
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
         bannerView.delegate = self
     }
     

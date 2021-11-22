@@ -15,7 +15,7 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

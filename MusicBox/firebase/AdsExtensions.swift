@@ -8,6 +8,27 @@
 import UIKit
 import GoogleMobileAds
 
+// 광고 목록
+/**
+ setting
+ - TextureCollectionViewController
+ - SettingTableViewController
+ - AudioMIDISettingTableViewController
+ 
+ archiveMain
+ - MemberProfileViewController
+ - UserCommunityViewController
+ - UploadFormViewController
+ - PostViewController
+ - SignUpTableViewController
+ - YouNeedLoginViewController
+ 
+ fileBrowser
+ - FileCollectionViewController
+ - CreateNewPaperTableViewController
+ - PaperInfoTableViewController
+ */
+
 // ============ 애드몹 셋업 ============
 
 /**

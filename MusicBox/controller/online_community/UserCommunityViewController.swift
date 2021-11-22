@@ -49,7 +49,7 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.shadowRadius = 6
         btnAddPost.layer.masksToBounds = false
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
         bannerView.delegate = self
     }
     

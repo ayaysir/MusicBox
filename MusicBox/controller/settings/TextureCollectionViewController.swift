@@ -1,5 +1,5 @@
 //
-//  PaperTextureCollectionViewController.swift
+//  TextureCollectionViewController.swift
 //  MusicBox
 //
 //  Created by yoonbumtae on 2021/11/10.
@@ -24,7 +24,7 @@ class TextureCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
     }
     
     override func viewWillAppear(_ animated: Bool) {

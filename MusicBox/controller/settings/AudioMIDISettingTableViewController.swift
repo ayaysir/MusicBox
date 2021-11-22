@@ -27,7 +27,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
         pkvInstrumentPatch.delegate = self
         pkvInstrumentPatch.dataSource = self
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
     }
     
     override func viewWillAppear(_ animated: Bool) {

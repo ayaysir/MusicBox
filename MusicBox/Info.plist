@@ -97,7 +97,7 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>This format can be opened with BGSMM's Musicbox app.</string>
+			<string>This format can be opened with BGSMM&apos;s Musicbox app.</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
@@ -120,7 +120,7 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>This format can be opened with BGSMM's Musicbox app.</string>
+			<string>This format can be opened with BGSMM&apos;s Musicbox app.</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
@@ -134,27 +134,25 @@
 			</dict>
 		</dict>
 	</array>
-    <key>NSExtensionAttributes</key>
-    <!-- https://pspdfkit.com/blog/2016/hiding-action-share-extensions-in-your-own-apps/ -->
-    <dict>
-        <key>NSExtensionActivationRule</key>
-        <string>
+	<key>NSExtensionAttributes</key>
+	<dict>
+		<key>NSExtensionActivationRule</key>
+		<string>
         SUBQUERY (
             extensionItems,
             $extensionItem,
                 SUBQUERY (
                     $extensionItem.attachments,
                     $attachment,
-                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.bgsmm.format.musicbox" OR
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.data" OR
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.content")
-                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "your.unique.uti.here")
+                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.bgsmm.format.musicbox&quot; OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.data&quot; OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.content&quot;)
+                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;your.unique.uti.here&quot;)
                 ).@count == $extensionItem.attachments.@count
         ).@count == 1
         </string>
-    </dict>
-    <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~1458002511 -->
-    <key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-3940256099942544~1458002511</string>
+	</dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6364767349592629~3313820285</string>
 </dict>
 </plist>

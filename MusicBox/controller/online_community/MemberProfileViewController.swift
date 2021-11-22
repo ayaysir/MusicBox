@@ -34,7 +34,7 @@ class MemberProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
         bannerView.delegate = self
         
         DispatchQueue.main.async {

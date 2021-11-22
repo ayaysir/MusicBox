@@ -105,7 +105,7 @@ class PostViewController: UIViewController {
         btnDelete.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         
         // banner
-        bannerView = setupBannerAds(self)
+        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
         bannerView.delegate = self
     }
     
