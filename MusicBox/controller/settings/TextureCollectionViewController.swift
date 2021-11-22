@@ -19,12 +19,15 @@ class TextureCollectionViewController: UICollectionViewController {
     }
     
     var category: Category = .paper
-    let configStore = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
+        // ====== 광고 ====== //
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

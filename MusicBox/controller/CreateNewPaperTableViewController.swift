@@ -178,8 +178,10 @@ class CreateNewPaperTableViewController: UITableViewController {
             thumbnailImage = imgAlbumart.image!
         }
         
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+            bannerView.delegate = self
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

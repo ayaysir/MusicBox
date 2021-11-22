@@ -60,6 +60,8 @@
 		4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790A274907130004D95D /* ArchiveNavigationController.swift */; };
 		4462790D274940130004D95D /* OnlyFirstrun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462790C274940130004D95D /* OnlyFirstrun.swift */; };
 		44675A5E274B9398008E9428 /* AdInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44675A5D274B9398008E9428 /* AdInfo.swift */; };
+		44675A60274B9DB5008E9428 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44675A5F274B9DB5008E9428 /* AdManager.swift */; };
+		44675A62274BA72E008E9428 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44675A61274BA72E008E9428 /* UserDefaults+.swift */; };
 		447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */; };
 		447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */; };
 		447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */; };
@@ -109,6 +111,9 @@
 		44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44E682F326EA46340074FE46 /* LaunchScreen.storyboard */; };
 		44E6830026EA46340074FE46 /* MusicBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682FF26EA46340074FE46 /* MusicBoxTests.swift */; };
 		44E6830B26EA46340074FE46 /* MusicBoxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E6830A26EA46340074FE46 /* MusicBoxUITests.swift */; };
+		44E6CDB3274BBC5300DE7EF0 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 44E6CDB2274BBC5300DE7EF0 /* html */; };
+		44E6CDB6274BC2F800DE7EF0 /* WebkitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E6CDB5274BC2F800DE7EF0 /* WebkitViewController.swift */; };
+		44E6CDB8274BCBBE00DE7EF0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E6CDB7274BCBBE00DE7EF0 /* WebKit.framework */; };
 		44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02C26FE0C71000CE46F /* Allian1.mid */; };
 		44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */; };
 		44F3A03126FE121A000CE46F /* MidiManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */; };
@@ -199,6 +204,8 @@
 		4462790A274907130004D95D /* ArchiveNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNavigationController.swift; sourceTree = "<group>"; };
 		4462790C274940130004D95D /* OnlyFirstrun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyFirstrun.swift; sourceTree = "<group>"; };
 		44675A5D274B9398008E9428 /* AdInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdInfo.swift; sourceTree = "<group>"; };
+		44675A5F274B9DB5008E9428 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
+		44675A61274BA72E008E9428 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		447E11672721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3; sourceTree = "<group>"; };
 		447E11682721C0FA00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3; sourceTree = "<group>"; };
 		447E11692721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3; sourceTree = "<group>"; };
@@ -253,6 +260,9 @@
 		44E6830626EA46340074FE46 /* MusicBoxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicBoxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E6830A26EA46340074FE46 /* MusicBoxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxUITests.swift; sourceTree = "<group>"; };
 		44E6830C26EA46340074FE46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44E6CDB2274BBC5300DE7EF0 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = "<group>"; };
+		44E6CDB5274BC2F800DE7EF0 /* WebkitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebkitViewController.swift; sourceTree = "<group>"; };
+		44E6CDB7274BCBBE00DE7EF0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		44F3A02C26FE0C71000CE46F /* Allian1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = Allian1.mid; sourceTree = "<group>"; };
 		44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
 		44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MidiManager+Sequence.swift"; sourceTree = "<group>"; };
@@ -281,6 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44E6CDB8274BCBBE00DE7EF0 /* WebKit.framework in Frameworks */,
 				4405E97A26FB798D0012E4F5 /* AudioKit in Frameworks */,
 				446279072747FE810004D95D /* IQKeyboardManagerSwift in Frameworks */,
 				5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */,
@@ -319,6 +330,7 @@
 		440A1A2C26ECC08A00AA4135 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				44E6CDB4274BC2D400DE7EF0 /* webkit */,
 				44C1BA50273BFD2800543A74 /* settings */,
 				444D94582711DB070090F587 /* online_community */,
 				444D94532711C94A0090F587 /* common */,
@@ -378,6 +390,7 @@
 				4405E96F26F780D00012E4F5 /* FirebaseFileManager.swift */,
 				448902A227495261001815FE /* AdsExtensions.swift */,
 				44675A5D274B9398008E9428 /* AdInfo.swift */,
+				44675A5F274B9DB5008E9428 /* AdManager.swift */,
 			);
 			path = firebase;
 			sourceTree = "<group>";
@@ -437,6 +450,7 @@
 				44C1BA4627357AA600543A74 /* FileManager+.swift */,
 				445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */,
 				445B5A4C27451FD00003A437 /* UIView+.swift */,
+				44675A61274BA72E008E9428 /* UserDefaults+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -553,6 +567,7 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				44E6CDB2274BBC5300DE7EF0 /* html */,
 				444D945B2711E3880090F587 /* firebase */,
 				44AE99432705E98100D046D1 /* misc */,
 				44F3A03426FE1E06000CE46F /* resource */,
@@ -602,6 +617,14 @@
 			path = MusicBoxUITests;
 			sourceTree = "<group>";
 		};
+		44E6CDB4274BC2D400DE7EF0 /* webkit */ = {
+			isa = PBXGroup;
+			children = (
+				44E6CDB5274BC2F800DE7EF0 /* WebkitViewController.swift */,
+			);
+			path = webkit;
+			sourceTree = "<group>";
+		};
 		44F3A03426FE1E06000CE46F /* resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +665,7 @@
 		FF1F2B833E758479F3B852B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44E6CDB7274BCBBE00DE7EF0 /* WebKit.framework */,
 				F1BF41CD842EF9D0FCDFC1A1 /* Pods_MusicBox.framework */,
 				3D9AAED110D6ED031E02DD11 /* Pods_MusicBox_MusicBoxUITests.framework */,
 				BEB529EDD9DC01CBC1B23167 /* Pods_MusicBoxTests.framework */,
@@ -774,6 +798,7 @@
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
 				44C1BA5F2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 in Resources */,
 				447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */,
+				44E6CDB3274BBC5300DE7EF0 /* html in Resources */,
 				44E682F226EA46340074FE46 /* Assets.xcassets in Resources */,
 				44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */,
 				44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */,
@@ -980,6 +1005,7 @@
 				440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */,
 				445B5A4B27429E1F0003A437 /* ActionExtensionBlockerItem.swift in Sources */,
 				449F3EA326EF332D002C874D /* Scale.swift in Sources */,
+				44E6CDB6274BC2F800DE7EF0 /* WebkitViewController.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
 				44C1BA56273C061900543A74 /* String+ConfigKeys.swift in Sources */,
 				44C1BA4727357AA600543A74 /* FileManager+.swift in Sources */,
@@ -987,11 +1013,13 @@
 				44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */,
 				445B5A4D27451FD10003A437 /* UIView+.swift in Sources */,
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
+				44675A60274B9DB5008E9428 /* AdManager.swift in Sources */,
 				446279092748D9430004D95D /* iOSDevCenters+GIF.swift in Sources */,
 				44C1BA54273C04D500543A74 /* TextureCollectionViewController.swift in Sources */,
 				44C1BA4D27395AF900543A74 /* NotConnectedViewController.swift in Sources */,
 				44AE99532707227900D046D1 /* CreateNewPaperViewController.swift in Sources */,
 				444AF3A52701E5BC00BD8E38 /* Document.swift in Sources */,
+				44675A62274BA72E008E9428 /* UserDefaults+.swift in Sources */,
 				444D94522711C8440090F587 /* SelectAFileViewController.swift in Sources */,
 				4405E97426F785350012E4F5 /* ImageWithName.swift in Sources */,
 				44F5B39C26F61EA3004DE730 /* SimpleAlert.swift in Sources */,

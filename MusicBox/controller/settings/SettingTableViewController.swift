@@ -14,8 +14,10 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
+        // ====== 광고 ====== //
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,6 +27,10 @@ class SettingTableViewController: UITableViewController {
             let category = sender as! String
             let vc = segue.destination as! TextureCollectionViewController
             vc.category = category == "paper" ? .paper : .background
+        case "GoToWebViewSegue":
+            let pageName = sender as! String
+            let vc = segue.destination as! WebkitViewController
+            vc.pageName = pageName
         default:
             break
         }
@@ -32,7 +38,7 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        print(indexPath)
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
@@ -41,6 +47,15 @@ class SettingTableViewController: UITableViewController {
                 performSegue(withIdentifier: "TextureSegue", sender: "background")
             case 2:
                 performSegue(withIdentifier: "MIDISegue", sender: nil)
+            default:
+                break
+            }
+        } else if indexPath.section == 2 {
+            switch indexPath.row {
+            case 0:
+                break
+            case 1:
+                performSegue(withIdentifier: "GoToWebViewSegue", sender: "license")
             default:
                 break
             }

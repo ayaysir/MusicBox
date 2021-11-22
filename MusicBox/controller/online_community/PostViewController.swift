@@ -104,9 +104,10 @@ class PostViewController: UIViewController {
         btnUpdate.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btnDelete.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         
-        // banner
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+            bannerView.delegate = self
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -34,8 +34,10 @@ class PaperInfoTableViewController: UITableViewController {
         initPaperInfo()
         initButtonsAppearance()
         
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+            bannerView.delegate = self
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

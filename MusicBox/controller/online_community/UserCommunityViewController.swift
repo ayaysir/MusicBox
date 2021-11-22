@@ -49,8 +49,10 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.shadowRadius = 6
         btnAddPost.layer.masksToBounds = false
         
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+            bannerView.delegate = self
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

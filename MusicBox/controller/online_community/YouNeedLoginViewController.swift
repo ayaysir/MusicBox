@@ -16,8 +16,10 @@ class YouNeedLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+            bannerView.delegate = self
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

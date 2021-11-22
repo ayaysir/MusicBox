@@ -25,6 +25,7 @@ class UploadFormViewController: UIViewController {
     @IBOutlet weak var txvPostComment: UITextView!
     @IBOutlet weak var swtPostAllowToEdit: UISwitch!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var btnPreplay: UIButton!
@@ -44,8 +45,11 @@ class UploadFormViewController: UIViewController {
         
         txfPostTitle.delegate = self
 
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+            bannerView.delegate = self
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,9 +87,17 @@ class UploadFormViewController: UIViewController {
     @IBAction func barBtnActSubmit(_ sender: Any) {
         upload()
     }
+
+}
+
+extension UploadFormViewController {
     
     private func upload() {
         midiManager.midiPlayer?.stop()
+        
+        guard validateFieldValues() else {
+            return
+        }
         
         guard let document = selectedDocument, let paper = document.paper else {
             return
@@ -150,7 +162,44 @@ class UploadFormViewController: UIViewController {
             self.first_uploadPaper(postIdStr: postIdStr, cacheDocument: cacheDocument)
         }
     }
+    
+    private func validateFieldValues() -> Bool {
+        
+        let alertTitle = "Unable to Create"
+        
+        guard selectedDocument != nil else {
+            simpleAlert(self, message: "You must select a file to upload.", title: alertTitle) { action in
+                self.scrollView.setContentOffset(.zero, animated: true)
+            }
+            return false
+        }
+        
+        // title
+        guard txfPostTitle.text! != "" else {
+            simpleAlert(self, message: "Please enter the title.", title: alertTitle) { action in
+                self.txfPostTitle.becomeFirstResponder()
+            }
+            return false
+        }
 
+        guard txfPostTitle.text!.count <= 50 else {
+            simpleAlert(self, message: "Please write the title within 50 characters.", title: alertTitle) { action in
+                self.txfPostTitle.becomeFirstResponder()
+            }
+            return false
+        }
+
+        // comment
+        guard txvPostComment.text!.count <= 5000 else {
+            simpleAlert(self, message: "Please write the comment within 5000 characters.", title: alertTitle) { action in
+                self.txvPostComment.becomeFirstResponder()
+            }
+            return false
+        }
+
+
+        return true
+    }
 }
 
 extension UploadFormViewController {

@@ -21,6 +21,8 @@ struct PaperConstant {
     
     let defaultColNum: Int = 80
     let viewWidthPerCol: CGFloat = 62.5
+    
+    let appName = "Make My MusicBox App"
 }
 
 class MusicBoxPaperView: UIView {
@@ -304,7 +306,7 @@ class MusicBoxPaperView: UIView {
         let footerFontSize: CGFloat = 25
         let footerAttrs = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: footerFontSize)!, NSAttributedString.Key.paragraphStyle: titleParagaphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
         
-        let footerText: NSString = "\(paperMadeBy) \(paperMaker) - http://musicbox.con" as NSString
+        let footerText: NSString = "\(paperMadeBy) \(paperMaker) - \(cst.appName)" as NSString
         let footerSize = footerText.size(withAttributes: footerAttrs)
         let footerRect = CGRect(x: boxOutline.minX, y: boxOutline.maxY + 20, width: footerSize.width, height: footerSize.height)
         footerText.draw(with: footerRect, options: .usesLineFragmentOrigin, attributes: footerAttrs, context: nil)

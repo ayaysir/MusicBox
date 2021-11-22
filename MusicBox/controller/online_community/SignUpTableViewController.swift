@@ -110,8 +110,10 @@ class SignUpTableViewController: UITableViewController {
         txfPassword.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         txfPasswordConfirm.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
-        bannerView.delegate = self
+        // ====== 광고 ====== //
+        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+            bannerView.delegate = self
+        }
     }
     
     @IBAction func btnActCancel(_ sender: UIButton) {

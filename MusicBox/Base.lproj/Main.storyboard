@@ -261,7 +261,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="qNy-DB-wUg">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="qNy-DB-wUg">
                                                 <rect key="frame" x="17" y="549" width="51" height="31"/>
                                                 <color key="onTintColor" systemColor="systemPinkColor"/>
                                             </switch>
@@ -497,6 +497,7 @@
                         <outlet property="lblSelectedArtist" destination="QGg-qA-eAc" id="YyV-rz-bnx"/>
                         <outlet property="lblSelectedPaperMaker" destination="JLY-SC-Pbs" id="Zvt-PT-m4h"/>
                         <outlet property="lblSelectedTitle" destination="EzZ-3U-sIi" id="J0c-Pu-nCs"/>
+                        <outlet property="scrollView" destination="iyh-KQ-18i" id="vlB-kL-FKl"/>
                         <outlet property="scrollViewBottomConstraint" destination="49R-5W-wbT" id="gY2-We-fV8"/>
                         <outlet property="selectAFileButtonView" destination="KWB-I9-ReI" id="5KY-vy-1ZF"/>
                         <outlet property="swtPostAllowToEdit" destination="qNy-DB-wUg" id="e2r-fa-kt0"/>
@@ -2657,11 +2658,47 @@ Arrangey by bcd</string>
                     <connections>
                         <segue destination="pD0-i5-lXB" kind="show" identifier="TextureSegue" id="FuI-zT-2fC"/>
                         <segue destination="0Uv-aZ-NbT" kind="show" identifier="MIDISegue" id="Xv9-gf-4wL"/>
+                        <segue destination="qWF-4f-Q4j" kind="show" identifier="GoToWebViewSegue" id="iFk-1b-PBV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVU-Z5-ZvP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3549" y="-1793"/>
+        </scene>
+        <!--Webkit View Controller-->
+        <scene sceneID="BsQ-fT-icq">
+            <objects>
+                <viewController id="qWF-4f-Q4j" customClass="WebkitViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9cJ-tO-yDw">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIU-A5-nqo">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CLU-hY-z4z"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EIU-A5-nqo" firstAttribute="top" secondItem="CLU-hY-z4z" secondAttribute="top" id="FfK-Me-g6U"/>
+                            <constraint firstItem="EIU-A5-nqo" firstAttribute="leading" secondItem="CLU-hY-z4z" secondAttribute="leading" id="GTM-AX-gC7"/>
+                            <constraint firstItem="CLU-hY-z4z" firstAttribute="trailing" secondItem="EIU-A5-nqo" secondAttribute="trailing" id="JMJ-zX-ZZf"/>
+                            <constraint firstItem="CLU-hY-z4z" firstAttribute="bottom" secondItem="EIU-A5-nqo" secondAttribute="bottom" id="VAM-lI-EkC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Msd-gN-7OG"/>
+                    <connections>
+                        <outlet property="webView" destination="EIU-A5-nqo" id="t0p-6Y-nmg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3I7-ms-53J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3563.5514018691588" y="-2451.1879049676027"/>
         </scene>
         <!--App Settings-->
         <scene sceneID="pVK-0d-0C0">
@@ -2673,11 +2710,11 @@ Arrangey by bcd</string>
                         <sections>
                             <tableViewSection headerTitle="Duration of Each Note during Playback" id="e3K-Ka-PsI">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="ruH-1n-IPu">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="ruH-1n-IPu" customClass="AccessoryCell" customModule="MusicBox" customModuleProvider="target">
                                         <rect key="frame" x="20" y="49" width="388" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ruH-1n-IPu" id="765-Hh-yfY">
-                                            <rect key="frame" x="0.0" y="0.0" width="344" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="347.33333333333331" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-jG-g7E">
@@ -2729,6 +2766,7 @@ Arrangey by bcd</string>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="Play sound in silent mode" translatesAutoresizingMaskIntoConstraints="NO" id="gRE-GL-iWY">
                                                     <rect key="frame" x="20" y="6" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="onTintColor" systemColor="systemPinkColor"/>
                                                     <connections>
                                                         <action selector="swtActChangePlayInSilentMode:" destination="0Uv-aZ-NbT" eventType="valueChanged" id="4JX-p2-0Zx"/>
                                                     </connections>
@@ -2751,7 +2789,7 @@ Arrangey by bcd</string>
                                         <rect key="frame" x="20" y="520.33333587646484" width="388" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qip-84-91V" id="3iz-57-5b4">
-                                            <rect key="frame" x="0.0" y="0.0" width="344" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="347.33333333333331" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="5" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="1Vd-sk-x47">

@@ -27,7 +27,11 @@ class AudioMIDISettingTableViewController: UITableViewController {
         pkvInstrumentPatch.delegate = self
         pkvInstrumentPatch.dataSource = self
         
-        bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
+        // ====== 광고 ====== //
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +65,19 @@ class AudioMIDISettingTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            simpleAlert(self, message: "Sets the duration of the note in seconds. The longer, the more natural playback will be. Some instruments may not work properly. The default is 8", title: "Duration of Each Note during Playback", handler: nil)
+        case 1:
+            simpleAlert(self, message: "You can set the playback instrument. The default instrument is “10: Music Box”.", title: "MIDI Instrument Patch", handler: nil)
+        case 3:
+            simpleAlert(self, message: "This app supports autosave. You can set the autosave interval in seconds. Smaller values can slow execution. The default is 10.", title: "Autosave Interval", handler: nil)
+        default:
+            break
+        }
+    }
+    
     @IBAction func sldActChangeDuration(_ sender: UISlider) {
         let intValue = Int(sender.value)
         sender.setValue(Float(intValue), animated: false)
@@ -84,6 +101,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
     }
     
     
+    
 }
 
 extension AudioMIDISettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -102,4 +120,8 @@ extension AudioMIDISettingTableViewController: UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         configStore.set(INST_LIST[row].number, forKey: .cfgInstrumentPatch)
     }
+}
+
+class AccessoryCell: UITableViewCell {
+    
 }

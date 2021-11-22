@@ -24,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Check app launched first or updated.
+        checkAppUpgrade {
+            OnlyOnceAfterInstall()
+        } updated: {
+            print("App Status: updated")
+        } nothingChanged: {
+            print("App Status: nothing")
+        }
+
         // Override point for customization after application launch.
         
         // Initialize the Google Mobile Ads SDK.

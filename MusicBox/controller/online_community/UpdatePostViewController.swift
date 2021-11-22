@@ -46,7 +46,13 @@ class UpdatePostViewController: UIViewController {
     }
     
     @IBAction func barBtnActUpdate(_ sender: Any) {
+        
         if let delegate = delegate {
+            
+            guard validateFieldValues() else {
+                return
+            }
+            
             post.postTitle = txfPostTitle.text ?? post.postTitle
             post.postComment = txvPostComment.text
             
@@ -60,6 +66,38 @@ class UpdatePostViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+}
+
+extension UpdatePostViewController {
+    private func validateFieldValues() -> Bool {
+        
+        let alertTitle = "Unable to Create"
+        
+        // title
+        guard txfPostTitle.text! != "" else {
+            simpleAlert(self, message: "Please enter the title.", title: alertTitle) { action in
+                self.txfPostTitle.becomeFirstResponder()
+            }
+            return false
+        }
+
+        guard txfPostTitle.text!.count <= 50 else {
+            simpleAlert(self, message: "Please write the title within 50 characters.", title: alertTitle) { action in
+                self.txfPostTitle.becomeFirstResponder()
+            }
+            return false
+        }
+
+        // comment
+        guard txvPostComment.text!.count <= 5000 else {
+            simpleAlert(self, message: "Please write the comment within 5000 characters.", title: alertTitle) { action in
+                self.txvPostComment.becomeFirstResponder()
+            }
+            return false
+        }
+        
+        return true
     }
 }
 
