@@ -17,7 +17,8 @@ class YouNeedLoginViewController: UIViewController {
         super.viewDidLoad()
 
         // ====== 광고 ====== //
-        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self
         }
     }

@@ -136,11 +136,17 @@ class MusicBoxPaperView: UIView {
         }
     }
     
-    func eraseSpecificNote(deletedCoord: PaperCoord, fullData: [PaperCoord]) {
+    func eraseSpecificNote(deletedCoord: PaperCoord) {
+        // redraw deleted area
         let arcX = cst.leftMargin + deletedCoord.gridX! * cst.cellWidth
         let arcY = cst.topMargin + deletedCoord.gridY!.cgFloat * cst.cellHeight
         let arcRect = CGRect(x: arcX - cst.circleRadius * 2, y: arcY - cst.circleRadius * 2, width: cst.circleRadius * 4, height: cst.circleRadius * 4)
         self.setNeedsDisplay(arcRect)
+    }
+    
+    func eraseSpecificNote(deletedCoord: PaperCoord, fullData: [PaperCoord]) {
+        eraseSpecificNote(deletedCoord: deletedCoord)
+        // re-assign filtered array
         self.data = fullData
     }
 

@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import SwiftSpinner
+import GoogleMobileAds
 
 protocol MusicPaperVCDelegate: AnyObject {
     func didPaperEditFinished(_ controller: MusicPaperViewController)
@@ -18,6 +19,9 @@ enum MusicPaperMode {
 }
 
 class MusicPaperViewController: UIViewController {
+    
+    private var bannerView: GADBannerView!
+    
     var previousScale: CGFloat = 1.0
     
     var mode: MusicPaperMode = .edit
@@ -26,6 +30,7 @@ class MusicPaperViewController: UIViewController {
     var player: AVAudioPlayer?
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var constraintScrollViewBottom: NSLayoutConstraint!
     @IBOutlet weak var musicPaperView: MusicBoxPaperView!
     @IBOutlet weak var constraintMusicPaperWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintMusicPaperHeight: NSLayoutConstraint!
@@ -120,6 +125,7 @@ class MusicPaperViewController: UIViewController {
         print("set colNum: \(colNum)")
         
         self.imBeatCount = paper.incompleteMeasureBeat
+        musicPaperView.imBeatCount = self.imBeatCount
         print("set colNum: \(imBeatCount)")
 
         musicPaperView.data = paper.coords
@@ -175,6 +181,12 @@ class MusicPaperViewController: UIViewController {
             
         case .view:
             initViewModePanel()
+            
+            // ====== 광고 ====== //
+            if AdManager.productMode {
+                bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+                bannerView.delegate = self
+            }
         }
         
         // PaperView 배경화면 설정
@@ -267,7 +279,6 @@ class MusicPaperViewController: UIViewController {
                 }
             }
             
-//            musicPaperView.data.append(coord)
             musicPaperView.addNote(appendCoord: coord)
             
         } else {
@@ -289,7 +300,7 @@ class MusicPaperViewController: UIViewController {
             if filtered.count != musicPaperView.data.count {
                 playEraserSound()
             }
-//            musicPaperView.data = filtered
+
             if let deletedCoord = deletedCoord {
                 musicPaperView.eraseSpecificNote(deletedCoord: deletedCoord, fullData: filtered)
             }
@@ -568,7 +579,8 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     
     func didClickedUndo(_ view: UIView) {
         if allowEdit && musicPaperView.data.count >= 1 {
-            musicPaperView.data.removeLast()
+            let lastCoord = musicPaperView.data.removeLast()
+            musicPaperView.eraseSpecificNote(deletedCoord: lastCoord)
         }
     }
     
@@ -697,4 +709,10 @@ extension MusicPaperViewController: PaperViewModePanelViewDelegate {
     }
     
     
+}
+
+extension MusicPaperViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        constraintScrollViewBottom.constant += bannerView.adSize.size.height
+    }
 }

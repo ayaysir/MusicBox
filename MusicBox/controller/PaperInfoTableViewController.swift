@@ -35,7 +35,8 @@ class PaperInfoTableViewController: UITableViewController {
         initButtonsAppearance()
         
         // ====== 광고 ====== //
-        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
         }
     }
@@ -97,7 +98,7 @@ class PaperInfoTableViewController: UITableViewController {
             return
         }
         
-        guard paper.isAllowOthersToEdit && paper.firebaseUID == getCurrentUserUID() else {
+        guard paper.isAllowOthersToEdit else {
             simpleAlert(self, message: "제작자가 편집을 허용하지 않았기 때문에 편집이 불가능합니다.", title: "접근 불가", handler: nil)
             return
         }

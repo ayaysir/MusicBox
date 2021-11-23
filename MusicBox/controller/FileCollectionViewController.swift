@@ -59,7 +59,8 @@ class FileCollectionViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(openFromExternalApp(notification:)), name: Notification.Name(rawValue: "OpenFromExternalApp"), object: nil)
         
         // ====== 광고 ====== //
-        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
         }
         

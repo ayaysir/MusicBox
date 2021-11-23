@@ -33,6 +33,9 @@ func checkAppUpgrade(firstrun: () -> (), updated: () -> (), nothingChanged: () -
 
 
 func OnlyOnceAfterInstall() {
+    
+    print("======== \(#function) ========")
+    
     // config 초기 세팅
     configStore.set("Paper: White paper with fibers", forKey: .cfgPaperTextureName)
     configStore.set("Background: Melamine-wood-2", forKey: .cfgBackgroundTextureName)
@@ -40,6 +43,21 @@ func OnlyOnceAfterInstall() {
     configStore.set(10, forKey: .cfgInstrumentPatch)
     configStore.set(true, forKey: .cfgPlayInSilentMode)
     configStore.set(10, forKey: .cfgAutosaveInterval)
+    
+    // 예제 파일 복사
+    guard let resourceURL = Bundle.main.url(forResource: "Nocturne", withExtension: "musicbox") else {
+        assert(false, "Nocturne.musicbox is not exist.")
+    }
+    
+    guard let documentDirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        assert(false, "Document Dir is not exist.")
+    }
+    
+    let fileURL = documentDirURL.appendingPathComponent("Nocturne").appendingPathExtension("musicbox")
+    
+    let copyResult = FileManager.default.secureCopyItem(at: resourceURL, to: fileURL)
+    
+    print("Nocturne.musicbox copy result:::", copyResult)
     
 }
 

@@ -179,7 +179,8 @@ class CreateNewPaperTableViewController: UITableViewController {
         }
         
         // ====== 광고 ====== //
-        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
         }
     }

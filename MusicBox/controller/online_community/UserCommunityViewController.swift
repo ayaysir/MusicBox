@@ -50,7 +50,8 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.masksToBounds = false
         
         // ====== 광고 ====== //
-        if AdManager.productMode {            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
+        if AdManager.productMode {
+            bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self
         }
     }
