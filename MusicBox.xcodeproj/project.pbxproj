@@ -19,6 +19,7 @@
 		440A1A2E26ECC0A000AA4135 /* OldSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */; };
 		440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */; };
 		440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */; };
+		4416727D274CE1E100041B33 /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4416727C274CE1E100041B33 /* DeviceUtil.swift */; };
 		4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417C7B027034C690086FECA /* NSCodingExample.swift */; };
 		4417C7B32703709F0086FECA /* ss.ccc in Resources */ = {isa = PBXBuildFile; fileRef = 4417C7B22703709F0086FECA /* ss.ccc */; };
 		44457929273251FD00F9A823 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457928273251FD00F9A823 /* SignInViewController.swift */; };
@@ -165,6 +166,7 @@
 		440A1A2D26ECC0A000AA4135 /* OldSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSignUpViewController.swift; sourceTree = "<group>"; };
 		440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSignInViewController.swift; sourceTree = "<group>"; };
 		440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
+		4416727C274CE1E100041B33 /* DeviceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtil.swift; sourceTree = "<group>"; };
 		4417C7B027034C690086FECA /* NSCodingExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCodingExample.swift; sourceTree = "<group>"; };
 		4417C7B22703709F0086FECA /* ss.ccc */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ss.ccc; sourceTree = "<group>"; };
 		44457928273251FD00F9A823 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				445B5A4E2745272B0003A437 /* ColorUtil.swift */,
 				446279032747FC340004D95D /* KeyboardLayoutConstraint.swift */,
 				446279082748D9430004D95D /* iOSDevCenters+GIF.swift */,
+				4416727C274CE1E100041B33 /* DeviceUtil.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -989,6 +992,7 @@
 				449A412726ECF84700EE3B67 /* MusicBoxGrid.swift in Sources */,
 				44C1BA58273C07B300543A74 /* AppConfigVariables.swift in Sources */,
 				4405E96A26F76E180012E4F5 /* ImageUtil.swift in Sources */,
+				4416727D274CE1E100041B33 /* DeviceUtil.swift in Sources */,
 				447E117027231AB200931B8C /* BPMConverter.swift in Sources */,
 				446279042747FC340004D95D /* KeyboardLayoutConstraint.swift in Sources */,
 				44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */,

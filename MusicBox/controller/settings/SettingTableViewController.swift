@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 import GoogleMobileAds
 
 class SettingTableViewController: UITableViewController {
@@ -28,9 +29,9 @@ class SettingTableViewController: UITableViewController {
             let vc = segue.destination as! TextureCollectionViewController
             vc.category = category == "paper" ? .paper : .background
         case "GoToWebViewSegue":
-            let pageName = sender as! String
+            let pageCategory = sender as! WebPageCategory
             let vc = segue.destination as! WebkitViewController
-            vc.pageName = pageName
+            vc.category = pageCategory
         default:
             break
         }
@@ -53,13 +54,58 @@ class SettingTableViewController: UITableViewController {
         } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
-                break
+                performSegue(withIdentifier: "GoToWebViewSegue", sender: WebPageCategory.help)
             case 1:
-                performSegue(withIdentifier: "GoToWebViewSegue", sender: "license")
+                performSegue(withIdentifier: "GoToWebViewSegue", sender: WebPageCategory.license)
+            default:
+                break
+            }
+        } else if indexPath.section == 3 {
+            switch indexPath.row {
+            case 0:
+                launchEmail()
+            case 1:
+                break
             default:
                 break
             }
         }
+    }
+    
+}
+
+extension SettingTableViewController: MFMailComposeViewControllerDelegate {
+    
+    func launchEmail() {
+        
+        guard MFMailComposeViewController.canSendMail() else {
+            // 사용자의 메일 계정이 설정되어 있지 않아 메일을 보낼 수 없다는 경고 메시지 추가
+            simpleAlert(self, message: "The mail cannot be sent because the mail account has not been set up on the device.")
+            return
+        }
+        
+        let emailTitle = "Make My MusicBox: Feedback" // 메일 제목
+        let messageBody =
+        """
+        OS Version: \(UIDevice.current.systemVersion)
+        Device: \(UIDevice().type)
+        
+        
+        """
+        
+        let toRecipents = [AdInfo.shared.developerMail]
+        let mc: MFMailComposeViewController = MFMailComposeViewController()
+        mc.mailComposeDelegate = self
+        mc.setSubject(emailTitle)
+        mc.setMessageBody(messageBody, isHTML: false)
+        mc.setToRecipients(toRecipents)
+        
+        self.present(mc, animated: true, completion: nil)
+    }
+    
+    @objc(mailComposeController:didFinishWithResult:error:)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult,error: Error?) {
+        controller.dismiss(animated: true)
     }
     
 }

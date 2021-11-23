@@ -8,14 +8,27 @@
 import UIKit
 import WebKit
 
+enum WebPageCategory {
+    case license, help
+}
+
 class WebkitViewController: UIViewController {
-    
-    var pageName = "license"
 
     @IBOutlet weak var webView: WKWebView!
+
+    var category: WebPageCategory = .help
+    private var pageURL: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        switch category {
+        case .license:
+            pageURL = Bundle.main.url(forResource: "license", withExtension: "html", subdirectory: "html")
+        case .help:
+            pageURL = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "html/help")
+        }
+        
         loadHTML()
     }
 }
@@ -26,7 +39,7 @@ extension WebkitViewController:  WKUIDelegate, WKNavigationDelegate {
         webView.uiDelegate = self
         webView.navigationDelegate = self
        
-        guard let url = Bundle.main.url(forResource: pageName, withExtension: "html", subdirectory: "html") else {
+        guard let url = pageURL else {
             return
         }
         webView.loadFileURL(url, allowingReadAccessTo: url)

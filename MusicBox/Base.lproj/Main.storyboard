@@ -92,7 +92,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글 제목" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XzG-lz-myO">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XzG-lz-myO">
                                                     <rect key="frame" x="8" y="202" width="185" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                                     <nil key="textColor"/>
@@ -524,7 +524,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAy-pH-xAQ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목: 가나다라마바사" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmN-c6-6HK">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Title: ABCD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmN-c6-6HK">
                                                 <rect key="frame" x="20" y="10" width="374" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                 <nil key="textColor"/>
@@ -617,7 +617,7 @@ Arrangey by bcd</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Jaj-4z-C5C">
                                                 <rect key="frame" x="48" y="424" width="318.5" height="32"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0r6-31-LTk">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0r6-31-LTk">
                                                         <rect key="frame" x="0.0" y="0.0" width="99.5" height="32"/>
                                                         <color key="tintColor" systemColor="systemGreenColor"/>
                                                         <state key="normal" title="Button"/>
@@ -1744,7 +1744,7 @@ Arrangey by bcd</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="LGn-Xg-o2f">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="LGn-Xg-o2f">
                                                     <rect key="frame" x="186" y="26" width="45.5" height="20.5"/>
                                                 </stackView>
                                                 <button opaque="NO" alpha="0.88" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZX-ch-Cls">
@@ -1778,11 +1778,13 @@ Arrangey by bcd</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="m8N-KV-55l" firstAttribute="leading" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="16" id="6jZ-Dy-HMD"/>
+                                                <constraint firstItem="8bA-MP-XPo" firstAttribute="top" secondItem="LGn-Xg-o2f" secondAttribute="bottom" constant="24.5" id="Ert-wE-Fw2"/>
                                                 <constraint firstItem="yGE-g0-uz2" firstAttribute="centerY" secondItem="a7K-eV-V6N" secondAttribute="centerY" id="Mxb-5S-B0m"/>
                                                 <constraint firstItem="m8N-KV-55l" firstAttribute="top" secondItem="lnS-u4-1Ny" secondAttribute="bottom" constant="-0.5" id="O8f-0M-7qj"/>
                                                 <constraint firstItem="lnS-u4-1Ny" firstAttribute="leading" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="16" id="OSW-O2-0Xt"/>
                                                 <constraint firstItem="qU3-3B-hml" firstAttribute="top" secondItem="yGE-g0-uz2" secondAttribute="top" id="Rxg-Cb-AvC"/>
                                                 <constraint firstItem="yGE-g0-uz2" firstAttribute="leading" secondItem="a7K-eV-V6N" secondAttribute="leading" constant="20" symbolic="YES" id="TUM-AU-yOK"/>
+                                                <constraint firstItem="LGn-Xg-o2f" firstAttribute="top" secondItem="qU3-3B-hml" secondAttribute="top" id="XmU-mv-iNs"/>
                                                 <constraint firstItem="WZX-ch-Cls" firstAttribute="bottom" secondItem="yGE-g0-uz2" secondAttribute="bottom" constant="-10" id="YRl-yP-4vy"/>
                                                 <constraint firstAttribute="trailing" secondItem="lnS-u4-1Ny" secondAttribute="trailing" constant="26" id="ayV-bY-89J"/>
                                                 <constraint firstAttribute="trailing" secondItem="8bA-MP-XPo" secondAttribute="trailing" constant="26" id="dQW-DK-XbD"/>
@@ -1795,6 +1797,7 @@ Arrangey by bcd</string>
                                                 <constraint firstItem="LGn-Xg-o2f" firstAttribute="leading" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="16" id="rcv-Sk-qlR"/>
                                                 <constraint firstItem="WZX-ch-Cls" firstAttribute="trailing" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="-10" id="tba-lK-WHn"/>
                                                 <constraint firstItem="qU3-3B-hml" firstAttribute="leading" secondItem="yGE-g0-uz2" secondAttribute="trailing" constant="16" id="yq7-wI-wXC"/>
+                                                <constraint firstAttribute="trailing" secondItem="LGn-Xg-o2f" secondAttribute="trailing" constant="182.5" id="zBv-3h-R9z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2476,7 +2479,7 @@ Arrangey by bcd</string>
         <scene sceneID="8bb-1j-Pfa">
             <objects>
                 <navigationController id="jfQ-LQ-naD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Options" image="gearshape.fill" catalog="system" id="XGA-Tm-GCy"/>
+                    <tabBarItem key="tabBarItem" title="Options" image="gear" catalog="system" id="XGA-Tm-GCy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="piw-3a-uls">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2715,7 +2718,7 @@ Arrangey by bcd</string>
                                         <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ruH-1n-IPu" id="765-Hh-yfY">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-jG-g7E">
@@ -2743,11 +2746,11 @@ Arrangey by bcd</string>
                                         <rect key="frame" x="20" y="143" width="374" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jqy-2T-fIH" id="75D-2L-mPW">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="212"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333.5" height="212"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47c-CY-G7r">
-                                                    <rect key="frame" x="18" y="25" width="291" height="162"/>
+                                                    <rect key="frame" x="18" y="25" width="294" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
                                             </subviews>
@@ -2790,7 +2793,7 @@ Arrangey by bcd</string>
                                         <rect key="frame" x="20" y="522" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qip-84-91V" id="3iz-57-5b4">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="5" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="1Vd-sk-x47">
@@ -2884,7 +2887,7 @@ Arrangey by bcd</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <tabBarAppearance key="scrollEdgeAppearance"/>
+                        <tabBarAppearance key="standardAppearance"/>
                     </tabBar>
                     <connections>
                         <segue destination="wdf-Rh-BDe" kind="relationship" relationship="viewControllers" id="8y4-9x-KDf"/>
@@ -2920,7 +2923,7 @@ Arrangey by bcd</string>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="daniel-tuttle-7iFNGzRRukA-unsplash" width="4898" height="3265"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
-        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="grab pull" width="188" height="137"/>
         <image name="heart" catalog="system" width="128" height="109"/>
