@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>If you agree to the collection of advertising identifiers, personalized advertisements will be displayed in banner ads.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -44,9 +46,9 @@
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>사용자의 프로필 사진을 찍으려면 카메라 권한 허용이 필요합니다.</string>
+	<string>Camera permission is required to take a user&apos;s profile picture.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사용자의 프로필 사진을 라이브러리로부터 업로드하려면 카메라 권한 허용이 필요합니다.</string>
+	<string>Photo Library permission is required to upload a user&apos;s profile picture from the library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

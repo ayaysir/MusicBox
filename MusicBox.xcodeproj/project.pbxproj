@@ -20,6 +20,9 @@
 		440A1A3026ECC0B100AA4135 /* OldSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */; };
 		440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */; };
 		4416727D274CE1E100041B33 /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4416727C274CE1E100041B33 /* DeviceUtil.swift */; };
+		44167280274CF59C00041B33 /* MusicBoxProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4416727F274CF59C00041B33 /* MusicBoxProducts.swift */; };
+		44167282274CF67000041B33 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44167281274CF67000041B33 /* StoreKit.framework */; };
+		44167284274D002F00041B33 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44167283274D002F00041B33 /* IAPHelper.swift */; };
 		4417C7B127034C690086FECA /* NSCodingExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417C7B027034C690086FECA /* NSCodingExample.swift */; };
 		4417C7B32703709F0086FECA /* ss.ccc in Resources */ = {isa = PBXBuildFile; fileRef = 4417C7B22703709F0086FECA /* ss.ccc */; };
 		44457929273251FD00F9A823 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457928273251FD00F9A823 /* SignInViewController.swift */; };
@@ -167,6 +170,9 @@
 		440A1A2F26ECC0B100AA4135 /* OldSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldSignInViewController.swift; sourceTree = "<group>"; };
 		440A1A3126ECC0C500AA4135 /* MemberProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProfileViewController.swift; sourceTree = "<group>"; };
 		4416727C274CE1E100041B33 /* DeviceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtil.swift; sourceTree = "<group>"; };
+		4416727F274CF59C00041B33 /* MusicBoxProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicBoxProducts.swift; sourceTree = "<group>"; };
+		44167281274CF67000041B33 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		44167283274D002F00041B33 /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		4417C7B027034C690086FECA /* NSCodingExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCodingExample.swift; sourceTree = "<group>"; };
 		4417C7B22703709F0086FECA /* ss.ccc */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ss.ccc; sourceTree = "<group>"; };
 		44457928273251FD00F9A823 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +304,7 @@
 				44E6CDB8274BCBBE00DE7EF0 /* WebKit.framework in Frameworks */,
 				4405E97A26FB798D0012E4F5 /* AudioKit in Frameworks */,
 				446279072747FE810004D95D /* IQKeyboardManagerSwift in Frameworks */,
+				44167282274CF67000041B33 /* StoreKit.framework in Frameworks */,
 				5D6A3655B095770BE9B06CDC /* Pods_MusicBox.framework in Frameworks */,
 				44AE995027071EA100D046D1 /* PanModal in Frameworks */,
 			);
@@ -348,6 +355,15 @@
 				44C1BA44273408ED00543A74 /* MainTabBarController.swift */,
 			);
 			path = controller;
+			sourceTree = "<group>";
+		};
+		4416727E274CF58300041B33 /* iap */ = {
+			isa = PBXGroup;
+			children = (
+				4416727F274CF59C00041B33 /* MusicBoxProducts.swift */,
+				44167283274D002F00041B33 /* IAPHelper.swift */,
+			);
+			path = iap;
 			sourceTree = "<group>";
 		};
 		444AF39F2701E33000BD8E38 /* document */ = {
@@ -572,6 +588,7 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				4416727E274CF58300041B33 /* iap */,
 				44E6CDB2274BBC5300DE7EF0 /* html */,
 				444D945B2711E3880090F587 /* firebase */,
 				44AE99432705E98100D046D1 /* misc */,
@@ -671,6 +688,7 @@
 		FF1F2B833E758479F3B852B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44167281274CF67000041B33 /* StoreKit.framework */,
 				44E6CDB7274BCBBE00DE7EF0 /* WebKit.framework */,
 				F1BF41CD842EF9D0FCDFC1A1 /* Pods_MusicBox.framework */,
 				3D9AAED110D6ED031E02DD11 /* Pods_MusicBox_MusicBoxUITests.framework */,
@@ -951,6 +969,7 @@
 				444AF39E2701E26400BD8E38 /* HomeViewController.swift in Sources */,
 				44AE993E2705DBE200D046D1 /* CGPoint+.swift in Sources */,
 				44AE99472705EA4700D046D1 /* PaperDocument.swift in Sources */,
+				44167284274D002F00041B33 /* IAPHelper.swift in Sources */,
 				44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */,
 				4450BCFD272706A000C21481 /* PaperInfoTableViewController.swift in Sources */,
 				444D94632711EF950090F587 /* PaperCoord.swift in Sources */,
@@ -970,6 +989,7 @@
 				444D94652711F7720090F587 /* JSONUtil.swift in Sources */,
 				449F3EA526EF334A002C874D /* MusicBoxUtil.swift in Sources */,
 				44558E5D271D906F00A0EF62 /* HeartButton.swift in Sources */,
+				44167280274CF59C00041B33 /* MusicBoxProducts.swift in Sources */,
 				447E116E2722E9DF00931B8C /* CreateNewPaperTableViewController.swift in Sources */,
 				444D9446270DCFBC0090F587 /* TimeSignature.swift in Sources */,
 				44F3A0892701CD7D000CE46F /* FileUtil.swift in Sources */,

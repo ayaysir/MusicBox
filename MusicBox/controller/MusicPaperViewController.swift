@@ -40,6 +40,11 @@ class MusicPaperViewController: UIViewController {
     @IBOutlet weak var paperViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var paperViewTrailingConstraint: NSLayoutConstraint!
     
+    // Hide home indicator(아이폰 밑에 있는 막대기)
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     var panelView: PaperOptionPanelView!
     var viewModePanelView: PaperViewModePanelView!
     
@@ -480,7 +485,6 @@ extension MusicPaperViewController: UIScrollViewDelegate {
         paperViewTopConstraint.constant = yOffset
         paperViewBottomConstraint.constant = yOffset
         
-        
         let xOffset = max(0, (size.width - musicPaperView.frame.width) / 2)
         paperViewLeadingConstraint.constant = xOffset
         paperViewTrailingConstraint.constant = xOffset
@@ -506,7 +510,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 musicPaperView.data = musicPaperView.data.filter { coord in
                     return coord.gridX! < threshold
                 }
-//                musicPaperView.setNeedsDisplay()
+
                 SwiftSpinner.hide(nil)
             }
         } else {
@@ -521,7 +525,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedExtendPaper(_ view: UIView) {
         self.colNum += cst.defaultColNum
         document?.paper?.colNum = colNum
-//        musicPaperView.configure(rowNum: util.noteRange.count, colNum: colNum, util: util, gridInfo:  document?.paper?.timeSignature.gridInfo ?? GridInfo())
         
         musicPaperView.expandPaper(expandedColNum: colNum)
         constraintMusicPaperWidth.constant = cst.leftMargin * 2 + musicPaperView.boxOutline.width
@@ -634,6 +637,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             }
             
         } else {
+            
             let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
             midiManager.musicSequence = sequence
             isNowPlaying = true

@@ -13,6 +13,11 @@ class SettingTableViewController: UITableViewController {
 
     private var bannerView: GADBannerView!
     
+    private var section_config = 0
+    private var section_inapp = 1
+    private var section_informations = 2
+    private var section_links = 3
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // ====== 광고 ====== //
@@ -40,7 +45,7 @@ class SettingTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
-        if indexPath.section == 0 {
+        if indexPath.section == section_config {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "TextureSegue", sender: "paper")
@@ -51,7 +56,7 @@ class SettingTableViewController: UITableViewController {
             default:
                 break
             }
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == section_informations {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "GoToWebViewSegue", sender: WebPageCategory.help)
@@ -60,15 +65,19 @@ class SettingTableViewController: UITableViewController {
             default:
                 break
             }
-        } else if indexPath.section == 3 {
+        } else if indexPath.section == section_links {
             switch indexPath.row {
             case 0:
                 launchEmail()
             case 1:
-                break
+                if let url = URL(string: "https://github.com/ayaysir/MusicBox"), !url.absoluteString.isEmpty {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
             default:
                 break
             }
+            
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
     
