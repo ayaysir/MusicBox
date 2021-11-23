@@ -92,7 +92,7 @@ class FileCollectionViewController: UICollectionViewController {
         print("\(Date())::: LoadFile ::: \(checkFilePath) ::: fileExist: \(FileManager.default.fileExists(atPath: checkFilePath.path))")
         
         var copyResult = false
-        simpleYesAndNo(self, message: "\(fileName) 파일을 불러오시겠습니까? '예'를 선택하면 파일이 문서 디렉토리에 복사됩니다.", title: "파일 불러오기") { action in
+        simpleYesAndNo(self, message: " Are you sure you want to load the '\(fileName)' file? If you select 'Yes', the files will be copied to the Documents directory.", title: "File Import") { action in
             if FileManager.default.fileExists(atPath: checkFilePath.path) {
                 let fileNameWithoutExt = fileName.replacingOccurrences(of: ".musicbox", with: "")
                 let newFilePath = dirPath.first!.appendingPathComponent(fileNameWithoutExt + " copy").appendingPathExtension("musicbox")
@@ -410,7 +410,7 @@ extension FileCollectionViewController {
                 break
             case 2:
                 print("delete")
-                simpleDestructiveYesAndNo(self, message: "이 파일을 삭제하시겠습니까?", title: "파일 삭제") { action in
+                simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete this file?", title: "Delete the File") { action in
                     guard let index = selectedCellIndexPath else {
                         return
                     }
@@ -424,7 +424,7 @@ extension FileCollectionViewController {
                         try filemgr.removeItem(at: document.fileURL)
                         loadFileList()
                         reloadAndRefresh()
-                        simpleAlert(self, message: "삭제되었습니다.", title: "삭제 완료", handler: nil)
+                        simpleAlert(self, message: "The file has been deleted.", title: "Delete completed", handler: nil)
                     } catch  {
                         print(error.localizedDescription)
                     }

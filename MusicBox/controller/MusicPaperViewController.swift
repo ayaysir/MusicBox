@@ -223,7 +223,7 @@ class MusicPaperViewController: UIViewController {
         view.layoutIfNeeded()
         
         if mode == .view {
-            SwiftSpinner.show("재생 준비중입니다.")
+            SwiftSpinner.show("Ready to play...")
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
                 SwiftSpinner.hide(nil)
                 self.playSequence()
@@ -494,7 +494,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedShrinkPaper(_ view: UIView) {
         
         if self.colNum > cst.defaultColNum {
-            simpleDestructiveYesAndNo(self, message: "정말 종이를 축소하시겠습니까? 이 작업은 복구할 수 없습니다.", title: "종이 축소") { [self] action in
+            simpleDestructiveYesAndNo(self, message: "Do you really want to shrink the paper? This operation is not recoverable.", title: "Shrink Paper") { [self] action in
                 SwiftSpinner.show("processing...")
                 self.colNum -= cst.defaultColNum
                 document?.paper?.colNum = colNum
@@ -510,7 +510,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 SwiftSpinner.hide(nil)
             }
         } else {
-            simpleAlert(self, message: "더 이상 줄일 수 없습니다.", title: "불가능", handler: nil)
+            simpleAlert(self, message: "It cannot be shrinked any further.", title: "Not Collapsible", handler: nil)
         }
     }
     
@@ -568,7 +568,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     
     func didClickedResetPaper(_ view: UIView) {
         if allowEdit {
-            simpleDestructiveYesAndNo(self, message: "정말 모든 노트를 제거하시겠습니까? 이 작업은 복구할 수 없습니다.", title: "모든 노트 제거") { action in
+            simpleDestructiveYesAndNo(self, message: "Are you sure you want to remove all notes? This operation is not recoverable.", title: "Remove All Notes") { action in
                 self.musicPaperView.data = []
                 
                 // ??

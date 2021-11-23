@@ -289,7 +289,7 @@ class CreateNewPaperTableViewController: UITableViewController {
             
             document.paper = paper
             document.save(to: document.fileURL, for: .forOverwriting) { success in
-                simpleAlert(self, message: "정보 업데이트가 완료되었습니다.", title: "업데이트 완료") { action in
+                simpleAlert(self, message: "Paper information update is complete.", title: "Update Completed") { action in
                     delegate.didDocumentUpdated(self, updatedDocument: document)
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -321,9 +321,12 @@ class CreateNewPaperTableViewController: UITableViewController {
     }
     
     func validateFieldValues() -> Bool {
+        
+        let alertTitle = "Unable to \(pageMode == .create ? "Create" : "Update")"
+        
         // file name
         guard txfFileName.text != "" else {
-            simpleAlert(self, message: "파일 이름을 입력해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Please enter a file name.", title: alertTitle) { action in
                 self.txfFileName.becomeFirstResponder()
             }
             
@@ -332,7 +335,7 @@ class CreateNewPaperTableViewController: UITableViewController {
         
         let regex = "^[^<>:;,?\"*|/]+$"
         guard txfFileName.text?.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil else {
-            simpleAlert(self, message: "파일 이름 형식이 잘못되었습니다. 파일명을 다시 작성해주세요.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "The file name format is incorrect. Please rewrite the file name.", title: alertTitle) { action in
                 self.txfFileName.becomeFirstResponder()
             }
             return false
@@ -340,14 +343,14 @@ class CreateNewPaperTableViewController: UITableViewController {
         
         // title
         guard txfTitle.text! != "" else {
-            simpleAlert(self, message: "제목을 입력해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Please enter the title.", title: alertTitle) { action in
                 self.txfTitle.becomeFirstResponder()
             }
             return false
         }
         
         guard txfTitle.text!.count <= 50 else {
-            simpleAlert(self, message: "제목은 50자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "The title must be 50 characters or less.", title: alertTitle) { action in
                 self.txfTitle.becomeFirstResponder()
             }
             return false
@@ -358,7 +361,7 @@ class CreateNewPaperTableViewController: UITableViewController {
             return false
         }
         guard bpm >= 10 && bpm <= 400 else {
-            simpleAlert(self, message: "BPM은 10 - 400의 범위 내에서만 지정해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Please specify the BPM within the range of 10 - 400.", title: alertTitle) { action in
                 self.txfBpm.becomeFirstResponder()
             }
             return false
@@ -369,7 +372,7 @@ class CreateNewPaperTableViewController: UITableViewController {
             return false
         }
         guard imBeat >= 0 && imBeat <= 7 else {
-            simpleAlert(self, message: "못갖춘마디는 16분음표에 해당하는 길이의 비트를 0 - 7 범위 내에서 지정해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "'Incomplete Measure' must be specified in the range of 0 - 7 beats with a length corresponding to a sixteenth note.", title: alertTitle) { action in
                 self.txfIncompleteMeasureBeat.becomeFirstResponder()
             }
             return false
@@ -377,21 +380,21 @@ class CreateNewPaperTableViewController: UITableViewController {
         
         // original artist, paper maker
         guard txfOriginalArtist.text! != "" else {
-            simpleAlert(self, message: "아티스트 이름을 입력해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Please enter the artist name.", title: alertTitle) { action in
                 self.txfOriginalArtist.becomeFirstResponder()
             }
             return false
         }
         
         guard txfOriginalArtist.text!.count <= 30 else {
-            simpleAlert(self, message: "아티스트 이름은 30자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Artist name must be 30 characters or less.", title: alertTitle) { action in
                 self.txfOriginalArtist.becomeFirstResponder()
             }
             return false
         }
         
         guard txfPaperMaker.text!.count <= 30 else {
-            simpleAlert(self, message: "페이퍼 작성자 이름은 30자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "The name of the paper creator must be 30 characters or less.", title: alertTitle) { action in
                 self.txfPaperMaker.becomeFirstResponder()
             }
             return false
@@ -399,7 +402,7 @@ class CreateNewPaperTableViewController: UITableViewController {
         
         // comment
         guard txvComment.text!.count <= 5000 else {
-            simpleAlert(self, message: "페이퍼 작성자 이름은 5000자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Paper comments must be limited to 5000 characters.", title: alertTitle) { action in
                 self.txvComment.becomeFirstResponder()
             }
             return false
@@ -531,7 +534,7 @@ extension CreateNewPaperTableViewController: UIImagePickerControllerDelegate, UI
                 present(self.imagePickerController, animated: true, completion: nil)
             }
         } else {
-            simpleAlert(self, message: "카메라 사용이 불가능합니다.")
+            simpleAlert(self, message: "Camera cannot be used.")
         }
     }
     

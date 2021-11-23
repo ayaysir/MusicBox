@@ -71,13 +71,13 @@ extension SignInViewController {
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { [self] authResult, error in
             
             if authResult != nil {
-                print("로그인 되었습니다")
+                print("You are logged in.")
                 let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
 
                 self.navigationController?.setViewControllers([memberVC], animated: true)
                 
             } else {
-                simpleAlert(self, message: "로그인되지 않았습니다. \(error?.localizedDescription ?? "")")
+                simpleAlert(self, message: "You are not signed in. Error: \(error?.localizedDescription ?? "")")
             }
         }
     }

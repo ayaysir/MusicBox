@@ -11,5 +11,5 @@ struct AdManager {
     
     // ====== 광고 ====== //
     
-    static let productMode: Bool = true
+    static let productMode: Bool = false
 }

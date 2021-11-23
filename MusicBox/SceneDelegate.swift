@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         if connectionOptions.urlContexts.isNotEmpty {
-            print("from WillConnectTo:", connectionOptions.urlContexts.first?.url, to: &logger)
+//            print("from WillConnectTo:", connectionOptions.urlContexts.first?.url, to: &logger)
             assignURLToRootForWCT(fileURL: connectionOptions.urlContexts.first?.url)
         }
         
@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print("from openURLContexts", URLContexts.first?.url, to: &logger)
+//        print("from openURLContexts", URLContexts.first?.url, to: &logger)
         assignURLToRoot(fileURL: URLContexts.first?.url)
     }
 

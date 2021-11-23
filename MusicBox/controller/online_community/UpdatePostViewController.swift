@@ -61,7 +61,7 @@ class UpdatePostViewController: UIViewController {
             targetPostRef.child("postTitle").setValue(post.postTitle)
             targetPostRef.child("postComment").setValue(post.postComment)
             
-            simpleAlert(self, message: "업데이트가 완료되었습니다.", title: "업데이트 완료") { _ in
+            simpleAlert(self, message: "The post update is complete.", title: "Update Completed") { _ in
                 delegate.didUpdateBtnClicked(self, updatedPost: self.post)
                 self.navigationController?.popViewController(animated: true)
             }

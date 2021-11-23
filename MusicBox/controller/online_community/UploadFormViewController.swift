@@ -104,13 +104,13 @@ extension UploadFormViewController {
         }
         
         guard let currentUID = getCurrentUserUID() else {
-            simpleAlert(self, message: "로그인되어 있지 않습니다.")
+            simpleAlert(self, message: "You are not signed in.")
             return
         }
         
         // 자신이 만든 파일만 업로드되도록
         if paper.firebaseUID != nil && paper.firebaseUID! != currentUID {
-            simpleAlert(self, message: "다른 사람이 만든 종이는 올릴 수 없습니다.")
+            simpleAlert(self, message: "Papers made by other members cannot be uploaded.")
             return
         } else {
             paper.firebaseUID = currentUID
@@ -139,7 +139,7 @@ extension UploadFormViewController {
         let postIdStr = post.postId.uuidString
         
         let ref = Database.database().reference(withPath: "community/\(postIdStr)")
-        SwiftSpinner.show("글을 등록하고 있습니다...")
+        SwiftSpinner.show("Writing a post...")
         
         let cachePath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         let targetDocCachePath = cachePath.appendingPathComponent(selectedDocument.fileURL.lastPathComponent)
@@ -212,7 +212,7 @@ extension UploadFormViewController {
                 guard success else { return }
                 
                 FirebaseFileManager.shared.setChild("musicbox/\(postIdStr)")
-                SwiftSpinner.show("종이 파일을 업로드하고 있습니다...")
+                SwiftSpinner.show("Uploading paper files...")
                 do {
                     let fileData = try Data(contentsOf: cacheDocument.fileURL)
                     FirebaseFileManager.shared.upload(data: fileData, withName: cacheDocument.fileURL.lastPathComponent) { url in
@@ -221,7 +221,7 @@ extension UploadFormViewController {
                                 self.second_uploadThumbnail(postIdStr: postIdStr)
                             }
                         } else {
-                            SwiftSpinner.show(duration: 3, title: "오류: 종이 파일이 업로드되지 않았습니다.", animated: false, completion: nil)
+                            SwiftSpinner.show(duration: 3, title: "Error: Paper file not uploaded.", animated: false, completion: nil)
                         }
                     }
                 } catch {
@@ -237,12 +237,12 @@ extension UploadFormViewController {
     
     private func second_uploadThumbnail(postIdStr: String) {
         
-        SwiftSpinner.show("앨범아트 섬네일을 업로드하고 있습니다...")
+        SwiftSpinner.show("Albumart thumbnails are being uploaded...")
         
         FirebaseFileManager.shared.setChild("PostThumbnail/\(postIdStr)")
         
         guard let image = imgSelectedAlbumart.image else {
-            SwiftSpinner.show("이미지 오류", animated: false)
+            SwiftSpinner.show("Image error", animated: false)
             return
         }
         
@@ -250,7 +250,7 @@ extension UploadFormViewController {
             let imageThumbnail = try resizeImage(image: image, maxSize: 180)
             
             guard let thumbData = imageThumbnail.jpegData(compressionQuality: 0.95) else {
-                SwiftSpinner.show("섬네일 오류", animated: false)
+                SwiftSpinner.show("Thumbnail error", animated: false)
                 return
             }
             
@@ -258,14 +258,14 @@ extension UploadFormViewController {
                 if url != nil {
                     self.third_uploadFullSizeImage(postIdStr: postIdStr)
                 } else {
-                    SwiftSpinner.show("섬네일 업로드 에러", animated: false)
+                    SwiftSpinner.show("Thumbnail upload error", animated: false)
                 }
             }
         } catch {
             print("thumbnail", error)
             if (error as! ResizeImageError) == .sizeIsTooSmall {
                 SwiftSpinner.hide(nil)
-                simpleAlert(self, message: "글 작성 및 파일 업로드가 완료되었습니다.", title: "글 등록 완료") { action in
+                simpleAlert(self, message: "The writing and paper file upload are complete.", title: "Post Upload Completed") { action in
                     self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -275,7 +275,7 @@ extension UploadFormViewController {
     }
     
     private func third_uploadFullSizeImage(postIdStr: String) {
-        SwiftSpinner.show("앨범아트를 업로드하고 있습니다...")
+        SwiftSpinner.show("Uploading albumart...")
         
         FirebaseFileManager.shared.setChild("PostAlbumart/\(postIdStr)")
         
@@ -288,11 +288,11 @@ extension UploadFormViewController {
         FirebaseFileManager.shared.upload(data: imageData, withName: "\(postIdStr).jpg") { url in
             if url != nil {
                 SwiftSpinner.hide(nil)
-                simpleAlert(self, message: "글 작성 및 파일 업로드가 완료되었습니다.", title: "글 등록 완료") { action in
+                simpleAlert(self, message: "The writing and paper file upload are complete.", title: "Post Upload Completed") { action in
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
-                SwiftSpinner.show("이미지 업로드 에러", animated: false)
+                SwiftSpinner.show("Image upload error", animated: false)
             }
         }
     }

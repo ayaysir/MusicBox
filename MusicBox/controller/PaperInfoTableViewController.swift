@@ -99,7 +99,7 @@ class PaperInfoTableViewController: UITableViewController {
         }
         
         guard paper.isAllowOthersToEdit else {
-            simpleAlert(self, message: "제작자가 편집을 허용하지 않았기 때문에 편집이 불가능합니다.", title: "접근 불가", handler: nil)
+            simpleAlert(self, message: "Editing is not possible because the creator did not allow editing.", title: "Cannot Edit", handler: nil)
             return
         }
         
@@ -144,18 +144,18 @@ class PaperInfoTableViewController: UITableViewController {
     
     
     @IBAction func btnActDeleteFile(_ sender: Any) {
-        simpleDestructiveYesAndNo(self, message: "정말 파일을 삭제하시겠습니까? 삭제된 파일은 복구할 수 없습니다.", title: "파일 삭제") { action in
+        simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.", title: "Delete the File") { action in
             guard let selectedDocument = self.selectedDocument else {
                 return
             }
             
             do {
                 try FileManager.default.removeItem(at: selectedDocument.fileURL)
-                simpleAlert(self, message: "삭제되었습니다.", title: "삭제 완료") { action in
+                simpleAlert(self, message: "The file has been deleted.", title: "Delete Completed") { action in
                     self.navigationController?.popViewController(animated: true)
                 }
             } catch {
-                simpleAlert(self, message: "삭제하지 못했습니다. \(error.localizedDescription)")
+                simpleAlert(self, message: "Failed to delete. \(error.localizedDescription)")
                 return
             }
         }
@@ -190,7 +190,7 @@ class PaperInfoTableViewController: UITableViewController {
                 musicPaperVC.mode = mode
                 self.present(musicPaperVC, animated: true, completion: nil)
             } else {
-                simpleAlert(self, message: "파일이 없거나 손상되었습니다.", title: "파일을 열 수 없음", handler: nil)
+                simpleAlert(self, message: "The paper file is missing or corrupted.", title: "Cannot Open File", handler: nil)
             }
         }
     }

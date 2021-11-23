@@ -157,14 +157,14 @@ class SignUpTableViewController: UITableViewController {
             return
         }
         
-        simpleDestructiveYesAndNo(self, message: "정말 탈퇴하시겠습니까? 탈퇴하면 회원정보가 삭제되며 복구할 수 없습니다. 작성 글은 삭제되지 않습니다.", title: "회원 탈퇴") { action in
+        simpleDestructiveYesAndNo(self, message: "Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted.", title: "Withdrawal Membership") { action in
             
             guard let user = Auth.auth().currentUser else {
                 return
             }
             
             self.ref.child("users/\(user.uid)").removeValue { error, ref in
-                SwiftSpinner.show("회원탈퇴를 진행중입니다...")
+                SwiftSpinner.show("Membership cancellation in progress...")
                 if let error = error {
                     print("userinfo delete failed:", error.localizedDescription)
                 }
@@ -237,7 +237,7 @@ extension SignUpTableViewController {
             // 비빌번호를 두 쪽 다 입력한 때
             if newPassword != "" || newPasswordConfirm != "" {
                 guard newPassword == newPasswordConfirm else {
-                    simpleAlert(self, message: "패스워드가 일치하지 않습니다.")
+                    simpleAlert(self, message: "Passwords do not match.")
                     return
                 }
                 sendInfoToFirebase(withEmail: user.email!, password: newPassword)
@@ -250,7 +250,7 @@ extension SignUpTableViewController {
     
     func sendVerificationMail(authUser: User?) {
         if authUser != nil && authUser!.isEmailVerified == false {
-            SwiftSpinner.show("인증 이메일을 전송하고 있습니다...")
+            SwiftSpinner.show("Sending a verification email...")
             authUser!.sendEmailVerification(completion: { (error) in
                 // Notify the user that the mail has sent or couldn't because of an error.
                 if error != nil {
@@ -268,7 +268,7 @@ extension SignUpTableViewController {
     
     func sendInfoToFirebase(withEmail userEmail: String, password userPassword: String) {
         
-        SwiftSpinner.show("회원 정보를 전송하고 있습니다...")
+        SwiftSpinner.show("Sending member information to server...")
         
         // 추가 정보 입력
         let interesting = selectedInteresting ?? "None"
@@ -299,7 +299,7 @@ extension SignUpTableViewController {
                     ]
                     
                     // 이미지 업로드
-                    SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
+                    SwiftSpinner.show("Your profile image is being sent...")
                     uploadUserProfileImage(images: images, user: user)
                 }
             case .updateMode:
@@ -323,7 +323,7 @@ extension SignUpTableViewController {
                     ]
                     
                     // 이미지 업로드
-                    SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
+                    SwiftSpinner.show("Your profile image is being sent...")
                     uploadUserProfileImage(images: images, user: user)
                 })
             }
@@ -348,7 +348,7 @@ extension SignUpTableViewController {
             let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
             try userProfileThumbnail = resizeImage(image: imgProfilePicture.image!, maxSize: 200)
             
-            SwiftSpinner.show("회원 정보를 전송하고 있습니다...")
+            SwiftSpinner.show("Sending member information to server...")
             
             // 추가 정보 입력
             let interesting = selectedInteresting ?? "None"
@@ -363,7 +363,7 @@ extension SignUpTableViewController {
             ]
             
             // 이미지 업로드
-            SwiftSpinner.show("프로필 이미지를 전송하고 있습니다...")
+            SwiftSpinner.show("Your profile image is being sent...")
             uploadUserProfileImage(images: images, user: user)
         } catch {
             print(error.localizedDescription)
@@ -410,7 +410,7 @@ extension SignUpTableViewController {
             
             getFileURL(childRefStr: "images/users/\(userUID)/original_\(userUID).jpg") { url in
                 
-                SwiftSpinner.show("기존 프로필 이미지를 불러오는 중입니다.")
+                SwiftSpinner.show("Loading existing profile image...")
                 guard let url = url else {
                     return
                 }
@@ -419,7 +419,7 @@ extension SignUpTableViewController {
                     SwiftSpinner.hide(nil)
                 }
             } failedHandler: { error in
-                SwiftSpinner.show(duration: 1.5, title: "기존 프로필 이미지를 불러오기가 실패했습니다.", animated: false, completion: nil)
+                SwiftSpinner.show(duration: 1.5, title: "Failed to load existing profile image.", animated: false, completion: nil)
             }
         }
     }
@@ -434,9 +434,13 @@ extension SignUpTableViewController {
             
             SwiftSpinner.hide(nil)
             
-            let attachText = self.pageMode == .signUpMode ? "회원가입이" : "회원정보 업데이트가"
+            let attachTextKR = self.pageMode == .signUpMode ? "회원가입이" : "회원정보 업데이트가"
+            let attachTextEN = self.pageMode == .signUpMode ? "registration" : "membership information update"
             
-            simpleAlert(self, message: "\(user.email!) 님의 \(attachText) 완료되었습니다.", title: "완료") { action in
+            // let koreanMsg = "\(user.email!) 님의 \(attachTextKR) 완료되었습니다."
+            let englishMsg = "\(user.email!): Your membership \(attachTextEN) is complete."
+            
+            simpleAlert(self, message: englishMsg, title: "Completed") { action in
 
                 self.navigationController?.popViewController(animated: true)
                 if self.delegate != nil {
@@ -494,6 +498,8 @@ extension SignUpTableViewController {
 extension SignUpTableViewController {
     func validateFieldValues() -> Bool {
         
+        let alertTitle = "Unable to Create"
+        
         guard let userEmail = txfUserEmail.text,
               let userPassword = txfPassword.text,
               let userPasswordConfirm = txfPasswordConfirm.text else {
@@ -504,7 +510,7 @@ extension SignUpTableViewController {
         case .signUpMode:
             
             guard userEmail != "" else {
-                simpleAlert(self, message: "이메일을 입력해야 합니다.", title: "만들 수 없음") { action in
+                simpleAlert(self, message: "Please enter your e-mail.", title: alertTitle) { action in
                     self.txfUserEmail.becomeFirstResponder()
                 }
                 return false
@@ -512,28 +518,28 @@ extension SignUpTableViewController {
             
             let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
             guard userEmail.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil else {
-                simpleAlert(self, message: "이메일 형식이 잘못되었습니다. 이메일을 다시 작성해주세요.", title: "만들 수 없음") { action in
+                simpleAlert(self, message: "Email format is incorrect. Please rewrite your email.", title: alertTitle) { action in
                     self.txfUserEmail.becomeFirstResponder()
                 }
                 return false
             }
             
             guard userPassword != "" else {
-                simpleAlert(self, message: "패스워드를 입력해야 합니다.", title: "만들 수 없음") { action in
+                simpleAlert(self, message: "You must enter a password.", title: alertTitle) { action in
                     self.txfPassword.becomeFirstResponder()
                 }
                 return false
             }
             
             guard userPasswordConfirm != "" else {
-                simpleAlert(self, message: "패스워드 확인 입력해야 합니다.", title: "만들 수 없음") { action in
+                simpleAlert(self, message: "You must enter a password confirmation.", title: alertTitle) { action in
                     self.txfPasswordConfirm.becomeFirstResponder()
                 }
                 return false
             }
             
             guard userPassword == userPasswordConfirm else {
-                simpleAlert(self, message: "패스워드가 일치하지 않습니다.", title: "만들 수 없음") { action in
+                simpleAlert(self, message: "Passwords do not match.", title: alertTitle) { action in
                     self.txfPassword.becomeFirstResponder()
                 }
                 return false
@@ -544,7 +550,7 @@ extension SignUpTableViewController {
         }
         
         guard txfNickname.text!.count >= 1 && txfNickname.text!.count <= 10 else {
-            simpleAlert(self, message: "닉네임은 1-10자 이내로 작성해야 합니다.", title: "만들 수 없음") { action in
+            simpleAlert(self, message: "Please write your nickname within 1-10 characters.", title: alertTitle) { action in
                 self.txfNickname.becomeFirstResponder()
             }
             return false
@@ -589,10 +595,10 @@ extension SignUpTableViewController: UITextFieldDelegate {
         
         if password == passwordConfirm {
             lblPasswordConfirmed.textColor = .green
-            lblPasswordConfirmed.text = "패스워드가 일치합니다."
+            lblPasswordConfirmed.text = "Passwords match."
         } else {
             lblPasswordConfirmed.textColor = .red
-            lblPasswordConfirmed.text = "패스워드가 일치하지 않습니다."
+            lblPasswordConfirmed.text = "Passwords do not match."
         }
     }
     
@@ -646,7 +652,7 @@ extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigati
                 present(self.imagePickerController, animated: true, completion: nil)
             }
         } else {
-            simpleAlert(self, message: "카메라 사용이 불가능합니다.")
+            simpleAlert(self, message: "Camera cannot be used.")
         }
     }
     

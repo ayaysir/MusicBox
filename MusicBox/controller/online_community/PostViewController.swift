@@ -180,10 +180,10 @@ class PostViewController: UIViewController {
             print("\(Date())::: Firebase copy result(case 3): \(checkFilePath)")
         }
         
-        SwiftSpinner.show("파일 다운로드중...")
+        SwiftSpinner.show("Downloading file...")
         getFileAndSave(childRefSTr: childRefStr, fileSaveURL: fileSaveURL) { url in
             SwiftSpinner.hide(nil)
-            simpleYesAndNo(self, message: "파일 다운로드가 완료되었습니다. 브라우저로 이동할까요?", title: "다운로드 완료") { action in
+            simpleYesAndNo(self, message: "File download is complete. Go to the file browser?", title: "Download Complete") { action in
                 self.tabBarController?.selectedIndex = 0
             }
         }
@@ -195,7 +195,7 @@ class PostViewController: UIViewController {
             return
         }
         
-        simpleDestructiveYesAndNo(self, message: "정말 이 글을 삭제할까요?", title: "삭제") { action in
+        simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete this post?", title: "Delete") { action in
             let ref = Database.database().reference()
             let targetPostRef = ref.child("community").child(self.post.postId.uuidString)
             targetPostRef.removeValue { error, ref in

@@ -26,6 +26,7 @@ extension String {
         return String(self[startIndex...endIndex])
     }
     
+    // 스트링이 비어있다면 unknown을 반환
     var unknown: String {
         if self == "" {
             return "unknown"
