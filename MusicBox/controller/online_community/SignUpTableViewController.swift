@@ -111,6 +111,7 @@ class SignUpTableViewController: UITableViewController {
         txfPasswordConfirm.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self

@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  MusicBox
+
+  Created by yoonbumtae on 2021/12/01.
+  
+*/
+
+NSCameraUsageDescription = "사용자 프로필 사진을 촬영하기 위한 카메라 권한 허용이 필요합니다.";
+NSPhotoLibraryUsageDescription = "사용자 프로필 사진을 가져오기 위한 사진 라이브러리 권한 허용이 필요합니다.";
+NSUserTrackingUsageDescription = "광고식별자 수집에 동의하시면 배너광고에 개인 맞춤 광고가 노출됩니다.";
+CFBundleDisplayName = "오르골";

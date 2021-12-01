@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  MusicBox
+
+  Created by yoonbumtae on 2021/12/01.
+  
+*/
+
+CFBundleDisplayName = "MusicBox";

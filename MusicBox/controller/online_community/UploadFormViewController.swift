@@ -46,6 +46,7 @@ class UploadFormViewController: UIViewController {
         txfPostTitle.delegate = self
 
         // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self

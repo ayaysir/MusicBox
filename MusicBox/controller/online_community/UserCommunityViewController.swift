@@ -50,6 +50,7 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.masksToBounds = false
         
         // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self

@@ -28,6 +28,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
         pkvInstrumentPatch.dataSource = self
         
         // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
         }

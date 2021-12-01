@@ -105,6 +105,7 @@ class PostViewController: UIViewController {
         btnDelete.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         
         // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self

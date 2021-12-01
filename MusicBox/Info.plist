@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>MusicBox</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDocumentTypes</key>
@@ -45,7 +47,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera permission is required to take a user's profile picture.</string>
+	<string>Camera permission is required to take a user&apos;s profile picture.</string>
 	<key>NSExtensionAttributes</key>
 	<dict>
 		<key>NSExtensionActivationRule</key>
@@ -56,16 +58,16 @@
                 SUBQUERY (
                     $extensionItem.attachments,
                     $attachment,
-                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.bgsmm.format.musicbox" OR
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.data" OR
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.content")
-                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "your.unique.uti.here")
+                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.bgsmm.format.musicbox&quot; OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.data&quot; OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.content&quot;)
+                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;your.unique.uti.here&quot;)
                 ).@count == $extensionItem.attachments.@count
         ).@count == 1
         </string>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library permission is required to upload a user's profile picture from the library.</string>
+	<string>Photo Library permission is required to upload a user&apos;s profile picture from the library.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>If you agree to the collection of advertising identifiers, personalized advertisements will be displayed in banner ads.</string>
 	<key>UIApplicationSceneManifest</key>
@@ -123,7 +125,7 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>This format can be opened with BGSMM's Musicbox app.</string>
+			<string>This format can be opened with BGSMM&apos;s Musicbox app.</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
@@ -146,7 +148,7 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>This format can be opened with BGSMM's Musicbox app.</string>
+			<string>This format can be opened with BGSMM&apos;s Musicbox app.</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>

@@ -179,6 +179,7 @@ class CreateNewPaperTableViewController: UITableViewController {
         }
         
         // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
