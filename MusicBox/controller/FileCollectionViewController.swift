@@ -37,6 +37,9 @@ class FileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let localizeSample = "He said the food %@ ate was %@.".localizedFormat("James".localized, "chicken".localized)
+        print(localizeSample)
+        
         askPhotoAuth()
         
         setMenuDropDown()
@@ -92,7 +95,7 @@ class FileCollectionViewController: UICollectionViewController {
         print("\(Date())::: LoadFile ::: \(checkFilePath) ::: fileExist: \(FileManager.default.fileExists(atPath: checkFilePath.path))")
         
         var copyResult = false
-        simpleYesAndNo(self, message: " Are you sure you want to load the '\(fileName)' file? If you select 'Yes', the files will be copied to the Documents directory.", title: "File Import") { action in
+        simpleYesAndNo(self, message: " Are you sure you want to load the '%@' file? If you select 'Yes', the files will be copied to the Documents directory.".localizedFormat(fileName), title: "File Import") { action in
             if FileManager.default.fileExists(atPath: checkFilePath.path) {
                 let fileNameWithoutExt = fileName.replacingOccurrences(of: ".musicbox", with: "")
                 let newFilePath = dirPath.first!.appendingPathComponent(fileNameWithoutExt + " copy").appendingPathExtension("musicbox")
@@ -357,7 +360,7 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "spaceForBanner", for: indexPath)
             return footerView
         default:
-            assert(false)
+            return UICollectionReusableView()
         }
     }
 
@@ -410,7 +413,7 @@ extension FileCollectionViewController {
                 break
             case 2:
                 print("delete")
-                simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete this file?", title: "Delete the File") { action in
+                simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.".localized, title: "Delete the File".localized) { action in
                     guard let index = selectedCellIndexPath else {
                         return
                     }
@@ -424,7 +427,7 @@ extension FileCollectionViewController {
                         try filemgr.removeItem(at: document.fileURL)
                         loadFileList()
                         reloadAndRefresh()
-                        simpleAlert(self, message: "The file has been deleted.", title: "Delete completed", handler: nil)
+                        simpleAlert(self, message: "The file has been deleted.".localized, title: "Delete Completed".localized, handler: nil)
                     } catch  {
                         print(error.localizedDescription)
                     }

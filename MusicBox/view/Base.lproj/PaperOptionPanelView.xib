@@ -300,7 +300,7 @@
     <resources>
         <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="button border" width="188" height="137"/>
-        <image name="button border space" width="188" height="137"/>
+        <image name="button border space" width="128" height="128"/>
         <image name="eraser white icon" width="188" height="137"/>
         <image name="expand icon" width="188" height="137"/>
         <image name="floppydisk" width="188" height="137"/>

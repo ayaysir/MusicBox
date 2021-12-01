@@ -36,7 +36,7 @@ class MainTabBarController: UITabBarController {
             
         }
         
-        iapTest()
+//        iapTest()
     }
     
 }

@@ -35,3 +35,16 @@ extension String {
         }
     }
 }
+
+extension String {
+    
+    var localized: String {
+        return NSLocalizedString(self, tableName: "Localizable", value: self, comment: "")
+    }
+    
+    // 예)
+    func localizedFormat(_ arguments: CVarArg...) -> String {
+        let localizedValue = self.localized
+        return String(format: localizedValue, arguments: arguments)
+    }
+}

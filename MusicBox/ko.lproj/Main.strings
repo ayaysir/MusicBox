@@ -1,0 +1,504 @@
+
+/* Class = "UILabel"; text = "="; ObjectID = "0JU-RH-LsB"; */
+"0JU-RH-LsB.text" = "=";
+
+/* Class = "UITableViewSection"; headerTitle = "Attach an Albumart"; ObjectID = "0aV-X0-bXG"; */
+"0aV-X0-bXG.headerTitle" = "앨범아트 첨부";
+
+/* Class = "UIButton"; configuration.title = "Download"; ObjectID = "0r6-31-LTk"; */
+"0r6-31-LTk.configuration.title" = "다운로드";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "0r6-31-LTk"; */
+"0r6-31-LTk.normalTitle" = "다운로드";
+
+/* Class = "UITableViewSection"; headerTitle = "Password Confirm"; ObjectID = "1RU-yM-VLq"; */
+"1RU-yM-VLq.headerTitle" = "패스워드 재입력";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "1Sg-hX-EXe"; */
+"1Sg-hX-EXe.text" = "제목";
+
+/* Class = "UIButton"; configuration.title = "Delete"; ObjectID = "21F-K1-LRY"; */
+"21F-K1-LRY.configuration.title" = "삭제";
+
+/* Class = "UILabel"; text = "192"; ObjectID = "2Sr-iW-VjF"; */
+"2Sr-iW-VjF.text" = "192";
+
+/* Class = "UILabel"; text = "BPM 170, 4/4"; ObjectID = "5aI-6u-kFH"; */
+"5aI-6u-kFH.text" = "BPM 170, 4/4";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "5bq-E9-gG1"; */
+"5bq-E9-gG1.text" = "비밀번호";
+
+/* Class = "UILabel"; text = "Comment"; ObjectID = "76e-mk-xxC"; */
+"76e-mk-xxC.text" = "코멘트";
+
+/* Class = "UITableViewSection"; headerTitle = "Paper Maker"; ObjectID = "7SN-PA-nSx"; */
+"7SN-PA-nSx.headerTitle" = "페이퍼 작성자";
+
+/* Class = "UILabel"; text = "The Wind of Poseidon"; ObjectID = "7sp-vx-oCa"; */
+"7sp-vx-oCa.text" = "The Wind of Poseidon";
+
+/* Class = "UILabel"; text = "Robert W. Smith"; ObjectID = "7uy-GL-ke5"; */
+"7uy-GL-ke5.text" = "Robert W. Smith";
+
+/* Class = "UILabel"; text = "패스워드가 일치합니다."; ObjectID = "842-Mo-Mlu"; */
+"842-Mo-Mlu.text" = "패스워드가 일치합니다.";
+
+/* Class = "UILabel"; text = "Various Artists. ETC"; ObjectID = "8bA-MP-XPo"; */
+"8bA-MP-XPo.text" = "Various Artists. ETC";
+
+/* Class = "UINavigationItem"; title = "Create a new paper"; ObjectID = "8yi-oz-aU0"; */
+"8yi-oz-aU0.title" = "페이퍼 만들기";
+
+/* Class = "UITableViewSection"; headerTitle = "Information"; ObjectID = "BBZ-Sw-mB8"; */
+"BBZ-Sw-mB8.headerTitle" = "정보";
+
+/* Class = "UILabel"; text = "Background Texture"; ObjectID = "BYq-qV-IFy"; */
+"BYq-qV-IFy.text" = "배경 텍스처";
+
+/* Class = "UITextView"; text = "Please entering the comment makes it easier to tell information to other people."; ObjectID = "CXG-n8-Hki"; */
+"CXG-n8-Hki.text" = "코멘트를 입력하면 다른 사람들에게 정보를 더 쉽게 알릴 수 있습니다.";
+
+/* Class = "UILabel"; text = "Paper Information "; ObjectID = "Cff-Bz-kEG"; */
+"Cff-Bz-kEG.text" = "페이퍼 정보 ";
+
+/* Class = "UIButton"; configuration.title = "Edit Paper"; ObjectID = "Chy-Z8-v56"; */
+"Chy-Z8-v56.configuration.title" = "페이퍼 편집";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Chy-Z8-v56"; */
+"Chy-Z8-v56.normalTitle" = "페이퍼 편집";
+
+/* Class = "UILabel"; text = "Original Artist"; ObjectID = "DI3-tW-zXg"; */
+"DI3-tW-zXg.text" = "아티스트";
+
+/* Class = "UITableViewSection"; footerTitle = "Restart the app for this change to take effect."; ObjectID = "Dbf-pW-psu"; */
+"Dbf-pW-psu.footerTitle" = "변경 사항을 적용하려면 앱 재시작이 필요합니다.";
+
+/* Class = "UITableViewSection"; headerTitle = "Autosave Interval"; ObjectID = "Dbf-pW-psu"; */
+"Dbf-pW-psu.headerTitle" = "자동저장 간격";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ddb-aL-Ygj"; */
+"Ddb-aL-Ygj.normalTitle" = "버튼";
+
+/* Class = "UILabel"; text = "123"; ObjectID = "E21-Es-ob4"; */
+"E21-Es-ob4.text" = "123";
+
+/* Class = "UILabel"; text = "Email is not verified."; ObjectID = "EPz-ty-CLn"; */
+"EPz-ty-CLn.text" = "이메일이 인증되지 않았습니다.";
+
+/* Class = "UILabel"; text = "The Wind of Poseidon"; ObjectID = "EzZ-3U-sIi"; */
+"EzZ-3U-sIi.text" = "The Wind of Poseidon";
+
+/* Class = "UIButton"; configuration.title = "Update Paper Information"; ObjectID = "FAA-jg-fq4"; */
+"FAA-jg-fq4.configuration.title" = "페이퍼 정보 업데이트";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "FAA-jg-fq4"; */
+"FAA-jg-fq4.normalTitle" = "페이퍼 정보 업데이트";
+
+/* Class = "UILabel"; text = "Organ Works"; ObjectID = "FeN-mW-toF"; */
+"FeN-mW-toF.text" = "Organ Works";
+
+/* Class = "UITableViewSection"; headerTitle = "File Name"; ObjectID = "G0d-iS-Djm"; */
+"G0d-iS-Djm.headerTitle" = "파일 이름";
+
+/* Class = "UILabel"; text = "Sean A Mail To The Developer"; ObjectID = "Haz-Hy-cDF"; */
+"Haz-Hy-cDF.text" = "개발자에게 메일 보내기";
+
+/* Class = "UILabel"; text = "Seiren"; ObjectID = "JLY-SC-Pbs"; */
+"JLY-SC-Pbs.text" = "Seiren";
+
+/* Class = "UINavigationItem"; title = "Dynamic Paper Title"; ObjectID = "JvR-8x-ej1"; */
+"JvR-8x-ej1.title" = "Dynamic Paper Title";
+
+/* Class = "UILabel"; text = "J. S. Bach"; ObjectID = "KQ6-kC-usU"; */
+"KQ6-kC-usU.text" = "J. S. Bach";
+
+/* Class = "UILabel"; text = "Converted BPM (♩ = )"; ObjectID = "KVs-0m-yZI"; */
+"KVs-0m-yZI.text" = "변환된 BPM (♩ = )";
+
+/* Class = "UITableViewSection"; headerTitle = "User Profile Photo (Optional)"; ObjectID = "Kdq-K3-ti3"; */
+"Kdq-K3-ti3.headerTitle" = "프로필 사진 (선택사항)";
+
+/* Class = "UIButton"; normalTitle = "라이브러리"; ObjectID = "Kz6-kh-SZR"; */
+"Kz6-kh-SZR.normalTitle" = "라이브러리";
+
+/* Class = "UILabel"; text = "Robert W. Smith "; ObjectID = "Li8-Ol-xFn"; */
+"Li8-Ol-xFn.text" = "Robert W. Smith ";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "Ll7-S1-PDK"; */
+"Ll7-S1-PDK.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "File Browser"; ObjectID = "Lli-rE-epq"; */
+"Lli-rE-epq.title" = "파일 브라우저";
+
+/* Class = "UITextField"; text = "0"; ObjectID = "Mtf-aj-nXe"; */
+"Mtf-aj-nXe.text" = "0";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "NlE-vw-egg"; */
+"NlE-vw-egg.title" = "Item";
+
+/* Class = "UILabel"; text = "Nickname"; ObjectID = "OSR-9m-YVn"; */
+"OSR-9m-YVn.text" = "닉네임";
+
+/* Class = "UIButton"; configuration.title = "Submit"; ObjectID = "P6o-8M-6wA"; */
+"P6o-8M-6wA.configuration.title" = "제출";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "P6o-8M-6wA"; */
+"P6o-8M-6wA.normalTitle" = "제출";
+
+/* Class = "UILabel"; text = "Licenses"; ObjectID = "PLN-Oh-IrF"; */
+"PLN-Oh-IrF.text" = "라이센스 정보";
+
+/* Class = "UIButton"; configuration.title = "retry"; ObjectID = "Pdp-A6-s7U"; */
+"Pdp-A6-s7U.configuration.title" = "재시도";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Pdp-A6-s7U"; */
+"Pdp-A6-s7U.normalTitle" = "재시도";
+
+/* Class = "UILabel"; text = "Nickname"; ObjectID = "Q0s-ZP-oHa"; */
+"Q0s-ZP-oHa.text" = "닉네임";
+
+/* Class = "UILabel"; text = "Robert W. Smith"; ObjectID = "QGg-qA-eAc"; */
+"QGg-qA-eAc.text" = "Robert W. Smith";
+
+/* Class = "UITableViewSection"; headerTitle = "Not Available Now"; ObjectID = "QR4-p3-RXd"; */
+"QR4-p3-RXd.headerTitle" = "지금은 이용할 수 없습니다.";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "Qs4-1a-Mkl"; */
+"Qs4-1a-Mkl.text" = "이메일";
+
+/* Class = "UIButton"; configuration.title = "Share"; ObjectID = "R5W-ns-hpF"; */
+"R5W-ns-hpF.configuration.title" = "공유";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "R5W-ns-hpF"; */
+"R5W-ns-hpF.normalTitle" = "공유";
+
+/* Class = "UINavigationItem"; title = "User Information"; ObjectID = "SXq-6Y-iz9"; */
+"SXq-6Y-iz9.title" = "사용자 정보";
+
+/* Class = "UITableViewSection"; headerTitle = "Original Artist"; ObjectID = "SjY-bm-xcf"; */
+"SjY-bm-xcf.headerTitle" = "아티스트";
+
+/* Class = "UILabel"; text = ".musicbox"; ObjectID = "T0Q-Fl-RzH"; */
+"T0Q-Fl-RzH.text" = ".musicbox";
+
+/* Class = "UILabel"; text = "email@email.com"; ObjectID = "TBB-sn-doD"; */
+"TBB-sn-doD.text" = "email@email.com";
+
+/* Class = "UITableViewSection"; headerTitle = "Incomplete Measure"; ObjectID = "Tss-U3-Pj0"; */
+"Tss-U3-Pj0.headerTitle" = "못갖춘마디";
+
+/* Class = "UILabel"; text = "Seiren"; ObjectID = "Ttq-vL-68C"; */
+"Ttq-vL-68C.text" = "Seiren";
+
+/* Class = "UILabel"; text = "Comment"; ObjectID = "Tzy-VK-iCp"; */
+"Tzy-VK-iCp.text" = "코멘트";
+
+/* Class = "UITableViewSection"; headerTitle = "BPM (Beat Per Minute)"; ObjectID = "U4Z-ZD-NjV"; */
+"U4Z-ZD-NjV.headerTitle" = "BPM (Beat Per Minute)";
+
+/* Class = "UITabBarItem"; title = "Papers"; ObjectID = "UTe-0H-itX"; */
+"UTe-0H-itX.title" = "페이퍼";
+
+/* Class = "UINavigationItem"; title = "App Settings"; ObjectID = "Ued-8k-jF0"; */
+"Ued-8k-jF0.title" = "앱 설정";
+
+/* Class = "UILabel"; text = "Create new paper"; ObjectID = "VIU-7x-Opq"; */
+"VIU-7x-Opq.text" = "페이퍼 만들기";
+
+/* Class = "UIButton"; configuration.title = "Reset All Fields"; ObjectID = "VPi-ng-bca"; */
+"VPi-ng-bca.configuration.title" = "재설정";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VPi-ng-bca"; */
+"VPi-ng-bca.normalTitle" = "재설정";
+
+/* Class = "UINavigationItem"; title = "Settings & Help"; ObjectID = "Vei-QA-745"; */
+"Vei-QA-745.title" = "설정 & 도움말";
+
+/* Class = "UIButton"; configuration.title = "Update"; ObjectID = "Vvg-hJ-fMT"; */
+"Vvg-hJ-fMT.configuration.title" = "업데이트";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Vvg-hJ-fMT"; */
+"Vvg-hJ-fMT.normalTitle" = "업데이트";
+
+/* Class = "UIBarButtonItem"; title = "Submit"; ObjectID = "WVd-wE-T5q"; */
+"WVd-wE-T5q.title" = "제출";
+
+/* Class = "UILabel"; text = "No internet connection."; ObjectID = "WaB-US-QxK"; */
+"WaB-US-QxK.text" = "인터넷에 연결되지 않았습니다.";
+
+/* Class = "UITextView"; text = "Please entering the comment makes it easier to tell information to other people."; ObjectID = "XAL-UH-D7P"; */
+"XAL-UH-D7P.text" = "코멘트를 입력하면 다른 사람들에게 정보를 더 쉽게 알릴 수 있습니다.";
+
+/* Class = "UITabBarItem"; title = "Options"; ObjectID = "XGA-Tm-GCy"; */
+"XGA-Tm-GCy.title" = "옵션";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "XQ4-op-6Cx"; */
+"XQ4-op-6Cx.text" = "120";
+
+/* Class = "UILabel"; text = "Available soon"; ObjectID = "Xcd-SP-CKa"; */
+"Xcd-SP-CKa.text" = "곧 이용할 수 있습니다.";
+
+/* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "XfL-bU-ZwF"; */
+"XfL-bU-ZwF.headerTitle" = "코멘트";
+
+/* Class = "UIButton"; configuration.title = "Go To Login Page"; ObjectID = "XiE-A9-smL"; */
+"XiE-A9-smL.configuration.title" = "로그인 페이지로 이동";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "XiE-A9-smL"; */
+"XiE-A9-smL.normalTitle" = "로그인 페이지로 이동";
+
+/* Class = "UILabel"; text = "Post Title"; ObjectID = "XzG-lz-myO"; */
+"XzG-lz-myO.text" = "포스트 제목";
+
+/* Class = "UIButton"; configuration.title = "Submit"; ObjectID = "Yxz-Xc-jyx"; */
+"Yxz-Xc-jyx.configuration.title" = "제출";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Yxz-Xc-jyx"; */
+"Yxz-Xc-jyx.normalTitle" = "제출";
+
+/* Class = "UITableViewSection"; headerTitle = "Configuration"; ObjectID = "ZBy-Y8-rA2"; */
+"ZBy-Y8-rA2.headerTitle" = "설정";
+
+/* Class = "UIButton"; configuration.title = "Resign Membership"; ObjectID = "aE4-ni-hJq"; */
+"aE4-ni-hJq.configuration.title" = "회원 탈퇴";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "aE4-ni-hJq"; */
+"aE4-ni-hJq.normalTitle" = "회원 탈퇴";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "aLZ-Ps-M7J"; */
+"aLZ-Ps-M7J.text" = "제목";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "aW2-5I-16y"; */
+"aW2-5I-16y.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Composed by xxxxxxx"; ObjectID = "bAQ-6T-DO6"; */
+"bAQ-6T-DO6.text" = "Composed by xxxxxxx";
+
+/* Class = "UIButton"; configuration.title = "Submit"; ObjectID = "bHd-RW-ioO"; */
+"bHd-RW-ioO.configuration.title" = "제출";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bHd-RW-ioO"; */
+"bHd-RW-ioO.normalTitle" = "제출";
+
+/* Class = "UINavigationItem"; title = "Upload"; ObjectID = "bNG-YB-QJA"; */
+"bNG-YB-QJA.title" = "업로드";
+
+/* Class = "UIButton"; configuration.title = "Sign Out"; ObjectID = "bPF-Nl-7So"; */
+"bPF-Nl-7So.configuration.title" = "로그아웃";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bPF-Nl-7So"; */
+"bPF-Nl-7So.normalTitle" = "로그아웃";
+
+/* Class = "UITableViewSection"; headerTitle = "MIDI Instrument Patch"; ObjectID = "baI-H0-blY"; */
+"baI-H0-blY.headerTitle" = "MIDI 악기 패치";
+
+/* Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "bos-Xg-8QN"; */
+"bos-Xg-8QN.headerTitle" = "링크";
+
+/* Class = "UITableViewSection"; headerTitle = "Time Signature"; ObjectID = "co1-6K-KT8"; */
+"co1-6K-KT8.headerTitle" = "박자표";
+
+/* Class = "UIBarButtonItem"; title = "Create"; ObjectID = "dBe-HV-QIZ"; */
+"dBe-HV-QIZ.title" = "만들기";
+
+/* Class = "UIBarButtonItem"; title = "Submit"; ObjectID = "dDZ-2J-plS"; */
+"dDZ-2J-plS.title" = "제출";
+
+/* Class = "UITableViewSection"; headerTitle = "Interesting"; ObjectID = "dI5-YM-Q4z"; */
+"dI5-YM-Q4z.headerTitle" = "흥미";
+
+/* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "dOp-0X-WqI"; */
+"dOp-0X-WqI.text" = "깃허브 저장소";
+
+/* Class = "UIButton"; configuration.title = "Delete"; ObjectID = "dcB-lV-4Lc"; */
+"dcB-lV-4Lc.configuration.title" = "삭제";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dcB-lV-4Lc"; */
+"dcB-lV-4Lc.normalTitle" = "삭제";
+
+/* Class = "UILabel"; text = "Posting by xxx"; ObjectID = "doE-TP-O14"; */
+"doE-TP-O14.text" = "Posting by xxx";
+
+/* Class = "UITableViewSection"; headerTitle = "Duration of Each Note during Playback"; ObjectID = "e3K-Ka-PsI"; */
+"e3K-Ka-PsI.headerTitle" = "시퀀스 재생시 각 노트의 지속 길이";
+
+/* Class = "UIBarButtonItem"; title = "Update"; ObjectID = "eK1-vv-Her"; */
+"eK1-vv-Her.title" = "업데이트";
+
+/* Class = "UITabBarItem"; title = "My Info"; ObjectID = "f4i-Uk-Jia"; */
+"f4i-Uk-Jia.title" = "나의 정보";
+
+/* Class = "UISwitch"; title = "Play sound in silent mode"; ObjectID = "gRE-GL-iWY"; */
+"gRE-GL-iWY.title" = "무음 모드에서도 소리 재생";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "gye-s7-G6Y"; */
+"gye-s7-G6Y.text" = "10";
+
+/* Class = "UIButton"; normalTitle = "Camera"; ObjectID = "h4b-Of-avi"; */
+"h4b-Of-avi.normalTitle" = "카메라";
+
+/* Class = "UILabel"; text = "The Wind of Poseidon"; ObjectID = "hSj-zc-UWt"; */
+"hSj-zc-UWt.text" = "The Wind of Poseidon";
+
+/* Class = "UITableViewSection"; headerTitle = "User Nickname"; ObjectID = "hTV-yD-pl7"; */
+"hTV-yD-pl7.headerTitle" = "사용자 닉네임";
+
+/* Class = "UILabel"; text = "Paper Texture"; ObjectID = "hTf-CL-8ix"; */
+"hTf-CL-8ix.text" = "페이퍼 텍스처";
+
+/* Class = "UILabel"; text = "Allow other members to edit this paper."; ObjectID = "hmU-xY-BUp"; */
+"hmU-xY-BUp.text" = "다른 사용자들이 이 페이퍼를 편집하는 것을 허용합니다.";
+
+/* Class = "UITabBarItem"; title = "Archive"; ObjectID = "i3A-d0-UzN"; */
+"i3A-d0-UzN.title" = "아카이브";
+
+/* Class = "UILabel"; text = "Original Artist"; ObjectID = "iHJ-5O-ZTw"; */
+"iHJ-5O-ZTw.text" = "아티스트";
+
+/* Class = "UINavigationItem"; title = "Sign Up"; ObjectID = "ime-3v-ilA"; */
+"ime-3v-ilA.title" = "회원가입";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "juL-O3-PTW"; */
+"juL-O3-PTW.text" = "제목";
+
+/* Class = "UILabel"; text = "Paper Maker"; ObjectID = "jwh-AZ-z3P"; */
+"jwh-AZ-z3P.text" = "페이퍼 제작자";
+
+/* Class = "UILabel"; text = "Sign In is required."; ObjectID = "kXu-Zi-9DL"; */
+"kXu-Zi-9DL.text" = "회원가입이 필요합니다.";
+
+/* Class = "UILabel"; text = "Post Title: ABCD"; ObjectID = "kmN-c6-6HK"; */
+"kmN-c6-6HK.text" = "Post Title: ABCD";
+
+/* Class = "UILabel"; text = "BPM 87, 4 / 4"; ObjectID = "lnS-u4-1Ny"; */
+"lnS-u4-1Ny.text" = "BPM 87, 4 / 4";
+
+/* Class = "UIButton"; normalTitle = "카메라"; ObjectID = "m68-1m-pAd"; */
+"m68-1m-pAd.normalTitle" = "카메라";
+
+/* Class = "UILabel"; text = "02:06"; ObjectID = "m8N-KV-55l"; */
+"m8N-KV-55l.text" = "02:06";
+
+/* Class = "UIButton"; configuration.title = "Sign Up"; ObjectID = "mZF-TL-vhq"; */
+"mZF-TL-vhq.configuration.title" = "회원가입";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mZF-TL-vhq"; */
+"mZF-TL-vhq.normalTitle" = "회원가입";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mwW-vq-RRr"; */
+"mwW-vq-RRr.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "10"; ObjectID = "n5H-F2-oWf"; */
+"n5H-F2-oWf.text" = "10";
+
+/* Class = "UILabel"; text = "Paper made by xxxxxxxx"; ObjectID = "n7K-tb-AVn"; */
+"n7K-tb-AVn.text" = "Paper made by xxxxxxxx";
+
+/* Class = "UIButton"; configuration.title = "Update User Infromation"; ObjectID = "nM9-fw-gvz"; */
+"nM9-fw-gvz.configuration.title" = "회원 정보 업데이트";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nM9-fw-gvz"; */
+"nM9-fw-gvz.normalTitle" = "회원 정보 업데이트";
+
+/* Class = "UILabel"; text = "App Settings"; ObjectID = "nf0-q0-10B"; */
+"nf0-q0-10B.text" = "앱 설정";
+
+/* Class = "UILabel"; text = "Play sound in silent mode"; ObjectID = "oV0-QR-5uU"; */
+"oV0-QR-5uU.text" = "무음 모드에서도 소리 재생";
+
+/* Class = "UITextField"; text = "120"; ObjectID = "pDl-Bb-qhD"; */
+"pDl-Bb-qhD.text" = "120";
+
+/* Class = "UINavigationItem"; title = "Main"; ObjectID = "pUf-n2-O71"; */
+"pUf-n2-O71.title" = "메인";
+
+/* Class = "UITableViewSection"; headerTitle = "Informations"; ObjectID = "pdJ-rF-SHW"; */
+"pdJ-rF-SHW.headerTitle" = "정보";
+
+/* Class = "UILabel"; text = "Select a paper to upload"; ObjectID = "pfJ-Gp-D6g"; */
+"pfJ-Gp-D6g.text" = "선택한 페이퍼 파일";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "qU3-3B-hml"; */
+"qU3-3B-hml.text" = "제목";
+
+/* Class = "UITableViewSection"; footerTitle = "Restart the app for this change to take effect."; ObjectID = "rKE-8v-qa2"; */
+"rKE-8v-qa2.footerTitle" = "변경 사항을 적용하려면 앱 재시작이 필요합니다.";
+
+/* Class = "UITableViewSection"; headerTitle = "Play sound in silent mode"; ObjectID = "rKE-8v-qa2"; */
+"rKE-8v-qa2.headerTitle" = "무음 모드에서도 소리 재생";
+
+/* Class = "UIButton"; configuration.title = "Listening to the Music Box"; ObjectID = "s5L-eq-RQG"; */
+"s5L-eq-RQG.configuration.title" = "뮤직박스 감상";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "s5L-eq-RQG"; */
+"s5L-eq-RQG.normalTitle" = "뮤직박스 감상";
+
+/* Class = "UINavigationItem"; title = "Select a Paper file"; ObjectID = "sFP-bZ-71Q"; */
+"sFP-bZ-71Q.title" = "페이퍼 파일을 선택하세요.";
+
+/* Class = "UIButton"; normalTitle = "Photo Library"; ObjectID = "sU9-9g-Qww"; */
+"sU9-9g-Qww.normalTitle" = "사진 라이브러리";
+
+/* Class = "UIButton"; configuration.title = "Select a paper file"; ObjectID = "srj-rf-EtM"; */
+"srj-rf-EtM.configuration.title" = "페이퍼 파일을 선택하세요.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "srj-rf-EtM"; */
+"srj-rf-EtM.normalTitle" = "페이퍼 파일을 선택하세요.";
+
+/* Class = "UILabel"; text = "Allow to paper edit"; ObjectID = "t9p-IP-R03"; */
+"t9p-IP-R03.text" = "페이퍼 편집 허용";
+
+/* Class = "UITextView"; text = "Composed by abc \nArrangey by bcd"; ObjectID = "tyw-Zw-AAv"; */
+"tyw-Zw-AAv.text" = "Composed by abc \nArrangey by bcd";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "uBZ-5q-9FK"; */
+"uBZ-5q-9FK.text" = "제목";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "uDg-Ob-NAM"; */
+"uDg-Ob-NAM.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; configuration.title = "Reselect"; ObjectID = "urQ-ou-ipa"; */
+"urQ-ou-ipa.configuration.title" = "재선택";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "urQ-ou-ipa"; */
+"urQ-ou-ipa.normalTitle" = "재선택";
+
+/* Class = "UITableViewSection"; headerTitle = "User Email"; ObjectID = "uwD-R9-01S"; */
+"uwD-R9-01S.headerTitle" = "사용자 이메일";
+
+/* Class = "UILabel"; text = "Paper Maker"; ObjectID = "vex-hb-y1N"; */
+"vex-hb-y1N.text" = "페이퍼 제작자";
+
+/* Class = "UILabel"; text = "Last Modified on 12:12:12"; ObjectID = "wBU-YC-XYa"; */
+"wBU-YC-XYa.text" = "Last Modified on 12:12:12";
+
+/* Class = "UILabel"; text = "Help"; ObjectID = "wPP-f9-xVF"; */
+"wPP-f9-xVF.text" = "도움말";
+
+/* Class = "UILabel"; text = "2001-01-01"; ObjectID = "wWW-VT-IhP"; */
+"wWW-VT-IhP.text" = "2001-01-01";
+
+/* Class = "UILabel"; text = "Paper Creator"; ObjectID = "xgH-w6-jVg"; */
+"xgH-w6-jVg.text" = "페이퍼 제작자";
+
+/* Class = "UINavigationItem"; title = "Select A Paper Texture"; ObjectID = "xpx-Sm-m2I"; */
+"xpx-Sm-m2I.title" = "페이퍼 텍스처를 선택하세요.";
+
+/* Class = "UILabel"; text = "Classic"; ObjectID = "y7b-Jj-VKx"; */
+"y7b-Jj-VKx.text" = "클래식";
+
+/* Class = "UIButton"; configuration.title = "Cancel"; ObjectID = "yKG-34-nbN"; */
+"yKG-34-nbN.configuration.title" = "취소";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yKG-34-nbN"; */
+"yKG-34-nbN.normalTitle" = "취소";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "yxf-44-xLd"; */
+"yxf-44-xLd.headerTitle" = "제목";
+
+/* Class = "UITableViewSection"; headerTitle = "Password"; ObjectID = "zVl-LW-K3R"; */
+"zVl-LW-K3R.headerTitle" = "비밀번호";
+
+/* Class = "UINavigationItem"; title = "Login"; ObjectID = "zbr-6u-FXN"; */
+"zbr-6u-FXN.title" = "로그인";

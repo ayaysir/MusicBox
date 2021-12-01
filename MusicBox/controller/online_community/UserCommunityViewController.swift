@@ -103,12 +103,12 @@ class UserCommunityViewController: UIViewController {
 extension UserCommunityViewController {
     
     func getPostList() {
-        SwiftSpinner.show("Loading post list...")
+        SwiftSpinner.show("Loading post list...".localized)
         let ref = Database.database().reference(withPath: "community")
         ref.observe(.value) { (snapshot: DataSnapshot) in
             
             guard let snapshotDict = snapshot.value as? Dictionary<String, Any> else {
-                SwiftSpinner.show(duration: 2, title: "There are no articles.", animated: false, completion: nil)
+                SwiftSpinner.show(duration: 2, title: "There are no articles.".localized, animated: false, completion: nil)
                 return
             }
             let array = snapshotDict.map { (key: String, value: Any) in
@@ -183,8 +183,9 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "spaceForBanner", for: indexPath)
             return footerView
         default:
-            assert(false)
+            break
         }
+        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

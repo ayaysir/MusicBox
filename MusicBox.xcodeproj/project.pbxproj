@@ -107,6 +107,8 @@
 		44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA59273C23E900543A74 /* SettingTableViewController.swift */; };
 		44C1BA5C273D506C00543A74 /* AudioMIDISettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA5B273D506C00543A74 /* AudioMIDISettingTableViewController.swift */; };
 		44C1BA5F2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44C1BA5E2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 */; };
+		44E437E327553240008B41BA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E437E527553240008B41BA /* Localizable.strings */; };
+		44E437E727576C93008B41BA /* PaperOptionPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E437E927576C93008B41BA /* PaperOptionPanelView.xib */; };
 		44E682E926EA46320074FE46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682E826EA46320074FE46 /* AppDelegate.swift */; };
 		44E682EB26EA46320074FE46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EA26EA46320074FE46 /* SceneDelegate.swift */; };
 		44E682ED26EA46320074FE46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E682EC26EA46320074FE46 /* ViewController.swift */; };
@@ -127,7 +129,6 @@
 		44F3A03A26FF72FA000CE46F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A03926FF72FA000CE46F /* .gitignore */; };
 		44F3A03D2700A40A000CE46F /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03C2700A40A000CE46F /* ENSideMenu.swift */; };
 		44F3A03F2700A448000CE46F /* ENSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03E2700A448000CE46F /* ENSideMenuNavigationController.swift */; };
-		44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */; };
 		44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */; };
 		44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A0442700B8FA000CE46F /* UIViewPreview.swift */; };
 		44F3A047270199F1000CE46F /* PaperInfoBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A046270199F1000CE46F /* PaperInfoBridge.swift */; };
@@ -255,6 +256,12 @@
 		44C1BA59273C23E900543A74 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA5B273D506C00543A74 /* AudioMIDISettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMIDISettingTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA5E2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3; sourceTree = "<group>"; };
+		44E437DE274D4E49008B41BA /* MusicBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicBox.entitlements; sourceTree = "<group>"; };
+		44E437DF27551F61008B41BA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		44E437E027551F63008B41BA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		44E437E627553244008B41BA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44E437E827576C93008B41BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PaperOptionPanelView.xib; sourceTree = "<group>"; };
+		44E437EB27576C99008B41BA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PaperOptionPanelView.strings; sourceTree = "<group>"; };
 		44E682E526EA46320074FE46 /* MusicBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E682E826EA46320074FE46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44E682EA26EA46320074FE46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -281,7 +288,6 @@
 		44F3A03926FF72FA000CE46F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		44F3A03C2700A40A000CE46F /* ENSideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
 		44F3A03E2700A448000CE46F /* ENSideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSideMenuNavigationController.swift; sourceTree = "<group>"; };
-		44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaperOptionPanelView.xib; sourceTree = "<group>"; };
 		44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperOptionPanelView.swift; sourceTree = "<group>"; };
 		44F3A0442700B8FA000CE46F /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		44F3A046270199F1000CE46F /* PaperInfoBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperInfoBridge.swift; sourceTree = "<group>"; };
@@ -349,7 +355,6 @@
 				449F3E9926EF1B1C002C874D /* MusicPaperViewController.swift */,
 				444AF39D2701E26400BD8E38 /* HomeViewController.swift */,
 				44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */,
-				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
 				447E116D2722E9DF00931B8C /* CreateNewPaperTableViewController.swift */,
 				4450BCFC272706A000C21481 /* PaperInfoTableViewController.swift */,
 				44C1BA44273408ED00543A74 /* MainTabBarController.swift */,
@@ -399,6 +404,7 @@
 				44C1BA4C27395AF900543A74 /* NotConnectedViewController.swift */,
 				44C1BA4E273961EA00543A74 /* YouNeedLoginViewController.swift */,
 				4462790A274907130004D95D /* ArchiveNavigationController.swift */,
+				444D94512711C8440090F587 /* SelectAFileViewController.swift */,
 			);
 			path = online_community;
 			sourceTree = "<group>";
@@ -448,7 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				449A412026ECD87E00EE3B67 /* MusicBoxPaperView.swift */,
-				44F3A0402700A952000CE46F /* PaperOptionPanelView.xib */,
+				44E437E927576C93008B41BA /* PaperOptionPanelView.xib */,
 				44F3A0422700AA59000CE46F /* PaperOptionPanelView.swift */,
 				44558E5C271D906F00A0EF62 /* HeartButton.swift */,
 				4450BCFE2731473800C21481 /* PaperViewModePanelView.xib */,
@@ -588,6 +594,7 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				44E437DE274D4E49008B41BA /* MusicBox.entitlements */,
 				4416727E274CF58300041B33 /* iap */,
 				44E6CDB2274BBC5300DE7EF0 /* html */,
 				444D945B2711E3880090F587 /* firebase */,
@@ -611,6 +618,7 @@
 				44E682F626EA46340074FE46 /* Info.plist */,
 				444D9478271B0A820090F587 /* GlobalVariables.swift */,
 				4462790C274940130004D95D /* OnlyFirstrun.swift */,
+				44E437E527553240008B41BA /* Localizable.strings */,
 			);
 			path = MusicBox;
 			sourceTree = "<group>";
@@ -792,6 +800,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 44E682DC26EA46310074FE46;
 			packageReferences = (
@@ -817,9 +826,10 @@
 			files = (
 				44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */,
-				44F3A0412700A952000CE46F /* PaperOptionPanelView.xib in Resources */,
+				44E437E727576C93008B41BA /* PaperOptionPanelView.xib in Resources */,
 				447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
+				44E437E327553240008B41BA /* Localizable.strings in Resources */,
 				44C1BA5F2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 in Resources */,
 				447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */,
 				44E6CDBA274BFD3800DE7EF0 /* Nocturne.musicbox in Resources */,
@@ -1096,10 +1106,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		44E437E527553240008B41BA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44E437E627553244008B41BA /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		44E437E927576C93008B41BA /* PaperOptionPanelView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44E437E827576C93008B41BA /* Base */,
+				44E437EB27576C99008B41BA /* ko */,
+			);
+			name = PaperOptionPanelView.xib;
+			sourceTree = "<group>";
+		};
 		44E682EE26EA46320074FE46 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				44E682EF26EA46320074FE46 /* Base */,
+				44E437DF27551F61008B41BA /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1108,6 +1136,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				44E682F426EA46340074FE46 /* Base */,
+				44E437E027551F63008B41BA /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1119,6 +1148,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1180,6 +1210,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1237,7 +1268,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MusicBox/MusicBox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				INFOPLIST_FILE = MusicBox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1245,6 +1278,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1258,7 +1292,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MusicBox/MusicBox.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				INFOPLIST_FILE = MusicBox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1266,6 +1302,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

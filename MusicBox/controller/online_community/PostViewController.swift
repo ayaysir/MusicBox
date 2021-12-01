@@ -183,7 +183,7 @@ class PostViewController: UIViewController {
         SwiftSpinner.show("Downloading file...")
         getFileAndSave(childRefSTr: childRefStr, fileSaveURL: fileSaveURL) { url in
             SwiftSpinner.hide(nil)
-            simpleYesAndNo(self, message: "File download is complete. Go to the file browser?", title: "Download Complete") { action in
+            simpleYesAndNo(self, message: "File download is complete. Go to the file browser?".localized, title: "Download Complete".localized) { action in
                 self.tabBarController?.selectedIndex = 0
             }
         }
@@ -195,7 +195,7 @@ class PostViewController: UIViewController {
             return
         }
         
-        simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete this post?", title: "Delete") { action in
+        simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete this post?".localized, title: "Delete".localized) { action in
             let ref = Database.database().reference()
             let targetPostRef = ref.child("community").child(self.post.postId.uuidString)
             targetPostRef.removeValue { error, ref in

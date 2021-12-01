@@ -34,9 +34,9 @@ class TextureCollectionViewController: UICollectionViewController {
         
         switch category {
         case .paper:
-            self.title = "Select a Paper Pattern"
+            self.title = "Select a Paper Pattern".localized
         case .background:
-            self.title = "Select a Background Pattern"
+            self.title = "Select a Background Pattern".localized
         }
     }
     

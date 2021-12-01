@@ -61,7 +61,7 @@ class UpdatePostViewController: UIViewController {
             targetPostRef.child("postTitle").setValue(post.postTitle)
             targetPostRef.child("postComment").setValue(post.postComment)
             
-            simpleAlert(self, message: "The post update is complete.", title: "Update Completed") { _ in
+            simpleAlert(self, message: "The post update is complete.".localized, title: "Update Completed".localized) { _ in
                 delegate.didUpdateBtnClicked(self, updatedPost: self.post)
                 self.navigationController?.popViewController(animated: true)
             }
@@ -72,18 +72,18 @@ class UpdatePostViewController: UIViewController {
 extension UpdatePostViewController {
     private func validateFieldValues() -> Bool {
         
-        let alertTitle = "Unable to Create"
+        let alertTitle = "Unable to Create".localized
         
         // title
         guard txfPostTitle.text! != "" else {
-            simpleAlert(self, message: "Please enter the title.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please enter the title.".localized, title: alertTitle) { action in
                 self.txfPostTitle.becomeFirstResponder()
             }
             return false
         }
 
         guard txfPostTitle.text!.count <= 50 else {
-            simpleAlert(self, message: "Please write the title within 50 characters.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please write the title within 50 characters.".localized, title: alertTitle) { action in
                 self.txfPostTitle.becomeFirstResponder()
             }
             return false
@@ -91,7 +91,7 @@ extension UpdatePostViewController {
 
         // comment
         guard txvPostComment.text!.count <= 5000 else {
-            simpleAlert(self, message: "Please write the comment within 5000 characters.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please write the comment within 5000 characters.".localized, title: alertTitle) { action in
                 self.txvPostComment.becomeFirstResponder()
             }
             return false

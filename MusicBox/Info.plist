@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>If you agree to the collection of advertising identifiers, personalized advertisements will be displayed in banner ads.</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDocumentTypes</key>
@@ -25,7 +18,6 @@
 				<string>com.bgsmm.format.musicbox</string>
 			</array>
 		</dict>
-		<dict/>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -38,17 +30,44 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6364767349592629~3313820285</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera permission is required to take a user&apos;s profile picture.</string>
+	<string>Camera permission is required to take a user's profile picture.</string>
+	<key>NSExtensionAttributes</key>
+	<dict>
+		<key>NSExtensionActivationRule</key>
+		<string>
+        SUBQUERY (
+            extensionItems,
+            $extensionItem,
+                SUBQUERY (
+                    $extensionItem.attachments,
+                    $attachment,
+                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.bgsmm.format.musicbox" OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.data" OR
+                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.content")
+                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "your.unique.uti.here")
+                ).@count == $extensionItem.attachments.@count
+        ).@count == 1
+        </string>
+	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library permission is required to upload a user&apos;s profile picture from the library.</string>
+	<string>Photo Library permission is required to upload a user's profile picture from the library.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>If you agree to the collection of advertising identifiers, personalized advertisements will be displayed in banner ads.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -104,7 +123,7 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>This format can be opened with BGSMM&apos;s Musicbox app.</string>
+			<string>This format can be opened with BGSMM's Musicbox app.</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
@@ -127,7 +146,7 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>This format can be opened with BGSMM&apos;s Musicbox app.</string>
+			<string>This format can be opened with BGSMM's Musicbox app.</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
@@ -141,25 +160,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>NSExtensionAttributes</key>
-	<dict>
-		<key>NSExtensionActivationRule</key>
-		<string>
-        SUBQUERY (
-            extensionItems,
-            $extensionItem,
-                SUBQUERY (
-                    $extensionItem.attachments,
-                    $attachment,
-                    (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;com.bgsmm.format.musicbox&quot; OR
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.data&quot; OR
-                    ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;public.content&quot;)
-                    AND NOT (ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO &quot;your.unique.uti.here&quot;)
-                ).@count == $extensionItem.attachments.@count
-        ).@count == 1
-        </string>
-	</dict>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-6364767349592629~3313820285</string>
 </dict>
 </plist>

@@ -498,7 +498,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedShrinkPaper(_ view: UIView) {
         
         if self.colNum > cst.defaultColNum {
-            simpleDestructiveYesAndNo(self, message: "Do you really want to shrink the paper? This operation is not recoverable.", title: "Shrink Paper") { [self] action in
+            simpleDestructiveYesAndNo(self, message: "Do you really want to shrink the paper? This operation is not recoverable.".localized, title: "Shrink Paper") { [self] action in
                 SwiftSpinner.show("processing...")
                 self.colNum -= cst.defaultColNum
                 document?.paper?.colNum = colNum
@@ -514,7 +514,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 SwiftSpinner.hide(nil)
             }
         } else {
-            simpleAlert(self, message: "It cannot be shrinked any further.", title: "Not Collapsible", handler: nil)
+            simpleAlert(self, message: "It cannot be shrinked any further.".localized, title: "Not Collapsible".localized, handler: nil)
         }
     }
     
@@ -571,7 +571,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     
     func didClickedResetPaper(_ view: UIView) {
         if allowEdit {
-            simpleDestructiveYesAndNo(self, message: "Are you sure you want to remove all notes? This operation is not recoverable.", title: "Remove All Notes") { action in
+            simpleDestructiveYesAndNo(self, message: "Are you sure you want to remove all notes? This operation is not recoverable.".localized, title: "Remove All Notes".localized) { action in
                 self.musicPaperView.data = []
                 
                 // ??

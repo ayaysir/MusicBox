@@ -10,7 +10,7 @@ import Photos
 
 private func photoAuth(isCamera: Bool, viewController: UIViewController) -> Bool {
     
-    let name = isCamera ? "카메라" : "사진 라이브러리"
+    let name = isCamera ? "camera".localized : "photo library".localized
     let status: Int = isCamera
             ? AVCaptureDevice.authorizationStatus(for: AVMediaType.video).rawValue
             : PHPhotoLibrary.authorizationStatus().rawValue
@@ -20,13 +20,15 @@ private func photoAuth(isCamera: Bool, viewController: UIViewController) -> Bool
     switch status {
     case 0:
         // .notDetermined
-        simpleDestructiveYesAndNo(viewController, message: "\(name) 권한 설정을 변경하시겠습니까?", title: "권한 정보 없음", yesHandler: openSetting)
+        let msg = "Are you sure you want to change the permission settings for your %@?"
+        simpleDestructiveYesAndNo(viewController, message: msg.localizedFormat(name), title: "No Permission Status", yesHandler: openSetting)
     case 1:
         // .restricted
-        simpleAlert(viewController, message: "시스템에 의해 거부되었습니다.")
+        simpleAlert(viewController, message: "Rejected by the system.")
     case 2:
         // .denied
-        simpleDestructiveYesAndNo(viewController, message: "\(name) 기능 권한이 거부되어 사용할 수 없습니다. \(name) 권한 설정을 변경하시겠습니까?", title: "권한 거부됨", yesHandler: openSetting(action:))
+        let msg = "The %@ permission is denied and cannot be used. Do you want to change the %@ permission settings?"
+        simpleDestructiveYesAndNo(viewController, message: msg.localizedFormat(name), title: "Permission Denied", yesHandler: openSetting(action:))
     case 3:
         // .authorized
         return true

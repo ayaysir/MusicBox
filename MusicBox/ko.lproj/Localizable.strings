@@ -1,0 +1,107 @@
+/* 
+  Localizable.strings
+  MusicBox
+
+  Created by yoonbumtae on 2021/11/30.
+  
+*/
+
+// Test
+"He said the food %@ ate was %@." = "그가 말하길 %@ 씨가 먹은 음식은 %@이라고 하네요.";
+"James" = "제임스";
+"chicken" = "치킨";
+
+//
+"camera" = "카메라";
+"photo library" = "사진 라이브러리";
+"Are you sure you want to change the permission settings for your %@?" = "%@의 권한 설정을 변경하시겠습니까?";
+"No Permission Status" = "권한 정보 없음";
+"Rejected by the system." = "시스템에 의해 거부되었습니다.";
+"The %@ permission is denied and cannot be used. Do you want to change the %@ permission settings?" = "%@ 기능 권한이 거부되어 사용할 수 없습니다. %@ 권한 설정을 변경하시겠습니까?";
+"Permission Denied" = "권한 거부됨";
+"Select a Paper Pattern" = "페이퍼 패턴 선택";
+"Select a Background Pattern" = "배경 패턴 선택";
+"The mail cannot be sent because the mail account has not been set up on the device." = "이 기기에 메일 계정이 설정되어 있지 않기 때문에 메일을 보낼 수 없습니다.";
+"Make My MusicBox: Feedback" = "나의 오르골 만들기: 피드백";
+"Sets the duration of the note in seconds. The longer, the more natural playback will be. Some instruments may not work properly. The default is 8" = "노트음 재생 시 지속 길이를 초 단위로 설정하세요. 값이 클수록 보다 자연스러운 소리가 납니다. 몇몇 악기에서는 오동작을 일으킬 수 있습니다. 기본값은 8입니다.";
+"Duration of Each Note during Playback" = "노트 음의 지속길이";
+"You can set the playback instrument. The default instrument is “10: Music Box”." = "재생 악기를 선택할 수 있습니다. 기본값은 “10: Music Box” 입니다.";
+"MIDI Instrument Patch" = "MIDI 악기 패치";
+"This app supports autosave. You can set the autosave interval in seconds. Smaller values can slow execution. The default is 10." = "이 앱은 자동 저장을 지원합니다. 저장 간격을 초 단위로 설정하세요. 값이 작으면 앱 실행이 느려질 수 있습니다.";
+"Autosave Interval" = "자동 저장 간격";
+
+"Loading user information..." = "사용자 정보를 불러오고 있습니다...";
+"Email has been verified." = "이메일이 인증되었습니다.";
+"Loading user's profile photo..." = "사용자 프로필 사진을 불러오고 있습니다...";
+"Failed to load profile photo." = "프로필 사진 불러오기가 실패했습니다.";
+"Loading post list..." = "게시글 리스트를 불러오고 있습니다...";
+"There are no articles." = "게시글이 없습니다.";
+"You are not signed in." = "회원가입이 되어있지 않습니다.";
+"Papers made by other members cannot be uploaded." = "다른 사람이 만든 페이퍼는 업로드할 수 없습니다.";
+"Writing a post..." = "게시글을 작성중입니다...";
+"Unable to Create" = "만들 수 없음";
+
+// validation
+"You must select a file to upload." = "업로드할 파일을 선택해야 합니다.";
+"Please enter the title." = "제목을 입력해주세요.";
+"Please write the title within 50 characters." = "제목은 50자 이내로 작성해야 합니다.";
+"Please write the comment within 5000 characters." = "코멘트는 5000자 이내로 작성해야 합니다.";
+"Email format is incorrect. Please rewrite your email." = "이메일 포맷이 잘못되었습니다. 올바른 포맷으로 재작성해주세요.";
+"You must enter a password." = "패스워드를 입력해야 합니다.";
+"You must enter a password confirmation." = "패스워드 확인란을 입력해야 합니다.";
+"Please write your nickname within 1-10 characters." = "";
+
+"Uploading paper files..." = "페이퍼 파일을 업로드하고 있습니다...";
+"Error: Paper file not uploaded." = "에러: 파일이 업로드되지 않았습니다.";
+"Albumart thumbnails are being uploaded..." = "앨범아트 섬네일이 업로드되고 있습니다...";
+"Thumbnail error" = "섬네일 파일의 에러";
+"Thumbnail upload error" = "섬네일 업로드 에러";
+"The writing and paper file upload are complete." = "모든 업로드 작업이 완료되었습니다.";
+"Post Upload Completed" = "게시글 업로드 완료";
+"Uploading albumart..." = "앨범아트 업로드 중...";
+"Image error" = "이미지 에러";
+"Image upload error" = "이미지 업로드 에러";
+
+"File download is complete. Go to the file browser?" = "파일 다운로드가 완료되었습니다. 브라우저로 이동할까요?";
+"Download Complete" = "다운로드 완료";
+
+"Are you sure you want to delete this post?" = "이 게시글을 정말 삭제할까요?";
+"Delete" = "삭제";
+
+"The post update is complete." = "게시글 업데이트가 완료되었습니다.";
+"Update Completed" = "업로드 완료";
+
+"Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted." = "회원탈퇴를 하시겠습니까? 회원탈퇴를 하시면 회원정보가 삭제되어 복구가 불가능합니다. 작성한 글은 삭제되지 않습니다.";
+"Withdrawal Membership" = "회원 탈퇴";
+"Membership cancellation in progress..." = "회원 탈퇴 진행중";
+"Passwords do not match." = "비밀번호가 일치하지 않습니다.";
+"Passwords match." = "패스워드가 일치합니다.";
+"Sending a verification email..." = "인증 요청 메일을 보내고 있습니다...";
+"Sending member information to server..." = "서버에 회원 정보를 전송중입니다.";
+"Your profile image is being sent..." = "프로필 사진을 전송중입니다..";
+
+"%@: Your membership %@ is complete." = "%@님의 %@ 완료되었습니다.";
+"registration" = "회원가입이";
+"membership information update" = "회원정보 업데이트가";
+
+"Do you really want to shrink the paper? This operation is not recoverable." = "페이퍼를 축소할까요? 이 작업은 되돌릴 수 없습니다.";
+"Shrink Paper" = "페이퍼 축소";
+"It cannot be shrinked any further." = "더 이상 줄일 수 없습니다.";
+"Not Collapsible" = "줄일 수 없음";
+"Are you sure you want to remove all notes? This operation is not recoverable." = "모든 노트를 삭제할까요? 이 작업은 되돌릴 수 없습니다.";
+"Remove All Notes" = "모든 노트 삭제";
+
+" Are you sure you want to load the '%@' file? If you select 'Yes', the files will be copied to the Documents directory." = "'%@' 파일을 불러올까요? '예'를 선택하면 파일이 다큐멘트 폴더로 복사됩니다.";
+"Are you sure you want to delete the file? Deleted files cannot be recovered." = "이 파일을 삭제할까요? 삭제한 파일은 복구할 수 없습니다.";
+"Delete the File" = "파일 삭제";
+"The file has been deleted." = "파일이 삭제되었습니다.";
+"Delete Completed" = "삭제 완료";
+
+"Editing is not possible because the creator did not allow editing." = "제작자가 편집을 허용하지 않았기 때문에 편집할 수 없습니다.";
+"Cannot Edit" = "편집할 수 없음";
+
+"Caution" = "주의";
+"No" = "아니오";
+"Yes" = "예";
+
+"Email is not verified." = "이메일이 인증되지 않았습니다.";

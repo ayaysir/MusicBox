@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Play/Stop Sequence"; ObjectID = "0w9-ZK-Xrf"; */
+"0w9-ZK-Xrf.text" = "시퀀스 재생/정지";
+
+/* Class = "UIButton"; normalTitle = "< Back to the Main"; ObjectID = "2hl-l0-ca9"; */
+"2hl-l0-ca9.normalTitle" = "< 메인으로 돌아가기";
+
+/* Class = "UILabel"; text = "Push/Pull Detail Menu"; ObjectID = "5rL-sP-SWD"; */
+"5rL-sP-SWD.text" = "세부 패널 당기기/밀기";
+
+/* Class = "UILabel"; text = "Beat per Minute"; ObjectID = "8hO-sf-82e"; */
+"8hO-sf-82e.text" = "Beat per Minute";
+
+/* Class = "UILabel"; text = "Undo"; ObjectID = "DIY-cO-ScE"; */
+"DIY-cO-ScE.text" = "실행 취소";
+
+/* Class = "UIButton"; normalTitle = "Erase All Note"; ObjectID = "KVE-fn-Kvn"; */
+"KVE-fn-Kvn.normalTitle" = "모든 노트 지우기";
+
+/* Class = "UIButton"; normalTitle = "Change"; ObjectID = "LSi-yf-se9"; */
+"LSi-yf-se9.normalTitle" = "변경";
+
+/* Class = "UILabel"; text = "Snap to Grid"; ObjectID = "XlT-Jm-MPt"; */
+"XlT-Jm-MPt.text" = "그리드에 맞추기";
+
+/* Class = "UIButton"; normalTitle = "Change"; ObjectID = "XuA-Ed-OJv"; */
+"XuA-Ed-OJv.normalTitle" = "변경";
+
+/* Class = "UILabel"; text = "Save the Paper File"; ObjectID = "c0Z-rU-i4K"; */
+"c0Z-rU-i4K.text" = "페이퍼 파일 저장";
+
+/* Class = "UILabel"; text = "Incomplete Measure"; ObjectID = "cBF-EM-y2k"; */
+"cBF-EM-y2k.text" = "못갖춘마디";
+
+/* Class = "UIButton"; normalTitle = "Shrink Paper"; ObjectID = "dEz-Pv-q1s"; */
+"dEz-Pv-q1s.normalTitle" = "페이퍼 길이 축소";
+
+/* Class = "UILabel"; text = "Eraser"; ObjectID = "fAr-BT-FlB"; */
+"fAr-BT-FlB.text" = "지우개";
+
+/* Class = "UILabel"; text = "Expand Paper"; ObjectID = "oSd-8n-KLj"; */
+"oSd-8n-KLj.text" = "페이퍼 길이 연장";

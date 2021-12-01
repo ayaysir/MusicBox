@@ -93,7 +93,7 @@ extension SettingTableViewController: MFMailComposeViewControllerDelegate {
             return
         }
         
-        let emailTitle = "Make My MusicBox: Feedback" // 메일 제목
+        let emailTitle = "Make My MusicBox: Feedback".localized // 메일 제목
         let messageBody =
         """
         OS Version: \(UIDevice.current.systemVersion)

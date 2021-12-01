@@ -49,7 +49,7 @@ class MemberProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         if Reachability.isConnectedToNetwork() {
-            SwiftSpinner.show("Loading user information...")
+            SwiftSpinner.show("Loading user information...".localized)
             Auth.auth().currentUser?.reload(completion: { error in
                 if error != nil {
                     print(error!.localizedDescription)
@@ -113,11 +113,11 @@ extension MemberProfileViewController {
     
     private func changeEmailVerified(_ isVerified: Bool) {
         if isVerified {
-            lblEmailVerified.text = "Email has been verified."
+            lblEmailVerified.text = "Email has been verified.".localized
             imgEmailVerified.image = UIImage(systemName: "checkmark.circle.fill")
             imgEmailVerified.tintColor = .green
         } else {
-            lblEmailVerified.text = "Email is not verified."
+            lblEmailVerified.text = "Email is not verified.".localized
             imgEmailVerified.image = UIImage(systemName: "xmark.circle.fill")
             imgEmailVerified.tintColor = .systemGray3
         }
@@ -148,14 +148,14 @@ extension MemberProfileViewController {
         
         let sampleImageRef = storageRef.child("images/users/\(uid)/thumb_\(uid).jpg")
         
-        SwiftSpinner.show("Loading user's profile photo...")
+        SwiftSpinner.show("Loading user's profile photo...".localized)
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         sampleImageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 // Uh-oh, an error occurred!
                 print("download error", error.localizedDescription)
-                SwiftSpinner.show(duration: 3, title: "Failed to load profile photo.", animated: false, completion: nil)
+                SwiftSpinner.show(duration: 3, title: "Failed to load profile photo.".localized, animated: false, completion: nil)
             } else {
                 // Data for "images/island.jpg" is returned
                 let image = UIImage(data: data!)

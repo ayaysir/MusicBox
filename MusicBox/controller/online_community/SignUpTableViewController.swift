@@ -157,14 +157,14 @@ class SignUpTableViewController: UITableViewController {
             return
         }
         
-        simpleDestructiveYesAndNo(self, message: "Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted.", title: "Withdrawal Membership") { action in
+        simpleDestructiveYesAndNo(self, message: "Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted.".localized, title: "Withdrawal Membership".localized) { action in
             
             guard let user = Auth.auth().currentUser else {
                 return
             }
             
             self.ref.child("users/\(user.uid)").removeValue { error, ref in
-                SwiftSpinner.show("Membership cancellation in progress...")
+                SwiftSpinner.show("Membership cancellation in progress...".localized)
                 if let error = error {
                     print("userinfo delete failed:", error.localizedDescription)
                 }
@@ -237,7 +237,7 @@ extension SignUpTableViewController {
             // 비빌번호를 두 쪽 다 입력한 때
             if newPassword != "" || newPasswordConfirm != "" {
                 guard newPassword == newPasswordConfirm else {
-                    simpleAlert(self, message: "Passwords do not match.")
+                    simpleAlert(self, message: "Passwords do not match.".localized)
                     return
                 }
                 sendInfoToFirebase(withEmail: user.email!, password: newPassword)
@@ -250,7 +250,7 @@ extension SignUpTableViewController {
     
     func sendVerificationMail(authUser: User?) {
         if authUser != nil && authUser!.isEmailVerified == false {
-            SwiftSpinner.show("Sending a verification email...")
+            SwiftSpinner.show("Sending a verification email...".localized)
             authUser!.sendEmailVerification(completion: { (error) in
                 // Notify the user that the mail has sent or couldn't because of an error.
                 if error != nil {
@@ -299,7 +299,7 @@ extension SignUpTableViewController {
                     ]
                     
                     // 이미지 업로드
-                    SwiftSpinner.show("Your profile image is being sent...")
+                    SwiftSpinner.show("Your profile image is being sent...".localized)
                     uploadUserProfileImage(images: images, user: user)
                 }
             case .updateMode:
@@ -323,7 +323,7 @@ extension SignUpTableViewController {
                     ]
                     
                     // 이미지 업로드
-                    SwiftSpinner.show("Your profile image is being sent...")
+                    SwiftSpinner.show("Your profile image is being sent...".localized)
                     uploadUserProfileImage(images: images, user: user)
                 })
             }
@@ -348,7 +348,7 @@ extension SignUpTableViewController {
             let image = try resizeImage(image: imgProfilePicture.image!, maxSize: 1020)
             try userProfileThumbnail = resizeImage(image: imgProfilePicture.image!, maxSize: 200)
             
-            SwiftSpinner.show("Sending member information to server...")
+            SwiftSpinner.show("Sending member information to server...".localized)
             
             // 추가 정보 입력
             let interesting = selectedInteresting ?? "None"
@@ -363,7 +363,7 @@ extension SignUpTableViewController {
             ]
             
             // 이미지 업로드
-            SwiftSpinner.show("Your profile image is being sent...")
+            SwiftSpinner.show("Your profile image is being sent...".localized)
             uploadUserProfileImage(images: images, user: user)
         } catch {
             print(error.localizedDescription)
@@ -434,11 +434,11 @@ extension SignUpTableViewController {
             
             SwiftSpinner.hide(nil)
             
-            let attachTextKR = self.pageMode == .signUpMode ? "회원가입이" : "회원정보 업데이트가"
-            let attachTextEN = self.pageMode == .signUpMode ? "registration" : "membership information update"
+//            let attachTextKR = self.pageMode == .signUpMode ? "회원가입이" : "회원정보 업데이트가"
+            let attachTextEN = self.pageMode == .signUpMode ? "registration".localized : "membership information update".localized
             
-            // let koreanMsg = "\(user.email!) 님의 \(attachTextKR) 완료되었습니다."
-            let englishMsg = "\(user.email!): Your membership \(attachTextEN) is complete."
+            let englishMsg = "%@: Your membership %@ is complete.".localizedFormat(user.email!, attachTextEN)
+//            let englishMsg = "\(user.email!): Your membership \(attachTextEN) is complete."
             
             simpleAlert(self, message: englishMsg, title: "Completed") { action in
 
@@ -498,7 +498,7 @@ extension SignUpTableViewController {
 extension SignUpTableViewController {
     func validateFieldValues() -> Bool {
         
-        let alertTitle = "Unable to Create"
+        let alertTitle = "Unable to Create".localized
         
         guard let userEmail = txfUserEmail.text,
               let userPassword = txfPassword.text,
@@ -518,28 +518,28 @@ extension SignUpTableViewController {
             
             let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
             guard userEmail.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil else {
-                simpleAlert(self, message: "Email format is incorrect. Please rewrite your email.", title: alertTitle) { action in
+                simpleAlert(self, message: "Email format is incorrect. Please rewrite your email.".localized, title: alertTitle) { action in
                     self.txfUserEmail.becomeFirstResponder()
                 }
                 return false
             }
             
             guard userPassword != "" else {
-                simpleAlert(self, message: "You must enter a password.", title: alertTitle) { action in
+                simpleAlert(self, message: "You must enter a password.".localized, title: alertTitle) { action in
                     self.txfPassword.becomeFirstResponder()
                 }
                 return false
             }
             
             guard userPasswordConfirm != "" else {
-                simpleAlert(self, message: "You must enter a password confirmation.", title: alertTitle) { action in
+                simpleAlert(self, message: "You must enter a password confirmation.".localized, title: alertTitle) { action in
                     self.txfPasswordConfirm.becomeFirstResponder()
                 }
                 return false
             }
             
             guard userPassword == userPasswordConfirm else {
-                simpleAlert(self, message: "Passwords do not match.", title: alertTitle) { action in
+                simpleAlert(self, message: "Passwords do not match.".localized, title: alertTitle) { action in
                     self.txfPassword.becomeFirstResponder()
                 }
                 return false
@@ -550,7 +550,7 @@ extension SignUpTableViewController {
         }
         
         guard txfNickname.text!.count >= 1 && txfNickname.text!.count <= 10 else {
-            simpleAlert(self, message: "Please write your nickname within 1-10 characters.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please write your nickname within 1-10 characters.".localized, title: alertTitle) { action in
                 self.txfNickname.becomeFirstResponder()
             }
             return false
@@ -595,10 +595,10 @@ extension SignUpTableViewController: UITextFieldDelegate {
         
         if password == passwordConfirm {
             lblPasswordConfirmed.textColor = .green
-            lblPasswordConfirmed.text = "Passwords match."
+            lblPasswordConfirmed.text = "Passwords match.".localized
         } else {
             lblPasswordConfirmed.textColor = .red
-            lblPasswordConfirmed.text = "Passwords do not match."
+            lblPasswordConfirmed.text = "Passwords do not match.".localized
         }
     }
     

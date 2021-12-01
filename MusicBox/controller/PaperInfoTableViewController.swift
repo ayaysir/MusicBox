@@ -99,7 +99,7 @@ class PaperInfoTableViewController: UITableViewController {
         }
         
         guard paper.isAllowOthersToEdit else {
-            simpleAlert(self, message: "Editing is not possible because the creator did not allow editing.", title: "Cannot Edit", handler: nil)
+            simpleAlert(self, message: "Editing is not possible because the creator did not allow editing.".localized, title: "Cannot Edit", handler: nil)
             return
         }
         
@@ -144,14 +144,15 @@ class PaperInfoTableViewController: UITableViewController {
     
     
     @IBAction func btnActDeleteFile(_ sender: Any) {
-        simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.", title: "Delete the File") { action in
+        simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.".localized, title: "Delete the File".localized
+        ) { action in
             guard let selectedDocument = self.selectedDocument else {
                 return
             }
             
             do {
                 try FileManager.default.removeItem(at: selectedDocument.fileURL)
-                simpleAlert(self, message: "The file has been deleted.", title: "Delete Completed") { action in
+                simpleAlert(self, message: "The file has been deleted.".localized, title: "Delete Completed".localized) { action in
                     self.navigationController?.popViewController(animated: true)
                 }
             } catch {

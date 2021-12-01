@@ -46,11 +46,13 @@ func OnlyOnceAfterInstall() {
     
     // 예제 파일 복사
     guard let resourceURL = Bundle.main.url(forResource: "Nocturne", withExtension: "musicbox") else {
-        assert(false, "Nocturne.musicbox is not exist.")
+        print(false, "Nocturne.musicbox is not exist.")
+        return
     }
     
     guard let documentDirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-        assert(false, "Document Dir is not exist.")
+        print(false, "Document Dir is not exist.")
+        return
     }
     
     let fileURL = documentDirURL.appendingPathComponent("Nocturne").appendingPathExtension("musicbox")

@@ -68,11 +68,11 @@ class AudioMIDISettingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            simpleAlert(self, message: "Sets the duration of the note in seconds. The longer, the more natural playback will be. Some instruments may not work properly. The default is 8", title: "Duration of Each Note during Playback", handler: nil)
+            simpleAlert(self, message: "Sets the duration of the note in seconds. The longer, the more natural playback will be. Some instruments may not work properly. The default is 8".localized, title: "Duration of Each Note during Playback".localized, handler: nil)
         case 1:
-            simpleAlert(self, message: "You can set the playback instrument. The default instrument is “10: Music Box”.", title: "MIDI Instrument Patch", handler: nil)
+            simpleAlert(self, message: "You can set the playback instrument. The default instrument is “10: Music Box”.".localized, title: "MIDI Instrument Patch".localized, handler: nil)
         case 3:
-            simpleAlert(self, message: "This app supports autosave. You can set the autosave interval in seconds. Smaller values can slow execution. The default is 10.", title: "Autosave Interval", handler: nil)
+            simpleAlert(self, message: "This app supports autosave. You can set the autosave interval in seconds. Smaller values can slow execution. The default is 10.".localized, title: "Autosave Interval".localized, handler: nil)
         default:
             break
         }

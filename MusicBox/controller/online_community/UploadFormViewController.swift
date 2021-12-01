@@ -104,13 +104,13 @@ extension UploadFormViewController {
         }
         
         guard let currentUID = getCurrentUserUID() else {
-            simpleAlert(self, message: "You are not signed in.")
+            simpleAlert(self, message: "You are not signed in.".localized)
             return
         }
         
         // 자신이 만든 파일만 업로드되도록
         if paper.firebaseUID != nil && paper.firebaseUID! != currentUID {
-            simpleAlert(self, message: "Papers made by other members cannot be uploaded.")
+            simpleAlert(self, message: "Papers made by other members cannot be uploaded.".localized)
             return
         } else {
             paper.firebaseUID = currentUID
@@ -139,7 +139,7 @@ extension UploadFormViewController {
         let postIdStr = post.postId.uuidString
         
         let ref = Database.database().reference(withPath: "community/\(postIdStr)")
-        SwiftSpinner.show("Writing a post...")
+        SwiftSpinner.show("Writing a post...".localized)
         
         let cachePath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         let targetDocCachePath = cachePath.appendingPathComponent(selectedDocument.fileURL.lastPathComponent)
@@ -165,10 +165,10 @@ extension UploadFormViewController {
     
     private func validateFieldValues() -> Bool {
         
-        let alertTitle = "Unable to Create"
+        let alertTitle = "Unable to Create".localized
         
         guard selectedDocument != nil else {
-            simpleAlert(self, message: "You must select a file to upload.", title: alertTitle) { action in
+            simpleAlert(self, message: "You must select a file to upload.".localized, title: alertTitle) { action in
                 self.scrollView.setContentOffset(.zero, animated: true)
             }
             return false
@@ -176,14 +176,14 @@ extension UploadFormViewController {
         
         // title
         guard txfPostTitle.text! != "" else {
-            simpleAlert(self, message: "Please enter the title.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please enter the title.".localized, title: alertTitle) { action in
                 self.txfPostTitle.becomeFirstResponder()
             }
             return false
         }
 
         guard txfPostTitle.text!.count <= 50 else {
-            simpleAlert(self, message: "Please write the title within 50 characters.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please write the title within 50 characters.".localized, title: alertTitle) { action in
                 self.txfPostTitle.becomeFirstResponder()
             }
             return false
@@ -191,7 +191,7 @@ extension UploadFormViewController {
 
         // comment
         guard txvPostComment.text!.count <= 5000 else {
-            simpleAlert(self, message: "Please write the comment within 5000 characters.", title: alertTitle) { action in
+            simpleAlert(self, message: "Please write the comment within 5000 characters.".localized, title: alertTitle) { action in
                 self.txvPostComment.becomeFirstResponder()
             }
             return false
@@ -212,7 +212,7 @@ extension UploadFormViewController {
                 guard success else { return }
                 
                 FirebaseFileManager.shared.setChild("musicbox/\(postIdStr)")
-                SwiftSpinner.show("Uploading paper files...")
+                SwiftSpinner.show("Uploading paper files...".localized)
                 do {
                     let fileData = try Data(contentsOf: cacheDocument.fileURL)
                     FirebaseFileManager.shared.upload(data: fileData, withName: cacheDocument.fileURL.lastPathComponent) { url in
@@ -221,7 +221,7 @@ extension UploadFormViewController {
                                 self.second_uploadThumbnail(postIdStr: postIdStr)
                             }
                         } else {
-                            SwiftSpinner.show(duration: 3, title: "Error: Paper file not uploaded.", animated: false, completion: nil)
+                            SwiftSpinner.show(duration: 3, title: "Error: Paper file not uploaded.".localized, animated: false, completion: nil)
                         }
                     }
                 } catch {
@@ -237,7 +237,7 @@ extension UploadFormViewController {
     
     private func second_uploadThumbnail(postIdStr: String) {
         
-        SwiftSpinner.show("Albumart thumbnails are being uploaded...")
+        SwiftSpinner.show("Albumart thumbnails are being uploaded...".localized)
         
         FirebaseFileManager.shared.setChild("PostThumbnail/\(postIdStr)")
         
@@ -250,7 +250,7 @@ extension UploadFormViewController {
             let imageThumbnail = try resizeImage(image: image, maxSize: 180)
             
             guard let thumbData = imageThumbnail.jpegData(compressionQuality: 0.95) else {
-                SwiftSpinner.show("Thumbnail error", animated: false)
+                SwiftSpinner.show("Thumbnail error".localized, animated: false)
                 return
             }
             
@@ -258,14 +258,14 @@ extension UploadFormViewController {
                 if url != nil {
                     self.third_uploadFullSizeImage(postIdStr: postIdStr)
                 } else {
-                    SwiftSpinner.show("Thumbnail upload error", animated: false)
+                    SwiftSpinner.show("Thumbnail upload error".localized, animated: false)
                 }
             }
         } catch {
             print("thumbnail", error)
             if (error as! ResizeImageError) == .sizeIsTooSmall {
                 SwiftSpinner.hide(nil)
-                simpleAlert(self, message: "The writing and paper file upload are complete.", title: "Post Upload Completed") { action in
+                simpleAlert(self, message: "The writing and paper file upload are complete.".localized, title: "Post Upload Completed".localized) { action in
                     self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -280,7 +280,7 @@ extension UploadFormViewController {
         FirebaseFileManager.shared.setChild("PostAlbumart/\(postIdStr)")
         
         guard let imageData = imgSelectedAlbumart.image?.jpegData(compressionQuality: 1) else {
-            SwiftSpinner.show("이미지 오류", animated: false)
+            SwiftSpinner.show("Image error".localized, animated: false)
             return
         }
         
@@ -288,11 +288,11 @@ extension UploadFormViewController {
         FirebaseFileManager.shared.upload(data: imageData, withName: "\(postIdStr).jpg") { url in
             if url != nil {
                 SwiftSpinner.hide(nil)
-                simpleAlert(self, message: "The writing and paper file upload are complete.", title: "Post Upload Completed") { action in
+                simpleAlert(self, message: "The writing and paper file upload are complete.".localized, title: "Post Upload Completed".localized) { action in
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
-                SwiftSpinner.show("Image upload error", animated: false)
+                SwiftSpinner.show("Image upload error".localized, animated: false)
             }
         }
     }
