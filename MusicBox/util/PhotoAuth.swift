@@ -28,7 +28,7 @@ private func photoAuth(isCamera: Bool, viewController: UIViewController) -> Bool
     case 2:
         // .denied
         let msg = "The %@ permission is denied and cannot be used. Do you want to change the %@ permission settings?"
-        simpleDestructiveYesAndNo(viewController, message: msg.localizedFormat(name), title: "Permission Denied", yesHandler: openSetting(action:))
+        simpleDestructiveYesAndNo(viewController, message: msg.localizedFormat(name, name), title: "Permission Denied", yesHandler: openSetting(action:))
     case 3:
         // .authorized
         return true
@@ -42,12 +42,12 @@ private func photoAuth(isCamera: Bool, viewController: UIViewController) -> Bool
     return false
 }
 
-func doTaskByPhotoAuthorization(_ viewController: UIViewController) -> Bool {
-    return photoAuth(isCamera: true, viewController: viewController)
+func authPhotoLibrary(_ viewController: UIViewController) -> Bool {
+    return photoAuth(isCamera: false, viewController: viewController)
 }
 
-func doTaskByCameraAuthorization(_ viewController: UIViewController) -> Bool {
-    return photoAuth(isCamera: false, viewController: viewController)
+func authDeviceCamera(_ viewController: UIViewController) -> Bool {
+    return photoAuth(isCamera: true, viewController: viewController)
 }
 
 private func openSetting(action: UIAlertAction) -> Void {

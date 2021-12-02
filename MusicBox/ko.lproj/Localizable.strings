@@ -49,7 +49,7 @@
 "Email format is incorrect. Please rewrite your email." = "이메일 포맷이 잘못되었습니다. 올바른 포맷으로 재작성해주세요.";
 "You must enter a password." = "패스워드를 입력해야 합니다.";
 "You must enter a password confirmation." = "패스워드 확인란을 입력해야 합니다.";
-"Please write your nickname within 1-10 characters." = "";
+"Please write your nickname within 1-10 characters." = "닉네임은 1-10 자 이내로 입력해야 합니다.";
 
 "Uploading paper files..." = "페이퍼 파일을 업로드하고 있습니다...";
 "Error: Paper file not uploaded." = "에러: 파일이 업로드되지 않았습니다.";
@@ -78,7 +78,7 @@
 "Passwords match." = "패스워드가 일치합니다.";
 "Sending a verification email..." = "인증 요청 메일을 보내고 있습니다...";
 "Sending member information to server..." = "서버에 회원 정보를 전송중입니다.";
-"Your profile image is being sent..." = "프로필 사진을 전송중입니다..";
+"Your profile image is being sent..." = "프로필 사진을 전송중입니다...";
 
 "%@: Your membership %@ is complete." = "%@님의 %@ 완료되었습니다.";
 "registration" = "회원가입이";

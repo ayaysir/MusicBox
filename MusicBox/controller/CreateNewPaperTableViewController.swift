@@ -290,7 +290,7 @@ class CreateNewPaperTableViewController: UITableViewController {
             
             document.paper = paper
             document.save(to: document.fileURL, for: .forOverwriting) { success in
-                simpleAlert(self, message: "Paper information update is complete.", title: "Update Completed") { action in
+                simpleAlert(self, message: "Paper information update is complete.".localized, title: "Update Completed".localized) { action in
                     delegate.didDocumentUpdated(self, updatedDocument: document)
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -531,7 +531,7 @@ extension CreateNewPaperTableViewController: UIImagePickerControllerDelegate, UI
     func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             self.imagePickerController.sourceType = .camera
-            if doTaskByCameraAuthorization(self) {
+            if authDeviceCamera(self) {
                 present(self.imagePickerController, animated: true, completion: nil)
             }
         } else {
@@ -541,7 +541,7 @@ extension CreateNewPaperTableViewController: UIImagePickerControllerDelegate, UI
     
     func getPhotoFromLibrary() {
         self.imagePickerController.sourceType = .photoLibrary
-        if doTaskByPhotoAuthorization(self) {
+        if authPhotoLibrary(self) {
             present(self.imagePickerController, animated: true, completion: nil)
         }
     }

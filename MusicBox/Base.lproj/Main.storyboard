@@ -617,6 +617,7 @@ Arrangey by bcd</string>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Download">
                                                             <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="15"/>
+                                                            <color key="baseForegroundColor" systemColor="systemGreenColor"/>
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="btnActDownload:" destination="aIW-eH-CQg" eventType="touchUpInside" id="LA3-dK-6HK"/>
@@ -1336,7 +1337,7 @@ Arrangey by bcd</string>
             <objects>
                 <tableViewController storyboardIdentifier="SignUpTableViewController" id="gAR-bh-5Od" customClass="SignUpTableViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Luk-gR-Xl5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <sections>
@@ -1604,7 +1605,7 @@ Arrangey by bcd</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHd-RW-ioO">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="31"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Submit">
                                                         <color key="baseForegroundColor" systemColor="systemGreenColor"/>
@@ -1616,7 +1617,6 @@ Arrangey by bcd</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="bHd-RW-ioO" firstAttribute="leading" secondItem="Lch-zZ-Ivq" secondAttribute="leading" constant="20" symbolic="YES" id="Iqx-y9-4X4"/>
-                                                <constraint firstAttribute="bottom" secondItem="bHd-RW-ioO" secondAttribute="bottom" id="Suf-Y0-6ZC"/>
                                                 <constraint firstAttribute="trailing" secondItem="bHd-RW-ioO" secondAttribute="trailing" constant="20" symbolic="YES" id="XJN-QD-z1g"/>
                                                 <constraint firstItem="bHd-RW-ioO" firstAttribute="top" secondItem="Lch-zZ-Ivq" secondAttribute="top" id="iVb-gG-dPP"/>
                                             </constraints>
@@ -1637,7 +1637,7 @@ Arrangey by bcd</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <size key="freeformSize" width="414" height="1200"/>
+                    <size key="freeformSize" width="414" height="1250"/>
                     <connections>
                         <outlet property="btnResetPageInfo" destination="VPi-ng-bca" id="mll-jf-tBE"/>
                         <outlet property="btnSubmitInfo" destination="bHd-RW-ioO" id="L3o-Va-bH4"/>

@@ -52,6 +52,8 @@ class SignUpTableViewController: UITableViewController {
     private var userNickname: String?
     private var userImage: UIImage?
     
+    var isImageChanged: Bool = false
+    
     weak var delegate: SignUpDelegate?
     weak var resignDelegate: ResignMemberDelegate?
     var pageMode: SignUpPageMode = .signUpMode
@@ -142,10 +144,12 @@ class SignUpTableViewController: UITableViewController {
             selectedInteresting = userInterestingStr ?? interestingList[0]
             imgProfilePicture.image = userImage
         }
+        isImageChanged = false
         
     }
     
     @IBAction func btnActSubmit(_ sender: UIButton) {
+        print(#function, sender.bounds)
         submit()
     }
     
@@ -293,15 +297,21 @@ extension SignUpTableViewController {
                     
                     ref.child("users").child(user.uid).child("interesting").setValue(interesting)
                     ref.child("users").child(user.uid).child("nickname").setValue(nickname)
-                    
-                    let images = [
-                        ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                        ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
-                    ]
+                
                     
                     // 이미지 업로드
-                    SwiftSpinner.show("Your profile image is being sent...".localized)
-                    uploadUserProfileImage(images: images, user: user)
+                    if isImageChanged {
+                        SwiftSpinner.show("Your profile image is being sent...".localized)
+                        
+                        let images = [
+                            ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                            ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                        ]
+                    
+                        uploadUserProfileImage(images: images)
+                    } else {
+                        completed()
+                    }
                 }
             case .updateMode:
                 
@@ -318,14 +328,20 @@ extension SignUpTableViewController {
                         return
                     }
                     
-                    let images = [
-                        ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                        ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
-                    ]
-                    
                     // 이미지 업로드
-                    SwiftSpinner.show("Your profile image is being sent...".localized)
-                    uploadUserProfileImage(images: images, user: user)
+                    if isImageChanged {
+                        
+                        SwiftSpinner.show("Your profile image is being sent...".localized)
+                        let images = [
+                            ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                            ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                        ]
+                        
+                        uploadUserProfileImage(images: images)
+                    } else {
+                        completed()
+                    }
+                    
                 })
             }
             
@@ -358,20 +374,27 @@ extension SignUpTableViewController {
             ref.child("users").child(user.uid).child("interesting").setValue(interesting)
             ref.child("users").child(user.uid).child("nickname").setValue(nickname)
             
-            let images = [
-                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
-            ]
-            
             // 이미지 업로드
-            SwiftSpinner.show("Your profile image is being sent...".localized)
-            uploadUserProfileImage(images: images, user: user)
+            if isImageChanged {
+                SwiftSpinner.show("Your profile image is being sent...".localized)
+                
+                let images = [
+                    ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                    ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                ]
+                uploadUserProfileImage(images: images)
+            } else {
+                completed()
+            }
+            
         } catch {
             print(error.localizedDescription)
         }
     }
     
     func loadExistingUserInfo() {
+        SwiftSpinner.show("Loading existing profile image...".localized)
+        
         if pageMode == .updateMode {
             // 회원 정보 불러오기
             guard let userUID = getCurrentUserUID() else {
@@ -411,7 +434,6 @@ extension SignUpTableViewController {
             
             getFileURL(childRefStr: "images/users/\(userUID)/original_\(userUID).jpg") { url in
                 
-                SwiftSpinner.show("Loading existing profile image...")
                 guard let url = url else {
                     return
                 }
@@ -430,25 +452,29 @@ extension SignUpTableViewController {
 
 extension SignUpTableViewController {
     
-    func uploadUserProfileImage(images: [ImageWithName], user: User) {
+    func uploadUserProfileImage(images: [ImageWithName]) {
         startUploading(images: images, childRefPath: "images/users") {
-            
-            SwiftSpinner.hide(nil)
-            
-//            let attachTextKR = self.pageMode == .signUpMode ? "회원가입이" : "회원정보 업데이트가"
-            let attachTextEN = self.pageMode == .signUpMode ? "registration".localized : "membership information update".localized
-            
-            let englishMsg = "%@: Your membership %@ is complete.".localizedFormat(user.email!, attachTextEN)
-//            let englishMsg = "\(user.email!): Your membership \(attachTextEN) is complete."
-            
-            simpleAlert(self, message: englishMsg, title: "Completed") { action in
+            self.completed()
+        }
+    }
+    
+    private func completed() {
+        
+        guard let user = getCurrentUser() else {
+            return
+        }
+        
+        SwiftSpinner.hide(nil)
+        
+        let attachTextEN = self.pageMode == .signUpMode ? "registration".localized : "membership information update".localized
+        
+        let englishMsg = "%@: Your membership %@ is complete.".localizedFormat(user.email!, attachTextEN)
+        
+        simpleAlert(self, message: englishMsg, title: "Completed") { action in
 
-                self.navigationController?.popViewController(animated: true)
-                if self.delegate != nil {
-                    self.delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
-                }
-                
-                
+            self.navigationController?.popViewController(animated: true)
+            if self.delegate != nil {
+                self.delegate!.didSignUpSuccess(self, isSuccess: true, uid: user.uid)
             }
         }
     }
@@ -511,7 +537,7 @@ extension SignUpTableViewController {
         case .signUpMode:
             
             guard userEmail != "" else {
-                simpleAlert(self, message: "Please enter your e-mail.", title: alertTitle) { action in
+                simpleAlert(self, message: "Please enter your e-mail.".localized, title: alertTitle) { action in
                     self.txfUserEmail.becomeFirstResponder()
                 }
                 return false
@@ -649,7 +675,7 @@ extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigati
     func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             self.imagePickerController.sourceType = .camera
-            if doTaskByCameraAuthorization(self) {
+            if authDeviceCamera(self) {
                 present(self.imagePickerController, animated: true, completion: nil)
             }
         } else {
@@ -659,7 +685,7 @@ extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigati
     
     func getPhotoFromLibrary() {
         self.imagePickerController.sourceType = .photoLibrary
-        if doTaskByPhotoAuthorization(self) {
+        if authPhotoLibrary(self) {
             present(self.imagePickerController, animated: true, completion: nil)
         }
     }
@@ -668,7 +694,7 @@ extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigati
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imgProfilePicture.image = image
         }
-        
+        isImageChanged = true
         dismiss(animated: true, completion: nil)
     }
 }
@@ -676,6 +702,10 @@ extension SignUpTableViewController: UIImagePickerControllerDelegate, UINavigati
 extension SignUpTableViewController: GADBannerViewDelegate {
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        
+        print(#function, "received ad.")
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print(#function, "received ad. Error:", error)
     }
 }

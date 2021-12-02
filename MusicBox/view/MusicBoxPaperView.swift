@@ -312,7 +312,7 @@ class MusicBoxPaperView: UIView {
         let footerFontSize: CGFloat = 25
         let footerAttrs = [NSAttributedString.Key.font: UIFont(name: "Palatino", size: footerFontSize)!, NSAttributedString.Key.paragraphStyle: titleParagaphStyle, NSAttributedString.Key.foregroundColor: blackFontUIColor]
         
-        let footerText: NSString = "\(paperMadeBy) \(paperMaker) - \(cst.appName)" as NSString
+        let footerText: NSString = "\(paperMadeBy) \(paperMaker.unknown) - \(cst.appName)" as NSString
         let footerSize = footerText.size(withAttributes: footerAttrs)
         let footerRect = CGRect(x: boxOutline.minX, y: boxOutline.maxY + 20, width: footerSize.width, height: footerSize.height)
         footerText.draw(with: footerRect, options: .usesLineFragmentOrigin, attributes: footerAttrs, context: nil)

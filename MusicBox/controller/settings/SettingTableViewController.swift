@@ -90,7 +90,7 @@ extension SettingTableViewController: MFMailComposeViewControllerDelegate {
         
         guard MFMailComposeViewController.canSendMail() else {
             // 사용자의 메일 계정이 설정되어 있지 않아 메일을 보낼 수 없다는 경고 메시지 추가
-            simpleAlert(self, message: "The mail cannot be sent because the mail account has not been set up on the device.")
+            simpleAlert(self, message: "The mail cannot be sent because the mail account has not been set up on the device.".localized)
             return
         }
         
