@@ -32,6 +32,14 @@ struct InstrumentPatch {
     var instName: String
 }
 
+// app icon customization
+// musicbox-appicon-0 : default icon
+let APP_ICON_LIST = [
+    "musicbox-appicon-0",
+    "musicbox-appicon-1",
+    "musicbox-appicon-2",
+]
+
 
 let INST_LIST = [
     InstrumentPatch(number: 0, className: "Piano", instName: "Acoustic Grand Piano"),

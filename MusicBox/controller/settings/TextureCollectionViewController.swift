@@ -143,6 +143,23 @@ class TextureCollectionViewController: UICollectionViewController {
 
 }
 
+extension TextureCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width
+        let itemsPerRow: CGFloat = 3
+        let widthPadding = 5 * (itemsPerRow + 1)
+        let cellWidth = (width - widthPadding) / itemsPerRow
+
+//        let height = collectionView.frame.height
+//        let itemsPerColumn: CGFloat = 3
+//        let heightPadding = 0 * (itemsPerColumn + 1)
+//        let cellHeight = (height - heightPadding) / itemsPerColumn
+        
+        return CGSize(width: cellWidth, height: cellWidth)
+        
+    }
+}
+
 class TextureCell: UICollectionViewCell {
     
     override var isSelected: Bool {

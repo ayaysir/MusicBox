@@ -18,6 +18,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
     @IBOutlet weak var swtPlayInSilentMode: UISwitch!
     @IBOutlet weak var sldAutosaveInterval: UISlider!
     @IBOutlet weak var lblAutosaveInterval: UILabel!
+    @IBOutlet weak var collectionViewChangeAppIcon: UICollectionView!
     
     
     let configStore = UserDefaults.standard
@@ -26,6 +27,10 @@ class AudioMIDISettingTableViewController: UITableViewController {
         super.viewDidLoad()
         pkvInstrumentPatch.delegate = self
         pkvInstrumentPatch.dataSource = self
+        
+        // == 앱 아이콘 변경 == //
+        collectionViewChangeAppIcon.delegate = self
+        collectionViewChangeAppIcon.dataSource = self
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
@@ -121,6 +126,49 @@ extension AudioMIDISettingTableViewController: UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         configStore.set(INST_LIST[row].number, forKey: .cfgInstrumentPatch)
     }
+}
+
+extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        APP_ICON_LIST.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppIconCell", for: indexPath)
+        let iconImage = UIImage(named: APP_ICON_LIST[indexPath.row])
+        cell.backgroundView = UIImageView(image: iconImage)
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        
+        cell.layer.borderWidth = 0
+        cell.layer.borderColor = UIColor.clear.cgColor
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
+        cell.layer.borderWidth = 5
+        cell.layer.borderColor = UIColor.red.cgColor
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
+        cell.layer.borderWidth = 0
+        cell.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
+    }
+    
+    
 }
 
 class AccessoryCell: UITableViewCell {
