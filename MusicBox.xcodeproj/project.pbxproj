@@ -91,6 +91,14 @@
 		44AE994D2705FD8000D046D1 /* FileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */; };
 		44AE995027071EA100D046D1 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 44AE994F27071EA100D046D1 /* PanModal */; };
 		44B18C3226EF7FF900890C13 /* Paper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B18C3126EF7FF900890C13 /* Paper.swift */; };
+		44B7851A27EB6D36001031AC /* VintageIcon1@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7851627EB6D36001031AC /* VintageIcon1@2x~ipad.png */; };
+		44B7851B27EB6D36001031AC /* VintageIcon1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7851727EB6D36001031AC /* VintageIcon1@2x.png */; };
+		44B7851C27EB6D36001031AC /* VintageIcon1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7851827EB6D36001031AC /* VintageIcon1@3x.png */; };
+		44B7851D27EB6D36001031AC /* VintageIcon1@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7851927EB6D36001031AC /* VintageIcon1@3x~ipad.png */; };
+		44B7852227EB7092001031AC /* VintageIcon2@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7851E27EB708F001031AC /* VintageIcon2@3x~ipad.png */; };
+		44B7852327EB7092001031AC /* VintageIcon2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7851F27EB7090001031AC /* VintageIcon2@2x.png */; };
+		44B7852427EB7092001031AC /* VintageIcon2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7852027EB7091001031AC /* VintageIcon2@3x.png */; };
+		44B7852527EB7092001031AC /* VintageIcon2@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B7852127EB7092001031AC /* VintageIcon2@2x~ipad.png */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
 		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
@@ -238,6 +246,14 @@
 		44AE99482705EB5400D046D1 /* MIDISequenceExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDISequenceExample.swift; sourceTree = "<group>"; };
 		44AE994C2705FD8000D046D1 /* FileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCollectionViewController.swift; sourceTree = "<group>"; };
 		44B18C3126EF7FF900890C13 /* Paper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paper.swift; sourceTree = "<group>"; };
+		44B7851627EB6D36001031AC /* VintageIcon1@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon1@2x~ipad.png"; sourceTree = "<group>"; };
+		44B7851727EB6D36001031AC /* VintageIcon1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon1@2x.png"; sourceTree = "<group>"; };
+		44B7851827EB6D36001031AC /* VintageIcon1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon1@3x.png"; sourceTree = "<group>"; };
+		44B7851927EB6D36001031AC /* VintageIcon1@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon1@3x~ipad.png"; sourceTree = "<group>"; };
+		44B7851E27EB708F001031AC /* VintageIcon2@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon2@3x~ipad.png"; sourceTree = "<group>"; };
+		44B7851F27EB7090001031AC /* VintageIcon2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon2@2x.png"; sourceTree = "<group>"; };
+		44B7852027EB7091001031AC /* VintageIcon2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon2@3x.png"; sourceTree = "<group>"; };
+		44B7852127EB7092001031AC /* VintageIcon2@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VintageIcon2@2x~ipad.png"; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -535,6 +551,21 @@
 			path = misc;
 			sourceTree = "<group>";
 		};
+		44B7851527EB6D0D001031AC /* Alternative Icons */ = {
+			isa = PBXGroup;
+			children = (
+				44B7851727EB6D36001031AC /* VintageIcon1@2x.png */,
+				44B7851627EB6D36001031AC /* VintageIcon1@2x~ipad.png */,
+				44B7851927EB6D36001031AC /* VintageIcon1@3x~ipad.png */,
+				44B7851F27EB7090001031AC /* VintageIcon2@2x.png */,
+				44B7852127EB7092001031AC /* VintageIcon2@2x~ipad.png */,
+				44B7851E27EB708F001031AC /* VintageIcon2@3x~ipad.png */,
+				44B7852027EB7091001031AC /* VintageIcon2@3x.png */,
+				44B7851827EB6D36001031AC /* VintageIcon1@3x.png */,
+			);
+			path = "Alternative Icons";
+			sourceTree = "<group>";
+		};
 		44C1BA50273BFD2800543A74 /* settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +611,7 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				44B7851527EB6D0D001031AC /* Alternative Icons */,
 				44E437DE274D4E49008B41BA /* MusicBox.entitlements */,
 				4416727E274CF58300041B33 /* iap */,
 				44E6CDB2274BBC5300DE7EF0 /* html */,
@@ -813,7 +845,10 @@
 			files = (
 				44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				44E437F027579DAC008B41BA /* InfoPlist.strings in Resources */,
+				44B7852227EB7092001031AC /* VintageIcon2@3x~ipad.png in Resources */,
+				44B7852327EB7092001031AC /* VintageIcon2@2x.png in Resources */,
 				44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */,
+				44B7851C27EB6D36001031AC /* VintageIcon1@3x.png in Resources */,
 				44E437E727576C93008B41BA /* PaperOptionPanelView.xib in Resources */,
 				447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
@@ -822,13 +857,18 @@
 				447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */,
 				44E6CDBA274BFD3800DE7EF0 /* Nocturne.musicbox in Resources */,
 				44E6CDB3274BBC5300DE7EF0 /* html in Resources */,
+				44B7851D27EB6D36001031AC /* VintageIcon1@3x~ipad.png in Resources */,
 				44E682F226EA46340074FE46 /* Assets.xcassets in Resources */,
 				44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */,
+				44B7851B27EB6D36001031AC /* VintageIcon1@2x.png in Resources */,
 				44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */,
 				4417C7B32703709F0086FECA /* ss.ccc in Resources */,
 				44E682F026EA46320074FE46 /* Main.storyboard in Resources */,
 				44F3A03A26FF72FA000CE46F /* .gitignore in Resources */,
+				44B7852527EB7092001031AC /* VintageIcon2@2x~ipad.png in Resources */,
 				44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */,
+				44B7852427EB7092001031AC /* VintageIcon2@3x.png in Resources */,
+				44B7851A27EB6D36001031AC /* VintageIcon1@2x~ipad.png in Resources */,
 				44A98B292703031800AE8B25 /* blank.musicbox in Resources */,
 				4450BCFF2731473800C21481 /* PaperViewModePanelView.xib in Resources */,
 				447E116C2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_003_66591.mp3 in Resources */,

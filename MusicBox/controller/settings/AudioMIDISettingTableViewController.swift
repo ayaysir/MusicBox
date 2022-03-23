@@ -71,6 +71,17 @@ class AudioMIDISettingTableViewController: UITableViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // 현재 선택된 아이콘 이름 불러오기
+        if let currentIconName = UIApplication.shared.alternateIconName {
+            let rowIndex = APP_ICON_LIST.firstIndex(of: currentIconName) ?? 0
+            collectionViewChangeAppIcon.selectItem(at: IndexPath(row: rowIndex, section: 0), animated: false, scrollPosition: .left)
+        } else {
+            collectionViewChangeAppIcon.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .left)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -134,15 +145,10 @@ extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppIconCell", for: indexPath)
-        let iconImage = UIImage(named: APP_ICON_LIST[indexPath.row])
-        cell.backgroundView = UIImageView(image: iconImage)
-        cell.layer.cornerRadius = 10
-        cell.layer.masksToBounds = true
-        
-        cell.layer.borderWidth = 0
-        cell.layer.borderColor = UIColor.clear.cgColor
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppIconCell", for: indexPath) as? AppIconCell else {
+            return UICollectionViewCell()
+        }
+        cell.update(imageName: APP_ICON_LIST[indexPath.row])
         return cell
     }
     
@@ -151,8 +157,16 @@ extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICol
             return
         }
         
-        cell.layer.borderWidth = 5
-        cell.layer.borderColor = UIColor.red.cgColor
+        cell.isSelected = true
+        
+        if UIApplication.shared.supportsAlternateIcons {
+            if indexPath.row == 0 {
+                UIApplication.shared.setAlternateIconName(nil, completionHandler: nil)
+            } else {
+                UIApplication.shared.setAlternateIconName(APP_ICON_LIST[indexPath.row], completionHandler: nil)
+            }
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -160,8 +174,7 @@ extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICol
             return
         }
         
-        cell.layer.borderWidth = 0
-        cell.layer.borderColor = UIColor.clear.cgColor
+        cell.isSelected = false
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -171,6 +184,29 @@ extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICol
     
 }
 
-class AccessoryCell: UITableViewCell {
+class AppIconCell: UICollectionViewCell {
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                setBorder(borderWidth: 5, borderColor: UIColor.red)
+            } else {
+                setBorder(borderWidth: 5, borderColor: UIColor.clear)
+            }
+        }
+    }
+    
+    func update(imageName: String) {
+        let iconImage = UIImage(named: imageName)
+        self.backgroundView = UIImageView(image: iconImage)
+        self.layer.cornerRadius = 10
+        self.layer.masksToBounds = true
+        setBorder(borderWidth: 5, borderColor: UIColor.clear)
+    }
+    
+    private func setBorder(borderWidth: CGFloat, borderColor: UIColor) {
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.cgColor
+    }
 }
+
