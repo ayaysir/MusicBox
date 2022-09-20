@@ -664,7 +664,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             }
             
             DispatchQueue.main.async { [self] in
-                
                 guard let duration = midiManager.midiPlayer?.duration else {
                     return
                 }
@@ -673,7 +672,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                     max(partialResult, coord.gridX)
                 }
                 
-                let endGridX = maxGridX * cst.cellWidth + cst.leftMargin
+                let endGridX = (maxGridX * cst.cellWidth + cst.leftMargin)
                 
                 lastScrollViewOffset = scrollView.contentOffset
                 lastScrollViewZoomScale = scrollView.zoomScale
@@ -693,8 +692,32 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                     self.scrollView.zoomScale = newZoomScale
                 }
                 
+                /* ScrollDelayFix:
+                 (X)
+                 configStore.integer(forKey: .cfgDurationOfNoteSound) * 1 bar당 16분음표 개수(=beat)?
+                 예1) 4분의 x박자에서 8(NoteDuration) * 4(1 bar당 16분음표 개수) = 32
+                 cst.cellWidth * 32 하면 4분의 x 박자 음악들에서 스크롤 맞음?
+                 
+                 x/1 => 16
+                 x/2 => 8
+                 x/4 => 4
+                 x/8 => 2
+                 x/16 => 1
+                 
+                 (O)
+                 NoteDuration * 4 하면 박자 상관 없이 스크롤 맞음 (이유는 아직 모름)
+                 
+                 */
+                let noteDuration = configStore.integer(forKey: .cfgDurationOfNoteSound).cgFloat
+                let beatsOfOneBar = 16.0 / document!.paper!.timeSignature.lower.cgFloat
+                // let extraGridXPixels = cst.cellWidth * (beatsOfOneBar * noteDuration)
+                let extraGridXPixels = cst.cellWidth * (noteDuration * 4)
+                
+                print("ScrollDelayFix: Step 1:", bpm, document!.paper!.timeSignature, PaperConstant.shared.cellWidth)
+                print("ScrollDelayFix: Step 2:", noteDuration, beatsOfOneBar, extraGridXPixels)
+                
                 self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: [.curveLinear, .allowUserInteraction], animations: { [unowned self] in
-                    self.scrollView.contentOffset.x = endGridX * self.scrollView.zoomScale
+                    self.scrollView.contentOffset.x = (endGridX + extraGridXPixels) * self.scrollView.zoomScale
                 }, completion: { [unowned self]  position in
                     scrollView.zoomScale = lastScrollViewZoomScale
                     scrollView.setContentOffset(lastScrollViewOffset, animated: false)
