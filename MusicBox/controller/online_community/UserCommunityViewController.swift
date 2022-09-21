@@ -27,6 +27,9 @@ class UserCommunityViewController: UIViewController {
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     var posts: [Post] = []
     
+    // 광고 배너로 height 올리는거 한 번만 실행
+    var bottomConstantRaiseOnce = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -241,8 +244,12 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
 
 extension UserCommunityViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        buttonBottomConstraint.constant += bannerView.adSize.size.height
-        shouldShowFooter = true
+        if bottomConstantRaiseOnce {
+            buttonBottomConstraint.constant += bannerView.adSize.size.height
+            shouldShowFooter = true
+            bottomConstantRaiseOnce = false
+        }
+        
     }
 }
 

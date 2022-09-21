@@ -43,7 +43,14 @@ import GoogleMobileAds
  
  3.  **GADBannerViewDelegate** 를 상속받은 후 **func bannerViewDidReceiveAd(...)**에서 로딩 후 작업(뷰 높이 변경 등) 진행
  
- 예) buttonBottomConstraint.constant += bannerView.adSize.size.height
+ 예)
+ // 광고 배너로 height 올리는거 한 번만 실행
+ var bottomConstantRaiseOnce = true
+ if bottomConstantRaiseOnce {
+    buttonBottomConstraint.constant += bannerView.adSize.size.height
+    bottomConstantRaiseOnce = false
+ }
+
  
  
  4. **UICollectionViewController**인 경우

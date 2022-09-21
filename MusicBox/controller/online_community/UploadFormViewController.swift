@@ -37,6 +37,9 @@ class UploadFormViewController: UIViewController {
     typealias FileCompletionBlock = () -> Void
     var block: FileCompletionBlock?
     
+    // 광고 배너로 height 올리는거 한 번만 실행
+    var bottomConstantRaiseOnce = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -349,6 +352,10 @@ extension UploadFormViewController: UITextFieldDelegate {
 
 extension UploadFormViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        scrollViewBottomConstraint.constant += bannerView.adSize.size.height
+        if bottomConstantRaiseOnce {
+            scrollViewBottomConstraint.constant += bannerView.adSize.size.height
+            bottomConstantRaiseOnce = false
+        }
+        
     }
 }

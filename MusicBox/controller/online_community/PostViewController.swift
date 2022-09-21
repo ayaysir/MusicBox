@@ -40,6 +40,9 @@ class PostViewController: UIViewController {
     
     let midiManager = MIDIManager()
     
+    // 광고 배너로 height 올리는거 한 번만 실행
+    var bottomConstantRaiseOnce = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -321,6 +324,9 @@ extension PostViewController: UpdatePostVCDelegate {
 
 extension PostViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        cnstScrollViewBottom.constant += bannerView.adSize.size.height
+        if bottomConstantRaiseOnce {
+            cnstScrollViewBottom.constant += bannerView.adSize.size.height
+            bottomConstantRaiseOnce = false
+        }
     }
 }

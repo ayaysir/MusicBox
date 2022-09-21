@@ -104,6 +104,9 @@ class MusicPaperViewController: UIViewController {
     
     var propertyAnimator: UIViewPropertyAnimator!
     
+    // 광고 배너로 height 올리는거 한 번만 실행
+    var bottomConstantRaiseOnce = true
+    
     let availablePunchSounds = [
         "zapsplat_office_stapler_single_staple_into_paper_001_66589",
         "zapsplat_office_stapler_single_staple_into_paper_002_66590",
@@ -741,6 +744,9 @@ extension MusicPaperViewController: PaperViewModePanelViewDelegate {
 
 extension MusicPaperViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        constraintScrollViewBottom.constant += bannerView.adSize.size.height
+        if bottomConstantRaiseOnce {
+            constraintScrollViewBottom.constant += bannerView.adSize.size.height
+            bottomConstantRaiseOnce = false
+        }
     }
 }
