@@ -71,7 +71,7 @@
 "The post update is complete." = "게시글 업데이트가 완료되었습니다.";
 "Update Completed" = "업로드 완료";
 
-"Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted." = "회원탈퇴를 하시겠습니까? 회원탈퇴를 하시면 회원정보가 삭제되어 복구가 불가능합니다. 작성한 글은 삭제되지 않습니다.";
+"Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted." = "회원탈퇴를 하시겠습니까? 회원탈퇴를 하시면 회원정보가 삭제되며 복구가 불가능합니다. 작성한 글은 삭제되지 않습니다.";
 "Withdrawal Membership" = "회원 탈퇴";
 "Membership cancellation in progress..." = "회원 탈퇴 진행중";
 "Passwords do not match." = "비밀번호가 일치하지 않습니다.";

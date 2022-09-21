@@ -83,13 +83,7 @@ class MemberProfileViewController: UIViewController {
         do {
             SwiftSpinner.hide(nil)
             try Auth.auth().signOut()
-            var viewControllers: [UIViewController] = []
-            if let rootVC = self.navigationController?.viewControllers[0] as? UserCommunityViewController {
-                viewControllers.append(rootVC)
-            }
-            let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
-            viewControllers.append(loginVC)
-            self.navigationController?.setViewControllers(viewControllers, animated: true)
+            goToSignVC()
         } catch {
             simpleAlert(self, message: "Sign out failed: \(error.localizedDescription)")
         }
@@ -99,6 +93,16 @@ class MemberProfileViewController: UIViewController {
         Auth.auth().currentUser?.reload(completion: { error in
             self.setUserInfoView(user: Auth.auth().currentUser)
         })
+    }
+    
+    private func goToSignVC(animtate: Bool = true) {
+        var viewControllers: [UIViewController] = []
+        if let rootVC = self.navigationController?.viewControllers[0] as? UserCommunityViewController {
+            viewControllers.append(rootVC)
+        }
+        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
+        viewControllers.append(loginVC)
+        self.navigationController?.setViewControllers(viewControllers, animated: animtate)
     }
 }
 
@@ -179,8 +183,7 @@ extension MemberProfileViewController {
 extension MemberProfileViewController: ResignMemberDelegate {
     func didResignSuccess(_ controller: SignUpTableViewController) {
         SwiftSpinner.hide(nil)
-        let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
-        self.navigationController?.setViewControllers([loginVC], animated: false)
+        goToSignVC(animtate: false)
     }
 }
 

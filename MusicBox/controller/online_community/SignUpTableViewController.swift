@@ -190,7 +190,6 @@ class SignUpTableViewController: UITableViewController {
                         } else {
                             // Account deleted.
                             SwiftSpinner.hide {
-//                                self.dismiss(animated: true, completion: nil)
                                 self.navigationController?.popViewController(animated: true)
                                 if let resignDelegate = self.resignDelegate {
                                     resignDelegate.didResignSuccess(self)
@@ -285,34 +284,62 @@ extension SignUpTableViewController {
             
             switch pageMode {
             case .signUpMode:
-                Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
-                    // 이메일, 비밀번호 전송
-                    guard let user = authResult?.user, error == nil else {
-                        simpleAlert(self, message: error!.localizedDescription)
-                        return
-                    }
-                    
-                    // 이메일 인증 요청
-                    sendVerificationMail(authUser: user)
-                    
-                    ref.child("users").child(user.uid).child("interesting").setValue(interesting)
-                    ref.child("users").child(user.uid).child("nickname").setValue(nickname)
                 
+                if let user = getCurrentUser(), user.isAnonymous {
+                    let credential = EmailAuthProvider.credential(withEmail: userEmail, password: userPassword)
+                    user.link(with: credential) { [self] authResult, error in
+                        // 이메일 인증 요청
+                        sendVerificationMail(authUser: user)
                     
-                    // 이미지 업로드
-                    if isImageChanged {
-                        SwiftSpinner.show("Your profile image is being sent...".localized)
-                        
-                        let images = [
-                            ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
-                            ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
-                        ]
+                        ref.child("users").child(user.uid).child("interesting").setValue(interesting)
+                        ref.child("users").child(user.uid).child("nickname").setValue(nickname)
                     
-                        uploadUserProfileImage(images: images)
-                    } else {
-                        completed()
+                        // 이미지 업로드
+                        if isImageChanged {
+                            SwiftSpinner.show("Your profile image is being sent...".localized)
+                    
+                            let images = [
+                                ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                                ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                            ]
+                    
+                            uploadUserProfileImage(images: images)
+                        } else {
+                            completed()
+                        }
                     }
                 }
+                
+                // Auth.auth().createUser(withEmail: userEmail, password: userPassword) { [self] authResult, error in
+                //     // 익명 정보
+                //
+                //     // 이메일, 비밀번호 전송
+                //     guard let user = authResult?.user, error == nil else {
+                //         simpleAlert(self, message: error!.localizedDescription)
+                //         return
+                //     }
+                //
+                //     // 이메일 인증 요청
+                //     sendVerificationMail(authUser: user)
+                //
+                //     ref.child("users").child(user.uid).child("interesting").setValue(interesting)
+                //     ref.child("users").child(user.uid).child("nickname").setValue(nickname)
+                //
+                //
+                //     // 이미지 업로드
+                //     if isImageChanged {
+                //         SwiftSpinner.show("Your profile image is being sent...".localized)
+                //
+                //         let images = [
+                //             ImageWithName(name: "\(user.uid)/thumb_\(user.uid)", image: userProfileThumbnail, fileExt: "jpg"),
+                //             ImageWithName(name: "\(user.uid)/original_\(user.uid)", image: image, fileExt: "jpg")
+                //         ]
+                //
+                //         uploadUserProfileImage(images: images)
+                //     } else {
+                //         completed()
+                //     }
+                // }
             case .updateMode:
                 
                 guard let user = getCurrentUser() else {

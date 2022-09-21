@@ -252,7 +252,7 @@
 "XzG-lz-myO.text" = "포스트 제목";
 
 /* Class = "UIButton"; configuration.title = "Submit"; ObjectID = "Yxz-Xc-jyx"; */
-"Yxz-Xc-jyx.configuration.title" = "제출";
+"Yxz-Xc-jyx.configuration.title" = "로그인";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Yxz-Xc-jyx"; */
 "Yxz-Xc-jyx.normalTitle" = "제출";
