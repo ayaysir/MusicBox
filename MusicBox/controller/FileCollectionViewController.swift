@@ -415,19 +415,19 @@ extension FileCollectionViewController {
             case 2:
                 print("delete")
                 simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.".localized, title: "Delete the File".localized) { action in
-                    guard let index = selectedCellIndexPath else {
+                    guard let index = self.selectedCellIndexPath else {
                         return
                     }
                     
-                    let target = collectionView.cellForItem(at: index) as? FileCollectionViewCell
+                    let target = self.collectionView.cellForItem(at: index) as? FileCollectionViewCell
                     guard let document = target?.document else {
                         return
                     }
                     
                     do {
-                        try filemgr.removeItem(at: document.fileURL)
-                        loadFileList()
-                        reloadAndRefresh()
+                        try self.filemgr.removeItem(at: document.fileURL)
+                        self.loadFileList()
+                        self.reloadAndRefresh()
                         simpleAlert(self, message: "The file has been deleted.".localized, title: "Delete Completed".localized, handler: nil)
                     } catch  {
                         print(error.localizedDescription)

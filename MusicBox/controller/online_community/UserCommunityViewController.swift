@@ -62,7 +62,7 @@ class UserCommunityViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        // navigationController?.setNavigationBarHidden(true, animated: animated)
         
         guard Reachability.isConnectedToNetwork() else {
             let notConnectedVC = mainStoryboard.instantiateViewController(withIdentifier: "NotConnectedViewController") as? NotConnectedViewController
@@ -101,6 +101,15 @@ class UserCommunityViewController: UIViewController {
             vc.posts = posts
             vc.currentIndex = indexPath.row
         }
+        
+        if segue.identifier == "PostPageSegue_withoutPageView" {
+            guard let postVC = segue.destination as? PostViewController,
+                  let indexPath = sender as? IndexPath else {
+                print("Error occured PostPageSegue_withoutPageView segue.")
+                return
+            }
+            postVC.post = posts[indexPath.row]
+        }
     }
 }
 
@@ -137,7 +146,6 @@ extension UserCommunityViewController {
                 print("getPost Error:", error.localizedDescription)
                 SwiftSpinner.show(duration: 2, title: "getPost Error: \(error.localizedDescription)", animated: false, completion: nil)
             }
-            
         }
     }
     
@@ -194,7 +202,7 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "PostPageSegue", sender: indexPath)
+        performSegue(withIdentifier: "PostPageSegue_withoutPageView", sender: indexPath)
     }
     
     // 사이즈 결정
@@ -335,8 +343,3 @@ class PostCell: UICollectionViewCell {
                     .assign(to: \.imgAlbumart.image, on: self)
     }
 }
-
-class PostCellContentView: UIView {
-    
-}
-
