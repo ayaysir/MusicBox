@@ -29,6 +29,12 @@ class UpdatePostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let user = getCurrentUser(), !user.isAnonymous else {
+            delegate?.didUpdatePermissionDenied(self)
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
         guard getCurrentUserUID() == post.writerUID else {
             delegate?.didUpdatePermissionDenied(self)
             self.navigationController?.popViewController(animated: true)

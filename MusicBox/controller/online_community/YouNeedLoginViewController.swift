@@ -32,7 +32,12 @@ class YouNeedLoginViewController: UIViewController {
     }
     
     @IBAction func btnActGoToLoginPage(_ sender: Any) {
-        self.tabBarController?.selectedIndex = 2
+        // self.tabBarController?.selectedIndex = 2
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
 }
 

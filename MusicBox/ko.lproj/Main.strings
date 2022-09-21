@@ -318,7 +318,7 @@
 "dcB-lV-4Lc.normalTitle" = "삭제";
 
 /* Class = "UILabel"; text = "Posting by xxx"; ObjectID = "doE-TP-O14"; */
-"doE-TP-O14.text" = "Posting by xxx";
+"doE-TP-O14.text" = "Posting by Unknown User";
 
 /* Class = "UITableViewSection"; headerTitle = "Duration of Each Note during Playback"; ObjectID = "e3K-Ka-PsI"; */
 "e3K-Ka-PsI.headerTitle" = "시퀀스 재생시 각 노트의 지속 길이";

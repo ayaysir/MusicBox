@@ -18,7 +18,6 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         txfEmail.delegate = self
         txfPassword.delegate = self
         
@@ -31,10 +30,7 @@ class SignInViewController: UIViewController {
             return
         }
         
-        if Auth.auth().currentUser != nil {
-            let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
-            self.navigationController?.setViewControllers([memberVC], animated: false)
-        }
+        changeRootController()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -71,11 +67,8 @@ extension SignInViewController {
         Auth.auth().signIn(withEmail: userEmail, password: userPassword) { [self] authResult, error in
             
             if authResult != nil {
-                print("You are logged in.")
-                let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
-
-                self.navigationController?.setViewControllers([memberVC], animated: true)
-                
+                print("You are logged in:", authResult!.user.uid)
+                changeRootController()
             } else {
                 simpleAlert(self, message: "You are not signed in. Error: \(error?.localizedDescription ?? "")")
             }
@@ -86,10 +79,22 @@ extension SignInViewController {
 extension SignInViewController: SignUpDelegate {
     
     func changeRootController() {
-        if Auth.auth().currentUser != nil {
+        // if Auth.auth().currentUser != nil {
+        //     let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
+        //     self.navigationController?.setViewControllers([memberVC], animated: false)
+        // }
+        
+        if let user = Auth.auth().currentUser, !user.isAnonymous  {
+            var viewControllers: [UIViewController] = []
+            if let rootVC = self.navigationController?.viewControllers[0] as? UserCommunityViewController {
+                viewControllers.append(rootVC)
+            }
             let memberVC = mainStoryboard.instantiateViewController(withIdentifier: "MemberProfileViewController")
-            self.navigationController?.setViewControllers([memberVC], animated: false)
+            viewControllers.append(memberVC)
+            self.navigationController?.setViewControllers(viewControllers, animated: false)
+             
         }
+        
     }
     
     func didUpdateUserInfoSuccess(_ controller: SignUpTableViewController, isSuccess: Bool) {

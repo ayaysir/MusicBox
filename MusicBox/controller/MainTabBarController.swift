@@ -18,9 +18,9 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 14, *) {
-            self.tabBar.items![3].image = UIImage(systemName: "gearshape.fill")
-        }
+        // if #available(iOS 14, *) {
+        //     self.tabBar.items![3].image = UIImage(systemName: "gearshape.fill")
+        // }
         
         TrackingTransparencyPermissionRequest()
         

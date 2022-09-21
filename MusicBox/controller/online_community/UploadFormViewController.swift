@@ -43,6 +43,11 @@ class UploadFormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let user = getCurrentUser(), !user.isAnonymous else {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
         btnPreplay.circleButton = true
         btnPreplay.setTitle("", for: .normal)
         

@@ -31,6 +31,8 @@ class MemberProfileViewController: UIViewController {
     var ref = Database.database().reference()
     var storageRef = Storage.storage().reference()
     
+    var bottomConstantRaiseOnce = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,8 +83,13 @@ class MemberProfileViewController: UIViewController {
         do {
             SwiftSpinner.hide(nil)
             try Auth.auth().signOut()
+            var viewControllers: [UIViewController] = []
+            if let rootVC = self.navigationController?.viewControllers[0] as? UserCommunityViewController {
+                viewControllers.append(rootVC)
+            }
             let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "SignInViewController")
-            self.navigationController?.setViewControllers([loginVC], animated: true)
+            viewControllers.append(loginVC)
+            self.navigationController?.setViewControllers(viewControllers, animated: true)
         } catch {
             simpleAlert(self, message: "Sign out failed: \(error.localizedDescription)")
         }
@@ -156,13 +163,14 @@ extension MemberProfileViewController {
             if let error = error {
                 // Uh-oh, an error occurred!
                 print("download error", error.localizedDescription)
-                SwiftSpinner.show(duration: 3, title: "Failed to load profile photo.".localized, animated: false, completion: nil)
+                // SwiftSpinner.show(duration: 3, title: "Failed to load profile photo.".localized, animated: false, completion: nil)
             } else {
                 // Data for "images/island.jpg" is returned
                 let image = UIImage(data: data!)
                 self.imgUserProfile.image = image
-                SwiftSpinner.hide(nil)
             }
+            
+            SwiftSpinner.hide(nil)
         }
     }
     
@@ -179,6 +187,9 @@ extension MemberProfileViewController: ResignMemberDelegate {
 extension MemberProfileViewController: GADBannerViewDelegate {
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        alignXConstraint.constant -= bannerView.adSize.size.height
+        if bottomConstantRaiseOnce {
+            alignXConstraint.constant -= bannerView.adSize.size.height
+            bottomConstantRaiseOnce = false
+        }
     }
 }

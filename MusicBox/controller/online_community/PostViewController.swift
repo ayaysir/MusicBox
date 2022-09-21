@@ -59,6 +59,7 @@ class PostViewController: UIViewController {
         }
         
         if let post = post {
+            self.title = post.postTitle
             lblTitle.text = post.paperTitle
             
             getNickname(of: post.writerUID) { nickname in

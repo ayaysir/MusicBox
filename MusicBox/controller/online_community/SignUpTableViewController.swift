@@ -64,7 +64,7 @@ class SignUpTableViewController: UITableViewController {
     var selectedInteresting: String!
     
     var imagePickerController = UIImagePickerController()
-    var userProfileThumbnail: UIImage!
+    var userProfileThumbnail: UIImage! = UIImage(named: "sample")
     
     var block: FileCompletionBlock?
     

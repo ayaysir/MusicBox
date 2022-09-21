@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize the Google Mobile Ads SDK.
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = false
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         IQKeyboardManager.shared.enable = true

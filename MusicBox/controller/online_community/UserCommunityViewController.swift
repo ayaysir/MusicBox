@@ -57,28 +57,6 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.shadowRadius = 6
         btnAddPost.layer.masksToBounds = false
         
-        // 프로필 사진 로딩
-        if let userUID = getCurrentUserUID() {
-            storageRef.child("images/users/\(userUID)/thumb_\(userUID).jpg").downloadURL { url, error in
-                if let error = error {
-                    print("get profile thumb failed:", error.localizedDescription)
-                    return
-                }
-                
-                if let url = url {
-                    let size = self.barBtnUserInfo.image?.size.scale(1.5) ?? CGSize(width: 25, height: 25)
-                    self.userThumbSubscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "person.circle.fill")).sink(receiveValue: { output in
-                        let scaledImage = try? resizeImage(image: output!, maxSize: Int(size.width))
-                        let imageView = UIImageView(image: scaledImage)
-                        imageView.frame = CGRect(origin: .zero, size: size)
-                        imageView.layer.cornerRadius = imageView.frame.size.width / 2
-                        imageView.clipsToBounds = true
-                        self.barBtnUserInfo.customView = imageView
-                    })
-                }
-            }
-        }
-        
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
         if AdManager.productMode {
@@ -91,6 +69,9 @@ class UserCommunityViewController: UIViewController {
         super.viewWillAppear(animated)
         // navigationController?.setNavigationBarHidden(true, animated: animated)
         
+        barBtnUserInfo.customView = nil
+        barBtnUserInfo.image = nil
+        
         guard Reachability.isConnectedToNetwork() else {
             let notConnectedVC = mainStoryboard.instantiateViewController(withIdentifier: "NotConnectedViewController") as? NotConnectedViewController
             notConnectedVC?.vcName = "UserCommunityViewController"
@@ -99,14 +80,63 @@ class UserCommunityViewController: UIViewController {
             return
         }
         
-        guard Auth.auth().currentUser != nil else {
-            let needLoginVC = mainStoryboard.instantiateViewController(withIdentifier: "YouNeedLoginViewController")
-            self.navigationController?.setViewControllers([needLoginVC], animated: false)
-            
-            return
+        // guard Auth.auth().currentUser != nil else {
+        //     let needLoginVC = mainStoryboard.instantiateViewController(withIdentifier: "YouNeedLoginViewController")
+        //     self.navigationController?.setViewControllers([needLoginVC], animated: false)
+        //
+        //     return
+        // }
+        
+        if Auth.auth().currentUser == nil {
+            Auth.auth().signInAnonymously { authResult, error in
+                if let error = error {
+                    print("signInAnonymously error:", error)
+                }
+                
+                print(authResult!)
+                self.getPostList()
+            }
+        } else {
+            getPostList()
         }
         
-        getPostList()
+        // 프로필 사진 로딩
+        if let user = getCurrentUser(), !user.isAnonymous {
+            storageRef.child("images/users/\(user.uid)/thumb_\(user.uid).jpg").downloadURL { url, error in
+                if let error = error {
+                    print("get profile thumb failed:", error.localizedDescription)
+                    self.assingImageToBarBtnUserInfo(image: UIImage(named: "sample")!)
+                    return
+                }
+                
+                if let url = url {
+                    self.userThumbSubscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "person.circle.fill")).sink(receiveValue: { output in
+                        self.assingImageToBarBtnUserInfo(image: output!)
+                    })
+                }
+            }
+        } else {
+            barBtnUserInfo.image = UIImage(systemName: "person.circle.fill")
+            btnAddPost.isHidden = true
+        }
+    }
+    
+    @objc func cvTapped() {
+        print(#function)
+        goToLoginVC()
+    }
+    
+    private func assingImageToBarBtnUserInfo(image: UIImage) {
+        let size = self.barBtnUserInfo.image?.size.scale(1.5) ?? CGSize(width: 25, height: 25)
+        let scaledImage = try? resizeImage(image: image, maxSize: Int(size.width))
+        let imageView = UIImageView(image: scaledImage)
+        imageView.frame = CGRect(origin: .zero, size: size)
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.clipsToBounds = true
+        self.barBtnUserInfo.customView = imageView
+        
+        let cvTap = UITapGestureRecognizer(target: self, action: #selector(self.cvTapped))
+        self.barBtnUserInfo.customView?.addGestureRecognizer(cvTap)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -117,6 +147,11 @@ class UserCommunityViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    @IBAction func barBtnActUserInfo(_ sender: Any) {
+        print(#function)
+        goToLoginVC()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -137,6 +172,15 @@ class UserCommunityViewController: UIViewController {
             }
             postVC.post = posts[indexPath.row]
         }
+    }
+    
+    private func goToLoginVC() {
+        if let user = getCurrentUser(), !user.isAnonymous {
+            performSegue(withIdentifier: "MemberVC_Segue", sender: nil)
+        } else {
+            performSegue(withIdentifier: "LoginVC_Segue", sender: nil)
+        }
+        
     }
 }
 
@@ -333,6 +377,7 @@ class PostCell: UICollectionViewCell {
         storageRef.child("images/users/\(post.writerUID)/thumb_\(post.writerUID).jpg").downloadURL { url, error in
             if let error = error {
                 print("get profile thumb failed:", error.localizedDescription)
+                self.imgUserProfile.image = UIImage(named: "sample")
                 return
             }
             
@@ -343,17 +388,22 @@ class PostCell: UICollectionViewCell {
         
         
         lblUserNickname.text = "noname"
-        ref.child("users").child(post.writerUID).child("nickname").getData { error, snapshot in
-            if let error = error {
-                print("get nickname failed:", error.localizedDescription)
-                return
-            }
-            
+        ref.child("users").child(post.writerUID).child("nickname").observe(.value) { snapshot in
             if snapshot.exists() {
                 self.lblUserNickname.text = snapshot.value as? String
             }
         }
-        
+        // ref.child("users").child(post.writerUID).child("nickname").getData { error, snapshot in
+        //     if let error = error {
+        //         print("get nickname failed:", error)
+        //         return
+        //     }
+        //
+        //     if snapshot.exists() {
+        //         self.lblUserNickname.text = snapshot.value as? String
+        //     }
+        // }
+        //
         
         lblTitle.text = post.postTitle
         

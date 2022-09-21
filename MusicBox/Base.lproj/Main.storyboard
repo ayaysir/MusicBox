@@ -20,38 +20,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="65n-Gw-3hg">
-                                <rect key="frame" x="59" y="413.5" width="296" height="74"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zjg-pf-PbE">
+                                <rect key="frame" x="61" y="290.5" width="292" height="320"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In is required." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-Zi-9DL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign In is required." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-Zi-9DL">
                                         <rect key="frame" x="0.0" y="0.0" width="296" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiE-A9-smL">
-                                        <rect key="frame" x="0.0" y="43" width="296" height="31"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Go To Login Page"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or Sign In Anonymously" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="C8j-Ic-f8x">
+                                        <rect key="frame" x="-4" y="117" width="296" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKy-82-I5S">
+                                        <rect key="frame" x="-4" y="150" width="300" height="138"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <string key="text">■ If you sign in as an anonymously, you can view post information, preview music, and download.
+■ Membership registration is required to upload music paper or use the Like feature.
+■ You can sign up for membership at any time while anonymously signed in.</string>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiE-A9-smL">
+                                        <rect key="frame" x="0.0" y="50" width="296" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Go To Sign In Page"/>
                                         <connections>
                                             <action selector="btnActGoToLoginPage:" destination="tUf-T4-MRk" eventType="touchUpInside" id="JtF-zb-447"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtc-Vv-GCR">
+                                        <rect key="frame" x="-4" y="283" width="296" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Sign In Anonymously"/>
+                                        <connections>
+                                            <action selector="btnActGoToLoginPage:" destination="tUf-T4-MRk" eventType="touchUpInside" id="D5g-yd-szl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="292" id="3TW-cy-igi"/>
+                                    <constraint firstAttribute="height" constant="320" id="DvC-WZ-giz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="are-AK-siM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="65n-Gw-3hg" firstAttribute="centerX" secondItem="are-AK-siM" secondAttribute="centerX" id="5sV-Nv-jxI"/>
-                            <constraint firstItem="65n-Gw-3hg" firstAttribute="centerY" secondItem="are-AK-siM" secondAttribute="centerY" id="OZS-bj-ORr"/>
+                            <constraint firstItem="Zjg-pf-PbE" firstAttribute="centerY" secondItem="are-AK-siM" secondAttribute="centerY" id="KAM-Kk-ngd"/>
+                            <constraint firstItem="Zjg-pf-PbE" firstAttribute="centerX" secondItem="are-AK-siM" secondAttribute="centerX" id="UVo-PK-JsD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wdH-kS-v2i"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wPe-YO-9CV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4336.231884057971" y="525"/>
+            <point key="canvasLocation" x="-4400" y="510"/>
         </scene>
         <!--Archive-->
         <scene sceneID="gCH-5n-oOf">
@@ -197,6 +230,9 @@
                     <navigationItem key="navigationItem" title="Archive" largeTitleDisplayMode="never" id="pUf-n2-O71">
                         <barButtonItem key="rightBarButtonItem" title="My Info" image="person.circle.fill" catalog="system" id="dzg-2g-9r7">
                             <color key="tintColor" systemColor="systemIndigoColor"/>
+                            <connections>
+                                <action selector="barBtnActUserInfo:" destination="To5-EN-MwS" id="q7Q-tT-hhI"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -207,11 +243,13 @@
                         <segue destination="e77-6f-XQ8" kind="show" identifier="PostPageSegue" id="z9e-fl-rXO"/>
                         <segue destination="tUf-T4-MRk" kind="show" id="ogE-Xa-aeo"/>
                         <segue destination="aIW-eH-CQg" kind="show" identifier="PostPageSegue_withoutPageView" id="Oha-tQ-GTK"/>
+                        <segue destination="rZx-ix-HPz" kind="show" identifier="LoginVC_Segue" id="Sqy-mW-WLH"/>
+                        <segue destination="Hkm-ET-XZZ" kind="show" identifier="MemberVC_Segue" id="2eI-dN-KjO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="udO-9E-btg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3549.2307692307691" y="524.64454976303318"/>
+            <point key="canvasLocation" x="-3549" y="548"/>
         </scene>
         <!--Upload-->
         <scene sceneID="wve-MW-fBD">
@@ -396,10 +434,11 @@
                                                             <constraint firstAttribute="width" constant="313" id="2na-h3-VKL"/>
                                                             <constraint firstAttribute="height" constant="61" id="LNF-xa-7lv"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Select a paper file">
-                                                            <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Select a paper file">
+                                                            <color key="titleColor" systemColor="linkColor"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="btnActSelectAFile:" destination="Hh2-PP-4wj" eventType="touchUpInside" id="rVS-Nh-m0t"/>
                                                         </connections>
@@ -417,7 +456,10 @@
                                                     <constraint firstAttribute="height" constant="31" id="kNr-oy-CTu"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Submit"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Submit">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="0.0"/>
+                                                    <color key="baseForegroundColor" red="0.15539218799999999" green="0.64178259140000005" blue="0.1337970316" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="btnActUpload:" destination="Hh2-PP-4wj" eventType="touchUpInside" id="haq-hf-h38"/>
                                                 </connections>
@@ -484,6 +526,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Upload" largeTitleDisplayMode="never" id="bNG-YB-QJA">
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="dDZ-2J-plS">
+                            <color key="tintColor" red="0.1397617307" green="0.57722751000000005" blue="0.12033876960000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="barBtnActSubmit:" destination="Hh2-PP-4wj" id="dsf-0T-lcd"/>
                             </connections>
@@ -507,7 +550,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZp-8E-cGV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2742" y="524"/>
+            <point key="canvasLocation" x="-2745" y="548"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="bw5-dY-DBr">
@@ -1666,6 +1709,7 @@ Arrangey by bcd</string>
             <objects>
                 <navigationController id="p6v-hQ-ZzC" customClass="AuthNavigationController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Info" image="person.fill" catalog="system" id="f4i-Uk-Jia"/>
+                    <navigationItem key="navigationItem" id="Rj3-xH-O2T"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ffk-OY-4Or">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2478,7 +2522,7 @@ Arrangey by bcd</string>
         <scene sceneID="8bb-1j-Pfa">
             <objects>
                 <navigationController id="jfQ-LQ-naD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Options" image="gear" catalog="system" id="XGA-Tm-GCy"/>
+                    <tabBarItem key="tabBarItem" title="Options" image="gearshape.fill" catalog="system" id="XGA-Tm-GCy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="piw-3a-uls">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2946,7 +2990,6 @@ Arrangey by bcd</string>
                     <connections>
                         <segue destination="wdf-Rh-BDe" kind="relationship" relationship="viewControllers" id="8y4-9x-KDf"/>
                         <segue destination="KJf-Py-8cv" kind="relationship" relationship="viewControllers" id="4l2-vb-QKe"/>
-                        <segue destination="p6v-hQ-ZzC" kind="relationship" relationship="viewControllers" id="DrS-Eb-jwc"/>
                         <segue destination="jfQ-LQ-naD" kind="relationship" relationship="viewControllers" id="qYY-RF-2S3"/>
                     </connections>
                 </tabBarController>
@@ -2972,12 +3015,16 @@ Arrangey by bcd</string>
             <point key="canvasLocation" x="-2436" y="-990"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="2eI-dN-KjO"/>
+        <segue reference="Sqy-mW-WLH"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="daniel-tuttle-7iFNGzRRukA-unsplash" width="4898" height="3265"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="grab pull" width="188" height="137"/>
         <image name="heart" catalog="system" width="128" height="109"/>
@@ -2999,6 +3046,9 @@ Arrangey by bcd</string>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
