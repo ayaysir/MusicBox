@@ -127,6 +127,7 @@
 		44E6CDB6274BC2F800DE7EF0 /* WebkitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E6CDB5274BC2F800DE7EF0 /* WebkitViewController.swift */; };
 		44E6CDB8274BCBBE00DE7EF0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E6CDB7274BCBBE00DE7EF0 /* WebKit.framework */; };
 		44E6CDBA274BFD3800DE7EF0 /* Nocturne.musicbox in Resources */ = {isa = PBXBuildFile; fileRef = 44E6CDB9274BFD3800DE7EF0 /* Nocturne.musicbox */; };
+		44F304A928DB10070068E50B /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304A828DB10070068E50B /* CGSize+.swift */; };
 		44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02C26FE0C71000CE46F /* Allian1.mid */; };
 		44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */; };
 		44F3A03126FE121A000CE46F /* MidiManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */; };
@@ -293,6 +294,7 @@
 		44E6CDB5274BC2F800DE7EF0 /* WebkitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebkitViewController.swift; sourceTree = "<group>"; };
 		44E6CDB7274BCBBE00DE7EF0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		44E6CDB9274BFD3800DE7EF0 /* Nocturne.musicbox */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Nocturne.musicbox; sourceTree = "<group>"; };
+		44F304A828DB10070068E50B /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		44F3A02C26FE0C71000CE46F /* Allian1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = Allian1.mid; sourceTree = "<group>"; };
 		44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
 		44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MidiManager+Sequence.swift"; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				445B5A4A27429E1F0003A437 /* ActionExtensionBlockerItem.swift */,
 				445B5A4C27451FD00003A437 /* UIView+.swift */,
 				44675A61274BA72E008E9428 /* UserDefaults+.swift */,
+				44F304A828DB10070068E50B /* CGSize+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -1043,6 +1046,7 @@
 				444AF3A42701E5BC00BD8E38 /* DocumentViewController.swift in Sources */,
 				444D945A2711DB550090F587 /* UploadFormViewController.swift in Sources */,
 				44558E5F271D94F300A0EF62 /* Like.swift in Sources */,
+				44F304A928DB10070068E50B /* CGSize+.swift in Sources */,
 				44B18C3226EF7FF900890C13 /* Paper.swift in Sources */,
 				444D946B2714787B0090F587 /* ImageManager.swift in Sources */,
 				444D9467271328F70090F587 /* UIButton+.swift in Sources */,

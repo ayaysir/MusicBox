@@ -22,10 +22,15 @@ class UserCommunityViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnAddPost: UIButton!
+    @IBOutlet weak var barBtnUserInfo: UIBarButtonItem!
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     var posts: [Post] = []
+    
+    private var subscriber: AnyCancellable?
+    private var userThumbSubscriber: AnyCancellable?
+    private let storageRef = Storage.storage().reference()
     
     // 광고 배너로 height 올리는거 한 번만 실행
     var bottomConstantRaiseOnce = true
@@ -51,6 +56,28 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.shadowOffset = CGSize(width: 2, height: 2)
         btnAddPost.layer.shadowRadius = 6
         btnAddPost.layer.masksToBounds = false
+        
+        // 프로필 사진 로딩
+        if let userUID = getCurrentUserUID() {
+            storageRef.child("images/users/\(userUID)/thumb_\(userUID).jpg").downloadURL { url, error in
+                if let error = error {
+                    print("get profile thumb failed:", error.localizedDescription)
+                    return
+                }
+                
+                if let url = url {
+                    let size = self.barBtnUserInfo.image?.size.scale(1.5) ?? CGSize(width: 25, height: 25)
+                    self.userThumbSubscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "person.circle.fill")).sink(receiveValue: { output in
+                        let scaledImage = try? resizeImage(image: output!, maxSize: Int(size.width))
+                        let imageView = UIImageView(image: scaledImage)
+                        imageView.frame = CGRect(origin: .zero, size: size)
+                        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+                        imageView.clipsToBounds = true
+                        self.barBtnUserInfo.customView = imageView
+                    })
+                }
+            }
+        }
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()

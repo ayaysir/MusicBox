@@ -200,6 +200,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="barBtnUserInfo" destination="dzg-2g-9r7" id="vJT-NH-5Qd"/>
                         <outlet property="btnAddPost" destination="Ddb-aL-Ygj" id="m7k-2K-faa"/>
                         <outlet property="buttonBottomConstraint" destination="Vpp-PQ-RQW" id="UjO-kF-S68"/>
                         <outlet property="collectionView" destination="je2-sM-oqK" id="9wq-eO-Inh"/>
