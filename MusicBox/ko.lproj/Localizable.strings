@@ -107,3 +107,13 @@
 "Email is not verified." = "이메일이 인증되지 않았습니다.";
 
 "The My Info menu has been integrated with the Archive.\nFrom now on, you can tap this button in the upper right corner to sign in and view my user information." = "'나의 정보' 메뉴가 아카이브와 통합되었습니다.\n앞으로 로그인 및 회원정보 조회는 오른쪽 상단의 이 버튼을 누르면 됩니다.";
+
+/* introduce other apps */
+
+"Other apps made by BGSMM" = "BGSMM이 만든 다른 앱 보기";
+"Make My MusicBox" = "나만의 오르골 만들기";
+
+"description_MakeMyMusicBox" = "iPhone/iPad에서 뮤직박스가 다시 태어났습니다. 나만의 오르골과 악보를 만들어보세요.";
+"description_TunerXR" = "Tuner XR(Tuner with eXtRa features)은 보컬, 악기 등을 연주하는 음악가들을 위한 튜너 앱입니다.";
+"description_DiffuserStick" = "디퓨저 스틱(막대기) 교체 주기 관리 도우미 앱으로, 디퓨저의 사진과 함께 디퓨저 스틱을 꽂은 날을 기록하고, 교체 기간이 되면 푸시 알람을 통해 알려줍니다.";
+"description_UltimateScale" = "UtimateScale은 다양한 키를 지원하는 내장 신디사이저 키보드와, 퀴즈를 통한 효율적인 학습이 가능한 스케일(음계) 학습 도우미입니다.";

@@ -2693,6 +2693,26 @@ Arrangey by bcd</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="aeJ-n6-x7w" style="IBUITableViewCellStyleDefault" id="uq1-SN-qpE">
+                                        <rect key="frame" x="20" y="547.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uq1-SN-qpE" id="oK1-RT-BmQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="345.5" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Other apps made by BGSMM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aeJ-n6-x7w">
+                                                    <rect key="frame" x="20" y="0.0" width="317.5" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="S0n-lL-bws" kind="show" id="jGS-JM-J6K"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -3014,6 +3034,76 @@ Arrangey by bcd</string>
             </objects>
             <point key="canvasLocation" x="-2436" y="-990"/>
         </scene>
+        <!--Other apps made by BGSMM-->
+        <scene sceneID="fRQ-vw-HY0">
+            <objects>
+                <tableViewController id="S0n-lL-bws" customClass="AppExhibitionTableViewController" customModule="MusicScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="SrX-6c-hbH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AppInfoCell" rowHeight="121" id="TOZ-Nw-IyE" customClass="AppInfoCell" customModule="MusicScale" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="121"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TOZ-Nw-IyE" id="cjn-Ge-4ew">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close_p.png" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-Ib-8en">
+                                            <rect key="frame" x="20" y="15" width="91" height="91"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="AXX-Ib-8en" secondAttribute="height" multiplier="1:1" id="3zH-KG-w7Z"/>
+                                                <constraint firstAttribute="height" constant="80" id="xfr-WY-jPS"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhd-R0-e1h">
+                                            <rect key="frame" x="123" y="15" width="271" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="vcz-oD-zGW"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UP-uQ-MwT">
+                                            <rect key="frame" x="123" y="45" width="271" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5UP-uQ-MwT" firstAttribute="trailing" secondItem="Uhd-R0-e1h" secondAttribute="trailing" id="2Au-ao-9A7"/>
+                                        <constraint firstAttribute="trailing" secondItem="Uhd-R0-e1h" secondAttribute="trailing" constant="20" symbolic="YES" id="HUK-Vq-Stf"/>
+                                        <constraint firstItem="5UP-uQ-MwT" firstAttribute="top" secondItem="Uhd-R0-e1h" secondAttribute="bottom" id="LUI-XT-i0m"/>
+                                        <constraint firstAttribute="bottom" secondItem="AXX-Ib-8en" secondAttribute="bottom" constant="15" id="POu-JF-DKi"/>
+                                        <constraint firstItem="5UP-uQ-MwT" firstAttribute="leading" secondItem="Uhd-R0-e1h" secondAttribute="leading" id="a0H-Vy-9ez"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5UP-uQ-MwT" secondAttribute="bottom" constant="15" id="abW-w8-r9T"/>
+                                        <constraint firstItem="AXX-Ib-8en" firstAttribute="top" secondItem="cjn-Ge-4ew" secondAttribute="top" constant="15" id="ecf-vD-6yH"/>
+                                        <constraint firstItem="Uhd-R0-e1h" firstAttribute="leading" secondItem="AXX-Ib-8en" secondAttribute="trailing" constant="12" id="pUE-MY-Zev"/>
+                                        <constraint firstItem="AXX-Ib-8en" firstAttribute="leading" secondItem="cjn-Ge-4ew" secondAttribute="leading" constant="20" symbolic="YES" id="r4U-x2-tTg"/>
+                                        <constraint firstItem="Uhd-R0-e1h" firstAttribute="top" secondItem="cjn-Ge-4ew" secondAttribute="top" constant="15" id="v1Y-kb-Elx"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imgViewAppIcon" destination="AXX-Ib-8en" id="yy4-Uy-iOc"/>
+                                    <outlet property="lblDescription" destination="5UP-uQ-MwT" id="y2G-Af-TmG"/>
+                                    <outlet property="lblTitle" destination="Uhd-R0-e1h" id="daR-cA-aod"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="S0n-lL-bws" id="ijc-wB-kF0"/>
+                            <outlet property="delegate" destination="S0n-lL-bws" id="dO9-3q-ggx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Other apps made by BGSMM" id="sHI-0N-7Yf"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H3Y-cu-zD3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4262" y="-2452"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PfT-9u-Kcm"/>
@@ -3022,6 +3112,7 @@ Arrangey by bcd</string>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="close_p.png" width="21" height="21"/>
         <image name="daniel-tuttle-7iFNGzRRukA-unsplash" width="4898" height="3265"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>

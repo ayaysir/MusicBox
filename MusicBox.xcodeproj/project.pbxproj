@@ -130,6 +130,7 @@
 		44F304A928DB10070068E50B /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304A828DB10070068E50B /* CGSize+.swift */; };
 		44F304AC28DC1FA90068E50B /* SpeechBubbleView in Frameworks */ = {isa = PBXBuildFile; productRef = 44F304AB28DC1FA90068E50B /* SpeechBubbleView */; };
 		44F304AE28DC222E0068E50B /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304AD28DC222E0068E50B /* UIViewController+.swift */; };
+		44F304B028DC406B0068E50B /* AppExhibitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F304AF28DC406B0068E50B /* AppExhibitionTableViewController.swift */; };
 		44F3A02D26FE0C71000CE46F /* Allian1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02C26FE0C71000CE46F /* Allian1.mid */; };
 		44F3A02F26FE0CF7000CE46F /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */; };
 		44F3A03126FE121A000CE46F /* MidiManager+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */; };
@@ -298,6 +299,8 @@
 		44E6CDB9274BFD3800DE7EF0 /* Nocturne.musicbox */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Nocturne.musicbox; sourceTree = "<group>"; };
 		44F304A828DB10070068E50B /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		44F304AD28DC222E0068E50B /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		44F304AF28DC406B0068E50B /* AppExhibitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExhibitionTableViewController.swift; sourceTree = "<group>"; };
+		44F304B128DC43D00068E50B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44F3A02C26FE0C71000CE46F /* Allian1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = Allian1.mid; sourceTree = "<group>"; };
 		44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
 		44F3A03026FE121A000CE46F /* MidiManager+Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MidiManager+Sequence.swift"; sourceTree = "<group>"; };
@@ -580,6 +583,7 @@
 				44C1BA53273C04D500543A74 /* TextureCollectionViewController.swift */,
 				44C1BA59273C23E900543A74 /* SettingTableViewController.swift */,
 				44C1BA5B273D506C00543A74 /* AudioMIDISettingTableViewController.swift */,
+				44F304AF28DC406B0068E50B /* AppExhibitionTableViewController.swift */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -1091,6 +1095,7 @@
 				4405E97226F784930012E4F5 /* UIImage+.swift in Sources */,
 				44675A60274B9DB5008E9428 /* AdManager.swift in Sources */,
 				446279092748D9430004D95D /* iOSDevCenters+GIF.swift in Sources */,
+				44F304B028DC406B0068E50B /* AppExhibitionTableViewController.swift in Sources */,
 				44C1BA54273C04D500543A74 /* TextureCollectionViewController.swift in Sources */,
 				44C1BA4D27395AF900543A74 /* NotConnectedViewController.swift in Sources */,
 				444AF3A52701E5BC00BD8E38 /* Document.swift in Sources */,
@@ -1147,6 +1152,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				44E437E627553244008B41BA /* ko */,
+				44F304B128DC43D00068E50B /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
