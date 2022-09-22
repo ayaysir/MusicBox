@@ -105,3 +105,5 @@
 "Yes" = "예";
 
 "Email is not verified." = "이메일이 인증되지 않았습니다.";
+
+"The My Info menu has been integrated with the Archive.\nFrom now on, you can tap this button in the upper right corner to sign in and view my user information." = "'나의 정보' 메뉴가 아카이브와 통합되었습니다.\n앞으로 로그인 및 회원정보 조회는 오른쪽 상단의 이 버튼을 누르면 됩니다.";

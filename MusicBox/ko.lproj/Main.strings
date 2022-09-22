@@ -502,3 +502,7 @@
 
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "zbr-6u-FXN"; */
 "zbr-6u-FXN.title" = "로그인";
+
+/* 아이콘 변경 */
+"gS7-A0-gU1.headerTitle" = "앱 아이콘 변경";
+"gS7-A0-gU1.footerTitle" = "홈 스크린의 아이콘이 변경됩니다. 만약 변경되지 않은 경우, 기기를 재부팅합니다.";

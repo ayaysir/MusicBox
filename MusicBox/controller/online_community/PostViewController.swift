@@ -76,7 +76,17 @@ class PostViewController: UIViewController {
             lblOriginalArtist.text = "Composed by \(post.paperArtist.unknown)"
             lblPaperMaker.text = "Paper made by \(post.paperMaker.unknown)"
             txvComment.text = post.postComment
-            lblUploadedDate.text = "\(post.uploadDate)"
+            
+            // 업로드 날짜
+            let formatter = DateFormatter()
+            formatter.timeZone = .autoupdatingCurrent
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let timezoneAbbr = TimeZone.abbreviationDictionary.first { $1 == formatter.timeZone.identifier }
+            
+            lblUploadedDate.text = formatter.string(from: post.uploadDate)
+            if let timezoneAbbr = timezoneAbbr {
+                lblUploadedDate.text! += " (\(timezoneAbbr.key))"
+            }
             
             getThumbnail(postIdStr: post.postId.uuidString)
             
@@ -117,6 +127,7 @@ class PostViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // 좋아요 수 실시간 갱신
         let ref = Database.database().reference()
@@ -130,6 +141,10 @@ class PostViewController: UIViewController {
             
             self.lblLikeCount.text = "\(dict.count)"
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        midiManager.midiPlayer?.stop()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -10,6 +10,7 @@ import Firebase
 import Combine
 import SwiftSpinner
 import GoogleMobileAds
+import SpeechBubbleView
 
 class UserCommunityViewController: UIViewController {
     
@@ -35,6 +36,11 @@ class UserCommunityViewController: UIViewController {
     // 광고 배너로 height 올리는거 한 번만 실행
     var bottomConstantRaiseOnce = true
     
+    let KEY_OnlyOnce_SpeechBubbleForNoticeUserInfoFeature = "OnlyOnce_SpeechBubbleForNoticeUserInfoFeature"
+    let TAG_overlay = 140031
+    let TAG_bubble = 140032
+    let TAG_label = 140033
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +62,9 @@ class UserCommunityViewController: UIViewController {
         btnAddPost.layer.shadowOffset = CGSize(width: 2, height: 2)
         btnAddPost.layer.shadowRadius = 6
         btnAddPost.layer.masksToBounds = false
+        
+        // 업데이트 알림 말풍선
+        popupSpeechBubbleForNoticeUserInfoFeature()
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
@@ -142,6 +151,10 @@ class UserCommunityViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        if !configStore.bool(forKey: KEY_OnlyOnce_SpeechBubbleForNoticeUserInfoFeature) {
+            removeOvelays()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -222,6 +235,83 @@ extension UserCommunityViewController {
     
     @objc func getPost(sender: UIButton) {
         
+    }
+}
+
+extension UserCommunityViewController {
+    func popupSpeechBubbleForNoticeUserInfoFeature() {
+        
+        // 한 번 봤으면 다시 표시하지 않음: 테스트하려면 아래 if문 주석처리
+        if configStore.bool(forKey: KEY_OnlyOnce_SpeechBubbleForNoticeUserInfoFeature) { return }
+        
+        // overlay
+        let overlayFrame = CGRect(x: view.frame.minX,
+                                  y: view.frame.minY + topBarHeight,
+                                  width: view.frame.width,
+                                  height: view.frame.height - topBarHeight)
+        let overlay = UIView(frame: overlayFrame)
+        overlay.backgroundColor = .black
+        overlay.layer.opacity = 0.5
+        
+        let overlayTap = UITapGestureRecognizer(target: self, action: #selector(didTouchedOverlay))
+        overlay.addGestureRecognizer(overlayTap)
+        
+        let width: CGFloat = 275
+        let height: CGFloat = 150
+        let x = self.view.frame.width - CGFloat(width + 5)
+        let y = self.topBarHeight
+        
+        let speechBubble = SpeechBubbleView(frame: CGRect(x: x, y: y, width: width, height: height))
+        speechBubble.backgroundColor = .clear
+        speechBubble.speechBubbleColor = .yellow
+        speechBubble.lineColor = .systemGray3
+        speechBubble.lineWidth = 3
+        speechBubble.cornerRadius = 3
+
+        speechBubble.triangleType = .left
+        speechBubble.triangleSpacing = 10
+        speechBubble.triangleWidth = 10
+        speechBubble.triangleHeight = 10
+        
+        let transform = CGAffineTransform(rotationAngle: 3.14)
+        speechBubble.transform = transform
+        
+        // speech bubble - text
+        // 한글: '나의 정보' 메뉴가 아카이브와 통합되었습니다.\n앞으로 로그인 및 회원정보 조회는 오른쪽 상단의 이 버튼을 누르면 됩니다.
+        let text = "The My Info menu has been integrated with the Archive.\nFrom now on, you can tap this button in the upper right corner to sign in and view my user information.".localized
+        let label = UILabel(frame: CGRect(x: x + 10, y: y + 10, width: width - 20, height: height - 10))
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.text = text
+        
+        if let languageCode = Locale.current.languageCode, languageCode == "ko" {
+            label.lineBreakMode = .byCharWrapping
+        } else {
+            label.lineBreakMode = .byWordWrapping
+        }
+        
+        overlay.tag = TAG_overlay
+        speechBubble.tag = TAG_bubble
+        label.tag = TAG_label
+        self.view.addSubview(overlay)
+        self.view.addSubview(speechBubble)
+        self.view.addSubview(label)
+        
+    }
+    
+    @objc func didTouchedOverlay() {
+        print(#function)
+        removeOvelays()
+    }
+    
+    func removeOvelays() {
+        let targetSubviewTags = [TAG_overlay, TAG_bubble, TAG_label]
+        self.view.subviews.forEach { view in
+            if targetSubviewTags.contains(view.tag) {
+                view.removeFromSuperview()
+            }
+        }
+        configStore.set(true, forKey: KEY_OnlyOnce_SpeechBubbleForNoticeUserInfoFeature)
     }
 }
 

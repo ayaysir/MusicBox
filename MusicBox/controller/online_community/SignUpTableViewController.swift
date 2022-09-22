@@ -288,6 +288,11 @@ extension SignUpTableViewController {
                 if let user = getCurrentUser(), user.isAnonymous {
                     let credential = EmailAuthProvider.credential(withEmail: userEmail, password: userPassword)
                     user.link(with: credential) { [self] authResult, error in
+                        guard let user = authResult?.user, error == nil else {
+                            simpleAlert(self, message: error!.localizedDescription)
+                            return
+                        }
+                        
                         // 이메일 인증 요청
                         sendVerificationMail(authUser: user)
                     
