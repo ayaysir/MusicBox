@@ -689,8 +689,8 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                     p1.gridX < p2.gridX
                 })
                 
-                self.scrollView.contentOffset.x = 0
                 let newZoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
+                
                 if self.scrollView.zoomScale >= newZoomScale {
                     self.scrollView.zoomScale = newZoomScale
                 }
@@ -713,14 +713,30 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                  */
                 let noteDuration = configStore.integer(forKey: .cfgDurationOfNoteSound).cgFloat
                 let beatsOfOneBar = 16.0 / document!.paper!.timeSignature.lower.cgFloat
-                // let extraGridXPixels = cst.cellWidth * (beatsOfOneBar * noteDuration)
                 let extraGridXPixels = cst.cellWidth * (noteDuration * 4)
+                
+                let endPosition = (endGridX + extraGridXPixels) * scrollView.zoomScale
+                
+                if scrollView.contentOffset.x > endPosition {
+                    scrollView.contentOffset.x = 0
+                    lastScrollViewOffset = scrollView.contentOffset
+                }
+                let currentProgress = scrollView.contentOffset.x / endPosition
+                
+                let midiStartPosition = duration * currentProgress
+                let remainDuration = duration - midiStartPosition
+                
+                // self.scrollView.contentOffset.x = 0
+                print("current paper postion:", currentProgress, scrollView.contentOffset.x, endPosition)
+                if let player = midiManager.midiPlayer {
+                    player.currentPosition = midiStartPosition
+                }
                 
                 print("ScrollDelayFix: Step 1:", bpm, document!.paper!.timeSignature, PaperConstant.shared.cellWidth)
                 print("ScrollDelayFix: Step 2:", noteDuration, beatsOfOneBar, extraGridXPixels)
                 
-                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: [.curveLinear, .allowUserInteraction], animations: { [unowned self] in
-                    self.scrollView.contentOffset.x = (endGridX + extraGridXPixels) * self.scrollView.zoomScale
+                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: remainDuration, delay: 0, options: [.curveLinear, .allowUserInteraction], animations: { [unowned self] in
+                    scrollView.contentOffset.x = endPosition
                 }, completion: { [unowned self]  position in
                     scrollView.zoomScale = lastScrollViewZoomScale
                     scrollView.setContentOffset(lastScrollViewOffset, animated: false)
