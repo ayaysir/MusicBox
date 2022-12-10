@@ -53,10 +53,10 @@ class MusicPaperViewController: UIViewController {
         didSet {
             if eraserMode {
                 panelView.btnEraser.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
-                panelView.btnUndo.isEnabled = false
+                // panelView.btnUndo.isEnabled = false
             } else {
                 panelView.btnEraser.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
-                panelView.btnUndo.isEnabled = true
+                // panelView.btnUndo.isEnabled = true
             }
         }
     }
@@ -116,6 +116,22 @@ class MusicPaperViewController: UIViewController {
         "zapsplat_office_stapler_single_staple_into_paper_002_66590",
         "zapsplat_office_stapler_single_staple_into_paper_003_66591"
     ]
+    
+    /// 현재 작업중에 실시된 명령들을 스택으로 저장
+    private var undoStack: [PaperCoordState] = [] {
+        didSet {
+            panelView.btnUndo.isEnabled = undoStack.count > 0
+        }
+    }
+    private var isSequenceWriting: Bool = false {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.panelView.btnPlay.isEnabled = !(self!.isSequenceWriting)
+            }
+        }
+    }
+    // private var throttle: Throttle!
+    // private var debounce: Debounce!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -253,6 +269,13 @@ class MusicPaperViewController: UIViewController {
             }
             
         } else {
+            // debounce = Debounce(milliseconds: 500, handler: { date in
+            //     print("delayWork-debounce:", date)
+            //     self.updateSequence()
+            // })
+            // throttle = Throttle(milliseconds: 1000, handler: { date in
+            //     print("delayWork-throttle:", date)
+            // })
             updateSequence()
         }
     }
@@ -300,7 +323,6 @@ class MusicPaperViewController: UIViewController {
             let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
             let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
 
-            
             // 새로 터치한 위치가 중복이면 추가하지 않고 리턴
             for another in musicPaperView.data {
                 let absoulteCircleBounds = CGRect(x: cst.leftMargin + another.gridX * cst.cellWidth - cst.circleRadius,
@@ -319,7 +341,7 @@ class MusicPaperViewController: UIViewController {
             
             playPunchSound()
             musicPaperView.addNote(appendCoord: coord)
-            
+            undoStack.append(PaperCoordState(state: .insert, coord: coord))
         } else {
             // eraser mode
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else { return }
@@ -342,8 +364,8 @@ class MusicPaperViewController: UIViewController {
 
             if let deletedCoord = deletedCoord {
                 musicPaperView.eraseSpecificNote(deletedCoord: deletedCoord, fullData: filtered)
+                undoStack.append(PaperCoordState(state: .remove, coord: deletedCoord))
             }
-            
         }
         
         // 마지막 터치된 시점으로부터
@@ -351,7 +373,10 @@ class MusicPaperViewController: UIViewController {
         touchTimeCheckMode = true
         
         // let _ = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
-        updateSequence()
+        
+        // debounce.run()
+        // throttle.run()
+        // updateSequence()
     }
     
     private func initPanel() {
@@ -498,9 +523,16 @@ class MusicPaperViewController: UIViewController {
     }
     
     private func updateSequence(after handler: (() -> ())? = nil) {
+        guard !isSequenceWriting else {
+            // print("sequence is writing")
+            return
+        }
+        
+        isSequenceWriting = true
         DispatchQueue.global(qos: .default).async { [unowned self] in
             currentSequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
             midiManager.musicSequence = currentSequence
+            isSequenceWriting = false
             handler?()
         }
     }
@@ -615,7 +647,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
         if allowEdit {
             simpleDestructiveYesAndNo(self, message: "Are you sure you want to remove all notes? This operation is not recoverable.".localized, title: "Remove All Notes".localized) { action in
                 self.musicPaperView.data = []
-                
+                self.undoStack = []
                 // ??
                 self.musicPaperView.setNeedsDisplay()
             }
@@ -623,9 +655,32 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedUndo(_ view: UIView) {
-        if allowEdit && musicPaperView.data.count >= 1 {
-            let lastCoord = musicPaperView.data.removeLast()
-            musicPaperView.eraseSpecificNote(deletedCoord: lastCoord)
+        // if allowEdit && musicPaperView.data.count >= 1 {
+        //     let lastCoord = musicPaperView.data.removeLast()
+        //     musicPaperView.eraseSpecificNote(deletedCoord: lastCoord)
+        // }
+        
+        if allowEdit && undoStack.count > 0 {
+            let last = undoStack.last!
+            
+            switch last.state {
+            case .insert:
+                // 되돌리기: 삽입 취소
+                let lastCoordIndex = musicPaperView.data.lastIndex { coord in
+                    // print(coord.paperId, last.coord.paperId, coord.paperId == last.coord.paperId)
+                    return coord.paperId == last.coord.paperId
+                }
+                // print(lastCoordIndex)
+                if let lastCoordIndex = lastCoordIndex {
+                    musicPaperView.eraseSpecificNote(deletedCoord: last.coord)
+                    musicPaperView.data.remove(at: lastCoordIndex)
+                }
+            case .remove:
+                // 되돌리기: 삭제 취소
+                musicPaperView.addNote(appendCoord: last.coord)
+            }
+            
+            _ = undoStack.popLast()
         }
     }
     
@@ -682,106 +737,123 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             // let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
             // midiManager.musicSequence = sequence
             
-            isNowPlaying = true
-            midiManager.midiPlayer?.play({
-                print("midi play finished")
-                DispatchQueue.main.async {
-                    switch self.mode {
-                    case .edit:
-                        self.panelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                        self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
-                    case .view:
-                        self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                    }
-                }
-            })
             
-            // GlobalOsc.shared.conductor.stop()
-            DispatchQueue.main.async { [self] in
-                switch mode {
-                case .edit:
-                    self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-                    self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
-                case .view:
-                    self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-                }
-                
-                guard let duration = midiManager.midiPlayer?.duration else {
-                    return
-                }
-                
-                let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
-                    max(partialResult, coord.gridX)
-                }
-                
-                let endGridX = (maxGridX * cst.cellWidth + cst.leftMargin)
-                
-                lastScrollViewOffset = scrollView.contentOffset
-                lastScrollViewZoomScale = scrollView.zoomScale
-                
-                guard let coords = document?.paper?.coords else {
-                    return
-                }
-                var playbackData = coords
-                
-                playbackData.sort(by: { p1, p2 in
-                    p1.gridX < p2.gridX
-                })
-                
-                let newZoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
-                
-                if self.scrollView.zoomScale >= newZoomScale {
-                    self.scrollView.zoomScale = newZoomScale
-                }
-                
-                /* ScrollDelayFix:
-                 (X)
-                 configStore.integer(forKey: .cfgDurationOfNoteSound) * 1 bar당 16분음표 개수(=beat)?
-                 예1) 4분의 x박자에서 8(NoteDuration) * 4(1 bar당 16분음표 개수) = 32
-                 cst.cellWidth * 32 하면 4분의 x 박자 음악들에서 스크롤 맞음?
-                 
-                 x/1 => 16
-                 x/2 => 8
-                 x/4 => 4
-                 x/8 => 2
-                 x/16 => 1
-                 
-                 (O)
-                 NoteDuration * 4 하면 박자 상관 없이 스크롤 맞음 (이유는 아직 모름)
-                 
-                 */
-                let noteDuration = configStore.integer(forKey: .cfgDurationOfNoteSound).cgFloat
-                let beatsOfOneBar = 16.0 / document!.paper!.timeSignature.lower.cgFloat
-                let extraGridXPixels = cst.cellWidth * (noteDuration * 4)
-                
-                let endPosition = (endGridX + extraGridXPixels) * scrollView.zoomScale
-                
-                if scrollView.contentOffset.x > endPosition {
-                    scrollView.contentOffset.x = 0
-                    lastScrollViewOffset = scrollView.contentOffset
-                }
-                let currentProgress = scrollView.contentOffset.x / endPosition
-                
-                let midiStartPosition = duration * currentProgress
-                let remainDuration = duration - midiStartPosition
-                
-                // self.scrollView.contentOffset.x = 0
-                print("current paper postion:", currentProgress, scrollView.contentOffset.x, endPosition)
-                if let player = midiManager.midiPlayer {
-                    player.currentPosition = midiStartPosition
-                }
-                
-                print("ScrollDelayFix: Step 1:", bpm, document!.paper!.timeSignature, PaperConstant.shared.cellWidth)
-                print("ScrollDelayFix: Step 2:", noteDuration, beatsOfOneBar, extraGridXPixels)
-                
-                self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: remainDuration, delay: 0, options: [.curveLinear, .allowUserInteraction], animations: { [unowned self] in
-                    scrollView.contentOffset.x = endPosition
-                }, completion: { [unowned self]  position in
-                    scrollView.zoomScale = lastScrollViewZoomScale
-                    scrollView.setContentOffset(lastScrollViewOffset, animated: false)
-                })
+            updateSequence { [unowned self] in
+                makeMidiPlayerAndScroll()
             }
         }
+    }
+    
+    private func makeMidiPlayerAndScroll() {
+        isNowPlaying = true
+        midiManager.midiPlayer?.play({
+            print("midi play finished")
+            DispatchQueue.main.async {
+                switch self.mode {
+                case .edit:
+                    self.panelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                    self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+                case .view:
+                    self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                }
+            }
+        })
+        
+        // GlobalOsc.shared.conductor.stop()
+        DispatchQueue.main.async { [unowned self] in
+            switch mode {
+            case .edit:
+                self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+                self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+            case .view:
+                self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+            }
+            
+            guard let duration = midiManager.midiPlayer?.duration else {
+                return
+            }
+            
+            let maxGridX = musicPaperView.data.reduce(0.0) { partialResult, coord in
+                max(partialResult, coord.gridX)
+            }
+            
+            let endGridX = (maxGridX * cst.cellWidth + cst.leftMargin)
+            
+            lastScrollViewOffset = scrollView.contentOffset
+            lastScrollViewZoomScale = scrollView.zoomScale
+            
+            guard let coords = document?.paper?.coords else {
+                return
+            }
+            var playbackData = coords
+            
+            playbackData.sort(by: { p1, p2 in
+                p1.gridX < p2.gridX
+            })
+            
+            let newZoomScale = self.scrollView.bounds.size.height / self.musicPaperView.bounds.size.height
+            
+            if self.scrollView.zoomScale >= newZoomScale {
+                self.scrollView.zoomScale = newZoomScale
+            }
+            
+            /* ScrollDelayFix:
+             (X)
+             configStore.integer(forKey: .cfgDurationOfNoteSound) * 1 bar당 16분음표 개수(=beat)?
+             예1) 4분의 x박자에서 8(NoteDuration) * 4(1 bar당 16분음표 개수) = 32
+             cst.cellWidth * 32 하면 4분의 x 박자 음악들에서 스크롤 맞음?
+             
+             x/1 => 16
+             x/2 => 8
+             x/4 => 4
+             x/8 => 2
+             x/16 => 1
+             
+             (O)
+             NoteDuration * 4 하면 박자 상관 없이 스크롤 맞음 (이유는 아직 모름)
+             
+             */
+            let noteDuration = configStore.integer(forKey: .cfgDurationOfNoteSound).cgFloat
+            let beatsOfOneBar = 16.0 / document!.paper!.timeSignature.lower.cgFloat
+            let extraGridXPixels = cst.cellWidth * (noteDuration * 4)
+            
+            let endPosition = (endGridX + extraGridXPixels) * scrollView.zoomScale
+            
+            if scrollView.contentOffset.x > endPosition || scrollView.contentOffset.x < 0.0 {
+                scrollView.contentOffset.x = 0
+                lastScrollViewOffset = scrollView.contentOffset
+            }
+            let currentProgress = scrollView.contentOffset.x / endPosition
+            
+            let midiStartPosition = duration * currentProgress
+            
+            // startPosition이 마이너스인 경우
+            // 'com.apple.coreaudio.avfaudio', reason: 'error -50' 발생
+            let remainDuration: TimeInterval = {
+                guard midiStartPosition > 0.0 else {
+                    return duration
+                }
+                
+                return duration - midiStartPosition
+            }()
+            
+            // self.scrollView.contentOffset.x = 0
+            print("current paper postion:", currentProgress, scrollView.contentOffset.x, endPosition)
+            if let player = midiManager.midiPlayer {
+                player.currentPosition = midiStartPosition
+            }
+            
+            print("ScrollDelayFix: Step 1:", bpm, document!.paper!.timeSignature, PaperConstant.shared.cellWidth)
+            print("ScrollDelayFix: Step 2:", noteDuration, beatsOfOneBar, extraGridXPixels)
+            
+            self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: remainDuration, delay: 0, options: [.curveLinear], animations: { [unowned self] in
+                scrollView.contentOffset.x = endPosition
+            }, completion: { [unowned self]  position in
+                scrollView.zoomScale = lastScrollViewZoomScale
+                scrollView.setContentOffset(lastScrollViewOffset, animated: false)
+            })
+        }
+
     }
 }
 

@@ -20,6 +20,7 @@ class MIDIManager {
         didSet {
             createAVMIDIPlayer(sequence: self.musicSequence)
             self.musicPlayer = createMusicPlayer(musicSequence)
+            
         }
     }
     
@@ -53,7 +54,6 @@ class MIDIManager {
             fatalError("sound bank file not found.")
         }
         
-        
         var status = noErr
         var data: Unmanaged<CFData>?
         status = MusicSequenceFileCreateData (musicSequence,
@@ -65,8 +65,8 @@ class MIDIManager {
             print("bad status \(status)")
         }
         
-        if let md = data {
-            let midiData = md.takeUnretainedValue() as Data
+        if let data = data {
+            let midiData = data.takeUnretainedValue() as Data
             do {
                 try self.midiPlayer = AVMIDIPlayer(data: midiData as Data, soundBankURL: bankURL)
                 print("created midi player with sound bank url \(bankURL)")
@@ -74,7 +74,7 @@ class MIDIManager {
                 print("nil midi player")
                 print("Error \(error.localizedDescription)")
             }
-            data?.release()
+            data.release()
             
             self.midiPlayer?.prepareToPlay()
         }
