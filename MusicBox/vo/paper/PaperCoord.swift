@@ -66,8 +66,6 @@ class PaperCoord: NSObject, NSCoding, NSSecureCoding, Codable {
         self.gridY = gridY
     }
     
-    
-    
     override var description: String {
         if let musicNote = musicNote, let gridX = gridX, let gridY = gridY {
             return "(musicNote: \(musicNote), gridX: \(gridX), gridY: \(gridY))"

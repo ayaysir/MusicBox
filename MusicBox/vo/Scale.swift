@@ -61,8 +61,6 @@ enum Scale: Int, CaseIterable, Codable {
         }
     }
     
-    
-    
     var justIntonationRatio: [Float] {
         switch self {
         case .C: return [1, 25/24, 9/8, 6/5, 5/4, 4/3, 45/32, 3/2, 8/5, 5/3, 9/5, 15/8]

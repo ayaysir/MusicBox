@@ -53,8 +53,10 @@ class MusicPaperViewController: UIViewController {
         didSet {
             if eraserMode {
                 panelView.btnEraser.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+                panelView.btnUndo.isEnabled = false
             } else {
                 panelView.btnEraser.setBackgroundImage(UIImage(named: "button border space"), for: .normal)
+                panelView.btnUndo.isEnabled = true
             }
         }
     }
@@ -103,6 +105,8 @@ class MusicPaperViewController: UIViewController {
     var lastScrollViewZoomScale: CGFloat!
     
     var propertyAnimator: UIViewPropertyAnimator!
+    
+    var currentSequence: MusicSequence?
     
     // 광고 배너로 height 올리는거 한 번만 실행
     var bottomConstantRaiseOnce = true
@@ -187,6 +191,12 @@ class MusicPaperViewController: UIViewController {
             eraserMode = false
             snapToGridMode = true
             
+            // ====== 광고 ====== //
+            TrackingTransparencyPermissionRequest()
+            if AdManager.productMode {
+                bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+                bannerView.delegate = self
+            }
         case .view:
             initViewModePanel()
             
@@ -233,23 +243,34 @@ class MusicPaperViewController: UIViewController {
         
         if mode == .view {
             SwiftSpinner.show("Ready to play...")
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
-                SwiftSpinner.hide(nil)
-                self.playSequence()
+            print("Ready to play", Date())
+            updateSequence {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                    SwiftSpinner.hide(nil)
+                    self.playSequence()
+                    print("Hide", Date())
+                }
             }
+            
+        } else {
+            updateSequence()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         SwiftSpinner.hide(nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         saveDocument()
         midiManager.midiPlayer?.stop()
+        // GlobalOsc.shared.conductor.stop()
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
@@ -279,19 +300,28 @@ class MusicPaperViewController: UIViewController {
             let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
             let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
 
-            playPunchSound()
             
-            // 중복된 노트 제거
+            // 새로 터치한 위치가 중복이면 추가하지 않고 리턴
             for another in musicPaperView.data {
-                if another.musicNote == coord.musicNote && another.gridX == gridX {
+                let absoulteCircleBounds = CGRect(x: cst.leftMargin + another.gridX * cst.cellWidth - cst.circleRadius,
+                                          y: cst.topMargin + another.gridY.cgFloat * cst.cellHeight - cst.circleRadius,
+                                          width: cst.circleRadius * 2,
+                                          height: cst.circleRadius * 2)
+                // print(another.musicNote, coord.musicNote, another.gridX, gridX)
+                // print(another.musicNote.equalTo(rhs: coord.musicNote), another.gridX == gridX)
+                
+                if another.musicNote.equalTo(rhs: coord.musicNote) && (another.gridX == gridX || absoulteCircleBounds.contains(touchedPoint)) {
+                    // GlobalOsc.shared.conductor.start()
+                    // GlobalOsc.shared.conductor.makeSound(note: UInt8(another.musicNote.semitone + 12))
                     return
                 }
             }
             
+            playPunchSound()
             musicPaperView.addNote(appendCoord: coord)
             
         } else {
-            
+            // eraser mode
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else { return }
             
             var deletedCoord: PaperCoord?
@@ -319,6 +349,9 @@ class MusicPaperViewController: UIViewController {
         // 마지막 터치된 시점으로부터
         lastTouchedTime = Date()
         touchTimeCheckMode = true
+        
+        // let _ = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+        updateSequence()
     }
     
     private func initPanel() {
@@ -463,11 +496,18 @@ class MusicPaperViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
+    
+    private func updateSequence(after handler: (() -> ())? = nil) {
+        DispatchQueue.global(qos: .default).async { [unowned self] in
+            currentSequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+            midiManager.musicSequence = currentSequence
+            handler?()
+        }
+    }
 }
 
 extension MusicPaperViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        
         return musicPaperView
     }
     
@@ -484,7 +524,6 @@ extension MusicPaperViewController: UIScrollViewDelegate {
     }
     
     func updateConstraintsForSize(_ size: CGSize) {
-        
         let yOffset = max(0, (size.height - musicPaperView.frame.height) / 2)
         paperViewTopConstraint.constant = yOffset
         paperViewBottomConstraint.constant = yOffset
@@ -494,13 +533,12 @@ extension MusicPaperViewController: UIScrollViewDelegate {
         paperViewTrailingConstraint.constant = xOffset
         
         view.layoutIfNeeded()
-        print("musicPaperView.frame.height", musicPaperView.frame)
+        // print("musicPaperView.frame.height", musicPaperView.frame)
     }
 }
 
 extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     func didClickedShrinkPaper(_ view: UIView) {
-        
         if self.colNum > cst.defaultColNum {
             simpleDestructiveYesAndNo(self, message: "Do you really want to shrink the paper? This operation is not recoverable.".localized, title: "Shrink Paper") { [self] action in
                 SwiftSpinner.show("processing...")
@@ -611,7 +649,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 print("Failed to save file ")
             }
         }
-        
     }
     
     private func backToMain() {
@@ -641,9 +678,10 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             }
             
         } else {
+            // 시퀀스 만들고 재생할 때 버벅거림
+            // let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
+            // midiManager.musicSequence = sequence
             
-            let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
-            midiManager.musicSequence = sequence
             isNowPlaying = true
             midiManager.midiPlayer?.play({
                 print("midi play finished")
@@ -658,15 +696,16 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
                 }
             })
             
-            switch mode {
-            case .edit:
-                self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-                self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
-            case .view:
-                self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-            }
-            
+            // GlobalOsc.shared.conductor.stop()
             DispatchQueue.main.async { [self] in
+                switch mode {
+                case .edit:
+                    self.panelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+                    self.panelView.btnPlay.setBackgroundImage(UIImage(named: "button border pushed sunset"), for: .normal)
+                case .view:
+                    self.viewModePanelView.btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+                }
+                
                 guard let duration = midiManager.midiPlayer?.duration else {
                     return
                 }
@@ -754,8 +793,6 @@ extension MusicPaperViewController: PaperViewModePanelViewDelegate {
     func didBackToMainClicked(_ view: PaperViewModePanelView) {
         backToMain()
     }
-    
-    
 }
 
 extension MusicPaperViewController: GADBannerViewDelegate {

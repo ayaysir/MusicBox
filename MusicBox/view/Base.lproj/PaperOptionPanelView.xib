@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina3_5" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +14,7 @@
                 <outlet property="btnEraser" destination="V0o-v8-LpO" id="htW-PQ-6rP"/>
                 <outlet property="btnPlay" destination="G12-z7-Pm4" id="sSr-LN-ywO"/>
                 <outlet property="btnSnapToGrid" destination="gaQ-Zi-vPf" id="4N3-at-xfu"/>
+                <outlet property="btnUndo" destination="OdD-GL-Gt5" id="dC7-Af-jlz"/>
                 <outlet property="txtBpm" destination="Acj-x8-XuG" id="N1U-yx-Fzj"/>
                 <outlet property="txtIncompleteMeasure" destination="0Ma-09-hy6" id="RpJ-as-Ycf"/>
             </connections>
@@ -300,7 +301,7 @@
     <resources>
         <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="button border" width="188" height="137"/>
-        <image name="button border space" width="128" height="128"/>
+        <image name="button border space" width="188" height="137"/>
         <image name="eraser white icon" width="188" height="137"/>
         <image name="expand icon" width="188" height="137"/>
         <image name="floppydisk" width="188" height="137"/>
