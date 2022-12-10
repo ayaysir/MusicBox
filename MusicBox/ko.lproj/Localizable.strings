@@ -124,3 +124,8 @@
 "Loading the file information..." = "파일을 로딩하는 중입니다...";
 "Drawing the paper..." = "페이퍼를 그리는 중입니다...";
 "Loading the post..." = "포스트를 가져오는 중입니다...";
+
+"Turning this switch on will play sound even in silent mode. You may need to restart the app." = "이 스위치를 켜면 무음 모드에서도 사운드가 재생됩니다. 앱을 다시 시작해야 할 수도 있습니다.";
+"Play Sound in Silent Mode" = "무음 모드에서 소리 재생";
+"When this switch is turned on, a pitch sound (musical tone) is played whenever a note is entered on the paper." = "이 스위치를 켜면 페이퍼에 음을 입력할 때마다 피치 사운드(음악적 톤)가 재생됩니다.";
+"Play Pitch Sound" = "음높이 재생";

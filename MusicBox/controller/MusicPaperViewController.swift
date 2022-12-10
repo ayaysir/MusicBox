@@ -372,8 +372,10 @@ class MusicPaperViewController: UIViewController {
             let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
             let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
 
-            GlobalOsc.shared.conductor.start()
-            GlobalOsc.shared.conductor.makeSound(note: UInt8(coord.musicNote.semitone + 12))
+            if configStore.bool(forKey: .cfgPlayPitchWhenInputNotes) {
+                GlobalOsc.shared.conductor.start()
+                GlobalOsc.shared.conductor.makeSound(note: UInt8(coord.musicNote.semitone + 12))
+            }
             
             // 새로 터치한 위치가 중복이면 추가하지 않고 리턴
             for another in musicPaperView.data {

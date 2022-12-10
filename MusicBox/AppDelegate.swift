@@ -30,6 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             OnlyOnceAfterInstall()
         } updated: {
             print("App Status: updated")
+            
+            // ONCE: 앱을 업데이트시 최초 한 번만 .cfgPlayPitchWhenInputNotes 를 true로
+            let ONCE_isForcedChangePlayPitch = configStore.bool(forKey: "ONCE_isForcedChangePlayPitch")
+            if !ONCE_isForcedChangePlayPitch {
+                configStore.set(true, forKey: .cfgPlayPitchWhenInputNotes)
+                configStore.set(true, forKey: "ONCE_isForcedChangePlayPitch")
+            }
         } nothingChanged: {
             print("App Status: nothing")
         }

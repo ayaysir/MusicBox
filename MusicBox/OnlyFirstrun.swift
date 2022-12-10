@@ -43,6 +43,7 @@ func OnlyOnceAfterInstall() {
     configStore.set(10, forKey: .cfgInstrumentPatch)
     configStore.set(true, forKey: .cfgPlayInSilentMode)
     configStore.set(10, forKey: .cfgAutosaveInterval)
+    configStore.set(true, forKey: .cfgPlayPitchWhenInputNotes)
     
     // 예제 파일 복사
     guard let resourceURL = Bundle.main.url(forResource: "Nocturne", withExtension: "musicbox") else {

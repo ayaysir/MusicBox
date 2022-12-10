@@ -16,12 +16,19 @@ class AudioMIDISettingTableViewController: UITableViewController {
     @IBOutlet weak var pkvInstrumentPatch: UIPickerView!
     @IBOutlet weak var lblDuration: UILabel!
     @IBOutlet weak var swtPlayInSilentMode: UISwitch!
+    @IBOutlet weak var swtPlayPitchWhenInputNotes: UISwitch!
     @IBOutlet weak var sldAutosaveInterval: UISlider!
     @IBOutlet weak var lblAutosaveInterval: UILabel!
     @IBOutlet weak var collectionViewChangeAppIcon: UICollectionView!
     
-    
     let configStore = UserDefaults.standard
+    
+    // indexPath
+    private let durationEachNote_IxP = IndexPath(row: 0, section: 0)
+    private let midiPatch_IxP = IndexPath(row: 0, section: 1)
+    private let playSoundInilentMode_IxP = IndexPath(row: 0, section: 2)
+    private let playPitchWhenInput_IxP = IndexPath(row: 1, section: 2)
+    private let autosaveInterval_IxP = IndexPath(row: 0, section: 3)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +76,8 @@ class AudioMIDISettingTableViewController: UITableViewController {
         let playInSilentMode = configStore.bool(forKey: .cfgPlayInSilentMode)
         swtPlayInSilentMode.isOn = playInSilentMode
         
+        swtPlayPitchWhenInputNotes.isOn = configStore.bool(forKey: .cfgPlayPitchWhenInputNotes)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,13 +92,17 @@ class AudioMIDISettingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
+        switch indexPath {
+        case durationEachNote_IxP:
             simpleAlert(self, message: "Sets the duration of the note in seconds. The longer, the more natural playback will be. Some instruments may not work properly. The default is 8".localized, title: "Duration of Each Note during Playback".localized, handler: nil)
-        case 1:
+        case midiPatch_IxP:
             simpleAlert(self, message: "You can set the playback instrument. The default instrument is “10: Music Box”.".localized, title: "MIDI Instrument Patch".localized, handler: nil)
-        case 3:
+        case autosaveInterval_IxP:
             simpleAlert(self, message: "This app supports autosave. You can set the autosave interval in seconds. Smaller values can slow execution. The default is 10.".localized, title: "Autosave Interval".localized, handler: nil)
+        case playSoundInilentMode_IxP:
+            simpleAlert(self, message: "Turning this switch on will play sound even in silent mode. You may need to restart the app.".localized, title: "Play Sound in Silent Mode".localized, handler: nil)
+        case playPitchWhenInput_IxP:
+            simpleAlert(self, message: "When this switch is turned on, a pitch sound (musical tone) is played whenever a note is entered on the paper.".localized, title: "Play Pitch Sound".localized, handler: nil)
         default:
             break
         }
@@ -117,8 +130,9 @@ class AudioMIDISettingTableViewController: UITableViewController {
         configStore.set(sender.isOn, forKey: .cfgPlayInSilentMode)
     }
     
-    
-    
+    @IBAction func swtActPlayPitchWhenInputNotes(_ sender: UISwitch) {
+        configStore.set(sender.isOn, forKey: .cfgPlayPitchWhenInputNotes)
+    }
 }
 
 extension AudioMIDISettingTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
