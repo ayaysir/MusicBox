@@ -362,8 +362,11 @@ extension UserCommunityViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        SwiftSpinner.show("Loading the post...".localized)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) { [unowned self] in
+            performSegue(withIdentifier: "PostPageSegue_withoutPageView", sender: indexPath)
+        }
         
-        performSegue(withIdentifier: "PostPageSegue_withoutPageView", sender: indexPath)
     }
     
     // 사이즈 결정

@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import SwiftSpinner
 import GoogleMobileAds
+import Lottie
 
 protocol MusicPaperVCDelegate: AnyObject {
     func didPaperEditFinished(_ controller: MusicPaperViewController)
@@ -21,6 +22,35 @@ enum MusicPaperMode {
 class MusicPaperViewController: UIViewController {
     
     private var bannerView: GADBannerView!
+    
+    lazy var lottieView: LottieAnimationView = {
+        let animationView = LottieAnimationView(name: "129574-ginger-bread-socks-christmas")
+        animationView.frame = CGRect(x: 0, y: 0,
+                                     width: 250, height: 250)
+        animationView.center = self.view.center
+        animationView.contentMode = .scaleAspectFill
+        animationView.stop()
+        animationView.isHidden = true
+        animationView.loopMode = .loop
+        
+        animationView.layer.shadowColor = UIColor.black.cgColor
+        animationView.layer.shadowOpacity = 0.7
+        animationView.layer.shadowOffset = .zero
+        animationView.layer.shadowRadius = 7
+        
+        return animationView
+    }()
+    
+    lazy var visualEffectView: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: blur)
+        visualEffectView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        visualEffectView.layer.cornerRadius = visualEffectView.frame.width * 0.5
+        visualEffectView.center = self.view.center
+        visualEffectView.isHidden = true
+        
+        return visualEffectView
+    }()
     
     var previousScale: CGFloat = 1.0
     
@@ -128,6 +158,20 @@ class MusicPaperViewController: UIViewController {
                     self?.panelView.btnPlay.isEnabled = !(self!.isSequenceWriting)
                 }
             }
+            
+            DispatchQueue.main.async { [unowned self] in
+                if isSequenceWriting {
+                    visualEffectView.isHidden = false
+                    lottieView.isHidden = false
+                    lottieView.play()
+                } else {
+                    visualEffectView.isHidden = true
+                    lottieView.isHidden = true
+                    lottieView.stop()
+                }
+            }
+            
+            
         }
     }
     // private var throttle: Throttle!
@@ -140,7 +184,7 @@ class MusicPaperViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SwiftSpinner.show("load")
+        SwiftSpinner.show("Finishing...".localized)
         
         guard let paper = document?.paper else {
             return
@@ -260,14 +304,11 @@ class MusicPaperViewController: UIViewController {
         if mode == .view {
             SwiftSpinner.show("Ready to play...")
             print("Ready to play", Date())
-            updateSequence {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
-                    SwiftSpinner.hide(nil)
-                    self.playSequence()
-                    print("Hide", Date())
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                SwiftSpinner.hide(nil)
+                self.playSequence()
+                print("Hide", Date())
             }
-            
         } else {
             // debounce = Debounce(milliseconds: 500, handler: { date in
             //     print("delayWork-debounce:", date)
@@ -279,6 +320,9 @@ class MusicPaperViewController: UIViewController {
             panelView.btnUndo.isEnabled = false
             updateSequence()
         }
+        
+        // view.addSubview(visualEffectView)
+        view.addSubview(lottieView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -295,6 +339,11 @@ class MusicPaperViewController: UIViewController {
         saveDocument()
         midiManager.midiPlayer?.stop()
         GlobalOsc.shared.conductor.stop()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        lottieView.center = self.view.center
+        visualEffectView.center = self.view.center
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
@@ -666,11 +715,16 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     private func backToMain() {
-        saveDocument()
-        if delegate != nil {
-            delegate!.didPaperEditFinished(self)
+        SwiftSpinner.show("Save the document...".localized)
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { [unowned self] timer in
+            saveDocument()
+            if delegate != nil {
+                delegate!.didPaperEditFinished(self)
+            }
+            SwiftSpinner.hide()
+            self.dismiss(animated: true, completion: nil)
         }
-        self.dismiss(animated: true, completion: nil)
+        
     }
     
     private func playSequence() {
@@ -695,7 +749,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             // 시퀀스 만들고 재생할 때 버벅거림
             // let sequence = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
             // midiManager.musicSequence = sequence
-            
             
             updateSequence { [unowned self] in
                 makeMidiPlayerAndScroll()

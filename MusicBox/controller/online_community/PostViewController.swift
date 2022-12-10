@@ -10,8 +10,26 @@ import Kingfisher
 import SwiftSpinner
 import Firebase
 import GoogleMobileAds
+import Lottie
 
 class PostViewController: UIViewController {
+    
+    lazy var lottieView: LottieAnimationView = {
+        let animationView = LottieAnimationView(name: "129574-ginger-bread-socks-christmas")
+        animationView.frame = imgAlbumart.frame
+        animationView.center = imgAlbumart.center
+        animationView.contentMode = .scaleAspectFill
+        animationView.stop()
+        animationView.isHidden = true
+        animationView.loopMode = .loop
+        
+        animationView.layer.shadowColor = UIColor.black.cgColor
+        animationView.layer.shadowOpacity = 0.7
+        animationView.layer.shadowOffset = .zero
+        animationView.layer.shadowRadius = 7
+        
+        return animationView
+    }()
     
     private var bannerView: GADBannerView!
     
@@ -45,6 +63,10 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(lottieView)
+        lottieView.isHidden = false
+        lottieView.play()
         
         btnPreplay.setTitle("", for: .normal)
         DispatchQueue.main.async  { [self] in
@@ -124,6 +146,8 @@ class PostViewController: UIViewController {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self
         }
+        
+        SwiftSpinner.hide()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -283,12 +307,13 @@ class PostViewController: UIViewController {
     func getThumbnail(postIdStr: String) {
         let refPath = "PostAlbumart/\(postIdStr)/\(postIdStr).jpg"
         getFileURL(childRefStr: refPath) { url in
-            self.imgAlbumart.kf.setImage(with: url)
+            self.imgAlbumart.kf.setImage(with: url) { result in
+                self.lottieView.isHidden = true
+            }
         } failedHandler: { error in
             
         }
     }
-    
     
     func getLikeState(nullCallback: @escaping RefHandler, likeStateCallback: @escaping RefHandler, unlikeStateCallback: @escaping RefHandler) {
         

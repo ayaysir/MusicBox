@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import SwiftSpinner
 
 class PaperInfoTableViewController: UITableViewController {
     
@@ -30,6 +31,8 @@ class PaperInfoTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("PaperInfoTableViewController viewdidload start", Date().timeIntervalSince1970)
         self.title = selectedDocument?.fileURL.lastPathComponent
         initPaperInfo()
         initButtonsAppearance()
@@ -40,6 +43,8 @@ class PaperInfoTableViewController: UITableViewController {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
         }
+        SwiftSpinner.hide()
+        print("PaperInfoTableViewController viewdidload end", Date().timeIntervalSince1970)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -183,6 +188,7 @@ class PaperInfoTableViewController: UITableViewController {
             return
         }
         
+        SwiftSpinner.show("Drawing the paper...".localized)
         let musicPaperVC = mainStoryboard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
         
         document.open { success in

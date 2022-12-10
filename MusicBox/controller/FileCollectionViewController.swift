@@ -37,9 +37,6 @@ class FileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let localizeSample = "He said the food %@ ate was %@.".localizedFormat("James".localized, "chicken".localized)
-        print(localizeSample)
-        
         askPhotoAuth()
         
         setMenuDropDown()
@@ -317,8 +314,10 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        performSegue(withIdentifier: "DetailPaperViewSegue", sender: documents[indexPath.row])
+        SwiftSpinner.show("Loading the file information...".localized)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) { [unowned self] in
+            performSegue(withIdentifier: "DetailPaperViewSegue", sender: documents[indexPath.row])
+        }
     }
     
     // 사이즈 결정
@@ -373,8 +372,6 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
             return CGSize(width: collectionView.bounds.width, height: 0)
         }
     }
-    
-    
 }
 
 extension FileCollectionViewController: CreateNewPaperVCDelegate {
@@ -446,7 +443,6 @@ extension FileCollectionViewController: MusicPaperVCDelegate {
     func didPaperEditFinished(_ controller: MusicPaperViewController) {
         reloadAndRefresh()
     }
-    
 }
 
 extension FileCollectionViewController: GADBannerViewDelegate {

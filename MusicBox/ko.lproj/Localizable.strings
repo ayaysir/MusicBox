@@ -117,3 +117,10 @@
 "description_TunerXR" = "Tuner XR(Tuner with eXtRa features)은 보컬, 악기 등을 연주하는 음악가들을 위한 튜너 앱입니다.";
 "description_DiffuserStick" = "디퓨저 스틱(막대기) 교체 주기 관리 도우미 앱으로, 디퓨저의 사진과 함께 디퓨저 스틱을 꽂은 날을 기록하고, 교체 기간이 되면 푸시 알람을 통해 알려줍니다.";
 "description_UltimateScale" = "UtimateScale은 다양한 키를 지원하는 내장 신디사이저 키보드와, 퀴즈를 통한 효율적인 학습이 가능한 스케일(음계) 학습 도우미입니다.";
+
+/* 2022-12-11 */
+"Save the document..." = "파일을 저장중입니다...";
+"Finishing..." = "마무리 중입니다...";
+"Loading the file information..." = "파일을 로딩하는 중입니다...";
+"Drawing the paper..." = "페이퍼를 그리는 중입니다...";
+"Loading the post..." = "포스트를 가져오는 중입니다...";

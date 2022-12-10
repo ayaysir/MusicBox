@@ -107,6 +107,7 @@
 		44BB17332944C99500C8A190 /* toy_musical_shaker_005.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44BB17322944C99500C8A190 /* toy_musical_shaker_005.mp3 */; };
 		44BB17362944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */; };
 		44BB17382944CE1A00C8A190 /* FXSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB17372944CE1A00C8A190 /* FXSound.swift */; };
+		44BB173B2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json in Resources */ = {isa = PBXBuildFile; fileRef = 44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
 		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
@@ -273,6 +274,7 @@
 		44BB17322944C99500C8A190 /* toy_musical_shaker_005.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = toy_musical_shaker_005.mp3; sourceTree = "<group>"; };
 		44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3; sourceTree = "<group>"; };
 		44BB17372944CE1A00C8A190 /* FXSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXSound.swift; sourceTree = "<group>"; };
+		44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "129574-ginger-bread-socks-christmas.json"; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -622,6 +624,13 @@
 			path = MiscSound;
 			sourceTree = "<group>";
 		};
+		44BB17392944D9CE00C8A190 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		44C1BA50273BFD2800543A74 /* settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -734,6 +743,8 @@
 		44F3A03426FE1E06000CE46F /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				44BB17392944D9CE00C8A190 /* Lottie */,
+				44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */,
 				44BB17342944CD1E00C8A190 /* MiscSound */,
 				44BB17312944C98B00C8A190 /* UndoSound */,
 				44C1BA5D273FFFF300543A74 /* erasersound */,
@@ -917,6 +928,7 @@
 				44BB17362944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 in Resources */,
 				447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
+				44BB173B2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json in Resources */,
 				44E437E327553240008B41BA /* Localizable.strings in Resources */,
 				44C1BA5F2740000400543A74 /* zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009.mp3 in Resources */,
 				447E116B2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_002_66590.mp3 in Resources */,

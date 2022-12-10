@@ -19,6 +19,7 @@
 
 /* Class = "UIButton"; configuration.title = "Delete"; ObjectID = "21F-K1-LRY"; */
 "21F-K1-LRY.configuration.title" = "삭제";
+"21F-K1-LRY.normalTitle" = "삭제";
 
 /* Class = "UILabel"; text = "192"; ObjectID = "2Sr-iW-VjF"; */
 "2Sr-iW-VjF.text" = "192";
