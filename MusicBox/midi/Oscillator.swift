@@ -9,10 +9,10 @@ import Foundation
 import AudioKit
 import SoundpipeAudioKit
 
-// class GlobalOsc {
-//     static let shared = GlobalOsc()
-//     let conductor = DynamicOscillatorConductor()
-// }
+class GlobalOsc {
+    static let shared = GlobalOsc()
+    let conductor = DynamicOscillatorConductor()
+}
 
 struct DynamicOscillatorData {
     var isPlaying: Bool = false

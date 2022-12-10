@@ -26,8 +26,6 @@ class MusicPaperViewController: UIViewController {
     
     var mode: MusicPaperMode = .edit
     weak var delegate: MusicPaperVCDelegate?
-
-    var player: AVAudioPlayer?
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var constraintScrollViewBottom: NSLayoutConstraint!
@@ -125,8 +123,10 @@ class MusicPaperViewController: UIViewController {
     }
     private var isSequenceWriting: Bool = false {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.panelView.btnPlay.isEnabled = !(self!.isSequenceWriting)
+            if mode == .edit {
+                DispatchQueue.main.async { [weak self] in
+                    self?.panelView.btnPlay.isEnabled = !(self!.isSequenceWriting)
+                }
             }
         }
     }
@@ -276,6 +276,7 @@ class MusicPaperViewController: UIViewController {
             // throttle = Throttle(milliseconds: 1000, handler: { date in
             //     print("delayWork-throttle:", date)
             // })
+            panelView.btnUndo.isEnabled = false
             updateSequence()
         }
     }
@@ -293,7 +294,7 @@ class MusicPaperViewController: UIViewController {
         super.viewWillDisappear(animated)
         saveDocument()
         midiManager.midiPlayer?.stop()
-        // GlobalOsc.shared.conductor.stop()
+        GlobalOsc.shared.conductor.stop()
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {
@@ -311,7 +312,6 @@ class MusicPaperViewController: UIViewController {
         let touchedPoint = sender.location(in: musicPaperView)
         
         if !eraserMode {
-            
             guard let note = util.getNoteFromGridBox(touchedPoint: touchedPoint) else {
                 print("not found note.")
                 return
@@ -323,6 +323,9 @@ class MusicPaperViewController: UIViewController {
             let gridY = util.getGridYFromGridBox(touchedPoint: touchedPoint)
             let coord = PaperCoord(musicNote: note, absoluteTouchedPoint: touchedPoint, gridX: gridX, gridY: gridY)
 
+            GlobalOsc.shared.conductor.start()
+            GlobalOsc.shared.conductor.makeSound(note: UInt8(coord.musicNote.semitone + 12))
+            
             // 새로 터치한 위치가 중복이면 추가하지 않고 리턴
             for another in musicPaperView.data {
                 let absoulteCircleBounds = CGRect(x: cst.leftMargin + another.gridX * cst.cellWidth - cst.circleRadius,
@@ -333,13 +336,12 @@ class MusicPaperViewController: UIViewController {
                 // print(another.musicNote.equalTo(rhs: coord.musicNote), another.gridX == gridX)
                 
                 if another.musicNote.equalTo(rhs: coord.musicNote) && (another.gridX == gridX || absoulteCircleBounds.contains(touchedPoint)) {
-                    // GlobalOsc.shared.conductor.start()
-                    // GlobalOsc.shared.conductor.makeSound(note: UInt8(another.musicNote.semitone + 12))
+                    FXSound.block.play()
                     return
                 }
             }
             
-            playPunchSound()
+            FXSound.punch.play()
             musicPaperView.addNote(appendCoord: coord)
             undoStack.append(PaperCoordState(state: .insert, coord: coord))
         } else {
@@ -358,8 +360,11 @@ class MusicPaperViewController: UIViewController {
                 }
                 return true
             }
+            
             if filtered.count != musicPaperView.data.count {
-                playEraserSound()
+                FXSound.eraser.play()
+            } else {
+                FXSound.block.play()
             }
 
             if let deletedCoord = deletedCoord {
@@ -473,53 +478,6 @@ class MusicPaperViewController: UIViewController {
         }
         panelTrailingConstraint.constant = panelMoveX
         panelTrailingConstraint.isActive = true
-    }
-    
-    func playPunchSound() {
-        let selectedSoundIndex = Int.random(in: 0...2)
-        
-        guard let url = Bundle.main.url(forResource: availablePunchSounds[selectedSoundIndex], withExtension: "mp3") else {
-            return
-        }
-        
-        do {
-            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            
-            /* iOS 10 and earlier require the following line:
-             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
-            
-            guard let player = player else { return }
-            
-            player.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func playEraserSound() {
-        // zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009
-        
-        let soundName = "zapsplat_foley_paper_sheets_x3_construction_sugar_set_down_on_surface_003_42009"
-        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else {
-            return
-        }
-        
-        do {
-            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            
-            /* iOS 10 and earlier require the following line:
-             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
-            
-            guard let player = player else { return }
-            
-            player.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
     }
     
     private func updateSequence(after handler: (() -> ())? = nil) {
@@ -681,6 +639,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             }
             
             _ = undoStack.popLast()
+            FXSound.undo.play()
         }
     }
     
@@ -759,7 +718,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             }
         })
         
-        // GlobalOsc.shared.conductor.stop()
+        GlobalOsc.shared.conductor.stop()
         DispatchQueue.main.async { [unowned self] in
             switch mode {
             case .edit:
@@ -846,7 +805,16 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             print("ScrollDelayFix: Step 1:", bpm, document!.paper!.timeSignature, PaperConstant.shared.cellWidth)
             print("ScrollDelayFix: Step 2:", noteDuration, beatsOfOneBar, extraGridXPixels)
             
-            self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: remainDuration, delay: 0, options: [.curveLinear], animations: { [unowned self] in
+            let animatorOptions: UIView.AnimationOptions = {
+                switch mode {
+                case .edit:
+                    return [.curveLinear]
+                case .view:
+                    return [.curveLinear, .allowUserInteraction]
+                }
+            }()
+            
+            self.propertyAnimator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: remainDuration, delay: 0, options: animatorOptions, animations: { [unowned self] in
                 scrollView.contentOffset.x = endPosition
             }, completion: { [unowned self]  position in
                 scrollView.zoomScale = lastScrollViewZoomScale

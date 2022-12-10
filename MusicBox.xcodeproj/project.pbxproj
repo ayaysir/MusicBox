@@ -104,6 +104,9 @@
 		44BB172B29448EF200C8A190 /* PaperCoordState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB172A29448EF200C8A190 /* PaperCoordState.swift */; };
 		44BB172D2944A7EA00C8A190 /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB172C2944A7EA00C8A190 /* Throttle.swift */; };
 		44BB172F2944AF7100C8A190 /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB172E2944AF7100C8A190 /* Debounce.swift */; };
+		44BB17332944C99500C8A190 /* toy_musical_shaker_005.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44BB17322944C99500C8A190 /* toy_musical_shaker_005.mp3 */; };
+		44BB17362944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */; };
+		44BB17382944CE1A00C8A190 /* FXSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB17372944CE1A00C8A190 /* FXSound.swift */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
 		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
@@ -267,6 +270,9 @@
 		44BB172A29448EF200C8A190 /* PaperCoordState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperCoordState.swift; sourceTree = "<group>"; };
 		44BB172C2944A7EA00C8A190 /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
 		44BB172E2944AF7100C8A190 /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
+		44BB17322944C99500C8A190 /* toy_musical_shaker_005.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = toy_musical_shaker_005.mp3; sourceTree = "<group>"; };
+		44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3; sourceTree = "<group>"; };
+		44BB17372944CE1A00C8A190 /* FXSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXSound.swift; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -417,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				444D94542711C95F0090F587 /* LoadMusicboxFileList.swift */,
+				44BB17372944CE1A00C8A190 /* FXSound.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -599,6 +606,22 @@
 			path = DelayWork;
 			sourceTree = "<group>";
 		};
+		44BB17312944C98B00C8A190 /* UndoSound */ = {
+			isa = PBXGroup;
+			children = (
+				44BB17322944C99500C8A190 /* toy_musical_shaker_005.mp3 */,
+			);
+			path = UndoSound;
+			sourceTree = "<group>";
+		};
+		44BB17342944CD1E00C8A190 /* MiscSound */ = {
+			isa = PBXGroup;
+			children = (
+				44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */,
+			);
+			path = MiscSound;
+			sourceTree = "<group>";
+		};
 		44C1BA50273BFD2800543A74 /* settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,6 +734,8 @@
 		44F3A03426FE1E06000CE46F /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				44BB17342944CD1E00C8A190 /* MiscSound */,
+				44BB17312944C98B00C8A190 /* UndoSound */,
 				44C1BA5D273FFFF300543A74 /* erasersound */,
 				447E11662721C0E900931B8C /* punchsound */,
 				44F3A02E26FE0CF7000CE46F /* gs_instruments.dls */,
@@ -881,6 +906,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44BB17332944C99500C8A190 /* toy_musical_shaker_005.mp3 in Resources */,
 				44F3A03826FF71B4000CE46F /* GeneralUser GS MuseScore v1.442.sf2 in Resources */,
 				44E437F027579DAC008B41BA /* InfoPlist.strings in Resources */,
 				44B7852227EB7092001031AC /* VintageIcon2@3x~ipad.png in Resources */,
@@ -888,6 +914,7 @@
 				44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */,
 				44B7851C27EB6D36001031AC /* VintageIcon1@3x.png in Resources */,
 				44E437E727576C93008B41BA /* PaperOptionPanelView.xib in Resources */,
+				44BB17362944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 in Resources */,
 				447E116A2721C0FB00931B8C /* zapsplat_office_stapler_single_staple_into_paper_001_66589.mp3 in Resources */,
 				440A1A2926EA48DE00AA4135 /* GoogleService-Info.plist in Resources */,
 				44E437E327553240008B41BA /* Localizable.strings in Resources */,
@@ -1074,6 +1101,7 @@
 				44AE99402705DBED00D046D1 /* Array+.swift in Sources */,
 				440A1A3226ECC0C500AA4135 /* MemberProfileViewController.swift in Sources */,
 				4462790B274907130004D95D /* ArchiveNavigationController.swift in Sources */,
+				44BB17382944CE1A00C8A190 /* FXSound.swift in Sources */,
 				444D946F271727EB0090F587 /* UITextField+.swift in Sources */,
 				4462790D274940130004D95D /* OnlyFirstrun.swift in Sources */,
 				449A412426ECE90200EE3B67 /* Int+.swift in Sources */,
