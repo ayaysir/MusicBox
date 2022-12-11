@@ -2912,11 +2912,10 @@ Arrangey by bcd</string>
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BQs-xH-q4G">
-                                                    <rect key="frame" x="20" y="10" width="202" height="62"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BQs-xH-q4G">
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="81"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="YiI-Yy-2VL">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="YiI-Yy-2VL">
                                                         <size key="itemSize" width="60" height="60"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2924,7 +2923,7 @@ Arrangey by bcd</string>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AppIconCell" id="jrH-zL-Ktn" customClass="AppIconCell" customModule="MusicBox" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
+                                                            <rect key="frame" x="0.0" y="9.5" width="62" height="62"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OP0-Rv-8fK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
@@ -2934,7 +2933,7 @@ Arrangey by bcd</string>
                                                             <size key="customSize" width="62" height="62"/>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="w9j-xb-949">
-                                                            <rect key="frame" x="67" y="1" width="60" height="60"/>
+                                                            <rect key="frame" x="67" y="10.5" width="60" height="60"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xFf-ZO-ti4">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -2942,7 +2941,7 @@ Arrangey by bcd</string>
                                                             </collectionViewCellContentView>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IF5-kI-ZwW">
-                                                            <rect key="frame" x="132" y="1" width="60" height="60"/>
+                                                            <rect key="frame" x="132" y="10.5" width="60" height="60"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CSM-1I-BFb">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -2952,6 +2951,12 @@ Arrangey by bcd</string>
                                                     </cells>
                                                 </collectionView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="BQs-xH-q4G" secondAttribute="bottom" id="84x-Xy-6aN"/>
+                                                <constraint firstItem="BQs-xH-q4G" firstAttribute="leading" secondItem="ycm-Gw-dPX" secondAttribute="leading" id="AkL-M3-Kqm"/>
+                                                <constraint firstAttribute="trailing" secondItem="BQs-xH-q4G" secondAttribute="trailing" id="EZC-eI-yzu"/>
+                                                <constraint firstItem="BQs-xH-q4G" firstAttribute="top" secondItem="ycm-Gw-dPX" secondAttribute="top" id="GsP-Io-Njw"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

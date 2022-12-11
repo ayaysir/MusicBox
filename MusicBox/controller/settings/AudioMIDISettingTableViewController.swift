@@ -29,6 +29,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
     private let playSoundInilentMode_IxP = IndexPath(row: 0, section: 2)
     private let playPitchWhenInput_IxP = IndexPath(row: 1, section: 2)
     private let autosaveInterval_IxP = IndexPath(row: 0, section: 3)
+    private let appIconChange_IxP = IndexPath(row: 0, section: 4)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +113,32 @@ class AudioMIDISettingTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let originalHeight = super.tableView(tableView, heightForHeaderInSection: section)
+        
+        switch section {
+        case playSoundInilentMode_IxP.section:
+            return originalHeight * 0.5
+        default:
+            break
+        }
+        
+        return originalHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let originalHeight = super.tableView(tableView, heightForHeaderInSection: section)
+        
+        switch section {
+        case playSoundInilentMode_IxP.section:
+            return originalHeight * 0.5
+        default:
+            break
+        }
+        
+        return originalHeight
+    }
+    
     @IBAction func sldActChangeDuration(_ sender: UISlider) {
         let intValue = Int(sender.value)
         sender.setValue(Float(intValue), animated: false)
@@ -157,7 +184,7 @@ extension AudioMIDISettingTableViewController: UIPickerViewDelegate, UIPickerVie
     }
 }
 
-extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         APP_ICON_LIST.count
     }
@@ -194,12 +221,26 @@ extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICol
         
         cell.isSelected = false
     }
+}
+
+extension AudioMIDISettingTableViewController:  UICollectionViewDelegateFlowLayout  {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
+        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 60)
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        // 셀 간 간격
+        return 5
+    }
 }
 
 class AppIconCell: UICollectionViewCell {

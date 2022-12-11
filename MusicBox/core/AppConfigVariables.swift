@@ -38,6 +38,10 @@ let APP_ICON_LIST = [
     "musicbox-appicon-0",
     "musicbox-appicon-1",
     "musicbox-appicon-2",
+    "musicbox-appicon-3",
+    "musicbox-appicon-4",
+    "musicbox-appicon-5",
+    "musicbox-appicon-6",
 ]
 
 
