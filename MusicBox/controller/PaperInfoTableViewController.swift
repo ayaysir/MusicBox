@@ -51,6 +51,10 @@ class PaperInfoTableViewController: UITableViewController {
         midiManager.midiPlayer?.stop()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
     private func initButtonsAppearance() {
         
         let leftMargin: CGFloat = 3

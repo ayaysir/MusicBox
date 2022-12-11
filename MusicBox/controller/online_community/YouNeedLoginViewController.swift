@@ -31,6 +31,10 @@ class YouNeedLoginViewController: UIViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
     @IBAction func btnActGoToLoginPage(_ sender: Any) {
         // self.tabBarController?.selectedIndex = 2
         

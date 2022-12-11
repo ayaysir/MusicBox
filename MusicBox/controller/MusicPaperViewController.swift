@@ -251,21 +251,8 @@ class MusicPaperViewController: UIViewController {
             eraserMode = false
             snapToGridMode = true
             
-            // ====== 광고 ====== //
-            TrackingTransparencyPermissionRequest()
-            if AdManager.productMode {
-                bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
-                bannerView.delegate = self
-            }
         case .view:
             initViewModePanel()
-            
-            // ====== 광고 ====== //
-            TrackingTransparencyPermissionRequest()
-            if AdManager.productMode {
-                bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
-                bannerView.delegate = self
-            }
         }
         
         // PaperView 배경화면 설정
@@ -321,8 +308,6 @@ class MusicPaperViewController: UIViewController {
             updateSequence()
         }
         
-        // view.addSubview(visualEffectView)
-        view.addSubview(lottieView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -332,6 +317,21 @@ class MusicPaperViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SwiftSpinner.hide(nil)
+        
+        // ====== 광고 ====== //
+        TrackingTransparencyPermissionRequest()
+        DispatchQueue.main.async { [unowned self] in
+            // 이거를 하면 view의 사이즈도 조정된다.
+            scrollView.layoutIfNeeded()
+            
+            if AdManager.productMode {
+                bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
+                bannerView.delegate = self
+            }
+            
+            view.addSubview(lottieView)
+            lottieView.center = view.center
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -342,8 +342,13 @@ class MusicPaperViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        lottieView.center = self.view.center
-        visualEffectView.center = self.view.center
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        DispatchQueue.main.async { [unowned self] in
+            scrollView.layoutIfNeeded()
+            lottieView.center = view.center
+            bannerView?.fitInView(self)
+        }
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) {

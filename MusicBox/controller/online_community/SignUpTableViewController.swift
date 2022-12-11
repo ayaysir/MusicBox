@@ -120,6 +120,10 @@ class SignUpTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
     @IBAction func btnActCancel(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

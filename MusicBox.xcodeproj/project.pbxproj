@@ -108,6 +108,7 @@
 		44BB17362944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */; };
 		44BB17382944CE1A00C8A190 /* FXSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB17372944CE1A00C8A190 /* FXSound.swift */; };
 		44BB173B2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json in Resources */ = {isa = PBXBuildFile; fileRef = 44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */; };
+		44BB173D2945C4BF00C8A190 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB173C2945C4BF00C8A190 /* UIApplication+.swift */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
 		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
@@ -275,6 +276,7 @@
 		44BB17352944CD3100C8A190 /* zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zapsplat_foley_wood_block_dense_heavy_small_set_down_ion_concrete_002_59957.mp3; sourceTree = "<group>"; };
 		44BB17372944CE1A00C8A190 /* FXSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXSound.swift; sourceTree = "<group>"; };
 		44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "129574-ginger-bread-socks-christmas.json"; sourceTree = "<group>"; };
+		44BB173C2945C4BF00C8A190 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				445B5A4C27451FD00003A437 /* UIView+.swift */,
 				44675A61274BA72E008E9428 /* UserDefaults+.swift */,
 				44F304A828DB10070068E50B /* CGSize+.swift */,
+				44BB173C2945C4BF00C8A190 /* UIApplication+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -1156,6 +1159,7 @@
 				44BB172F2944AF7100C8A190 /* Debounce.swift in Sources */,
 				44F5B39E26F631F4004DE730 /* String+.swift in Sources */,
 				44C1BA56273C061900543A74 /* String+ConfigKeys.swift in Sources */,
+				44BB173D2945C4BF00C8A190 /* UIApplication+.swift in Sources */,
 				44C1BA4727357AA600543A74 /* FileManager+.swift in Sources */,
 				444D94602711EE170090F587 /* Post.swift in Sources */,
 				44C1BA5A273C23E900543A74 /* SettingTableViewController.swift in Sources */,

@@ -67,9 +67,15 @@ class FileCollectionViewController: UICollectionViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        reloadAndRefresh()
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionViewLayout.invalidateLayout()
+        
+        bannerView?.fitInView(self)
     }
 
     @objc func openFromExternalApp(notification: Notification) {
@@ -146,10 +152,6 @@ class FileCollectionViewController: UICollectionViewController {
 
         }
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        reloadAndRefresh()
     }
     
     @objc func reloadAndRefresh() {

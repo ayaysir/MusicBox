@@ -186,6 +186,10 @@ class CreateNewPaperTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         let selectedRow = pkvBpmNote.selectedRow(inComponent: 0)
         convertTempoWithLabelChange(tempo: textField.text, noteDivision: noteRatio[selectedRow])

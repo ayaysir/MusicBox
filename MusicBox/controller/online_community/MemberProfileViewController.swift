@@ -70,6 +70,10 @@ class MemberProfileViewController: UIViewController {
         
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
     @IBAction func btnActUpdateUserInfo(_ sender: Any) {
         guard let updateVC = mainStoryboard.instantiateViewController(withIdentifier: "SignUpTableViewController") as? SignUpTableViewController else {
             return

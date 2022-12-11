@@ -16,7 +16,8 @@ class PostViewController: UIViewController {
     
     lazy var lottieView: LottieAnimationView = {
         let animationView = LottieAnimationView(name: "129574-ginger-bread-socks-christmas")
-        animationView.frame = imgAlbumart.frame
+        animationView.frame = CGRect(x: 0, y: 0,
+                                     width: 250, height: 250)
         animationView.center = imgAlbumart.center
         animationView.contentMode = .scaleAspectFill
         animationView.stop()
@@ -169,6 +170,10 @@ class PostViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         midiManager.midiPlayer?.stop()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

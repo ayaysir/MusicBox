@@ -91,6 +91,10 @@ class AudioMIDISettingTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         switch indexPath {
         case durationEachNote_IxP:

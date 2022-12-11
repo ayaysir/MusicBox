@@ -55,10 +55,13 @@ class TextureCollectionViewController: UICollectionViewController {
             
             self.collectionView.selectItem(at: IndexPath(row: patternIndex, section: 0), animated: false, scrollPosition: .left)
         }
-        
     }
-
-    // MARK: UICollectionViewDataSource
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        bannerView?.fitInView(self)
+    }
+    
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
