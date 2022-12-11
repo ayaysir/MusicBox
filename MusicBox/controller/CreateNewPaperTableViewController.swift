@@ -136,7 +136,6 @@ class CreateNewPaperTableViewController: UITableViewController {
                 }
             }
         case .update:
-            
             self.title = "Update a paper"
             btnSubmit.title = "Update"
             
@@ -154,6 +153,9 @@ class CreateNewPaperTableViewController: UITableViewController {
             let lowerIndex = lowerListTS.firstIndex(of: paper.timeSignature.lower) ?? 1
             pkvTimeSignature.selectRow(upperIndex, inComponent: 0, animated: false)
             pkvTimeSignature.selectRow(lowerIndex, inComponent: 2, animated: false)
+            
+            selectedLowerTS = paper.timeSignature.lower
+            selectedUpperTS = paper.timeSignature.upper
             
             // 기존 정보
             txfFileName.isEnabled = false
@@ -272,6 +274,7 @@ class CreateNewPaperTableViewController: UITableViewController {
                 return
             }
             
+            paper.bpm = bpm
             paper.title = title
             paper.incompleteMeasureBeat = imBeat
             paper.originalArtist = originalArtist

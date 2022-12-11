@@ -29,5 +29,23 @@ class SwiftExtensionTests: XCTestCase {
         XCTAssertEqual(point1Arr, [42.3, 16.6])
         XCTAssertEqual(arr1.cgPoint, CGPoint(x: 155.34, y: 992.2))
     }
-
+    
+    func test_makeBool() throws {
+        let totalCount = 10000
+        let probability: Double = 0.277
+        
+        var trueCount = 0
+        var trueCountProb0 = 0
+        var trueCountProb1 = 0
+        
+        for _ in 1...totalCount {
+            trueCountProb0 += ChanceUtil.probability(_ probability: 0.0) ? 1 : 0
+            trueCountProb1 += ChanceUtil.probability(_ probability: 1.0) ? 1 : 0
+            trueCount += ChanceUtil.probability(_ probability: probability) ? 1 : 0
+        }
+        
+        print(trueCount, totalCount, Double(trueCount) / Double(totalCount))
+        XCTAssertEqual(trueCountProb0, 0)
+        XCTAssertEqual(trueCountProb1, totalCount)
+    }
 }

@@ -90,18 +90,17 @@ import GoogleMobileAds
  */
 
 func setupBannerAds(_ viewController: UIViewController, adUnitID: String = "ca-app-pub-3940256099942544/2934735716") -> GADBannerView {
-    if UIApplication.shared.isSplitOrSlideOver {
-        print("Split: splitover", viewController.view.bounds)
-        if let vc = viewController as? MusicPaperViewController {
-            print("Split mp", vc.scrollView.bounds, vc.scrollView.frame, vc.musicPaperView.bounds, vc.musicPaperView.frame)
-        }
-    } else {
-        print("Split: not", viewController.view.bounds)
-    }
+    // if UIApplication.shared.isSplitOrSlideOver {
+    //     print("Split: splitover", viewController.view.bounds)
+    //     if let vc = viewController as? MusicPaperViewController {
+    //         print("Split mp", vc.scrollView.bounds, vc.scrollView.frame, vc.musicPaperView.bounds, vc.musicPaperView.frame)
+    //     }
+    // } else {
+    //     print("Split: not", viewController.view.bounds)
+    // }
     let adSize = GADAdSizeFromCGSize(CGSize(width: viewController.view.bounds.width, height: 50))
     let bannerView = GADBannerView(adSize: adSize)
     
-    // bannerView.backgroundColor = .systemBackground
     bannerView.translatesAutoresizingMaskIntoConstraints = false
     viewController.view.addSubview(bannerView)
     viewController.view.addConstraints( [NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: viewController.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: viewController.view, attribute: .centerX, multiplier: 1, constant: 0) ])

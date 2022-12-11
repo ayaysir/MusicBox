@@ -22,6 +22,14 @@ enum MusicPaperMode {
 class MusicPaperViewController: UIViewController {
     
     private var bannerView: GADBannerView!
+    private var interstitial: GADInterstitialAd?
+    private var validTapCount: Int = 0 {
+        didSet {
+            // print("validTapCount:", validTapCount)
+        }
+    }
+    private var isBannerAdEnabled = false
+    private var isEndFullScreenAd = false
     
     lazy var lottieView: LottieAnimationView = {
         let animationView = LottieAnimationView(name: "129574-ginger-bread-socks-christmas")
@@ -308,6 +316,8 @@ class MusicPaperViewController: UIViewController {
             updateSequence()
         }
         
+        // 전면 광고
+        prepareFullScreenAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -323,10 +333,11 @@ class MusicPaperViewController: UIViewController {
         DispatchQueue.main.async { [unowned self] in
             // 이거를 하면 view의 사이즈도 조정된다.
             scrollView.layoutIfNeeded()
-            
-            if AdManager.productMode {
+            let probability = mode == .view ? true : ChanceUtil.probability(0.33)
+            if AdManager.productMode && probability {
                 bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
                 bannerView.delegate = self
+                isBannerAdEnabled = true
             }
             
             view.addSubview(lottieView)
@@ -421,6 +432,7 @@ class MusicPaperViewController: UIViewController {
                 FXSound.eraser.play()
             } else {
                 FXSound.block.play()
+                return
             }
 
             if let deletedCoord = deletedCoord {
@@ -432,6 +444,8 @@ class MusicPaperViewController: UIViewController {
         // 마지막 터치된 시점으로부터
         lastTouchedTime = Date()
         touchTimeCheckMode = true
+        
+        increaseValidCount()
         
         // let _ = midiManager.convertPaperToMIDI(paperCoords: musicPaperView.data)
         
@@ -632,7 +646,12 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedBackToMain(_ view: UIView) {
-        backToMain()
+        if AdManager.productMode && ChanceUtil.probability(0.33) {
+            isEndFullScreenAd = true
+            showFullScreenAd()
+        } else {
+            backToMain()
+        }
     }
     
     func didClickedSetting(_ view: UIView) {
@@ -696,6 +715,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             
             _ = undoStack.popLast()
             FXSound.undo.play()
+            increaseValidCount()
         }
     }
     
@@ -731,7 +751,6 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
             SwiftSpinner.hide()
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
     
     private func playSequence() {
@@ -901,5 +920,84 @@ extension MusicPaperViewController: GADBannerViewDelegate {
             constraintScrollViewBottom.constant += bannerView.adSize.size.height
             bottomConstantRaiseOnce = false
         }
+    }
+}
+
+extension MusicPaperViewController: GADFullScreenContentDelegate {
+    
+    func prepareFullScreenAd() {
+        guard AdManager.productMode else {
+            return
+        }
+        
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID: AdInfo.shared.paperFullScreen,
+                               request: request,
+                               completionHandler: { [self] ad, error in
+                if let error = error {
+                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                    return
+                }
+                interstitial = ad
+                interstitial?.fullScreenContentDelegate = self
+            }
+        )
+    }
+    
+    private func increaseValidCount() {
+        validTapCount += 1
+    
+        let step1Count = 10
+        let step2Count = 32
+        let step3Count = 64
+        let validTapCountExcludedStep2Count = validTapCount - step2Count
+    
+        let isAllowFullScreenAd = mode == .edit ? !isBannerAdEnabled : true
+        let triggerCondition1 = validTapCount == step1Count && ChanceUtil.probability(0.5)
+        let triggerCondition2 = validTapCount == step2Count
+        let triggerCondition3 = validTapCountExcludedStep2Count >= 0 && validTapCountExcludedStep2Count % step3Count == 0
+        let triggerConditions = isAllowFullScreenAd && (triggerCondition1 || triggerCondition2 || triggerCondition3)
+        if triggerCondition1 {
+            print("triggerCondition1: true")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) { [unowned self] in
+            if triggerConditions {
+                showFullScreenAd()
+            }
+        }
+    }
+    
+    private func showFullScreenAd() {
+        guard AdManager.productMode else {
+            return
+        }
+        
+        if let interstitial = interstitial {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
+    }
+    
+    /// Tells the delegate that the ad failed to present full screen content.
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        print("Ad did fail to present full screen content.")
+    }
+    
+    /// Tells the delegate that the ad will present full screen content.
+    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad will present full screen content.")
+    }
+    
+    /// Tells the delegate that the ad dismissed full screen content.
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad did dismiss full screen content.")
+        if isEndFullScreenAd {
+            backToMain()
+            return
+        }
+        
+        prepareFullScreenAd()
     }
 }
