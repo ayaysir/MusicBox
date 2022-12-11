@@ -109,6 +109,8 @@
 		44BB17382944CE1A00C8A190 /* FXSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB17372944CE1A00C8A190 /* FXSound.swift */; };
 		44BB173B2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json in Resources */ = {isa = PBXBuildFile; fileRef = 44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */; };
 		44BB173D2945C4BF00C8A190 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB173C2945C4BF00C8A190 /* UIApplication+.swift */; };
+		44BB173F2945D4F300C8A190 /* 99833-edupia-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 44BB173E2945D4F300C8A190 /* 99833-edupia-loading.json */; };
+		44BB17412945DCA700C8A190 /* lf30_editor_s2qiyrio.json in Resources */ = {isa = PBXBuildFile; fileRef = 44BB17402945DCA700C8A190 /* lf30_editor_s2qiyrio.json */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
 		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
@@ -277,6 +279,8 @@
 		44BB17372944CE1A00C8A190 /* FXSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FXSound.swift; sourceTree = "<group>"; };
 		44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "129574-ginger-bread-socks-christmas.json"; sourceTree = "<group>"; };
 		44BB173C2945C4BF00C8A190 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		44BB173E2945D4F300C8A190 /* 99833-edupia-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "99833-edupia-loading.json"; sourceTree = "<group>"; };
+		44BB17402945DCA700C8A190 /* lf30_editor_s2qiyrio.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf30_editor_s2qiyrio.json; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -630,6 +634,9 @@
 		44BB17392944D9CE00C8A190 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				44BB17402945DCA700C8A190 /* lf30_editor_s2qiyrio.json */,
+				44BB173E2945D4F300C8A190 /* 99833-edupia-loading.json */,
+				44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -747,7 +754,6 @@
 			isa = PBXGroup;
 			children = (
 				44BB17392944D9CE00C8A190 /* Lottie */,
-				44BB173A2944D9D800C8A190 /* 129574-ginger-bread-socks-christmas.json */,
 				44BB17342944CD1E00C8A190 /* MiscSound */,
 				44BB17312944C98B00C8A190 /* UndoSound */,
 				44C1BA5D273FFFF300543A74 /* erasersound */,
@@ -925,6 +931,7 @@
 				44E437F027579DAC008B41BA /* InfoPlist.strings in Resources */,
 				44B7852227EB7092001031AC /* VintageIcon2@3x~ipad.png in Resources */,
 				44B7852327EB7092001031AC /* VintageIcon2@2x.png in Resources */,
+				44BB173F2945D4F300C8A190 /* 99833-edupia-loading.json in Resources */,
 				44E682F526EA46340074FE46 /* LaunchScreen.storyboard in Resources */,
 				44B7851C27EB6D36001031AC /* VintageIcon1@3x.png in Resources */,
 				44E437E727576C93008B41BA /* PaperOptionPanelView.xib in Resources */,
@@ -946,6 +953,7 @@
 				44E682F026EA46320074FE46 /* Main.storyboard in Resources */,
 				44F3A03A26FF72FA000CE46F /* .gitignore in Resources */,
 				44B7852527EB7092001031AC /* VintageIcon2@2x~ipad.png in Resources */,
+				44BB17412945DCA700C8A190 /* lf30_editor_s2qiyrio.json in Resources */,
 				44F3A03326FE1DF9000CE46F /* VintageDreamsWaves-v2.sf2 in Resources */,
 				44B7852427EB7092001031AC /* VintageIcon2@3x.png in Resources */,
 				44B7851A27EB6D36001031AC /* VintageIcon1@2x~ipad.png in Resources */,

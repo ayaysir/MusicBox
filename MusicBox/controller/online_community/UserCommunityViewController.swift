@@ -11,6 +11,7 @@ import Combine
 import SwiftSpinner
 import GoogleMobileAds
 import SpeechBubbleView
+import Lottie
 
 class UserCommunityViewController: UIViewController {
     
@@ -429,6 +430,20 @@ extension UserCommunityViewController: GADBannerViewDelegate {
 
 class PostCell: UICollectionViewCell {
     
+    lazy var lottieView: LottieAnimationView = {
+        let width = 200
+        let animationView = LottieAnimationView(name: "lf30_editor_s2qiyrio")
+        animationView.frame = CGRect(x: 0, y: 0,
+                                     width: width, height: width)
+
+        animationView.contentMode = .scaleAspectFill
+        animationView.stop()
+        animationView.isHidden = true
+        animationView.loopMode = .loop
+        
+        return animationView
+    }()
+    
     @IBOutlet weak var imgAlbumart: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgUserProfile: UIImageView!
@@ -448,7 +463,7 @@ class PostCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         subscriber?.cancel()
-        imgAlbumart.image = UIImage(named: "loading-icon-static")
+        // imgAlbumart.image = UIImage(named: "loading-icon-static")
     }
     
     func reset() {
@@ -460,6 +475,12 @@ class PostCell: UICollectionViewCell {
     }
     
     func update(post: Post) {
+        
+        imgAlbumart.image = nil
+        lottieView.center = imgAlbumart.center
+        lottieView.isHidden = false
+        lottieView.play()
+        imgAlbumart.addSubview(lottieView)
         
         self.post = post
         
@@ -511,7 +532,13 @@ class PostCell: UICollectionViewCell {
     }
     
     func setImage(to url: URL) {
-        subscriber = ImageManager.shared.imagePublisher(for: url, errorImage: UIImage(systemName: "heart.fill"))
-                    .assign(to: \.imgAlbumart.image, on: self)
+        subscriber = ImageManager.shared
+            .imagePublisher(for: url, errorImage: UIImage(systemName: "heart.fill"), handler: {
+                DispatchQueue.main.async { [unowned self] in
+                    lottieView.stop()
+                    lottieView.isHidden = true
+                }
+            })
+            .assign(to: \.imgAlbumart.image, on: self)
     }
 }

@@ -25,7 +25,7 @@ class ImageManager {
         case invalidResponse
     }
     
-    func imagePublisher(for url: URL, errorImage: UIImage? = nil) -> AnyPublisher<UIImage?, Never> {
+    func imagePublisher(for url: URL, errorImage: UIImage? = nil, handler: (() -> Void)? = nil) -> AnyPublisher<UIImage?, Never> {
         session.dataTaskPublisher(for: url)
             .tryMap { data, response in
                 guard
@@ -35,6 +35,8 @@ class ImageManager {
                 else {
                     throw ImageManagerError.invalidResponse
                 }
+                
+                handler?()
                 
                 return image
             }
