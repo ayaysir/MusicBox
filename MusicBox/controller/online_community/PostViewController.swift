@@ -259,32 +259,35 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func btnActLike(_ sender: HeartButton) {
-        
         getLikeState { targetPostLikesRef, currentUID in
-            
             var likeDict = Like(likeUserUID: currentUID, postID: self.post.postId.uuidString, likedDate: Date()).dictionary
             likeDict["likedDate"] = ServerValue.timestamp()
             
             targetPostLikesRef.child(currentUID).setValue(likeDict)
             print("first like success:")
+            
+            Vibration.medium.vibrate()
             sender.setState(true)
         } likeStateCallback: { targetPostLikesRef, currentUID in
-            
             var likeDict = Like(likeUserUID: currentUID, postID: self.post.postId.uuidString, likedDate: Date()).dictionary
             likeDict["likedDate"] = ServerValue.timestamp()
             
             targetPostLikesRef.child(currentUID).setValue(likeDict)
             print("like success:")
+            
+            Vibration.medium.vibrate()
             sender.setState(true)
         } unlikeStateCallback: { targetPostLikesRef, currentUID in
-            
+            // 미리 좋아요 표시 제거 (실제 unlike 된 후 실행하면 딜레이 느껴짐)
+            sender.setState(false)
             targetPostLikesRef.child(currentUID).removeValue { error, ref in
                 if let error = error {
                     print("unlike failed:", error.localizedDescription)
+                    // 롤백: unlike 하는 경우는 이전 상태가 liked 인 경우밖에 없음
+                    sender.setState(true)
                     return
                 }
                 print("unlike success:")
-                sender.setState(false)
             }
         }
     }

@@ -130,6 +130,7 @@
 		44BB176629460C4100C8A190 /* RedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BB176229460C4000C8A190 /* RedIcon@2x~ipad.png */; };
 		44BB176729460C4100C8A190 /* RedIcon@3x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BB176329460C4000C8A190 /* RedIcon@3x~ipad.png */; };
 		44BB176829460C4100C8A190 /* RedIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BB176429460C4100C8A190 /* RedIcon@3x.png */; };
+		44BB17A02959D76C00C8A190 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BB179F2959D76C00C8A190 /* Vibration.swift */; };
 		44C1BA412732B28300543A74 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA402732B28300543A74 /* SignUpTableViewController.swift */; };
 		44C1BA432733F8F000543A74 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA422733F8F000543A74 /* Log.swift */; };
 		44C1BA45273408ED00543A74 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1BA44273408ED00543A74 /* MainTabBarController.swift */; };
@@ -319,6 +320,7 @@
 		44BB176229460C4000C8A190 /* RedIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedIcon@2x~ipad.png"; sourceTree = "<group>"; };
 		44BB176329460C4000C8A190 /* RedIcon@3x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedIcon@3x~ipad.png"; sourceTree = "<group>"; };
 		44BB176429460C4100C8A190 /* RedIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedIcon@3x.png"; sourceTree = "<group>"; };
+		44BB179F2959D76C00C8A190 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		44C1BA402732B28300543A74 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
 		44C1BA422733F8F000543A74 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44C1BA44273408ED00543A74 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				446279082748D9430004D95D /* iOSDevCenters+GIF.swift */,
 				4416727C274CE1E100041B33 /* DeviceUtil.swift */,
 				44BB17422945E53500C8A190 /* ChanceUtil.swift */,
+				44BB179F2959D76C00C8A190 /* Vibration.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1232,6 +1235,7 @@
 				444D9476271AF4FD0090F587 /* PostViewController.swift in Sources */,
 				44F3A0452700B8FA000CE46F /* UIViewPreview.swift in Sources */,
 				44F3A0432700AA59000CE46F /* PaperOptionPanelView.swift in Sources */,
+				44BB17A02959D76C00C8A190 /* Vibration.swift in Sources */,
 				449F3EA826EF3529002C874D /* TextUtil.swift in Sources */,
 				444D944A270DF24F0090F587 /* UserCommunityViewController.swift in Sources */,
 				444D945027106FF90090F587 /* PhotoAuth.swift in Sources */,
@@ -1534,7 +1538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1558,7 +1562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
