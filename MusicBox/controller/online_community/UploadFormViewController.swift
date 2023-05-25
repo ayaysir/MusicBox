@@ -10,6 +10,10 @@ import Firebase
 import SwiftSpinner
 import GoogleMobileAds
 
+protocol UploadFormVCDelegate: AnyObject {
+    func didNotLogined(_ controller: UploadFormViewController)
+}
+
 class UploadFormViewController: UIViewController {
     
     private var bannerView: GADBannerView!
@@ -40,11 +44,16 @@ class UploadFormViewController: UIViewController {
     // 광고 배너로 height 올리는거 한 번만 실행
     var bottomConstantRaiseOnce = true
     
+    weak var delegate: UploadFormVCDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let user = getCurrentUser(), !user.isAnonymous else {
-            self.navigationController?.popViewController(animated: true)
+        guard let user = getCurrentUser(),
+              !user.isAnonymous else {
+            print("Not logined")
+            self.navigationController?.popViewController(animated: false)
+            delegate?.didNotLogined(self)
             return
         }
         

@@ -127,12 +127,11 @@ class UserCommunityViewController: UIViewController {
             }
         } else {
             barBtnUserInfo.image = UIImage(systemName: "person.circle.fill")
-            btnAddPost.isHidden = true
+            // btnAddPost.isHidden = true
         }
     }
     
     @objc func cvTapped() {
-        print(#function)
         goToLoginVC()
     }
     
@@ -166,27 +165,42 @@ class UserCommunityViewController: UIViewController {
     }
     
     @IBAction func barBtnActUserInfo(_ sender: Any) {
-        print(#function)
         goToLoginVC()
     }
     
+    @IBAction func btnActAddPost(_ sender: UIButton) {
+        if let user = getCurrentUser(),
+           !user.isAnonymous {
+            performSegue(withIdentifier: "UploadFormSegue", sender: nil)
+        } else {
+            goToLoginVC()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PostPageSegue" {
+        switch segue.identifier {
+        case "PostPageSegue":
             guard let vc = segue.destination as? PostPageViewController,
                   let indexPath = sender as? IndexPath else {
                 return
             }
             vc.posts = posts
             vc.currentIndex = indexPath.row
-        }
-        
-        if segue.identifier == "PostPageSegue_withoutPageView" {
+        case "PostPageSegue_withoutPageView":
             guard let postVC = segue.destination as? PostViewController,
                   let indexPath = sender as? IndexPath else {
                 print("Error occured PostPageSegue_withoutPageView segue.")
                 return
             }
             postVC.post = posts[indexPath.row]
+        case "UploadFormSegue":
+            guard let uploadVC = segue.destination as? UploadFormViewController else {
+                print("Error occured UploadFormSegue.")
+                return
+            }
+            uploadVC.delegate = self
+        default:
+            break
         }
     }
     
@@ -303,7 +317,6 @@ extension UserCommunityViewController {
     }
     
     @objc func didTouchedOverlay() {
-        print(#function)
         removeOvelays()
     }
     
@@ -425,6 +438,12 @@ extension UserCommunityViewController: GADBannerViewDelegate {
             bottomConstantRaiseOnce = false
         }
         
+    }
+}
+
+extension UserCommunityViewController: UploadFormVCDelegate {
+    func didNotLogined(_ controller: UploadFormViewController) {
+        goToLoginVC()
     }
 }
 
