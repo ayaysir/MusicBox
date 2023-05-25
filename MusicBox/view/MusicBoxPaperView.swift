@@ -72,8 +72,6 @@ class MusicBoxPaperView: UIView {
     }
     
     func configure(rowNum: Int, colNum: Int, util: MusicBoxUtil, gridInfo: GridInfo) {
-        
-        
         self.rowNum = rowNum
         self.colNum = colNum
         
@@ -88,7 +86,6 @@ class MusicBoxPaperView: UIView {
         fontPalatio = UIFont(name: "Palatio", size: 30) ?? UIFont()
         
         self.setNeedsDisplay()
-        
     }
     
     func expandPaper(expandedColNum: Int) {

@@ -34,10 +34,12 @@ class MusicBoxUtil {
     
     func getNoteRange() -> [Note] {
         // E6 ~ E3
+        // 2023-05-25 업데이트: E6 ~ C3
         var noteArray: [Note] = []
         
         let highestSemitone = highestNote.semitone
-        let startSemitone = highestSemitone - (12 * 3)
+        // let startSemitone = highestSemitone - (12 * 3)
+        let startSemitone = highestSemitone - (12 * 3) - 4
         
         for semitone in (startSemitone...highestSemitone).reversed() {
             guard let note = Note.getNote(semitone: semitone) else { return [] }
