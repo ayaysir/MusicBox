@@ -449,7 +449,7 @@ extension SignUpTableViewController {
                     return
                 }
                 
-                if snapshot.exists() {
+                if let snapshot = snapshot, snapshot.exists() {
                     let dict = snapshot.value as? [String: String]
                     
                     if let interesting = dict["interesting"] as? String {

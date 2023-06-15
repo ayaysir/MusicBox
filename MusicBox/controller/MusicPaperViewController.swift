@@ -986,9 +986,9 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
     }
     
     /// Tells the delegate that the ad will present full screen content.
-    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad will present full screen content.")
-    }
+    // func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    //     print("Ad will present full screen content.")
+    // }
     
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {

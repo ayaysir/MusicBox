@@ -59,7 +59,7 @@ func getNickname(of uid: String, completeHandler: @escaping StringBlock) {
             return
         }
         
-        if snapshot.exists() {
+        if let snapshot = snapshot, snapshot.exists() {
 //            self.lblUserNickname.text = snapshot.value as? String
             let snapshotText = snapshot.value as? String
             completeHandler(snapshotText)

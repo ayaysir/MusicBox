@@ -132,7 +132,8 @@ class CreateNewPaperTableViewController: UITableViewController {
                         print(error.localizedDescription)
                         return
                     }
-                    self.txfPaperMaker.text = (snapshot.value as? String)
+                    
+                    self.txfPaperMaker.text = (snapshot?.value as? String)
                 }
             }
         case .update:

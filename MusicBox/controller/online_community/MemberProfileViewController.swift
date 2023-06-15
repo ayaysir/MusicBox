@@ -143,7 +143,7 @@ extension MemberProfileViewController {
     private func getUserAdditionalInfo(uid: String) {
         let userRef = self.ref.child("users/\(uid)/")
         userRef.getData { error, snapshot in
-            if snapshot.exists() {
+            if let snapshot = snapshot, snapshot.exists() {
                 let dict = snapshot.value as? [String: String]
                 let interesting = dict["interesting"] ?? "-"
                 let nickname = dict["nickname"] ?? "-"
