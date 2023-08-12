@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Database.database().isPersistenceEnabled = false
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
+        // 앱을 출시하기 전에 이러한 테스트 기기를 설정하는 코드를 반드시 삭제하세요.
+        // GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["2077ef9a63d2b398840261c8221a0c9b"]
+        
         IQKeyboardManager.shared.enable = true
         
         return true

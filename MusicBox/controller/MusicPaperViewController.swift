@@ -333,8 +333,7 @@ class MusicPaperViewController: UIViewController {
         DispatchQueue.main.async { [unowned self] in
             // 이거를 하면 view의 사이즈도 조정된다.
             scrollView.layoutIfNeeded()
-            let probability = mode == .view ? true : ChanceUtil.probability(0.33)
-            if AdManager.productMode && probability {
+            if AdManager.productMode {
                 bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
                 bannerView.delegate = self
                 isBannerAdEnabled = true
@@ -973,16 +972,20 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
             return
         }
         
+        view.isUserInteractionEnabled = false
+        
         if let interstitial = interstitial {
             interstitial.present(fromRootViewController: self)
         } else {
             print("Ad wasn't ready")
+            view.isUserInteractionEnabled = true
         }
     }
     
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("Ad did fail to present full screen content.")
+        view.isUserInteractionEnabled = true
     }
     
     /// Tells the delegate that the ad will present full screen content.
@@ -998,6 +1001,7 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
             return
         }
         
+        view.isUserInteractionEnabled = true
         prepareFullScreenAd()
     }
 }

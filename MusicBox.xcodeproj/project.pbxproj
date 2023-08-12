@@ -771,7 +771,6 @@
 		44E682DC26EA46310074FE46 = {
 			isa = PBXGroup;
 			children = (
-				44F3A03B2700A3E8000CE46F /* ENSwiftSideMenu */,
 				44F3A03926FF72FA000CE46F /* .gitignore */,
 				44E682E726EA46320074FE46 /* MusicBox */,
 				44E682FE26EA46340074FE46 /* MusicBoxTests */,
@@ -795,6 +794,7 @@
 		44E682E726EA46320074FE46 /* MusicBox */ = {
 			isa = PBXGroup;
 			children = (
+				44F3A03B2700A3E8000CE46F /* ENSwiftSideMenu */,
 				44B7851527EB6D0D001031AC /* Alternative Icons */,
 				44E437DE274D4E49008B41BA /* MusicBox.entitlements */,
 				4416727E274CF58300041B33 /* iap */,
