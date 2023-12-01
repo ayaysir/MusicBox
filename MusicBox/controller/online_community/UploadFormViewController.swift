@@ -131,12 +131,13 @@ extension UploadFormViewController {
         }
         
         // 자신이 만든 파일만 업로드되도록
-        if paper.firebaseUID != nil && paper.firebaseUID! != currentUID {
-            simpleAlert(self, message: "Papers made by other members cannot be uploaded.".localized)
-            return
-        } else {
-            paper.firebaseUID = currentUID
-        }
+        // if paper.firebaseUID != nil && paper.firebaseUID! != currentUID {
+        //     simpleAlert(self, message: "Papers made by other members cannot be uploaded.".localized)
+        //     return
+        // } else {
+        //     paper.firebaseUID = currentUID
+        // }
+        paper.firebaseUID = currentUID
         
         let postTitle = txfPostTitle.text!
         let postComment = txvPostComment.text!
