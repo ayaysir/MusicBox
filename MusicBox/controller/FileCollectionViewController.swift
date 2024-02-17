@@ -13,8 +13,9 @@ import SwiftSpinner
 import GoogleMobileAds
 
 class FileCollectionViewController: UICollectionViewController {
-    
     private var bannerView: GADBannerView!
+    private var interstitial: GADInterstitialAd?
+    
     var shouldShowFooter: Bool = false {
         didSet {
             collectionView?.collectionViewLayout.invalidateLayout()
@@ -37,6 +38,7 @@ class FileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        prepareAndShowFullScreenAd()
         askPhotoAuth()
         
         setMenuDropDown()
@@ -64,11 +66,18 @@ class FileCollectionViewController: UICollectionViewController {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         reloadAndRefresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if ChanceUtil.probability(1) {
+            // showFullScreenAd()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -441,7 +450,6 @@ extension FileCollectionViewController {
 }
 
 extension FileCollectionViewController: MusicPaperVCDelegate {
-    
     func didPaperEditFinished(_ controller: MusicPaperViewController) {
         reloadAndRefresh()
     }
@@ -458,6 +466,64 @@ extension FileCollectionViewController: GADBannerViewDelegate {
         
     }
 }
+
+extension FileCollectionViewController: GADFullScreenContentDelegate {
+    /// 전면 광고 준비
+    /// 멤버변수에 `private var interstitial: GADInterstitialAd?` 추가
+    private func prepareAndShowFullScreenAd() {
+        guard AdManager.productMode else {
+            return
+        }
+        
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID: AdInfo.shared.paperFullScreen,
+                               request: request,
+                               completionHandler: { [self] ad, error in
+            if let error = error {
+                print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                return
+            }
+            
+            interstitial = ad
+            guard let interstitial else {
+                return
+            }
+            
+            interstitial.fullScreenContentDelegate = self
+            if ChanceUtil.probability(1) {
+                interstitial.present(fromRootViewController: self)
+            }
+        })
+    }
+    
+    // private func showFullScreenAd() {
+    //     guard AdManager.productMode else {
+    //         return
+    //     }
+    //     
+    //     view.isUserInteractionEnabled = false
+    //     
+    //     if let interstitial = interstitial {
+    //         interstitial.present(fromRootViewController: self)
+    //     } else {
+    //         print("Ad wasn't ready")
+    //         view.isUserInteractionEnabled = true
+    //     }
+    // }
+    
+    /// Tells the delegate that the ad failed to present full screen content.
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        print("Ad did fail to present full screen content.")
+        view.isUserInteractionEnabled = true
+    }
+    
+    /// Tells the delegate that the ad dismissed full screen content.
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("Ad did dismiss full screen content.")
+        view.isUserInteractionEnabled = true
+    }
+}
+
 
 class FileCollectionViewCell: UICollectionViewCell {
     

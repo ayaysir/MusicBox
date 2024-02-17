@@ -10,8 +10,8 @@ import GoogleMobileAds
 import SwiftSpinner
 
 class PaperInfoTableViewController: UITableViewController {
-    
     private var bannerView: GADBannerView!
+    private var interstitial: GADInterstitialAd?
     
     var selectedDocument: PaperDocument?
     
@@ -43,6 +43,7 @@ class PaperInfoTableViewController: UITableViewController {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
         }
+        
         SwiftSpinner.hide()
         print("PaperInfoTableViewController viewdidload end", Date().timeIntervalSince1970)
     }

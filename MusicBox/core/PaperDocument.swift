@@ -9,9 +9,7 @@ import UIKit
 import AVFoundation
 
 class PaperDocument: UIDocument {
-    
     var paper: Paper?
-    var error: Error?
     
     override func contents(forType typeName: String) throws -> Any {
         guard let paper = paper else { return Data() }

@@ -20,7 +20,6 @@ enum MusicPaperMode {
 }
 
 class MusicPaperViewController: UIViewController {
-    
     private var bannerView: GADBannerView!
     private var interstitial: GADInterstitialAd?
     private var validTapCount: Int = 0 {
@@ -645,7 +644,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedBackToMain(_ view: UIView) {
-        if AdManager.productMode && ChanceUtil.probability(0.33) {
+        if AdManager.productMode {
             isEndFullScreenAd = true
             showFullScreenAd()
         } else {
@@ -923,7 +922,7 @@ extension MusicPaperViewController: GADBannerViewDelegate {
 }
 
 extension MusicPaperViewController: GADFullScreenContentDelegate {
-    
+    /// 전면 광고 준비
     func prepareFullScreenAd() {
         guard AdManager.productMode else {
             return
@@ -937,6 +936,7 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
                     print("Failed to load interstitial ad with error: \(error.localizedDescription)")
                     return
                 }
+            
                 interstitial = ad
                 interstitial?.fullScreenContentDelegate = self
             }
@@ -962,7 +962,7 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) { [unowned self] in
             if triggerConditions {
-                showFullScreenAd()
+                // showFullScreenAd()
             }
         }
     }
@@ -1002,6 +1002,6 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
         }
         
         view.isUserInteractionEnabled = true
-        prepareFullScreenAd()
+        // prepareFullScreenAd()
     }
 }
