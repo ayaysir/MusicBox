@@ -2716,6 +2716,18 @@ Arrangey by bcd</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Plz-ZL-yop">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5P5-MQ-YEJ">
+                                        <rect key="frame" x="20" y="651" width="374" height="44.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5P5-MQ-YEJ" id="nDF-Fn-TFz">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="tvW-j5-NLr" id="dxX-UC-HAi"/>
@@ -2958,6 +2970,18 @@ Arrangey by bcd</string>
                                                 <constraint firstAttribute="trailing" secondItem="BQs-xH-q4G" secondAttribute="trailing" id="EZC-eI-yzu"/>
                                                 <constraint firstItem="BQs-xH-q4G" firstAttribute="top" secondItem="ycm-Gw-dPX" secondAttribute="top" id="GsP-Io-Njw"/>
                                             </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="WF1-F4-Wl8" userLabel="BANNER SECTION">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="0.0" id="Xnj-GN-9M0">
+                                        <rect key="frame" x="20" y="838.5" width="374" height="0.0"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xnj-GN-9M0" id="bGk-do-V8p">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>

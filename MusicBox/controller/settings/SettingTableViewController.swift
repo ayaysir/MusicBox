@@ -10,9 +10,9 @@ import MessageUI
 import GoogleMobileAds
 
 class SettingTableViewController: UITableViewController {
-
     private var bannerView: GADBannerView!
-    
+
+    private let SECTION_BANNER = 4
     private var section_config = 0
     private var section_inapp = 1
     private var section_informations = 2
@@ -84,6 +84,22 @@ class SettingTableViewController: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: false)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == SECTION_BANNER && !AdManager.productMode {
+            return 0.1
+        }
+        
+        return super.tableView(tableView, heightForFooterInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == SECTION_BANNER {
+            return 0
+        }
+        
+        return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
 }
