@@ -482,6 +482,7 @@ extension FileCollectionViewController: GADFullScreenContentDelegate {
                                completionHandler: { [self] ad, error in
             if let error = error {
                 print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                self.view.isUserInteractionEnabled = true
                 return
             }
             
