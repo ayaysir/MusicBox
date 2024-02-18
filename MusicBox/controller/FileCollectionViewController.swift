@@ -475,14 +475,14 @@ extension FileCollectionViewController: GADFullScreenContentDelegate {
             return
         }
         
-        self.view.isUserInteractionEnabled = false
+        toggleViewAndTabBarView(false)
         let request = GADRequest()
         GADInterstitialAd.load(withAdUnitID: AdInfo.shared.paperFullScreen,
                                request: request,
                                completionHandler: { [self] ad, error in
             if let error = error {
                 print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                self.view.isUserInteractionEnabled = true
+                toggleViewAndTabBarView(true)
                 return
             }
             
@@ -498,37 +498,26 @@ extension FileCollectionViewController: GADFullScreenContentDelegate {
         })
     }
     
-    // private func showFullScreenAd() {
-    //     guard AdManager.productMode else {
-    //         return
-    //     }
-    //     
-    //     view.isUserInteractionEnabled = false
-    //     
-    //     if let interstitial = interstitial {
-    //         interstitial.present(fromRootViewController: self)
-    //     } else {
-    //         print("Ad wasn't ready")
-    //         view.isUserInteractionEnabled = true
-    //     }
-    // }
+    private func toggleViewAndTabBarView(_ isShow: Bool = true) {
+        self.view.isUserInteractionEnabled = isShow
+        self.view.alpha = isShow ? 1 : 0
+        self.tabBarController?.view.alpha = isShow ? 1 : 0
+    }
     
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("Ad did fail to present full screen content.")
-        view.isUserInteractionEnabled = true
+        toggleViewAndTabBarView()
     }
     
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("Ad did dismiss full screen content.")
-        view.isUserInteractionEnabled = true
+        toggleViewAndTabBarView()
     }
 }
 
-
 class FileCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var imgAlbumart: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblArtist: UILabel!

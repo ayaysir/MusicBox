@@ -105,7 +105,7 @@ func setupBannerAds(_ viewController: UIViewController, adUnitID: String = "ca-a
     viewController.view.addSubview(bannerView)
     viewController.view.addConstraints( [NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: viewController.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: viewController.view, attribute: .centerX, multiplier: 1, constant: 0) ])
     
-    bannerView.backgroundColor = .systemBackground
+    // bannerView.backgroundColor = .systemBackground
     bannerView.adUnitID = adUnitID
     bannerView.rootViewController = viewController
     
