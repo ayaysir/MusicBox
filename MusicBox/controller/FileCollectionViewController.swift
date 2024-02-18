@@ -475,6 +475,7 @@ extension FileCollectionViewController: GADFullScreenContentDelegate {
             return
         }
         
+        self.view.isUserInteractionEnabled = false
         let request = GADRequest()
         GADInterstitialAd.load(withAdUnitID: AdInfo.shared.paperFullScreen,
                                request: request,

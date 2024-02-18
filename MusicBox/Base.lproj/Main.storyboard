@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eno-5m-qsx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eno-5m-qsx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1393,14 +1393,14 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="User Email" id="uwD-R9-01S">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="UAc-bq-bDf">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="55.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UAc-bq-bDf" id="qT8-3A-n8i">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CBb-uv-la8">
-                                                    <rect key="frame" x="20" y="5" width="334" height="33.5"/>
+                                                    <rect key="frame" x="20" y="5" width="334" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                                 </textField>
@@ -1418,14 +1418,14 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Password" id="zVl-LW-K3R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jWq-eT-I0T">
-                                        <rect key="frame" x="20" y="155" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="156" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jWq-eT-I0T" id="YbN-c8-wPl">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x75-nC-qGv">
-                                                    <rect key="frame" x="20" y="5" width="334" height="33.5"/>
+                                                    <rect key="frame" x="20" y="5" width="334" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                                 </textField>
@@ -1443,14 +1443,14 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Password Confirm" id="1RU-yM-VLq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="xnN-6R-P83">
-                                        <rect key="frame" x="20" y="254.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="256.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xnN-6R-P83" id="9eS-a9-afd">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9GI-wQ-Joa">
-                                                    <rect key="frame" x="20" y="5" width="334" height="33.5"/>
+                                                    <rect key="frame" x="20" y="5" width="334" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                                 </textField>
@@ -1464,10 +1464,10 @@ Arrangey by bcd</string>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="sx8-cK-3qA">
-                                        <rect key="frame" x="20" y="298" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="301" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sx8-cK-3qA" id="W5W-nk-ebF">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="패스워드가 일치합니다." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="842-Mo-Mlu">
@@ -1485,14 +1485,14 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="User Nickname" id="hTV-yD-pl7">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="u0x-MY-LdI">
-                                        <rect key="frame" x="20" y="397.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="401.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u0x-MY-LdI" id="QyO-Q2-3Xe">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUG-ME-j56">
-                                                    <rect key="frame" x="20" y="5" width="334" height="33.5"/>
+                                                    <rect key="frame" x="20" y="5" width="334" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -1510,7 +1510,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Interesting" id="dI5-YM-Q4z">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="PHV-sU-FVT">
-                                        <rect key="frame" x="20" y="497" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="502" width="374" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PHV-sU-FVT" id="0Oh-Yb-BD1">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -1528,7 +1528,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="User Profile Photo (Optional)" id="Kdq-K3-ti3">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="jco-01-VlT">
-                                        <rect key="frame" x="20" y="703" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="708" width="374" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jco-01-VlT" id="1yk-kH-Au9">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -1573,7 +1573,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="" id="SKh-tg-YxZ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="EP5-8u-9xB">
-                                        <rect key="frame" x="20" y="893" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="898" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EP5-8u-9xB" id="CCI-ky-ZEP">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -1599,7 +1599,7 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="P44-UO-TwQ">
-                                        <rect key="frame" x="20" y="937" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="942" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P44-UO-TwQ" id="Kst-Ij-rKd">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -1623,7 +1623,7 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="TSZ-KW-5TP">
-                                        <rect key="frame" x="20" y="981" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="986" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TSZ-KW-5TP" id="aKr-CW-QT2">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -1647,7 +1647,7 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="UOs-Vb-x9X">
-                                        <rect key="frame" x="20" y="1025" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="1030" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOs-Vb-x9X" id="Lch-zZ-Ivq">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -2020,8 +2020,8 @@ Arrangey by bcd</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Mp-J0-GZM">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-Wl-es1" customClass="MusicBoxPaperView" customModule="MusicBox" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-Wl-es1" customClass="MusicBoxPaperView" customModule="MusicBox" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="5000" height="972"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayg-nN-tL3">
                                                 <rect key="frame" x="110" y="171" width="0.0" height="0.0"/>
@@ -2034,7 +2034,7 @@ Arrangey by bcd</string>
                                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="5000" id="YfR-eA-Nca"/>
-                                            <constraint firstAttribute="height" constant="952" id="ucP-nR-p7O"/>
+                                            <constraint firstAttribute="height" constant="972" id="ucP-nR-p7O"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2323,7 +2323,7 @@ Arrangey by bcd</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Converted BPM (♩ = )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVs-0m-yZI">
-                                                    <rect key="frame" x="20" y="8" width="126.5" height="14.5"/>
+                                                    <rect key="frame" x="20" y="8" width="119.5" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -2779,10 +2779,10 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Duration of Each Note during Playback" id="e3K-Ka-PsI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="ruH-1n-IPu" customClass="AccessoryCell" customModule="MusicBox" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="55.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ruH-1n-IPu" id="765-Hh-yfY">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-jG-g7E">
@@ -2807,7 +2807,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="MIDI Instrument Patch" id="baI-H0-blY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="212" id="Jqy-2T-fIH">
-                                        <rect key="frame" x="20" y="155" width="374" height="212"/>
+                                        <rect key="frame" x="20" y="156" width="374" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jqy-2T-fIH" id="75D-2L-mPW">
                                             <rect key="frame" x="0.0" y="0.0" width="330" height="212"/>
@@ -2825,10 +2825,10 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="" footerTitle="" id="rKE-8v-qa2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="I0g-u1-Q6x">
-                                        <rect key="frame" x="20" y="414.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="415.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I0g-u1-Q6x" id="oh6-2h-Qgi">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="Play sound in silent mode" translatesAutoresizingMaskIntoConstraints="NO" id="gRE-GL-iWY">
@@ -2850,10 +2850,10 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="iSJ-hR-4CY">
-                                        <rect key="frame" x="20" y="458" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="460" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iSJ-hR-4CY" id="tL2-nI-C3o">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" title="Play sound in silent mode" translatesAutoresizingMaskIntoConstraints="NO" id="Z1q-Ds-SIn">
@@ -2879,10 +2879,10 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Autosave Interval" footerTitle="Restart the app for this change to take effect." id="Dbf-pW-psu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" id="qip-84-91V">
-                                        <rect key="frame" x="20" y="569" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="572.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qip-84-91V" id="3iz-57-5b4">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="5" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="1Vd-sk-x47">
@@ -2907,7 +2907,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Change App Icon" footerTitle="The app icon on the home screen will change. If there is no change, restart the device." id="gS7-A0-gU1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="w3f-W6-99W">
-                                        <rect key="frame" x="20" y="688" width="374" height="81"/>
+                                        <rect key="frame" x="20" y="693" width="374" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w3f-W6-99W" id="ycm-Gw-dPX">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="81"/>
@@ -3153,7 +3153,7 @@ Arrangey by bcd</string>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="loading-icon-static" width="615" height="450"/>
         <image name="noun_Punched Card_404218" width="34" height="21"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="80"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="86"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
@@ -3162,13 +3162,13 @@ Arrangey by bcd</string>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sample" width="1072" height="1072"/>
         <image name="speaker.2.fill" catalog="system" width="128" height="88"/>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="TouchBarBezel">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

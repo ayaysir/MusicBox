@@ -915,6 +915,7 @@ extension MusicPaperViewController: PaperViewModePanelViewDelegate {
 extension MusicPaperViewController: GADBannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         if bottomConstantRaiseOnce {
+            print("bottomConst")
             constraintScrollViewBottom.constant += bannerView.adSize.size.height
             bottomConstantRaiseOnce = false
         }
