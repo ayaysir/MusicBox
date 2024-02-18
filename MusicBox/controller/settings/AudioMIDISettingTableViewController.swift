@@ -30,6 +30,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
     private let playPitchWhenInput_IxP = IndexPath(row: 1, section: 2)
     private let autosaveInterval_IxP = IndexPath(row: 0, section: 3)
     private let appIconChange_IxP = IndexPath(row: 0, section: 4)
+    private let bannerAdArea_IxP = IndexPath(row: 0, section: 5)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,11 +133,21 @@ class AudioMIDISettingTableViewController: UITableViewController {
         switch section {
         case playSoundInilentMode_IxP.section:
             return originalHeight * 0.5
+        case bannerAdArea_IxP.section:
+            return !AdManager.productMode ? 0.1 : originalHeight
         default:
             break
         }
         
         return originalHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == bannerAdArea_IxP.section {
+            return 0
+        }
+        
+        return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
     @IBAction func sldActChangeDuration(_ sender: UISlider) {
@@ -210,7 +221,6 @@ extension AudioMIDISettingTableViewController: UICollectionViewDataSource, UICol
             } else {
                 UIApplication.shared.setAlternateIconName(APP_ICON_LIST[indexPath.row], completionHandler: nil)
             }
-            
         }
     }
     
