@@ -12,11 +12,11 @@ import GoogleMobileAds
 class SettingTableViewController: UITableViewController {
     private var bannerView: GADBannerView!
 
+    private var SECTION_CONFIG = 0
+    private var SECTION_IAP = 1
+    private var SECTION_INFOS = 2
+    private var SECTION_LINKS = 3
     private let SECTION_BANNER = 4
-    private var section_config = 0
-    private var section_inapp = 1
-    private var section_informations = 2
-    private var section_links = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,6 @@ class SettingTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         switch segue.identifier {
         case "TextureSegue":
             let category = sender as! String
@@ -45,12 +44,13 @@ class SettingTableViewController: UITableViewController {
         default:
             break
         }
-        
     }
+}
 
+extension SettingTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
-        if indexPath.section == section_config {
+        if indexPath.section == SECTION_CONFIG {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "TextureSegue", sender: "paper")
@@ -61,7 +61,7 @@ class SettingTableViewController: UITableViewController {
             default:
                 break
             }
-        } else if indexPath.section == section_informations {
+        } else if indexPath.section == SECTION_INFOS {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "GoToWebViewSegue", sender: WebPageCategory.help)
@@ -70,7 +70,7 @@ class SettingTableViewController: UITableViewController {
             default:
                 break
             }
-        } else if indexPath.section == section_links {
+        } else if indexPath.section == SECTION_LINKS {
             switch indexPath.row {
             case 0:
                 launchEmail()
@@ -87,8 +87,8 @@ class SettingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == SECTION_BANNER && !AdManager.productMode {
-            return 0.1
+        if section == SECTION_BANNER && AdManager.productMode {
+            return 50
         }
         
         return super.tableView(tableView, heightForFooterInSection: section)
@@ -102,12 +102,18 @@ class SettingTableViewController: UITableViewController {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == SECTION_BANNER {
+            return "APP VERSION: \(AppInfoUtil.appVersionAndBuild())"
+        }
+        
+        return super.tableView(tableView, titleForHeaderInSection: section)
+    }
 }
 
 extension SettingTableViewController: MFMailComposeViewControllerDelegate {
     
     func launchEmail() {
-        
         guard MFMailComposeViewController.canSendMail() else {
             // 사용자의 메일 계정이 설정되어 있지 않아 메일을 보낼 수 없다는 경고 메시지 추가
             simpleAlert(self, message: "The mail cannot be sent because the mail account has not been set up on the device.".localized)
@@ -119,7 +125,7 @@ extension SettingTableViewController: MFMailComposeViewControllerDelegate {
         """
         OS Version: \(UIDevice.current.systemVersion)
         Device: \(UIDevice().type)
-        
+        App Version: \(AppInfoUtil.appVersionAndBuild())
         
         """
         

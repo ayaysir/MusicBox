@@ -2599,7 +2599,7 @@ Arrangey by bcd</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Not Available Now" id="QR4-p3-RXd">
+                            <tableViewSection headerTitle="In-App Purchases" id="QR4-p3-RXd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Xcd-SP-CKa" style="IBUITableViewCellStyleDefault" id="k2a-Xq-DKv">
                                         <rect key="frame" x="20" y="242" width="374" height="43.5"/>
@@ -2608,11 +2608,28 @@ Arrangey by bcd</string>
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Available soon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xcd-SP-CKa">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Restore Purchase History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xcd-SP-CKa">
                                                     <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <color key="textColor" systemColor="systemGray4Color"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="rO4-Bb-Kkl" style="IBUITableViewCellStyleDefault" id="ddD-Pc-9Or">
+                                        <rect key="frame" x="20" y="285.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ddD-Pc-9Or" id="JX4-s9-5gS">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Remove All Ads ($0.99)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rO4-Bb-Kkl">
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2623,7 +2640,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Informations" id="pdJ-rF-SHW">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="wPP-f9-xVF" style="IBUITableViewCellStyleDefault" id="oDc-lM-BDA">
-                                        <rect key="frame" x="20" y="341.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="385" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oDc-lM-BDA" id="NAm-lm-oKW">
                                             <rect key="frame" x="0.0" y="0.0" width="343.5" height="43.5"/>
@@ -2640,7 +2657,7 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="PLN-Oh-IrF" style="IBUITableViewCellStyleDefault" id="mtd-3a-8xD">
-                                        <rect key="frame" x="20" y="385" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="428.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mtd-3a-8xD" id="47f-Q6-48F">
                                             <rect key="frame" x="0.0" y="0.0" width="343.5" height="43.5"/>
@@ -2661,13 +2678,13 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Links" id="bos-Xg-8QN">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Haz-Hy-cDF" style="IBUITableViewCellStyleDefault" id="Iue-tJ-nwc">
-                                        <rect key="frame" x="20" y="484.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="528" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iue-tJ-nwc" id="3Cm-Mq-7OY">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Send A Mail To The Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Haz-Hy-cDF">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Send A Mail to the Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Haz-Hy-cDF">
                                                     <rect key="frame" x="20" y="0.0" width="334" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
@@ -2678,7 +2695,7 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="dOp-0X-WqI" style="IBUITableViewCellStyleDefault" id="lXU-Uy-Atp">
-                                        <rect key="frame" x="20" y="528" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="571.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lXU-Uy-Atp" id="O3c-ik-xl1">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
@@ -2695,7 +2712,7 @@ Arrangey by bcd</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="aeJ-n6-x7w" style="IBUITableViewCellStyleDefault" id="uq1-SN-qpE">
-                                        <rect key="frame" x="20" y="571.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="615" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uq1-SN-qpE" id="oK1-RT-BmQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343.5" height="43.5"/>
@@ -2716,10 +2733,10 @@ Arrangey by bcd</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="Plz-ZL-yop">
+                            <tableViewSection headerTitle="App Version: 1.0.0" id="Plz-ZL-yop">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5P5-MQ-YEJ">
-                                        <rect key="frame" x="20" y="651" width="374" height="44.5"/>
+                                        <rect key="frame" x="20" y="714.5" width="374" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5P5-MQ-YEJ" id="nDF-Fn-TFz">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44.5"/>
@@ -2977,10 +2994,10 @@ Arrangey by bcd</string>
                             <tableViewSection id="WF1-F4-Wl8" userLabel="BANNER SECTION">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="0.0" id="Xnj-GN-9M0">
-                                        <rect key="frame" x="20" y="838.5" width="374" height="0.0"/>
+                                        <rect key="frame" x="20" y="838.5" width="374" height="1.1920928955078125e-07"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xnj-GN-9M0" id="bGk-do-V8p">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="1.1920928955078125e-07"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3202,9 +3219,6 @@ Arrangey by bcd</string>
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
