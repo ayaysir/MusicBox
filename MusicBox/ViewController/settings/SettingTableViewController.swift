@@ -165,7 +165,7 @@ extension SettingTableViewController: MFMailComposeViewControllerDelegate {
         let messageBody =
         """
         OS Version: \(UIDevice.current.systemVersion)
-        Device: \(UIDevice().type)
+        Device: \(UIDevice.modelName)
         App Version: \(AppInfoUtil.appVersionAndBuild())
         
         """
