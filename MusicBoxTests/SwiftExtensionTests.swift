@@ -39,9 +39,9 @@ class SwiftExtensionTests: XCTestCase {
         var trueCountProb1 = 0
         
         for _ in 1...totalCount {
-            trueCountProb0 += ChanceUtil.probability(_ probability: 0.0) ? 1 : 0
-            trueCountProb1 += ChanceUtil.probability(_ probability: 1.0) ? 1 : 0
-            trueCount += ChanceUtil.probability(_ probability: probability) ? 1 : 0
+            trueCountProb0 += ChanceUtil.probability(0.0) ? 1 : 0
+            trueCountProb1 += ChanceUtil.probability(1.0) ? 1 : 0
+            trueCount += ChanceUtil.probability(probability) ? 1 : 0
         }
         
         print(trueCount, totalCount, Double(trueCount) / Double(totalCount))

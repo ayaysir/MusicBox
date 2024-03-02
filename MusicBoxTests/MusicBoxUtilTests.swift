@@ -35,8 +35,8 @@ class MusicBoxUtilTests: XCTestCase {
         
         XCTAssert(firstNote!.equalTo(rhs: Note(note: Scale.E, octave: 6)))
         XCTAssert(secondNote.equalTo(rhs: Note(note: Scale.D_sharp, octave: 6)))
-        XCTAssert(beforeLastNote.equalTo(rhs: Note(note: Scale.F, octave: 3)))
-        XCTAssert(lastNote!.equalTo(rhs: Note(note: Scale.E, octave: 3)))
+        XCTAssert(beforeLastNote.equalTo(rhs: Note(note: Scale.C_sharp, octave: 3)))
+        XCTAssert(lastNote!.equalTo(rhs: Note(note: Scale.C, octave: 3)))
     }
     
     func test_getGridXFromGridBox() throws {
