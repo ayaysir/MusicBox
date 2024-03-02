@@ -135,3 +135,7 @@
 "Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it." = "구매 완료되었습니다. 이제 앱에서 광고가 표시되지 않습니다. 일부 화면에서 광고가 제거되지 않은 경우 앱을 강제 종료 후 다시 실행해주세요.";
 "Purchase completed" = "구매 완료";
 "Purchase failed: Please try again." = "구매 실패: 다시 시도해주세요.";
+
+/* onboarding */
+"Onboarding_EN" = "Onboarding_KO";
+"OK, I got it!" = "확인했어요";

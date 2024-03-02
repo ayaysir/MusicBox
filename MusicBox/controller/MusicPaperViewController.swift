@@ -181,12 +181,14 @@ class MusicPaperViewController: UIViewController {
             
         }
     }
-    // private var throttle: Throttle!
-    // private var debounce: Debounce!
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    // 온보딩 관련 변수
+    private let onboardingKey = "ONBOARDING_ONCE_iS_APPEARED"
+    private let onboardingTag = 2109742
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -317,6 +319,9 @@ class MusicPaperViewController: UIViewController {
         
         // 전면 광고
         prepareFullScreenAd()
+        
+        // 온보딩 일회용
+        onboardingOnce()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -560,6 +565,59 @@ class MusicPaperViewController: UIViewController {
             midiManager.musicSequence = currentSequence
             isSequenceWriting = false
             handler?()
+        }
+    }
+}
+
+extension MusicPaperViewController {
+    private func onboardingOnce() {
+        guard mode == .edit else {
+            return
+        }
+        
+        if !UserDefaults.standard.bool(forKey: onboardingKey) {
+            // Make it appear only once
+            UserDefaults.standard.setValue(true, forKey: onboardingKey)
+            
+            let onboardingView = UIView(frame: view.frame)
+            let overlayView = UIView(frame: view.frame)
+            overlayView.backgroundColor = .black
+            overlayView.alpha = 0.7
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOnboarding))
+            overlayView.addGestureRecognizer(tapGesture)
+            
+            let imageView = UIImageView(image: .init(named: "Onboarding_EN".localized))
+            imageView.frame.size.width = view.frame.size.width
+            imageView.frame.size.height = view.frame.size.width * 3 / 4
+            imageView.center = view.center
+            imageView.contentMode = .scaleAspectFit
+            imageView.layoutIfNeeded()
+            
+            let button = UIButton(frame:
+                    .init(x: imageView.frame.midX - 100,
+                          y: imageView.frame.maxY + 20,
+                          width: 200,
+                          height: 50))
+            button.setTitle("OK, I got it!".localized, for: .normal)
+            button.backgroundColor = .systemBlue
+            button.layer.cornerRadius = 10
+            button.addTarget(self, action: #selector(dismissOnboarding), for: .touchUpInside)
+            
+            onboardingView.addSubview(overlayView)
+            onboardingView.addSubview(imageView)
+            onboardingView.addSubview(button)
+            onboardingView.tag = 2109742
+            
+            view.addSubview(onboardingView)
+        }
+    }
+    
+    @objc func dismissOnboarding() {
+        view.subviews.forEach {
+            if $0.tag == onboardingTag {
+                $0.removeFromSuperview()
+            }
         }
     }
 }
