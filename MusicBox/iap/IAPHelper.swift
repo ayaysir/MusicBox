@@ -5,7 +5,7 @@ public struct InAppProducts {
     
     /// 앱 스토어 커넥트에 등록된 IAP의 제품 ID들의 리스트입니다.
     public static let productIDs = [
-        "com.yoonbumtae.DiffuserStick.IAP.removeAds1"
+        "com.yoonbumtae.MusicBox.IAP.removeAds1"
     ]
     
     private static let productIdentifiers: Set<ProductIdentifier> = Set(productIDs)

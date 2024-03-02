@@ -332,7 +332,7 @@ class MusicPaperViewController: UIViewController {
         DispatchQueue.main.async { [unowned self] in
             // 이거를 하면 view의 사이즈도 조정된다.
             scrollView.layoutIfNeeded()
-            if AdManager.productMode {
+            if AdManager.isReallyShowAd {
                 bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
                 bannerView.delegate = self
                 isBannerAdEnabled = true
@@ -644,7 +644,7 @@ extension MusicPaperViewController: PaperOptionPanelViewDelegate {
     }
     
     func didClickedBackToMain(_ view: UIView) {
-        if AdManager.productMode {
+        if AdManager.isReallyShowAd {
             isEndFullScreenAd = true
             showFullScreenAd()
         } else {
@@ -929,7 +929,7 @@ extension MusicPaperViewController: GADBannerViewDelegate {
 extension MusicPaperViewController: GADFullScreenContentDelegate {
     /// 전면 광고 준비
     func prepareFullScreenAd() {
-        guard AdManager.productMode else {
+        guard AdManager.isReallyShowAd else {
             return
         }
         
@@ -973,7 +973,7 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
     }
     
     private func showFullScreenAd() {
-        guard AdManager.productMode else {
+        guard AdManager.isReallyShowAd else {
             return
         }
         

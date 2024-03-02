@@ -43,7 +43,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
-        if AdManager.productMode {
+        if AdManager.isReallyShowAd {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
         }
         
@@ -134,7 +134,7 @@ class AudioMIDISettingTableViewController: UITableViewController {
         case playSoundInilentMode_IxP.section:
             return originalHeight * 0.5
         case bannerAdArea_IxP.section:
-            return !AdManager.productMode ? 0.1 : originalHeight
+            return !AdManager.isReallyShowAd ? 0.1 : originalHeight
         default:
             break
         }

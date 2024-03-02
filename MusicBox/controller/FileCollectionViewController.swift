@@ -62,9 +62,11 @@ class FileCollectionViewController: UICollectionViewController {
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
-        if AdManager.productMode {
+        if AdManager.isReallyShowAd {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.fileBrowser)
             bannerView.delegate = self
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(handleIAPPurchase(_:)), name: .IAPHelperPurchaseNotification, object: nil)
         }
     }
     
@@ -88,17 +90,27 @@ class FileCollectionViewController: UICollectionViewController {
     }
 
     @objc func openFromExternalApp(notification: Notification) {
-        
         print("noti obj type", type(of: notification.object), to: &logger)
         
         if let fileURL = notification.object as? URL {
             openFromExternalApp(fileURL: fileURL)
         }
+    }
+    
+    @objc func handleIAPPurchase(_ notification: Notification) {
+        // 광고 구입한 직후 다시 들어왔다면 원상복구
+        let height = bannerView.adSize.size.height
+        bottomAnchorConstarint.constant += height
+        shouldShowFooter = false
         
+        if let bannerView {
+            bannerView.removeFromSuperview()
+        }
+        
+        collectionView.reloadData()
     }
     
     private func openFromExternalApp(fileURL: URL) {
-        
         let fm = FileManager.default
         
         let fileName = fileURL.lastPathComponent
@@ -216,11 +228,9 @@ class FileCollectionViewController: UICollectionViewController {
         btnAdd.imageEdgeInsets = UIEdgeInsets(top: insetValue, left: insetValue, bottom: insetValue * 2, right: insetValue * 2)
         
         btnAdd.addTarget(self, action: #selector(touchedAddButton), for: .touchUpInside)
-        
     }
     
     @objc private func touchedAddButton() {
-        
         self.dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "PaperCreateWindowSegue", sender: nil)
     }
@@ -463,7 +473,6 @@ extension FileCollectionViewController: GADBannerViewDelegate {
         let height = bannerView.adSize.size.height
         bottomAnchorConstarint.constant -= height
         shouldShowFooter = true
-        
     }
 }
 
@@ -471,7 +480,7 @@ extension FileCollectionViewController: GADFullScreenContentDelegate {
     /// 전면 광고 준비
     /// 멤버변수에 `private var interstitial: GADInterstitialAd?` 추가
     private func prepareAndShowFullScreenAd() {
-        guard AdManager.productMode else {
+        guard AdManager.isReallyShowAd else {
             return
         }
         

@@ -238,7 +238,7 @@
 "XQ4-op-6Cx.text" = "120";
 
 /* Class = "UILabel"; text = "Available soon"; ObjectID = "Xcd-SP-CKa"; */
-"Xcd-SP-CKa.text" = "곧 이용할 수 있습니다.";
+"Xcd-SP-CKa.text" = "구매 내역 복원";
 
 /* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "XfL-bU-ZwF"; */
 "XfL-bU-ZwF.headerTitle" = "코멘트";

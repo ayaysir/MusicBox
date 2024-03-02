@@ -9,13 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    override func viewDidLoad() {
-
-    }
+    override func viewDidLoad() {}
     
-    @IBAction func btnActOpenFileBrowser(_ sender: Any) {
-        
-    }
-    
-
+    @IBAction func btnActOpenFileBrowser(_ sender: Any) {}
 }

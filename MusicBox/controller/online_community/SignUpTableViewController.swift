@@ -114,7 +114,7 @@ class SignUpTableViewController: UITableViewController {
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
-        if AdManager.productMode {
+        if AdManager.isReallyShowAd {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self
         }

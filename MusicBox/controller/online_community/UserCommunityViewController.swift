@@ -14,7 +14,6 @@ import SpeechBubbleView
 import Lottie
 
 class UserCommunityViewController: UIViewController {
-    
     private var bannerView: GADBannerView!
     var shouldShowFooter: Bool = false {
         didSet {
@@ -69,9 +68,11 @@ class UserCommunityViewController: UIViewController {
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
-        if AdManager.productMode {
+        if AdManager.isReallyShowAd {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.archiveMain)
             bannerView.delegate = self
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(handleIAPPurchase(_:)), name: .IAPHelperPurchaseNotification, object: nil)
         }
     }
     
@@ -89,13 +90,6 @@ class UserCommunityViewController: UIViewController {
             self.navigationController?.setViewControllers([notConnectedVC!], animated: false)
             return
         }
-        
-        // guard Auth.auth().currentUser != nil else {
-        //     let needLoginVC = mainStoryboard.instantiateViewController(withIdentifier: "YouNeedLoginViewController")
-        //     self.navigationController?.setViewControllers([needLoginVC], animated: false)
-        //
-        //     return
-        // }
         
         if Auth.auth().currentUser == nil {
             Auth.auth().signInAnonymously { authResult, error in
@@ -133,6 +127,18 @@ class UserCommunityViewController: UIViewController {
     
     @objc func cvTapped() {
         goToLoginVC()
+    }
+    
+    @objc func handleIAPPurchase(_ notification: Notification) {
+        // 광고 구입한 직후 다시 들어왔다면 원상복구
+        buttonBottomConstraint.constant -= bannerView.adSize.size.height
+        shouldShowFooter = false
+        
+        if let bannerView {
+            bannerView.removeFromSuperview()
+        }
+        
+        collectionView.reloadData()
     }
     
     private func assingImageToBarBtnUserInfo(image: UIImage) {

@@ -25,7 +25,7 @@ class TextureCollectionViewController: UICollectionViewController {
         
         // ====== 광고 ====== //
         TrackingTransparencyPermissionRequest()
-        if AdManager.productMode {
+        if AdManager.isReallyShowAd {
             bannerView = setupBannerAds(self, adUnitID: AdInfo.shared.setting)
         }
         

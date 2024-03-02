@@ -129,3 +129,9 @@
 "Play Sound in Silent Mode" = "무음 모드에서 소리 재생";
 "When this switch is turned on, a pitch sound (musical tone) is played whenever a note is entered on the paper." = "이 스위치를 켜면 페이퍼에 음을 입력할 때마다 피치 사운드(음악적 톤)가 재생됩니다.";
 "Play Pitch Sound" = "음높이 재생";
+
+/* SettingViewController.swift (2024-03-03) */
+"Processing in-app purchase operation.\nPlease wait..." = "결제 작업을 처리중입니다.\n잠시만 기다려 주세요...";
+"Your purchase has been completed. You will no longer see ads in the app. If ads are not removed from some screens, force quit the app and relaunch it." = "구매 완료되었습니다. 이제 앱에서 광고가 표시되지 않습니다. 일부 화면에서 광고가 제거되지 않은 경우 앱을 강제 종료 후 다시 실행해주세요.";
+"Purchase completed" = "구매 완료";
+"Purchase failed: Please try again." = "구매 실패: 다시 시도해주세요.";
