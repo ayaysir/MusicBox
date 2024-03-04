@@ -992,6 +992,35 @@ extension MusicPaperViewController: GADFullScreenContentDelegate {
         }
         
         let request = GADRequest()
+        request.keywords = [
+            "음악",
+            "악기",
+            "Music",
+            "instrument",
+            "score",
+            "sheet",
+            "piano",
+            "roll",
+            "노래",
+            "song",
+            "classical",
+            "클래식",
+            "유아",
+            "청소년",
+            "학습",
+            "공부",
+            "musical",
+            "연주",
+            "performance",
+            "칼림바",
+            "kalimba",
+            "커뮤니티",
+            "온라인",
+            "트럼펫",
+            "학원",
+            "academy"
+        ]
+        
         GADInterstitialAd.load(withAdUnitID: AdInfo.shared.paperFullScreen,
                                request: request,
                                completionHandler: { [self] ad, error in

@@ -38,7 +38,7 @@ class FileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareAndShowFullScreenAd()
+        // prepareAndShowFullScreenAd()
         askPhotoAuth()
         
         setMenuDropDown()

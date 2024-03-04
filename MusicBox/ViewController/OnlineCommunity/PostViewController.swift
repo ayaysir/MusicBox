@@ -13,6 +13,7 @@ import GoogleMobileAds
 import Lottie
 
 class PostViewController: UIViewController {
+    private var interstitial: GADInterstitialAd?
     
     lazy var lottieView: LottieAnimationView = {
         let animationView = LottieAnimationView(name: "129574-ginger-bread-socks-christmas")
@@ -149,6 +150,8 @@ class PostViewController: UIViewController {
         }
         
         SwiftSpinner.hide()
+        
+        prepareFullScreenAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,6 +177,12 @@ class PostViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         bannerView?.fitInView(self)
+    }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        if AdManager.isReallyShowAd, let interstitial {
+            interstitial.present(fromRootViewController: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -377,5 +386,57 @@ extension PostViewController: GADBannerViewDelegate {
             cnstScrollViewBottom.constant += bannerView.adSize.size.height
             bottomConstantRaiseOnce = false
         }
+    }
+}
+
+extension PostViewController: GADFullScreenContentDelegate {
+    /// 전면 광고 준비
+    func prepareFullScreenAd() {
+        guard AdManager.isReallyShowAd else {
+            return
+        }
+        
+        let request = GADRequest()
+        request.keywords = [
+            "음악", 
+            "악기",
+            "Music",
+            "instrument",
+            "score",
+            "sheet",
+            "piano",
+            "roll",
+            "노래", 
+            "song",
+            "classical",
+            "클래식",
+            "유아",
+            "청소년",
+            "학습",
+            "공부",
+            "musical",
+            "연주",
+            "performance",
+            "칼림바",
+            "kalimba",
+            "커뮤니티",
+            "온라인",
+            "트럼펫",
+            "학원",
+            "academy"
+        ]
+        
+        GADInterstitialAd.load(withAdUnitID: AdInfo.shared.paperFullScreen,
+                               request: request,
+                               completionHandler: { [self] ad, error in
+                if let error = error {
+                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                    return
+                }
+            
+                interstitial = ad
+                interstitial?.fullScreenContentDelegate = self
+            }
+        )
     }
 }
