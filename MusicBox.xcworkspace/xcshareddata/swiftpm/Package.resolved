@@ -1,12 +1,13 @@
 {
+  "originHash" : "6b38c1280f04f88dc372251f4ee2922f72640820f8ab2bf55f185b63479a79df",
   "pins" : [
     {
       "identity" : "audiokit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AudioKit/AudioKit.git",
       "state" : {
-        "revision" : "c30a151fea40696ad0a45c60c2bba29112bb4279",
-        "version" : "5.6.1"
+        "revision" : "2ebd422855e4645d3169f83d1765d1c8196b4f46",
+        "version" : "5.6.4"
       }
     },
     {
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AudioKit/AudioKitEX",
       "state" : {
-        "revision" : "58fa4a002028a2addf96466dd5ad68182e7d387e",
-        "version" : "5.6.0"
+        "revision" : "cb1a1276978ffc08e00d4774c0617aa8a58a17c4",
+        "version" : "5.6.1"
       }
     },
     {
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hackiftekhar/IQKeyboardManager.git",
       "state" : {
-        "revision" : "474f849accae40fe61b5302d9b057dd48ee073ba",
-        "version" : "6.5.9"
+        "revision" : "c00b1ae9fa1ad8af4465bb6ca901f6943fc98eba",
+        "version" : "6.5.16"
       }
     },
     {
@@ -64,5 +65,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -89,42 +89,34 @@ import GoogleMobileAds
     
  */
 
-func setupBannerAds(_ viewController: UIViewController, adUnitID: String = "ca-app-pub-3940256099942544/2934735716") -> GADBannerView {
-    // if UIApplication.shared.isSplitOrSlideOver {
-    //     print("Split: splitover", viewController.view.bounds)
-    //     if let vc = viewController as? MusicPaperViewController {
-    //         print("Split mp", vc.scrollView.bounds, vc.scrollView.frame, vc.musicPaperView.bounds, vc.musicPaperView.frame)
-    //     }
-    // } else {
-    //     print("Split: not", viewController.view.bounds)
-    // }
-    let adSize = GADAdSizeFromCGSize(CGSize(width: viewController.view.bounds.width, height: 50))
-    let bannerView = GADBannerView(adSize: adSize)
-    
-    bannerView.translatesAutoresizingMaskIntoConstraints = false
-    viewController.view.addSubview(bannerView)
-    viewController.view.addConstraints( [NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: viewController.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: viewController.view, attribute: .centerX, multiplier: 1, constant: 0) ])
-    
-    // bannerView.backgroundColor = .systemBackground
-    bannerView.adUnitID = adUnitID
-    bannerView.rootViewController = viewController
-    
-    let request = GADRequest()
-    bannerView.load(request)
-    
-    return bannerView
+func setupBannerAds(_ viewController: UIViewController, adUnitID: String = "ca-app-pub-3940256099942544/2934735716") -> BannerView {
+  let adSize = adSizeFor(cgSize: CGSize(width: viewController.view.bounds.width, height: 50))
+  let bannerView = BannerView(adSize: adSize)
+  
+  bannerView.translatesAutoresizingMaskIntoConstraints = false
+  viewController.view.addSubview(bannerView)
+  viewController.view.addConstraints( [NSLayoutConstraint(item: bannerView, attribute: .bottom, relatedBy: .equal, toItem: viewController.view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0), NSLayoutConstraint(item: bannerView, attribute: .centerX, relatedBy: .equal, toItem: viewController.view, attribute: .centerX, multiplier: 1, constant: 0) ])
+  
+  // bannerView.backgroundColor = .systemBackground
+  bannerView.adUnitID = adUnitID
+  bannerView.rootViewController = viewController
+  
+  let request = Request()
+  bannerView.load(request)
+  
+  return bannerView
 }
 
-extension GADBannerView {
-    func fitInView(_ viewController: UIViewController) {
-        if let vc = viewController as? MusicPaperViewController {
-            self.adSize = GADAdSizeFromCGSize(CGSize(width: vc.view.bounds.width, height: 50))
-            return
-        }
-        
-        DispatchQueue.main.async { [unowned self] in
-            viewController.view.layoutIfNeeded()
-            self.adSize = GADAdSizeFromCGSize(CGSize(width: viewController.view.bounds.width, height: 50))
-        }
+extension BannerView {
+  func fitInView(_ viewController: UIViewController) {
+    if let vc = viewController as? MusicPaperViewController {
+      self.adSize = adSizeFor(cgSize: CGSize(width: vc.view.bounds.width, height: 50))
+      return
     }
+    
+    DispatchQueue.main.async { [unowned self] in
+      viewController.view.layoutIfNeeded()
+      self.adSize = adSizeFor(cgSize: CGSize(width: viewController.view.bounds.width, height: 50))
+    }
+  }
 }
