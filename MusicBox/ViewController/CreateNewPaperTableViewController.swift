@@ -110,9 +110,19 @@ class CreateNewPaperTableViewController: UITableViewController {
     
     switch pageMode {
     case .create:
+      txfTitle.addTarget(
+        self,
+        action: #selector(txfTitleChanged),
+        for: .editingChanged
+      )
+      txfFileName.addTarget(
+        self,
+        action: #selector(txfFileNameChanged),
+        for: .editingChanged
+      )
       
-      self.title = "Create a new paper"
-      btnSubmit.title = "Create"
+      self.title = "Create a new paper".localized
+      btnSubmit.title = "Create".localized
       
       // BPM
       pkvBpmNote.selectRow(4, inComponent: 0, animated: false)
@@ -137,8 +147,8 @@ class CreateNewPaperTableViewController: UITableViewController {
         }
       }
     case .update:
-      self.title = "Update a paper"
-      btnSubmit.title = "Update"
+      self.title = "Update a paper".localized
+      btnSubmit.title = "Update".localized
       
       guard let paper = document?.paper else {
         return
@@ -160,6 +170,8 @@ class CreateNewPaperTableViewController: UITableViewController {
       
       // 기존 정보
       txfFileName.isEnabled = false
+      // 파일이름 회색으로
+      txfFileName.textColor = .systemGray
       txfFileName.text = document?.fileURL.lastPathComponent.replacingOccurrences(of: ".musicbox", with: "")
       txfTitle.text = paper.title
       txfIncompleteMeasureBeat.text = "\(paper.incompleteMeasureBeat)"
@@ -199,7 +211,6 @@ class CreateNewPaperTableViewController: UITableViewController {
   }
   
   @IBAction func btnActCreateNewPaper(_ sender: Any) {
-    
     // 유효성 검사
     guard validateFieldValues() else {
       return
@@ -207,7 +218,7 @@ class CreateNewPaperTableViewController: UITableViewController {
     
     guard let bpmStr = lblConvertedBPM.text,
           let title = txfTitle.text,
-          let fileName = txfFileName.text,
+          let fileName = txfFileName.text?.isEmpty == true ? txfFileName.placeholder : txfFileName.text,
           let comment = txvComment.text,
           let originalArtist = txfOriginalArtist.text,
           let paperMaker = txfPaperMaker.text
@@ -334,16 +345,21 @@ class CreateNewPaperTableViewController: UITableViewController {
     let alertTitle = "Unable to \(pageMode == .create ? "Create" : "Update")"
     
     // file name
-    guard txfFileName.text != "" else {
-      simpleAlert(self, message: "Please enter a file name.", title: alertTitle) { action in
-        self.txfFileName.becomeFirstResponder()
-      }
-      
-      return false
-    }
+    // guard txfFileName.text != "" else {
+    //   simpleAlert(self, message: "Please enter a file name.", title: alertTitle) { action in
+    //     self.txfFileName.becomeFirstResponder()
+    //   }
+    //   
+    //   return false
+    // }
     
-    let regex = "^[^<>:;,?\"*|/]+$"
-    guard txfFileName.text?.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil else {
+    let targetFileName = txfFileName.text?.isEmpty == true ? txfFileName.placeholder : txfFileName.text
+    guard targetFileName?.range(
+      of: "^[^<>:;,?\"*|/]+$",
+      options: .regularExpression,
+      range: nil,
+      locale: nil
+    ) != nil else {
       simpleAlert(self, message: "The file name format is incorrect. Please rewrite the file name.", title: alertTitle) { action in
         self.txfFileName.becomeFirstResponder()
       }
@@ -418,6 +434,27 @@ class CreateNewPaperTableViewController: UITableViewController {
     }
     
     return true
+  }
+  
+  @objc func txfTitleChanged(_ textField: UITextField) {
+    // 파일 이름 필드가 비어있을 때만 placeholder 업데이트
+    if let text = textField.text,
+       txfFileName.text?.isEmpty == true {
+      txfFileName.placeholder = convertToValidFileName(text)
+    }
+  }
+  
+  @objc func txfFileNameChanged(_ textField: UITextField) {
+    if let text = txfTitle.text,
+       textField.text?.isEmpty == true {
+      txfFileName.placeholder = convertToValidFileName(text)
+    }
+  }
+  
+  private func convertToValidFileName(_ text: String) -> String {
+    // 파일 이름으로 사용할 수 없는 문자: \ / : * ? " < > |
+    let invalidCharacters = CharacterSet(charactersIn: "\\/:;,*?\"<>|")
+    return text.components(separatedBy: invalidCharacters).joined(separator: "_")
   }
 }
 

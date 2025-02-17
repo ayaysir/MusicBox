@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eno-5m-qsx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eno-5m-qsx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -2215,10 +2215,35 @@ Arrangey by bcd</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
+                            <tableViewSection headerTitle="Title" id="yxf-44-xLd">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bs6-sa-8k3">
+                                        <rect key="frame" x="20" y="55.5" width="374" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bs6-sa-8k3" id="jIu-ts-Y3T">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EaK-lb-Bg7">
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="45"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" textContentType="url"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EaK-lb-Bg7" firstAttribute="leading" secondItem="jIu-ts-Y3T" secondAttribute="leading" constant="20" symbolic="YES" id="105-dF-qSc"/>
+                                                <constraint firstAttribute="bottom" secondItem="EaK-lb-Bg7" secondAttribute="bottom" id="BZu-p2-4Nl"/>
+                                                <constraint firstAttribute="trailing" secondItem="EaK-lb-Bg7" secondAttribute="trailing" constant="20" symbolic="YES" id="fB1-0C-Nwq"/>
+                                                <constraint firstItem="EaK-lb-Bg7" firstAttribute="top" secondItem="jIu-ts-Y3T" secondAttribute="top" id="t2u-yD-ql4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="File Name" id="G0d-iS-Djm">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="btl-AX-fmT">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="45"/>
+                                        <rect key="frame" x="20" y="156.5" width="374" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="btl-AX-fmT" id="ZfZ-bF-uxy">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
@@ -2243,31 +2268,6 @@ Arrangey by bcd</string>
                                                 <constraint firstAttribute="bottom" secondItem="la1-vr-WoF" secondAttribute="bottom" id="poZ-Nm-GdT"/>
                                                 <constraint firstItem="T0Q-Fl-RzH" firstAttribute="centerY" secondItem="ZfZ-bF-uxy" secondAttribute="centerY" id="u1h-YO-FOb"/>
                                                 <constraint firstItem="la1-vr-WoF" firstAttribute="top" secondItem="ZfZ-bF-uxy" secondAttribute="top" id="zmg-It-Fpr"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Title" id="yxf-44-xLd">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bs6-sa-8k3">
-                                        <rect key="frame" x="20" y="156.5" width="374" height="45"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bs6-sa-8k3" id="jIu-ts-Y3T">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EaK-lb-Bg7">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="45"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" textContentType="url"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="EaK-lb-Bg7" firstAttribute="leading" secondItem="jIu-ts-Y3T" secondAttribute="leading" constant="20" symbolic="YES" id="105-dF-qSc"/>
-                                                <constraint firstAttribute="bottom" secondItem="EaK-lb-Bg7" secondAttribute="bottom" id="BZu-p2-4Nl"/>
-                                                <constraint firstAttribute="trailing" secondItem="EaK-lb-Bg7" secondAttribute="trailing" constant="20" symbolic="YES" id="fB1-0C-Nwq"/>
-                                                <constraint firstItem="EaK-lb-Bg7" firstAttribute="top" secondItem="jIu-ts-Y3T" secondAttribute="top" id="t2u-yD-ql4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3183,7 +3183,7 @@ Arrangey by bcd</string>
         <segue reference="Sqy-mW-WLH"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
+        <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="93"/>
         <image name="close_p.png" width="21" height="21"/>
         <image name="daniel-tuttle-7iFNGzRRukA-unsplash" width="4898" height="3265"/>
@@ -3194,16 +3194,16 @@ Arrangey by bcd</string>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="loading-icon-static" width="615" height="450"/>
         <image name="noun_Punched Card_404218" width="34" height="21"/>
-        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="86"/>
+        <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="85"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="play.fill" catalog="system" width="117" height="128"/>
+        <image name="play.fill" catalog="system" width="120" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sample" width="1072" height="1072"/>
         <image name="speaker.2.fill" catalog="system" width="128" height="88"/>
-        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
+        <image name="square.and.arrow.up" catalog="system" width="110" height="128"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="TouchBarBezel">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
