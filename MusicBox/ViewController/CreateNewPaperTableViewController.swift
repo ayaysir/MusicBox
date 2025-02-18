@@ -325,6 +325,32 @@ class CreateNewPaperTableViewController: UITableViewController {
     getPhotoFromLibrary()
   }
   
+  @IBAction func btnActTimeSignature(_ sender: UIButton) {
+    switch sender.tag {
+    case 0:
+      pkvTimeSignature.selectRow(2, inComponent: 0, animated: true)
+      pkvTimeSignature.selectRow(1, inComponent: 2, animated: true)
+    case 1:
+      pkvTimeSignature.selectRow(1, inComponent: 0, animated: true)
+      pkvTimeSignature.selectRow(1, inComponent: 2, animated: true)
+    case 2:
+      pkvTimeSignature.selectRow(0, inComponent: 0, animated: true)
+      pkvTimeSignature.selectRow(1, inComponent: 2, animated: true)
+    case 3:
+      pkvTimeSignature.selectRow(4, inComponent: 0, animated: true)
+      pkvTimeSignature.selectRow(2, inComponent: 2, animated: true)
+    case 4:
+      pkvTimeSignature.selectRow(0, inComponent: 0, animated: true)
+      pkvTimeSignature.selectRow(0, inComponent: 2, animated: true)
+    case 5:
+      pkvTimeSignature.selectRow(4, inComponent: 0, animated: true)
+      pkvTimeSignature.selectRow(3, inComponent: 2, animated: true)
+    default:
+      break
+    }
+  }
+  
+  
   func convertTempoWithLabelChange(tempo: Double, noteDivision: Double) {
     let bpm = convertTempoToBaseQuarterNoteBPM(tempo: tempo, noteDivision: noteDivision)
     lblConvertedBPM.text = "\(bpm)"
