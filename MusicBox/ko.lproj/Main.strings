@@ -115,7 +115,7 @@
 "KQ6-kC-usU.text" = "J. S. Bach";
 
 /* Class = "UILabel"; text = "Converted BPM (♩ = )"; ObjectID = "KVs-0m-yZI"; */
-"KVs-0m-yZI.text" = "변환된 BPM (♩ = )";
+"KVs-0m-yZI.text" = "변환된 BPM ( ♩ = )";
 
 /* Class = "UITableViewSection"; headerTitle = "User Profile Photo (Optional)"; ObjectID = "Kdq-K3-ti3"; */
 "Kdq-K3-ti3.headerTitle" = "프로필 사진 (선택사항)";

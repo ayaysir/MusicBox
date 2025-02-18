@@ -2286,8 +2286,8 @@ Arrangey by bcd</string>
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CG9-Tz-fZa">
-                                                    <rect key="frame" x="44" y="4" width="286.5" height="120"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="CG9-Tz-fZa">
+                                                    <rect key="frame" x="45" y="4" width="284.5" height="120"/>
                                                     <subviews>
                                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCQ-MS-dLT">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
@@ -2297,7 +2297,7 @@ Arrangey by bcd</string>
                                                             </constraints>
                                                         </pickerView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="=" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JU-RH-LsB">
-                                                            <rect key="frame" x="200" y="0.0" width="23.5" height="120"/>
+                                                            <rect key="frame" x="204" y="0.0" width="23.5" height="120"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="23.5" id="IhM-z9-Nf2"/>
                                                             </constraints>
@@ -2305,9 +2305,9 @@ Arrangey by bcd</string>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pDl-Bb-qhD">
-                                                            <rect key="frame" x="223.5" y="0.0" width="63" height="120"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="pDl-Bb-qhD">
+                                                            <rect key="frame" x="231.5" y="0.0" width="53" height="120"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                         </textField>
                                                     </subviews>
@@ -2326,8 +2326,8 @@ Arrangey by bcd</string>
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Converted BPM (♩ = )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVs-0m-yZI">
-                                                    <rect key="frame" x="20" y="8" width="119.5" height="14.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Converted BPM ( ♩ = ) " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVs-0m-yZI">
+                                                    <rect key="frame" x="20" y="8" width="126.5" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -3001,7 +3001,7 @@ Arrangey by bcd</string>
                                         <rect key="frame" x="20" y="838.5" width="374" height="1.1920928955078125e-07"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xnj-GN-9M0" id="bGk-do-V8p">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="1.1920928955078125e-07"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
