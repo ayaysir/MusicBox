@@ -2427,7 +2427,7 @@ Arrangey by bcd</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Incomplete Measure" id="Tss-U3-Pj0">
+                            <tableViewSection headerTitle="Anacrusis (Incomplete Measure)" id="Tss-U3-Pj0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XSO-uD-TLv">
                                         <rect key="frame" x="20" y="703.5" width="374" height="45"/>
@@ -2445,12 +2445,32 @@ Arrangey by bcd</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="IBw-tc-GFb">
+                                        <rect key="frame" x="20" y="748.5" width="374" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IBw-tc-GFb" id="swO-tR-Lgl">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSA-Za-E4F">
+                                                    <rect key="frame" x="20" y="5" width="334" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="What is Anacrusis?"/>
+                                                    <connections>
+                                                        <segue destination="Z0f-YI-x12" kind="show" id="CoW-B7-Y4d"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Original Artist" id="SjY-bm-xcf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" editingAccessoryType="checkmark" id="JGD-13-1rw">
-                                        <rect key="frame" x="20" y="804.5" width="374" height="45"/>
+                                        <rect key="frame" x="20" y="849.5" width="374" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JGD-13-1rw" id="4i6-Cn-jhj">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
@@ -2470,7 +2490,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Paper Maker" id="7SN-PA-nSx">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ny8-hD-Vzu">
-                                        <rect key="frame" x="20" y="905.5" width="374" height="45"/>
+                                        <rect key="frame" x="20" y="950.5" width="374" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ny8-hD-Vzu" id="dSD-o2-4gc">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
@@ -2490,7 +2510,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Comment" id="XfL-bU-ZwF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="L5R-a0-hxr">
-                                        <rect key="frame" x="20" y="1006.5" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="1051.5" width="374" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L5R-a0-hxr" id="SH5-Mw-RNq">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -2517,7 +2537,7 @@ Arrangey by bcd</string>
                             <tableViewSection headerTitle="Attach an Albumart" id="0aV-X0-bXG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="N9f-EU-2we">
-                                        <rect key="frame" x="20" y="1212.5" width="374" height="150"/>
+                                        <rect key="frame" x="20" y="1257.5" width="374" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N9f-EU-2we" id="JB2-40-Vmu">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -2586,6 +2606,93 @@ Arrangey by bcd</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uN4-Vt-oIv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-591.304347826087" y="-990.40178571428567"/>
+        </scene>
+        <!--What Is Anacrusis View Controller-->
+        <scene sceneID="eri-J4-0dy">
+            <objects>
+                <viewController id="Z0f-YI-x12" customClass="WhatIsAnacrusisViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gMJ-1a-tMZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFS-qg-rrJ">
+                                <rect key="frame" x="20" y="92" width="374" height="770"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1t-Is-gUg">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="686"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is Anacrusis? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lg-b5-tnk">
+                                                <rect key="frame" x="0.0" y="30" width="374" height="41"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="anacrusis" translatesAutoresizingMaskIntoConstraints="NO" id="fXN-tb-t5F">
+                                                <rect key="frame" x="0.0" y="364" width="374" height="279"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="279" id="OVM-07-Ydl"/>
+                                                </constraints>
+                                            </imageView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRT-zg-W21">
+                                                <rect key="frame" x="0.0" y="91" width="374" height="255"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="255" id="Lal-Bu-hXC"/>
+                                                </constraints>
+                                                <string key="text">An anacrusis is an incomplete measure that allows the composition [or section or phrase] to start on a beat other than one.
+
+In general, there are many cases where there is no Anacrusis, so enter 0.
+
+In the opposite case, enter the number of the smallest area in the subdivision of the bit. For example, in the case of Nocturne provided as an example, it is a 3/4 beat. I would like to set the first beat to anacrusis here. If you subdivide 1 beat into the smallest unit, it consists of 4 16-minute notes. Therefore, enter 4.</string>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="9lg-b5-tnk" firstAttribute="leading" secondItem="s1t-Is-gUg" secondAttribute="leading" id="0CY-Cs-LtN"/>
+                                            <constraint firstItem="fXN-tb-t5F" firstAttribute="top" secondItem="MRT-zg-W21" secondAttribute="bottom" constant="18" id="GK4-oX-03d"/>
+                                            <constraint firstItem="MRT-zg-W21" firstAttribute="top" secondItem="9lg-b5-tnk" secondAttribute="bottom" constant="20" id="KkR-il-7hV"/>
+                                            <constraint firstItem="fXN-tb-t5F" firstAttribute="leading" secondItem="MRT-zg-W21" secondAttribute="leading" id="M2e-2r-JXU"/>
+                                            <constraint firstItem="9lg-b5-tnk" firstAttribute="top" secondItem="s1t-Is-gUg" secondAttribute="top" constant="30" id="PcR-e4-xgw"/>
+                                            <constraint firstAttribute="trailing" secondItem="9lg-b5-tnk" secondAttribute="trailing" id="cac-mv-grw"/>
+                                            <constraint firstItem="fXN-tb-t5F" firstAttribute="trailing" secondItem="MRT-zg-W21" secondAttribute="trailing" id="g1c-Mb-TFj"/>
+                                            <constraint firstAttribute="height" constant="686" id="kfl-Jz-8wS"/>
+                                            <constraint firstItem="MRT-zg-W21" firstAttribute="trailing" secondItem="9lg-b5-tnk" secondAttribute="trailing" id="o0G-m5-A1L"/>
+                                            <constraint firstItem="MRT-zg-W21" firstAttribute="leading" secondItem="9lg-b5-tnk" secondAttribute="leading" id="oBc-Kk-qJm"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="s1t-Is-gUg" firstAttribute="width" secondItem="YmA-dc-b2s" secondAttribute="width" id="9iT-2e-HJ3"/>
+                                    <constraint firstItem="s1t-Is-gUg" firstAttribute="leading" secondItem="A7O-vM-kkQ" secondAttribute="leading" id="ewD-z8-VDG"/>
+                                    <constraint firstItem="s1t-Is-gUg" firstAttribute="bottom" secondItem="A7O-vM-kkQ" secondAttribute="bottom" id="gqf-SR-ygv"/>
+                                    <constraint firstItem="s1t-Is-gUg" firstAttribute="trailing" secondItem="A7O-vM-kkQ" secondAttribute="trailing" id="mXl-YQ-yLr"/>
+                                    <constraint firstItem="s1t-Is-gUg" firstAttribute="top" secondItem="A7O-vM-kkQ" secondAttribute="top" id="rWL-si-VOZ"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="A7O-vM-kkQ"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="YmA-dc-b2s"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Lrl-59-CgW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Lrl-59-CgW" firstAttribute="bottom" secondItem="IFS-qg-rrJ" secondAttribute="bottom" id="0fg-RE-5vf"/>
+                            <constraint firstItem="IFS-qg-rrJ" firstAttribute="leading" secondItem="Lrl-59-CgW" secondAttribute="leading" constant="20" id="3l0-rI-h0q"/>
+                            <constraint firstItem="Lrl-59-CgW" firstAttribute="trailing" secondItem="IFS-qg-rrJ" secondAttribute="trailing" constant="20" id="Sob-2Q-BIu"/>
+                            <constraint firstItem="IFS-qg-rrJ" firstAttribute="top" secondItem="Lrl-59-CgW" secondAttribute="top" id="c1K-K4-aVP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2tV-N4-lSi"/>
+                    <connections>
+                        <outlet property="cnstTxvContentHeight" destination="Lal-Bu-hXC" id="RyQ-cG-Xk8"/>
+                        <outlet property="txvContent" destination="MRT-zg-W21" id="fxY-An-UMW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oi2-YO-NdG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="198.55072463768118" y="-922.76785714285711"/>
         </scene>
         <!--Options-->
         <scene sceneID="8bb-1j-Pfa">
@@ -3257,6 +3364,7 @@ Arrangey by bcd</string>
         <image name="4_4" width="34" height="79"/>
         <image name="6_16" width="50" height="79"/>
         <image name="6_8" width="31" height="79"/>
+        <image name="anacrusis" width="916" height="694"/>
         <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="93"/>
         <image name="close_p.png" width="21" height="21"/>
