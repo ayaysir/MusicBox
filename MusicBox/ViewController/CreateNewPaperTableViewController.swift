@@ -132,6 +132,9 @@ class CreateNewPaperTableViewController: UITableViewController {
       pkvTimeSignature.selectRow(2, inComponent: 0, animated: false)
       pkvTimeSignature.selectRow(1, inComponent: 2, animated: false)
       
+      // 코멘트
+      txvComment.text = "paperinfo_comment_placeholder".localized
+      
       // 기본 닉네임
       if getCurrentUser() != nil, let userUID = getCurrentUserUID() {
         SwiftSpinner.show("Load user's nickname...")

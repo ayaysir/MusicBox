@@ -2692,7 +2692,7 @@ In the opposite case, enter the number of the smallest area in the subdivision o
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oi2-YO-NdG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198.55072463768118" y="-922.76785714285711"/>
+            <point key="canvasLocation" x="143" y="-990"/>
         </scene>
         <!--Options-->
         <scene sceneID="8bb-1j-Pfa">
@@ -3172,7 +3172,7 @@ In the opposite case, enter the number of the smallest area in the subdivision o
                                         <rect key="frame" x="20" y="838.5" width="374" height="1.1920928955078125e-07"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xnj-GN-9M0" id="bGk-do-V8p">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="1.1920928955078125e-07"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
