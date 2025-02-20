@@ -374,7 +374,11 @@ extension FileCollectionViewController: UICollectionViewDelegateFlowLayout  {
   }
   
   // 배너 광고 공간
-  override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+  override func collectionView(
+    _ collectionView: UICollectionView,
+    viewForSupplementaryElementOfKind kind: String,
+    at indexPath: IndexPath
+  ) -> UICollectionReusableView {
     switch kind {
     case UICollectionView.elementKindSectionFooter:
       let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "spaceForBanner", for: indexPath)

@@ -2216,7 +2216,7 @@ Arrangey by bcd</string>
             <objects>
                 <tableViewController storyboardIdentifier="CreateNewPaperTableViewController" id="lFp-ds-kYG" customClass="CreateNewPaperTableViewController" customModule="MusicBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="1yH-rI-2g7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection headerTitle="Title" id="yxf-44-xLd">
@@ -2544,12 +2544,14 @@ Arrangey by bcd</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-67-nl0">
-                                                    <rect key="frame" x="23" y="11" width="140" height="129"/>
+                                                    <rect key="frame" x="20" y="15" width="120" height="120"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m68-1m-pAd">
-                                                    <rect key="frame" x="191" y="49" width="72" height="22"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m68-1m-pAd">
+                                                    <rect key="frame" x="151" y="25" width="118" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="카메라" image="camera.fill" catalog="system">
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
@@ -2557,9 +2559,11 @@ Arrangey by bcd</string>
                                                         <action selector="btnActCamera:" destination="lFp-ds-kYG" eventType="touchUpInside" id="TqH-8e-Yss"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kz6-kh-SZR">
-                                                    <rect key="frame" x="191" y="79" width="102" height="22"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kz6-kh-SZR">
+                                                    <rect key="frame" x="151" y="50" width="118" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="라이브러리" image="photo.fill" catalog="system">
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
@@ -2567,7 +2571,31 @@ Arrangey by bcd</string>
                                                         <action selector="btnActPhotoLibrary:" destination="lFp-ds-kYG" eventType="touchUpInside" id="hjg-hS-AyQ"/>
                                                     </connections>
                                                 </button>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="musicbox-appicon-1" translatesAutoresizingMaskIntoConstraints="NO" id="GYR-VH-SLr">
+                                                    <rect key="frame" x="151" y="84" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="musicbox-appicon-2" translatesAutoresizingMaskIntoConstraints="NO" id="s2O-Tc-Ekg">
+                                                    <rect key="frame" x="199" y="84" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="musicbox-appicon-3" translatesAutoresizingMaskIntoConstraints="NO" id="i1t-Zh-y0z">
+                                                    <rect key="frame" x="247" y="84" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="Nem-Ek-3dK">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="I56-zf-Yo5">
+                                        <rect key="frame" x="20" y="1443.5" width="374" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I56-zf-Yo5" id="6sd-rU-aad">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -2587,10 +2615,13 @@ Arrangey by bcd</string>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <size key="freeformSize" width="414" height="1320"/>
+                    <size key="freeformSize" width="414" height="1700"/>
                     <connections>
                         <outlet property="btnSubmit" destination="dBe-HV-QIZ" id="oOW-Qo-gLQ"/>
                         <outlet property="imgAlbumart" destination="z8i-67-nl0" id="RQc-0H-1P6"/>
+                        <outlet property="imgvCustomImage1" destination="GYR-VH-SLr" id="jQV-XV-zZx"/>
+                        <outlet property="imgvCustomImage2" destination="s2O-Tc-Ekg" id="2k2-Ah-zha"/>
+                        <outlet property="imgvCustomImage3" destination="i1t-Zh-y0z" id="4yt-bh-tBq"/>
                         <outlet property="lblConvertedBPM" destination="XQ4-op-6Cx" id="ahY-Cp-rEA"/>
                         <outlet property="pkvBpmNote" destination="GCQ-MS-dLT" id="bUW-XI-uaE"/>
                         <outlet property="pkvTimeSignature" destination="9Cq-bG-Vdr" id="EZf-GQ-cdK"/>
@@ -2605,7 +2636,7 @@ Arrangey by bcd</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uN4-Vt-oIv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-591.304347826087" y="-990.40178571428567"/>
+            <point key="canvasLocation" x="-277" y="-859"/>
         </scene>
         <!--What Is Anacrusis View Controller-->
         <scene sceneID="eri-J4-0dy">
@@ -2692,7 +2723,7 @@ In the opposite case, enter the number of the smallest area in the subdivision o
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oi2-YO-NdG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143" y="-990"/>
+            <point key="canvasLocation" x="383" y="-1002"/>
         </scene>
         <!--Options-->
         <scene sceneID="8bb-1j-Pfa">
@@ -3172,7 +3203,7 @@ In the opposite case, enter the number of the smallest area in the subdivision o
                                         <rect key="frame" x="20" y="838.5" width="374" height="1.1920928955078125e-07"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xnj-GN-9M0" id="bGk-do-V8p">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="1.1920928955078125e-07"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3375,6 +3406,9 @@ In the opposite case, enter the number of the smallest area in the subdivision o
         <image name="grab pull" width="188" height="137"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="loading-icon-static" width="615" height="450"/>
+        <image name="musicbox-appicon-1" width="1072" height="1072"/>
+        <image name="musicbox-appicon-2" width="1024" height="1024"/>
+        <image name="musicbox-appicon-3" width="1024" height="1024"/>
         <image name="noun_Punched Card_404218" width="34" height="21"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="85"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>

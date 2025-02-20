@@ -66,28 +66,38 @@ class CreateNewPaperTableViewController: UITableViewController {
   @IBOutlet weak var txfPaperMaker: UITextField!
   @IBOutlet weak var lblConvertedBPM: UILabel!
   @IBOutlet weak var txvComment: UITextView!
-  
-  @IBOutlet weak var imgAlbumart: UIImageView!
-  var thumbnailImage: UIImage?
-  
   @IBOutlet weak var pkvBpmNote: UIPickerView!
   @IBOutlet weak var pkvTimeSignature: UIPickerView!
-  
   @IBOutlet weak var btnSubmit: UIBarButtonItem!
+  @IBOutlet weak var imgvCustomImage1: UIImageView!
+  @IBOutlet weak var imgvCustomImage2: UIImageView!
+  @IBOutlet weak var imgvCustomImage3: UIImageView!
+  @IBOutlet weak var imgAlbumart: UIImageView!
   
-  var imagePickerController = UIImagePickerController()
+  private var thumbnailImage: UIImage?
+  private var imagePickerController = UIImagePickerController()
   
-  var selectedUpperTS: Int = 4
-  var selectedLowerTS: Int = 4
+  private var selectedUpperTS: Int = 4
+  private var selectedLowerTS: Int = 4
+  
+  private let AD_SPACE_SECTION = 9
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    // 커스텀 이미지를 앨범아트로 사용하기
+    [
+      imgvCustomImage1,
+      imgvCustomImage2,
+      imgvCustomImage3,
+    ].forEach { imageView in
+      let tapGesture = UITapGestureRecognizer(
+        target: self,
+        action: #selector(selectCustomImage)
+      )
+      // userInteraction: 스토리보드 상에서 활성화됨
+      imageView.addGestureRecognizer(tapGesture)
+    }
     
     txfFileName.delegate = self
     txfTitle.delegate = self
@@ -263,7 +273,7 @@ class CreateNewPaperTableViewController: UITableViewController {
         }
       }
       
-      if let thumbnailImage = thumbnailImage {
+      if let thumbnailImage {
         paper.thumbnailImageData = thumbnailImage.jpegData(compressionQuality: 1)
       }
       
@@ -306,7 +316,7 @@ class CreateNewPaperTableViewController: UITableViewController {
         }
       }
       
-      if let thumbnailImage = thumbnailImage {
+      if let thumbnailImage {
         paper.thumbnailImageData = thumbnailImage.jpegData(compressionQuality: 1)
       }
       
@@ -352,7 +362,6 @@ class CreateNewPaperTableViewController: UITableViewController {
       break
     }
   }
-  
   
   func convertTempoWithLabelChange(tempo: Double, noteDivision: Double) {
     let bpm = convertTempoToBaseQuarterNoteBPM(tempo: tempo, noteDivision: noteDivision)
@@ -480,10 +489,80 @@ class CreateNewPaperTableViewController: UITableViewController {
     }
   }
   
+  @objc func selectCustomImage(_ gesture: UITapGestureRecognizer) {
+    guard let imageView = gesture.view as? UIImageView else {
+      return
+    }
+    
+    imgAlbumart.image = imageView.image
+    
+    do {
+      try thumbnailImage = resizeImage(
+        image: imgAlbumart.image!,
+        maxSize: 200
+      )
+    } catch {
+      print(error)
+      thumbnailImage = imageView.image
+    }
+    
+    switch view.tag {
+    case 0:
+      break
+    case 1:
+      break
+    case 2:
+      break
+    default:
+      break
+    }
+  }
+  
   private func convertToValidFileName(_ text: String) -> String {
     // 파일 이름으로 사용할 수 없는 문자: \ / : * ? " < > |
     let invalidCharacters = CharacterSet(charactersIn: "\\/:;,*?\"<>|")
     return text.components(separatedBy: invalidCharacters).joined(separator: "_")
+  }
+}
+
+extension CreateNewPaperTableViewController {
+  // MARK: - 배너 광고 관련
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    if section == AD_SPACE_SECTION {
+      return 0.1
+    }
+    
+    return super.tableView(tableView, heightForHeaderInSection: section)
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.section == AD_SPACE_SECTION {
+      return 0.1
+    }
+    
+    return super.tableView(tableView, heightForRowAt: indexPath)
+  }
+  
+  override func tableView(
+    _ tableView: UITableView,
+    heightForFooterInSection section: Int
+  ) -> CGFloat {
+    if section == AD_SPACE_SECTION {
+      return AdManager.isReallyShowAd ? 30 : 0
+    }
+    
+    return super.tableView(tableView, heightForFooterInSection: section)
+  }
+  
+  override func tableView(
+    _ tableView: UITableView,
+    numberOfRowsInSection section: Int
+  ) -> Int {
+    if section == AD_SPACE_SECTION {
+      return 0
+    }
+    
+    return super.tableView(tableView, numberOfRowsInSection: section)
   }
 }
 
