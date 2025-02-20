@@ -49,9 +49,9 @@ class MusicBoxPaperView: UIView {
         }
     }
     
-    override class var layerClass: AnyClass {
-        return CATiledLayer.self
-    }
+    // override class var layerClass: AnyClass {
+    //     return CATiledLayer.self
+    // }
     
     var title: String = "Toccata & Fugue In D Minor - II. Fugue - BWV 538"
     var originalArtist: String = "J. S. Bach"
@@ -78,7 +78,8 @@ class MusicBoxPaperView: UIView {
         let boxWidth = cst.cellWidth * (colNum + imBeatCount).cgFloat
         let boxHeight = cst.cellHeight * (rowNum - 1).cgFloat
         self.boxOutline = CGRect(x: cst.leftMargin, y: cst.topMargin, width: boxWidth, height: boxHeight)
-        (self.layer as! CATiledLayer).tileSize = CGSize(width: 10000, height: boxHeight + cst.topMargin * 2)
+        // (self.layer as! CATiledLayer).tileSize = CGSize(width: 10000, height: boxHeight + cst.topMargin * 2)
+        // (self.layer as! CATiledLayer).tileSize = CGSize(width: 2048, height: 2048)
         
         self.util = util
         self.paperGrid = gridInfo

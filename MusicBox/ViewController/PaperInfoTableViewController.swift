@@ -25,6 +25,9 @@ class PaperInfoTableViewController: UITableViewController {
   @IBOutlet weak var btnUpdateInformation: UIButton!
   @IBOutlet weak var btnShare: UIButton!
   @IBOutlet weak var btnViewMode: UIButton!
+  @IBOutlet weak var btnExportAsPNG: UIButton!
+  @IBOutlet weak var btnExportAsPDF: UIButton!
+  @IBOutlet weak var btnExportAsMP3: UIButton!
   
   @IBOutlet weak var btnPreplay: UIButton!
   var midiManager = MIDIManager()
@@ -65,13 +68,18 @@ class PaperInfoTableViewController: UITableViewController {
       btnUpdateInformation.configuration?.imagePadding = leftMargin
       btnEditPaper.configuration?.imagePadding = leftMargin
       btnViewMode.configuration?.imagePadding = leftMargin
-      
+      btnExportAsPNG.configuration?.imagePadding = leftMargin
+      btnExportAsPDF.configuration?.imagePadding = leftMargin
+      btnExportAsMP3.configuration?.imagePadding = leftMargin
     } else {
       // Fallback on earlier versions
       btnShare.titleEdgeInsets.left = leftMargin
       btnUpdateInformation.titleEdgeInsets.left = leftMargin
       btnEditPaper.titleEdgeInsets.left = leftMargin
       btnViewMode.titleEdgeInsets.left = leftMargin
+      btnExportAsPNG.titleEdgeInsets.left = leftMargin
+      btnExportAsPDF.titleEdgeInsets.left = leftMargin
+      btnExportAsMP3.titleEdgeInsets.left = leftMargin
     }
   }
   
@@ -153,6 +161,19 @@ class PaperInfoTableViewController: UITableViewController {
     self.present(activityViewController, animated: true, completion: nil)
   }
   
+  @IBAction func btnActExport(_ sender: UIButton) {
+    switch sender.tag {
+    case 0:
+      exportPaperAsPNG()
+    case 1:
+      exportPaperAsPDF()
+    case 2:
+      exportPaperAsAudio()
+    default:
+      break
+    }
+  }
+  
   
   @IBAction func btnActDeleteFile(_ sender: Any) {
     simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.".localized, title: "Delete the File".localized
@@ -189,16 +210,16 @@ class PaperInfoTableViewController: UITableViewController {
   }
   
   private func openPaper(mode: MusicPaperMode) {
-    guard let document = selectedDocument else {
+    guard let selectedDocument else {
       return
     }
     
     SwiftSpinner.show("Drawing the paper...".localized)
     let musicPaperVC = mainStoryboard.instantiateViewController(withIdentifier: "MusicPaperViewController") as! MusicPaperViewController
     
-    document.open { success in
+    selectedDocument.open { success in
       if success {
-        musicPaperVC.document = document
+        musicPaperVC.document = selectedDocument
         musicPaperVC.delegate = self
         musicPaperVC.mode = mode
         self.present(musicPaperVC, animated: true, completion: nil)
@@ -206,6 +227,18 @@ class PaperInfoTableViewController: UITableViewController {
         simpleAlert(self, message: "The paper file is missing or corrupted.".localized, title: "Cannot Open File".localized, handler: nil)
       }
     }
+  }
+  
+  private func exportPaperAsPNG() {
+    
+  }
+  
+  private func exportPaperAsPDF() {
+    
+  }
+  
+  private func exportPaperAsAudio() {
+    
   }
 }
 

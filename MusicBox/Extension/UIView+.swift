@@ -44,3 +44,11 @@ extension UIView {
     }
 }
 
+extension UIView {
+  func toImage() -> UIImage? {
+    let renderer = UIGraphicsImageRenderer(size: self.bounds.size)
+    return renderer.image { context in
+      self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+    }
+  }
+}

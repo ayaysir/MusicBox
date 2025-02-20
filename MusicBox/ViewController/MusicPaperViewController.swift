@@ -439,9 +439,7 @@ class MusicPaperViewController: UIViewController {
   }
   
   private func initPanel() {
-    
     panelView = PaperOptionPanelView()
-    panelView.setEditMode(allowEdit)
     panelView.delegate = self
     panelView.clipsToBounds = true
     view.addSubview(panelView)
