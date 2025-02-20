@@ -74,6 +74,7 @@ class CreateNewPaperTableViewController: UITableViewController {
   @IBOutlet weak var imgvCustomImage3: UIImageView!
   @IBOutlet weak var imgAlbumart: UIImageView!
   
+  private var isCommentNotWritten = true
   private var thumbnailImage: UIImage?
   private var imagePickerController = UIImagePickerController()
   
@@ -144,6 +145,8 @@ class CreateNewPaperTableViewController: UITableViewController {
       
       // 코멘트
       txvComment.text = "paperinfo_comment_placeholder".localized
+      txvComment.textColor = .lightGray
+      txvComment.delegate = self
       
       // 기본 닉네임
       if getCurrentUser() != nil, let userUID = getCurrentUserUID() {
@@ -715,6 +718,7 @@ extension CreateNewPaperTableViewController: UIImagePickerControllerDelegate, UI
 }
 
 extension CreateNewPaperTableViewController: UITextFieldDelegate {
+  // MARK: - UITextFieldDelegate
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     switch textField {
@@ -753,6 +757,16 @@ extension CreateNewPaperTableViewController: UITextFieldDelegate {
     }
     
     return true
+  }
+}
+
+extension CreateNewPaperTableViewController: UITextViewDelegate {
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if isCommentNotWritten && pageMode == .create {
+      textView.text = ""
+      textView.textColor = .label
+      isCommentNotWritten = false
+    }
   }
 }
 
