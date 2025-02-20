@@ -110,7 +110,7 @@ class PaperInfoTableViewController: UITableViewController {
     }
     
     guard paper.isAllowOthersToEdit else {
-      simpleAlert(self, message: "Editing is not possible because the creator did not allow editing.".localized, title: "Cannot Edit", handler: nil)
+      simpleAlert(self, message: "Editing is not possible because the creator did not allow editing.".localized, title: "Cannot Edit".localized, handler: nil)
       return
     }
     
@@ -203,7 +203,7 @@ class PaperInfoTableViewController: UITableViewController {
         musicPaperVC.mode = mode
         self.present(musicPaperVC, animated: true, completion: nil)
       } else {
-        simpleAlert(self, message: "The paper file is missing or corrupted.", title: "Cannot Open File", handler: nil)
+        simpleAlert(self, message: "The paper file is missing or corrupted.".localized, title: "Cannot Open File".localized, handler: nil)
       }
     }
   }

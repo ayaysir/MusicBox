@@ -69,7 +69,7 @@
 "Delete" = "삭제";
 
 "The post update is complete." = "게시글 업데이트가 완료되었습니다.";
-"Update Completed" = "업로드 완료";
+"Update Completed" = "업데이트 완료";
 
 "Are you sure you want to withdrawal membership? If you cancel your membership, your member information is deleted and cannot be recovered. Posts written are not deleted." = "회원탈퇴를 하시겠습니까? 회원탈퇴를 하시면 회원정보가 삭제되며 복구가 불가능합니다. 작성한 글은 삭제되지 않습니다.";
 "Withdrawal Membership" = "회원 탈퇴";
@@ -150,3 +150,20 @@
 /* 2025-02-20 */
 "what_is_anacrusis_content" = "못갖춘마디는 악곡[또는 섹션 또는 구절]이 1이 아닌 박자에서 시작할 수 있는 불완전한 마디입니다.\n\n일반적으로 못갖춘마디가 없는 경우가 많으므로 0을 입력합니다.\n\n반대의 경우 비트의 세분화에서 가장 작은 영역의 번호를 입력합니다. 예를 들어, 예제로 제공된 Nocturne의 경우 3/4 박자입니다. 여기서 첫 번째 박자를 못갖춘마디로 설정하고 싶습니다. 1박자를 가장 작은 단위로 세분화하면 4개의 16분 음표로 구성됩니다. 따라서 4를 입력합니다.";
 "paperinfo_comment_placeholder" = "코멘트를 입력하면 다른 사람들에게 정보를 더 쉽게 알릴 수 있습니다.";
+
+"Load user's nickname..." = "유저 닉네임을 불러오고 있습니다...";
+"Unable to Create" = "생성할 수 없습니다.";
+"Unable to Update" = "업데이트할 수 없습니다.";
+"The file name format is incorrect. Please rewrite the file name." = "파일 이름 형식이 올바르지 않습니다. 파일 이름을 다시 작성해주세요.";
+"Please enter the title." = "제목을 입력해주세요.";
+"The title must be 50 characters or less." = "제목은 50자 이하여야 합니다.";
+"Please specify the BPM within the range of 10 - 400." = "BPM을 10~400 범위 내에서 지정해주세요.";
+"'Incomplete Measure' must be specified in the range of 0 - 7 beats with a length corresponding to a sixteenth note." = "'불완전 마디'는 16분 음표 길이에 해당하는 0~7 박자 범위 내에서 지정해야 합니다.";
+"Please enter the artist name." = "아티스트 이름을 입력해주세요.";
+"Artist name must be 30 characters or less." = "아티스트 이름은 30자 이하여야 합니다.";
+"The name of the paper creator must be 30 characters or less." = "악보 작성자의 이름은 30자 이하여야 합니다.";
+"Paper comments must be limited to 5000 characters." = "악보 코멘트는 5000자 이내로 입력해야 합니다.";
+"Camera cannot be used." = "카메라를 사용할 수 없습니다.";
+"The paper file is missing or corrupted." = "페이퍼 파일의 정보가 소실되었습니다.";
+"Cannot Open File" = "파일을 열 수 없음";
+"Paper information update is complete." = "페이퍼 정보 업데이트가 완료되었습니다.";

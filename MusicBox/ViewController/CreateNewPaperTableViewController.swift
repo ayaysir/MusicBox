@@ -147,7 +147,7 @@ class CreateNewPaperTableViewController: UITableViewController {
       
       // 기본 닉네임
       if getCurrentUser() != nil, let userUID = getCurrentUserUID() {
-        SwiftSpinner.show("Load user's nickname...")
+        SwiftSpinner.show("Load user's nickname...".localized)
         getDatabaseRef().child("users/\(userUID)/nickname").getData { error, snapshot in
           SwiftSpinner.hide(nil)
           
@@ -380,7 +380,7 @@ class CreateNewPaperTableViewController: UITableViewController {
   
   func validateFieldValues() -> Bool {
     
-    let alertTitle = "Unable to \(pageMode == .create ? "Create" : "Update")"
+    let alertTitle = "Unable to \(pageMode == .create ? "Create": "Update")".localized
     
     // file name
     // guard txfFileName.text != "" else {
@@ -398,7 +398,7 @@ class CreateNewPaperTableViewController: UITableViewController {
       range: nil,
       locale: nil
     ) != nil else {
-      simpleAlert(self, message: "The file name format is incorrect. Please rewrite the file name.", title: alertTitle) { action in
+      simpleAlert(self, message: "The file name format is incorrect. Please rewrite the file name.".localized, title: alertTitle) { action in
         self.txfFileName.becomeFirstResponder()
       }
       return false
@@ -406,14 +406,14 @@ class CreateNewPaperTableViewController: UITableViewController {
     
     // title
     guard txfTitle.text! != "" else {
-      simpleAlert(self, message: "Please enter the title.", title: alertTitle) { action in
+      simpleAlert(self, message: "Please enter the title.".localized, title: alertTitle) { action in
         self.txfTitle.becomeFirstResponder()
       }
       return false
     }
     
     guard txfTitle.text!.count <= 50 else {
-      simpleAlert(self, message: "The title must be 50 characters or less.", title: alertTitle) { action in
+      simpleAlert(self, message: "The title must be 50 characters or less.".localized, title: alertTitle) { action in
         self.txfTitle.becomeFirstResponder()
       }
       return false
@@ -424,7 +424,7 @@ class CreateNewPaperTableViewController: UITableViewController {
       return false
     }
     guard bpm >= 10 && bpm <= 400 else {
-      simpleAlert(self, message: "Please specify the BPM within the range of 10 - 400.", title: alertTitle) { action in
+      simpleAlert(self, message: "Please specify the BPM within the range of 10 - 400.".localized, title: alertTitle) { action in
         self.txfBpm.becomeFirstResponder()
       }
       return false
@@ -435,7 +435,7 @@ class CreateNewPaperTableViewController: UITableViewController {
       return false
     }
     guard imBeat >= 0 && imBeat <= 7 else {
-      simpleAlert(self, message: "'Incomplete Measure' must be specified in the range of 0 - 7 beats with a length corresponding to a sixteenth note.", title: alertTitle) { action in
+      simpleAlert(self, message: "'Incomplete Measure' must be specified in the range of 0 - 7 beats with a length corresponding to a sixteenth note.".localized, title: alertTitle) { action in
         self.txfIncompleteMeasureBeat.becomeFirstResponder()
       }
       return false
@@ -443,21 +443,21 @@ class CreateNewPaperTableViewController: UITableViewController {
     
     // original artist, paper maker
     guard txfOriginalArtist.text! != "" else {
-      simpleAlert(self, message: "Please enter the artist name.", title: alertTitle) { action in
+      simpleAlert(self, message: "Please enter the artist name.".localized, title: alertTitle) { action in
         self.txfOriginalArtist.becomeFirstResponder()
       }
       return false
     }
     
     guard txfOriginalArtist.text!.count <= 30 else {
-      simpleAlert(self, message: "Artist name must be 30 characters or less.", title: alertTitle) { action in
+      simpleAlert(self, message: "Artist name must be 30 characters or less.".localized, title: alertTitle) { action in
         self.txfOriginalArtist.becomeFirstResponder()
       }
       return false
     }
     
     guard txfPaperMaker.text!.count <= 30 else {
-      simpleAlert(self, message: "The name of the paper creator must be 30 characters or less.", title: alertTitle) { action in
+      simpleAlert(self, message: "The name of the paper creator must be 30 characters or less.".localized, title: alertTitle) { action in
         self.txfPaperMaker.becomeFirstResponder()
       }
       return false
@@ -465,7 +465,7 @@ class CreateNewPaperTableViewController: UITableViewController {
     
     // comment
     guard txvComment.text!.count <= 5000 else {
-      simpleAlert(self, message: "Paper comments must be limited to 5000 characters.", title: alertTitle) { action in
+      simpleAlert(self, message: "Paper comments must be limited to 5000 characters.".localized, title: alertTitle) { action in
         self.txvComment.becomeFirstResponder()
       }
       return false
