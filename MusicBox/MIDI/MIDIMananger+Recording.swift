@@ -8,28 +8,65 @@
 import AVFoundation
 
 extension MIDIManager {
-  func startRecording(outputURL: URL, completion: @escaping (Bool) -> Void) {
-    do {
-      let format = engine.mainMixerNode.outputFormat(forBus: 0)
-      let file = try AVAudioFile(forWriting: outputURL, settings: format.settings)
-
-      engine.mainMixerNode.installTap(onBus: 0, bufferSize: 4096, format: format) { (buffer, _) in
-        do {
-          try file.write(from: buffer)
-        } catch {
-          print("Error writing audio buffer: \(error)")
-        }
-      }
-
-      try engine.start()
-      midiPlayer?.play {
-        self.engine.mainMixerNode.removeTap(onBus: 0)
-        self.engine.stop()
-        completion(true)
-      }
-    } catch {
-      print("Error starting recording: \(error)")
-      completion(false)
+  func exportToWAV(outputURL: URL) async -> Bool {
+    /*
+     var engine = AVAudioEngine()
+     var sampler = AVAudioUnitSampler()
+     var sequencer: AVAudioSequencer!
+     */
+    
+    engine.attach(sampler)
+    engine.connect(sampler, to: engine.mainMixerNode, format: nil)
+    
+    guard let soundbankURL, let data = musicSequenceToData(sequence: musicSequence) else {
+      return false
     }
+    
+    do {
+      try sampler.loadInstrument(at: soundbankURL)
+      sequencer = .init(audioEngine: engine)
+      try sequencer.load(from: data, options: .smf_ChannelsToTracks)
+    } catch {
+      print(#function, "Sequencer init error:", error)
+    }
+    
+    guard let sequencer else {
+      return false
+    }
+    
+   // do {
+   //   let audioSession = AVAudioSession.sharedInstance()
+   //   try audioSession.setCategory(.playAndRecord, mode: .default, options: [])
+   //   try audioSession.setActive(true)
+   // } catch {
+   //   print(#function, "AudioSession error:", error)
+   // }
+    
+    do {
+      engine.prepare()
+      // try engine.start()
+      let format = engine.outputNode.outputFormat(forBus: 0)
+      let audioFile = try AVAudioFile(forWriting: outputURL, settings: format.settings)
+      
+      let bufferSize: AVAudioFrameCount = 4096
+      let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: bufferSize)!
+      
+      // try sequencer.start()/\
+      sequencer.currentPositionInBeats = 0
+      
+      while sequencer.currentPositionInBeats < sequencer.tracks.reduce(0, { max($0, $1.lengthInBeats) }) {
+        try engine.renderOffline(bufferSize, to: buffer)
+        try audioFile.write(from: buffer)
+      }
+      
+      // sequencer.stop()
+      engine.stop()
+      
+      return true
+    } catch {
+      print(#function, "convert error:", error)
+    }
+    
+    return false
   }
 }

@@ -32,6 +32,8 @@ class PaperInfoTableViewController: UITableViewController {
   @IBOutlet weak var btnPreplay: UIButton!
   var midiManager = MIDIManager()
   
+  private var exportFileURL: URL?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -238,7 +240,50 @@ class PaperInfoTableViewController: UITableViewController {
   }
   
   private func exportPaperAsAudio() {
+    // 1️⃣ WAV 파일을 저장할 임시 경로 설정
+    let tempDir = FileManager.default.temporaryDirectory
+    exportFileURL = tempDir.appendingPathComponent("exported_audio.wav")
     
+    /*
+     
+     */
+    
+    guard let data = midiManager.musicSequenceToData(sequence: midiManager.musicSequence) else {
+      print("midi data is nil")
+      return
+    }
+
+    // guard let url = Bundle.main.url(forResource: "Allian1", withExtension: "mid"),
+    //       let data = try? Data(contentsOf: url) else {
+    //   return
+    // }
+    
+    // // 3️⃣ UIActivityViewController를 통해 공유
+    // try? data.write(to: exportFileURL!)
+    // let activityVC = UIActivityViewController(activityItems: [exportFileURL!], applicationActivities: nil)
+    // 
+    // // 4️⃣ iPad에서 팝업이 제대로 뜨도록 설정 (iPad 대응)
+    // if let topVC = UIApplication.shared.keyWindow?.rootViewController {
+    //   activityVC.popoverPresentationController?.sourceView = topVC.view
+    //   activityVC.popoverPresentationController?.sourceRect = CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
+    //   activityVC.popoverPresentationController?.permittedArrowDirections = []
+    //   topVC.present(activityVC, animated: true, completion: nil)
+    // }
+    
+    do {
+      let bouncer = try MIDIFileBouncer(
+        midiFileData: data,
+        soundfontURL: SOUNDBANK_URL!
+      )
+      
+      bouncer.delegate = self
+      
+      DispatchQueue.global(qos: .background).async {
+        try? bouncer.bounce(to: self.exportFileURL!)
+      }
+    } catch {
+      print("bouncer error:", error)
+    }
   }
 }
 
@@ -258,4 +303,40 @@ extension PaperInfoTableViewController: MusicPaperVCDelegate {
 
 extension PaperInfoTableViewController: BannerViewDelegate {
   func bannerViewDidReceiveAd(_ bannerView: BannerView) {}
+}
+
+extension PaperInfoTableViewController: MIDIFileBouncerDelegate {
+  func bounceProgress(progress: Double, currentTime: TimeInterval) {
+    print(#function, progress, currentTime)
+    
+    SwiftSpinner.show(progress: progress / 100.0, title: "Converting...")
+  }
+  
+  func bounceError(error: MIDIBounceError) {
+    print(#function, error)
+  }
+  
+  func bounceCompleted() {
+    print(#function)
+    SwiftSpinner.hide()
+    
+    guard let exportFileURL else {
+      print("exportFileURL is nil")
+      return
+    }
+    
+    // 3️⃣ UIActivityViewController를 통해 공유
+    let activityVC = UIActivityViewController(
+      activityItems: [exportFileURL],
+      applicationActivities: nil
+    )
+    
+    // 4️⃣ iPad에서 팝업이 제대로 뜨도록 설정 (iPad 대응)
+    if let topVC = UIApplication.shared.keyWindow?.rootViewController {
+      activityVC.popoverPresentationController?.sourceView = topVC.view
+      activityVC.popoverPresentationController?.sourceRect = CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
+      activityVC.popoverPresentationController?.permittedArrowDirections = []
+      topVC.present(activityVC, animated: true, completion: nil)
+    }
+  }
 }

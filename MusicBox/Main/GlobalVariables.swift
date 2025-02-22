@@ -24,3 +24,9 @@ let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 
 /// 배너 광고 높이
 let adBannerHeight: CGFloat = 50
+
+/// 기본 사운드폰트 URL
+let SOUNDBANK_URL = Bundle.main.url(
+  forResource: "GeneralUser GS MuseScore v1.442",
+  withExtension: "sf2"
+)

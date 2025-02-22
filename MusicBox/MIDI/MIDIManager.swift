@@ -9,9 +9,10 @@ import AVFoundation
 
 class MIDIManager {
   var midiPlayer: AVMIDIPlayer?
-  var soundbank: URL?
+  var soundbankURL: URL?
   var engine = AVAudioEngine()
   var sampler = AVAudioUnitSampler()
+  var sequencer: AVAudioSequencer!
   
   var musicPlayer: MusicPlayer?
   
@@ -28,19 +29,18 @@ class MIDIManager {
   
   /// 기본 사운드폰트 사용
   convenience init() {
-    let generalSoundbank = Bundle.main.url(forResource: "GeneralUser GS MuseScore v1.442", withExtension: "sf2")
-    self.init(soundbank: generalSoundbank)
+    self.init(soundbank: SOUNDBANK_URL)
   }
   
   init(soundbank: URL?) {
-    self.soundbank = soundbank
+    self.soundbankURL = soundbank
     self.musicSequence = createMusicSequence_바둑이()
     createAVMIDIPlayer(sequence: self.musicSequence)
     self.musicPlayer = createMusicPlayer(musicSequence)
   }
   
   deinit {
-    self.soundbank = nil
+    self.soundbankURL = nil
     self.musicSequence = nil
     self.musicPlayer = nil
     self.midiPlayer = nil
@@ -66,7 +66,7 @@ class MIDIManager {
   }
   
   func createAVMIDIPlayer(sequence musicSequence: MusicSequence) {
-    guard let bankURL = soundbank else {
+    guard let bankURL = soundbankURL else {
       fatalError("sound bank file not found.")
     }
     
@@ -95,7 +95,7 @@ extension MIDIManager {
       fatalError("midi file not found.")
     }
     
-    guard let bankURL = soundbank else {
+    guard let bankURL = soundbankURL else {
       fatalError("sound bank file not found.")
     }
     
