@@ -169,10 +169,10 @@
 "Qs4-1a-Mkl.text" = "이메일";
 
 /* Class = "UIButton"; configuration.title = "Share"; ObjectID = "R5W-ns-hpF"; */
-"R5W-ns-hpF.configuration.title" = "공유";
+"R5W-ns-hpF.configuration.title" = ".musicbox 파일로 공유";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "R5W-ns-hpF"; */
-"R5W-ns-hpF.normalTitle" = "공유";
+"R5W-ns-hpF.normalTitle" = ".musicbox 파일로 공유";
 
 /* Class = "UINavigationItem"; title = "User Information"; ObjectID = "SXq-6Y-iz9"; */
 "SXq-6Y-iz9.title" = "사용자 정보";

@@ -1967,7 +1967,7 @@ Arrangey by bcd</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="y0k-Oi-qlw">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="y0k-Oi-qlw">
                                         <rect key="frame" x="0.0" y="437.5" width="414" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y0k-Oi-qlw" id="4f7-wp-SBZ">
@@ -1997,8 +1997,35 @@ Arrangey by bcd</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="6xD-CZ-1mz">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="OqB-AS-ssk">
                                         <rect key="frame" x="0.0" y="472.5" width="414" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OqB-AS-ssk" id="PYL-Dh-wJ4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcB-lV-4Lc">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="35"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btnActDeleteFile:" destination="qRt-PD-Ker" eventType="touchUpInside" id="Kx6-3M-HLQ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="dcB-lV-4Lc" secondAttribute="bottom" id="R9E-DW-K6A"/>
+                                                <constraint firstAttribute="trailing" secondItem="dcB-lV-4Lc" secondAttribute="trailing" constant="20" symbolic="YES" id="bw8-Tk-vgl"/>
+                                                <constraint firstItem="dcB-lV-4Lc" firstAttribute="leading" secondItem="PYL-Dh-wJ4" secondAttribute="leading" constant="20" symbolic="YES" id="crb-Jo-flJ"/>
+                                                <constraint firstItem="dcB-lV-4Lc" firstAttribute="top" secondItem="PYL-Dh-wJ4" secondAttribute="top" id="rCu-U0-tUL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="6xD-CZ-1mz">
+                                        <rect key="frame" x="0.0" y="507.5" width="414" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6xD-CZ-1mz" id="mjS-at-B6j">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -2027,8 +2054,8 @@ Arrangey by bcd</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="t1w-8N-2WO">
-                                        <rect key="frame" x="0.0" y="507.5" width="414" height="35"/>
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="t1w-8N-2WO">
+                                        <rect key="frame" x="0.0" y="542.5" width="414" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t1w-8N-2WO" id="HlN-bL-crb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -2054,33 +2081,6 @@ Arrangey by bcd</string>
                                                 <constraint firstAttribute="trailing" secondItem="NJX-ec-K1L" secondAttribute="trailing" constant="20" symbolic="YES" id="SfL-Ri-tvf"/>
                                                 <constraint firstItem="NJX-ec-K1L" firstAttribute="leading" secondItem="HlN-bL-crb" secondAttribute="leading" constant="20" symbolic="YES" id="eGd-E7-Y0B"/>
                                                 <constraint firstItem="NJX-ec-K1L" firstAttribute="top" secondItem="HlN-bL-crb" secondAttribute="top" id="tBe-oN-zLF"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="OqB-AS-ssk">
-                                        <rect key="frame" x="0.0" y="542.5" width="414" height="35"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OqB-AS-ssk" id="PYL-Dh-wJ4">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcB-lV-4Lc">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="35"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Delete">
-                                                        <color key="titleColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="btnActDeleteFile:" destination="qRt-PD-Ker" eventType="touchUpInside" id="Kx6-3M-HLQ"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="dcB-lV-4Lc" secondAttribute="bottom" id="R9E-DW-K6A"/>
-                                                <constraint firstAttribute="trailing" secondItem="dcB-lV-4Lc" secondAttribute="trailing" constant="20" symbolic="YES" id="bw8-Tk-vgl"/>
-                                                <constraint firstItem="dcB-lV-4Lc" firstAttribute="leading" secondItem="PYL-Dh-wJ4" secondAttribute="leading" constant="20" symbolic="YES" id="crb-Jo-flJ"/>
-                                                <constraint firstItem="dcB-lV-4Lc" firstAttribute="top" secondItem="PYL-Dh-wJ4" secondAttribute="top" id="rCu-U0-tUL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

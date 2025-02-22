@@ -14,7 +14,7 @@ struct AdManager {
   /// 내부 테스트용 변수: true인 경우 광고 내보냄
   static private let productMode: Bool = {
 #if DEBUG
-    false
+    true
 #else
     true
 #endif
