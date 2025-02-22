@@ -19,3 +19,5 @@
 /* 2025-02-20 */
 "what_is_anacrusis_content" = "An anacrusis is an incomplete measure that allows the composition [or section or phrase] to start on a beat other than one.\n\nIn general, there are many cases where there is no Anacrusis, so enter 0.\n\nIn the opposite case, enter the number of the smallest area in the subdivision of the bit. For example, in the case of Nocturne provided as an example, it is a 3/4 beat. We would like to set the first beat to anacrusis here. If you subdivide 1 beat into the smallest unit, it consists of 4 16-minute notes. Therefore, enter 4.";
 "paperinfo_comment_placeholder" = "Please entering the comment makes it easier to tell information to other people.";
+
+"description_IntervalMaster" = "Master intervals effortlessly with fun quizzes, sheet music, and sound! Track your progress with stats, customize settings, and speed up your learning!";

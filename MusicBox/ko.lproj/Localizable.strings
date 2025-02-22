@@ -169,4 +169,5 @@
 "Paper information update is complete." = "페이퍼 정보 업데이트가 완료되었습니다.";
 
 "[Purchased]" = "[구입 완료]";
-"[Not Purchased]" = "[미구입]"; 
+"[Not Purchased]" = "[미구입]";
+"description_IntervalMaster" = "음정 공부를 퀴즈, 악보, 소리와 함께 쉽게 마스터하세요!";
