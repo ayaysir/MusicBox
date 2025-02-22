@@ -14,8 +14,8 @@ import SwiftSpinner
 class SettingTableViewController: UITableViewController {
   private var bannerView: BannerView!
   
-  private var SECTION_CONFIG = 0
-  private var SECTION_IAP = 1
+  private var SECTION_CONFIG = 1
+  private var SECTION_IAP = 0
   private var SECTION_INFOS = 2
   private var SECTION_LINKS = 3
   private let SECTION_BANNER = 4
@@ -133,13 +133,18 @@ extension SettingTableViewController {
     let cell = super.tableView(tableView, cellForRowAt: indexPath)
     
     if indexPath.section == SECTION_IAP,
+       let iapProducts, !iapProducts.isEmpty,
+       indexPath.row < iapProducts.count,
        let firstLabel = cell.contentView.subviews[0] as? UILabel,
-       let iapProducts, !iapProducts.isEmpty, indexPath.row != 0 {
-      let index = indexPath.row - 1
+       let secondLabel = cell.contentView.subviews[1] as? UILabel {
+      let index = indexPath.row
       let currentProduct = iapProducts[index]
       let isPurchased = InAppProducts.helper.isProductPurchased(currentProduct.productIdentifier)
-      firstLabel.text = isPurchased ? "[구입 완료] " : ""
-      firstLabel.text! += iapProducts[index].localizedTitle
+      
+      firstLabel.text = iapProducts[index].localizedTitle
+      secondLabel.text = isPurchased ? "[Purchased]".localized : "[Not Purchased]".localized
+      firstLabel.textColor = isPurchased ? .darkGray : nil
+      secondLabel.textColor = isPurchased ? .systemGreen : .systemGray
       
       if let localizedPrice = iapProducts[index].localizedPrice {
         firstLabel.text! += " (\(localizedPrice))"

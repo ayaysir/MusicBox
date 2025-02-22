@@ -167,3 +167,6 @@
 "The paper file is missing or corrupted." = "페이퍼 파일의 정보가 소실되었습니다.";
 "Cannot Open File" = "파일을 열 수 없음";
 "Paper information update is complete." = "페이퍼 정보 업데이트가 완료되었습니다.";
+
+"[Purchased]" = "[구입 완료]";
+"[Not Purchased]" = "[미구입]"; 
