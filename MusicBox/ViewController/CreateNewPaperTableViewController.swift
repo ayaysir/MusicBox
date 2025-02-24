@@ -229,7 +229,11 @@ class CreateNewPaperTableViewController: UITableViewController {
   }
   
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    changeTSButtonColor()
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    DispatchQueue.main.async() {
+      self.changeTSButtonColor(forceInvert: true)
+    }
   }
   
   @objc func textFieldDidChange(_ textField: UITextField) {
@@ -538,10 +542,15 @@ class CreateNewPaperTableViewController: UITableViewController {
     return text.components(separatedBy: invalidCharacters).joined(separator: "_")
   }
   
-  private func changeTSButtonColor() {
+  private func changeTSButtonColor(forceInvert: Bool = false) {
     if let cell = tableView.cellForRow(at: .init(row: 0, section: SECTION_TS)) {
       cell.contentView.subviews.forEach { button in
         if let button = button as? UIButton {
+          if forceInvert {
+            button.invertImage()
+            return
+          }
+          
           button.clipsToBounds = true
           button.layer.cornerRadius = 4
           
