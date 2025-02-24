@@ -81,7 +81,8 @@ class CreateNewPaperTableViewController: UITableViewController {
   private var selectedUpperTS: Int = 4
   private var selectedLowerTS: Int = 4
   
-  private let AD_SPACE_SECTION = 9
+  private let SECTION_AD_SPACE = 9
+  private let SECTION_TS = 3
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -216,9 +217,19 @@ class CreateNewPaperTableViewController: UITableViewController {
       bannerView.delegate = self
     }
   }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    changeTSButtonColor()
+  }
   
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     bannerView?.fitInView(self)
+  }
+  
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    changeTSButtonColor()
   }
   
   @objc func textFieldDidChange(_ textField: UITextField) {
@@ -526,12 +537,30 @@ class CreateNewPaperTableViewController: UITableViewController {
     let invalidCharacters = CharacterSet(charactersIn: "\\/:;,*?\"<>|")
     return text.components(separatedBy: invalidCharacters).joined(separator: "_")
   }
+  
+  private func changeTSButtonColor() {
+    if let cell = tableView.cellForRow(at: .init(row: 0, section: SECTION_TS)) {
+      cell.contentView.subviews.forEach { button in
+        if let button = button as? UIButton {
+          button.clipsToBounds = true
+          button.layer.cornerRadius = 4
+          
+          switch traitCollection.userInterfaceStyle {
+          case .unspecified, .light:
+            button.invertImage()
+          default:
+            break
+          }
+        }
+      }
+    }
+  }
 }
 
 extension CreateNewPaperTableViewController {
   // MARK: - 배너 광고 관련
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    if section == AD_SPACE_SECTION {
+    if section == SECTION_AD_SPACE {
       return 0.1
     }
     
@@ -539,7 +568,7 @@ extension CreateNewPaperTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == AD_SPACE_SECTION {
+    if indexPath.section == SECTION_AD_SPACE {
       return 0.1
     }
     
@@ -550,7 +579,7 @@ extension CreateNewPaperTableViewController {
     _ tableView: UITableView,
     heightForFooterInSection section: Int
   ) -> CGFloat {
-    if section == AD_SPACE_SECTION {
+    if section == SECTION_AD_SPACE {
       return AdManager.isReallyShowAd ? 30 : 0
     }
     
@@ -561,7 +590,7 @@ extension CreateNewPaperTableViewController {
     _ tableView: UITableView,
     numberOfRowsInSection section: Int
   ) -> Int {
-    if section == AD_SPACE_SECTION {
+    if section == SECTION_AD_SPACE {
       return 0
     }
     

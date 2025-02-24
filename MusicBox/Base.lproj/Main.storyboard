@@ -2454,17 +2454,8 @@ Arrangey by bcd</string>
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruE-qe-TGG">
-                                                    <rect key="frame" x="20" y="11" width="18" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="4_4"/>
-                                                    <connections>
-                                                        <action selector="btnActTimeSignature:" destination="lFp-ds-kYG" eventType="touchUpInside" id="THf-de-EfJ"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UFF-aw-hpn">
-                                                    <rect key="frame" x="60" y="11" width="18" height="36"/>
+                                                    <rect key="frame" x="42" y="8" width="25" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="3_4"/>
@@ -2473,7 +2464,7 @@ Arrangey by bcd</string>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9u-n2-okS">
-                                                    <rect key="frame" x="100" y="11" width="18" height="36"/>
+                                                    <rect key="frame" x="72" y="8" width="25" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="2_4"/>
@@ -2482,7 +2473,7 @@ Arrangey by bcd</string>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAy-yY-Gxf">
-                                                    <rect key="frame" x="140" y="11" width="18" height="36"/>
+                                                    <rect key="frame" x="102" y="8" width="25" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="6_8"/>
@@ -2491,7 +2482,7 @@ Arrangey by bcd</string>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5b-IH-Xc9">
-                                                    <rect key="frame" x="180" y="11" width="18" height="36"/>
+                                                    <rect key="frame" x="132" y="8" width="25" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="2_2"/>
@@ -2500,12 +2491,23 @@ Arrangey by bcd</string>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsh-7J-2b4">
-                                                    <rect key="frame" x="220" y="11" width="18" height="36"/>
+                                                    <rect key="frame" x="162" y="8" width="25" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="6_16"/>
                                                     <connections>
                                                         <action selector="btnActTimeSignature:" destination="lFp-ds-kYG" eventType="touchUpInside" id="Brs-mn-r6t"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruE-qe-TGG">
+                                                    <rect key="frame" x="12" y="8" width="25" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="4_4">
+                                                        <color key="titleColor" systemColor="labelColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btnActTimeSignature:" destination="lFp-ds-kYG" eventType="touchUpInside" id="THf-de-EfJ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2736,7 +2738,7 @@ Arrangey by bcd</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uN4-Vt-oIv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-277" y="-859"/>
+            <point key="canvasLocation" x="-278.26086956521743" y="-859.15178571428567"/>
         </scene>
         <!--What Is Anacrusis View Controller-->
         <scene sceneID="eri-J4-0dy">
@@ -3496,12 +3498,12 @@ In the opposite case, enter the number of the smallest area in the subdivision o
         <segue reference="Sqy-mW-WLH"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="2_2" width="34" height="79"/>
-        <image name="2_4" width="33" height="79"/>
-        <image name="3_4" width="33" height="79"/>
-        <image name="4_4" width="34" height="79"/>
-        <image name="6_16" width="50" height="79"/>
-        <image name="6_8" width="31" height="79"/>
+        <image name="2_2" width="50" height="80"/>
+        <image name="2_4" width="50" height="80"/>
+        <image name="3_4" width="50" height="81"/>
+        <image name="4_4" width="50" height="80"/>
+        <image name="6_16" width="50" height="80"/>
+        <image name="6_8" width="50" height="80"/>
         <image name="anacrusis" width="916" height="694"/>
         <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="93"/>
