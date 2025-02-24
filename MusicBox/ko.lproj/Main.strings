@@ -163,7 +163,7 @@
 "QGg-qA-eAc.text" = "Robert W. Smith";
 
 /* Class = "UITableViewSection"; headerTitle = "Not Available Now"; ObjectID = "QR4-p3-RXd"; */
-"QR4-p3-RXd.headerTitle" = "앱 내 결제";
+"QR4-p3-RXd.headerTitle" = "앱 내 구매";
 
 /* Class = "UILabel"; text = "Email"; ObjectID = "Qs4-1a-Mkl"; */
 "Qs4-1a-Mkl.text" = "이메일";

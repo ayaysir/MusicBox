@@ -43,10 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Override point for customization after application launch.
     
-    // // IAP Test only - Must be removed when distributing
+    // **IAP Test only** - Must be removed when distributing
+    #if DEBUG
     // if let firstProduct = InAppProducts.productIDs.first {
-    //     UserDefaults.standard.set(false, forKey: firstProduct)
+    //   UserDefaults.standard.set(false, forKey: firstProduct)
     // }
+    #endif
     
     // Initialize the Google Mobile Ads SDK.
     FirebaseApp.configure()

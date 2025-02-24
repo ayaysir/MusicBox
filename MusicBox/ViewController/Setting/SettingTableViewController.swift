@@ -55,7 +55,7 @@ class SettingTableViewController: UITableViewController {
 
 extension SettingTableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print(indexPath)
+    // print(indexPath)
     if indexPath.section == SECTION_CONFIG {
       switch indexPath.row {
       case 0:
@@ -90,12 +90,21 @@ extension SettingTableViewController {
       
       tableView.deselectRow(at: indexPath, animated: false)
     } else if indexPath.section == SECTION_IAP {
+      guard Reachability.isConnectedToNetwork(),
+            let iapProducts else {
+        simpleAlert(
+          self,
+          message: "To use the in-app purchase feature, please ensure that your device is connected to the internet.".localized,
+          title: "In-app Purchase".localized,
+          handler: nil
+        )
+        return
+      }
+      
       switch indexPath.row {
-      case 1...:
-        if let iapProducts {
-          purchaseIAP(productID: iapProducts[indexPath.row - 1].productIdentifier)
-        }
-      case 0:
+      case 0..<iapProducts.count:
+        purchaseIAP(productID: iapProducts[indexPath.row].productIdentifier)
+      case iapProducts.count:
         restoreIAP()
       default:
         break
