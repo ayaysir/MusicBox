@@ -174,3 +174,7 @@
 
 "In-app Purchase" = "앱 내 구매";
 "To use the in-app purchase feature, please ensure that your device is connected to the internet." = "앱 내 구매 관련 기능을 이용하려면 인터넷에 연결되어 있어야 합니다.";
+
+"Select a Export File Format" = "파일 포맷 선택";
+"MIDI File (*.mid)" = "🎹 MIDI 파일 (*.mid)";
+"Cancel" = "취소";

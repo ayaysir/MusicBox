@@ -25,10 +25,7 @@ class PaperInfoTableViewController: UITableViewController {
   @IBOutlet weak var btnUpdateInformation: UIButton!
   @IBOutlet weak var btnShare: UIButton!
   @IBOutlet weak var btnViewMode: UIButton!
-  @IBOutlet weak var btnExportAsPNG: UIButton!
-  @IBOutlet weak var btnExportAsPDF: UIButton!
-  @IBOutlet weak var btnExportAsMP3: UIButton!
-  
+  @IBOutlet weak var btnExportAs: UIButton!
   @IBOutlet weak var btnPreplay: UIButton!
   var midiManager = MIDIManager()
   
@@ -62,7 +59,6 @@ class PaperInfoTableViewController: UITableViewController {
   }
   
   private func initButtonsAppearance() {
-    
     let leftMargin: CGFloat = 3
     
     if #available(iOS 15.0, *) {
@@ -70,18 +66,14 @@ class PaperInfoTableViewController: UITableViewController {
       btnUpdateInformation.configuration?.imagePadding = leftMargin
       btnEditPaper.configuration?.imagePadding = leftMargin
       btnViewMode.configuration?.imagePadding = leftMargin
-      btnExportAsPNG.configuration?.imagePadding = leftMargin
-      btnExportAsPDF.configuration?.imagePadding = leftMargin
-      btnExportAsMP3.configuration?.imagePadding = leftMargin
+      btnExportAs.configuration?.imagePadding = leftMargin
     } else {
       // Fallback on earlier versions
       btnShare.titleEdgeInsets.left = leftMargin
       btnUpdateInformation.titleEdgeInsets.left = leftMargin
       btnEditPaper.titleEdgeInsets.left = leftMargin
       btnViewMode.titleEdgeInsets.left = leftMargin
-      btnExportAsPNG.titleEdgeInsets.left = leftMargin
-      btnExportAsPDF.titleEdgeInsets.left = leftMargin
-      btnExportAsMP3.titleEdgeInsets.left = leftMargin
+      btnExportAs.titleEdgeInsets.left = leftMargin
     }
   }
   
@@ -114,7 +106,6 @@ class PaperInfoTableViewController: UITableViewController {
   }
   
   @IBAction func btnActUpdatePaperinfo(_ sender: Any) {
-    
     guard let paper = selectedDocument?.paper else {
       return
     }
@@ -139,43 +130,34 @@ class PaperInfoTableViewController: UITableViewController {
   }
   
   @IBAction func btnActShare(_ sender: UIButton) {
-    
-    let activityViewController = UIActivityViewController(activityItems: [/* Items to be shared, */ selectedDocument!.fileURL, ActionExtensionBlockerItem()], applicationActivities: nil)
-    
-    // so that iPads won't crash
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      activityViewController.popoverPresentationController?.sourceView = self.view
-      activityViewController.popoverPresentationController?.sourceRect = sender.frame
+    guard let fileURL = selectedDocument?.fileURL else {
+      return
     }
     
-    // exclude some activity types from the list (optional)
-    activityViewController.excludedActivityTypes = [
-      .postToVimeo,
-      .postToWeibo,
-      .postToFlickr,
-      .postToTwitter,
-      .postToFacebook,
-      .postToTencentWeibo,
-      UIActivity.ActivityType(rawValue: "com.bgsmm.MusicBox")
-    ]
-    
-    // present the view controller
-    self.present(activityViewController, animated: true, completion: nil)
+    popupActivityController(button: sender, fileURL: fileURL)
   }
   
   @IBAction func btnActExport(_ sender: UIButton) {
-    switch sender.tag {
-    case 0:
-      exportPaperAsPNG()
-    case 1:
-      exportPaperAsPDF()
-    case 2:
-      exportPaperAsAudio()
-    default:
-      break
-    }
+    let alertController = UIAlertController(
+      title: "Select a Export File Format".localized,
+      message: nil,
+      preferredStyle: .alert
+    )
+    let actionExportAsMIDI = UIAlertAction(
+      title: "MIDI File (*.mid)".localized,
+      style: .default) { [unowned self] _ in
+        exportAsMIDI()
+      }
+    let actionCancel = UIAlertAction(
+      title: "Cancel".localized,
+      style: .cancel
+    )
+    
+    alertController.addAction(actionExportAsMIDI)
+    alertController.addAction(actionCancel)
+    
+    present(alertController, animated: true)
   }
-  
   
   @IBAction func btnActDeleteFile(_ sender: Any) {
     simpleDestructiveYesAndNo(self, message: "Are you sure you want to delete the file? Deleted files cannot be recovered.".localized, title: "Delete the File".localized
@@ -231,10 +213,6 @@ class PaperInfoTableViewController: UITableViewController {
     }
   }
   
-  private func exportPaperAsPNG() {
-    
-  }
-  
   private func exportPaperAsPDF() {
     
   }
@@ -244,31 +222,10 @@ class PaperInfoTableViewController: UITableViewController {
     let tempDir = FileManager.default.temporaryDirectory
     exportFileURL = tempDir.appendingPathComponent("exported_audio.wav")
     
-    /*
-     
-     */
-    
     guard let data = midiManager.musicSequenceToData(sequence: midiManager.musicSequence) else {
       print("midi data is nil")
       return
     }
-
-    // guard let url = Bundle.main.url(forResource: "Allian1", withExtension: "mid"),
-    //       let data = try? Data(contentsOf: url) else {
-    //   return
-    // }
-    
-    // // 3️⃣ UIActivityViewController를 통해 공유
-    // try? data.write(to: exportFileURL!)
-    // let activityVC = UIActivityViewController(activityItems: [exportFileURL!], applicationActivities: nil)
-    // 
-    // // 4️⃣ iPad에서 팝업이 제대로 뜨도록 설정 (iPad 대응)
-    // if let topVC = UIApplication.shared.keyWindow?.rootViewController {
-    //   activityVC.popoverPresentationController?.sourceView = topVC.view
-    //   activityVC.popoverPresentationController?.sourceRect = CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
-    //   activityVC.popoverPresentationController?.permittedArrowDirections = []
-    //   topVC.present(activityVC, animated: true, completion: nil)
-    // }
     
     do {
       let bouncer = try MIDIFileBouncer(
@@ -283,6 +240,28 @@ class PaperInfoTableViewController: UITableViewController {
       }
     } catch {
       print("bouncer error:", error)
+    }
+  }
+  
+  private func exportAsMIDI() {
+    guard let fileName = selectedDocument?.fileURL.lastPathComponent,
+          let data = midiManager.musicSequenceToData(sequence: midiManager.musicSequence) else {
+      return
+    }
+    
+    let tempDir = FileManager.default.temporaryDirectory
+    exportFileURL = tempDir.appendingPathComponent("\(fileName).mid")
+    
+    guard let exportFileURL else {
+      return
+    }
+    
+    do {
+      try data.write(to: exportFileURL)
+      
+      popupActivityController(button: btnExportAs, fileURL: exportFileURL)
+    } catch {
+      
     }
   }
 }
@@ -326,17 +305,36 @@ extension PaperInfoTableViewController: MIDIFileBouncerDelegate {
     }
     
     // 3️⃣ UIActivityViewController를 통해 공유
-    let activityVC = UIActivityViewController(
-      activityItems: [exportFileURL],
+    popupActivityController(button: btnExportAs, fileURL: exportFileURL)
+  }
+  
+  private func popupActivityController(
+    button: UIButton,
+    fileURL: URL,
+    completionHandler: (() -> Void)? = nil
+  ) {
+    let activityViewController = UIActivityViewController(
+      activityItems: [/* Items to be shared, */ fileURL, ],
       applicationActivities: nil
     )
     
-    // 4️⃣ iPad에서 팝업이 제대로 뜨도록 설정 (iPad 대응)
-    if let topVC = UIApplication.shared.keyWindow?.rootViewController {
-      activityVC.popoverPresentationController?.sourceView = topVC.view
-      activityVC.popoverPresentationController?.sourceRect = CGRect(x: topVC.view.bounds.midX, y: topVC.view.bounds.midY, width: 0, height: 0)
-      activityVC.popoverPresentationController?.permittedArrowDirections = []
-      topVC.present(activityVC, animated: true, completion: nil)
+    // so that iPads won't crash
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      activityViewController.popoverPresentationController?.sourceView = self.view
+      activityViewController.popoverPresentationController?.sourceRect = button.frame
     }
+    
+    // exclude some activity types from the list (optional)
+    activityViewController.excludedActivityTypes = [
+      .postToVimeo,
+      .postToWeibo,
+      .postToFlickr,
+      .postToTwitter,
+      .postToFacebook,
+      .postToTencentWeibo,
+      UIActivity.ActivityType(rawValue: "com.bgsmm.MusicBox")
+    ]
+    
+    present(activityViewController, animated: true, completion: completionHandler)
   }
 }

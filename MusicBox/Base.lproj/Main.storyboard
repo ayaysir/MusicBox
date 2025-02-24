@@ -1967,38 +1967,46 @@ Arrangey by bcd</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="y0k-Oi-qlw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="t1w-8N-2WO">
                                         <rect key="frame" x="0.0" y="437.5" width="414" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y0k-Oi-qlw" id="4f7-wp-SBZ">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t1w-8N-2WO" id="HlN-bL-crb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lfi-Jw-HpD">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-ec-K1L">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="tintColor" systemColor="systemPurpleColor"/>
                                                     <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Export Paper as PNG">
+                                                    <state key="normal" title="Export Paper As...">
                                                         <color key="titleColor" systemColor="systemPurpleColor"/>
-                                                        <imageReference key="image" image="photo" catalog="system" symbolScale="small"/>
+                                                        <imageReference key="image" image="doc.badge.ellipsis" catalog="system" symbolScale="small"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="btnActExport:" destination="qRt-PD-Ker" eventType="touchUpInside" id="ugg-jv-hbx"/>
+                                                        <action selector="btnActExport:" destination="qRt-PD-Ker" eventType="touchUpInside" id="gBL-bV-PPH"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Lfi-Jw-HpD" secondAttribute="bottom" id="3Pr-RB-Two"/>
-                                                <constraint firstItem="Lfi-Jw-HpD" firstAttribute="leading" secondItem="4f7-wp-SBZ" secondAttribute="leading" constant="20" symbolic="YES" id="AXT-bN-fdR"/>
-                                                <constraint firstAttribute="trailing" secondItem="Lfi-Jw-HpD" secondAttribute="trailing" constant="20" symbolic="YES" id="FEv-zN-2Jk"/>
-                                                <constraint firstItem="Lfi-Jw-HpD" firstAttribute="top" secondItem="4f7-wp-SBZ" secondAttribute="top" id="IYR-I4-3tc"/>
+                                                <constraint firstAttribute="bottom" secondItem="NJX-ec-K1L" secondAttribute="bottom" id="Fkf-MQ-euo"/>
+                                                <constraint firstAttribute="trailing" secondItem="NJX-ec-K1L" secondAttribute="trailing" constant="20" symbolic="YES" id="SfL-Ri-tvf"/>
+                                                <constraint firstItem="NJX-ec-K1L" firstAttribute="leading" secondItem="HlN-bL-crb" secondAttribute="leading" constant="20" symbolic="YES" id="eGd-E7-Y0B"/>
+                                                <constraint firstItem="NJX-ec-K1L" firstAttribute="top" secondItem="HlN-bL-crb" secondAttribute="top" id="tBe-oN-zLF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="OqB-AS-ssk">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="y0k-Oi-qlw">
                                         <rect key="frame" x="0.0" y="472.5" width="414" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y0k-Oi-qlw" id="4f7-wp-SBZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="OqB-AS-ssk">
+                                        <rect key="frame" x="0.0" y="507.5" width="414" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OqB-AS-ssk" id="PYL-Dh-wJ4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
@@ -2024,66 +2032,6 @@ Arrangey by bcd</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="6xD-CZ-1mz">
-                                        <rect key="frame" x="0.0" y="507.5" width="414" height="35"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6xD-CZ-1mz" id="mjS-at-B6j">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoC-On-agj">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="35"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="tintColor" systemColor="systemPurpleColor"/>
-                                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Export Paper as PDF">
-                                                        <color key="titleColor" systemColor="systemPurpleColor"/>
-                                                        <imageReference key="image" image="doc.text" catalog="system" symbolScale="small"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="btnActExport:" destination="qRt-PD-Ker" eventType="touchUpInside" id="cGN-Ok-JoH"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="XoC-On-agj" firstAttribute="top" secondItem="mjS-at-B6j" secondAttribute="top" id="ckp-Cl-xpi"/>
-                                                <constraint firstAttribute="bottom" secondItem="XoC-On-agj" secondAttribute="bottom" id="is4-B3-YXl"/>
-                                                <constraint firstItem="XoC-On-agj" firstAttribute="leading" secondItem="mjS-at-B6j" secondAttribute="leading" constant="20" symbolic="YES" id="j5b-ZN-MnL"/>
-                                                <constraint firstAttribute="trailing" secondItem="XoC-On-agj" secondAttribute="trailing" constant="20" symbolic="YES" id="lO3-8y-Tum"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="35" id="t1w-8N-2WO">
-                                        <rect key="frame" x="0.0" y="542.5" width="414" height="35"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t1w-8N-2WO" id="HlN-bL-crb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-ec-K1L">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="35"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="tintColor" systemColor="systemPurpleColor"/>
-                                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Export Paper as MP3">
-                                                        <color key="titleColor" systemColor="systemPurpleColor"/>
-                                                        <imageReference key="image" image="music.note" catalog="system" symbolScale="small"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="btnActExport:" destination="qRt-PD-Ker" eventType="touchUpInside" id="8wg-RB-YeJ"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="NJX-ec-K1L" secondAttribute="bottom" id="Fkf-MQ-euo"/>
-                                                <constraint firstAttribute="trailing" secondItem="NJX-ec-K1L" secondAttribute="trailing" constant="20" symbolic="YES" id="SfL-Ri-tvf"/>
-                                                <constraint firstItem="NJX-ec-K1L" firstAttribute="leading" secondItem="HlN-bL-crb" secondAttribute="leading" constant="20" symbolic="YES" id="eGd-E7-Y0B"/>
-                                                <constraint firstItem="NJX-ec-K1L" firstAttribute="top" secondItem="HlN-bL-crb" secondAttribute="top" id="tBe-oN-zLF"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -2095,9 +2043,7 @@ Arrangey by bcd</string>
                     <navigationItem key="navigationItem" title="Dynamic Paper Title" id="JvR-8x-ej1"/>
                     <connections>
                         <outlet property="btnEditPaper" destination="Chy-Z8-v56" id="0HI-5h-8Ae"/>
-                        <outlet property="btnExportAsMP3" destination="NJX-ec-K1L" id="UNe-2R-TFz"/>
-                        <outlet property="btnExportAsPDF" destination="XoC-On-agj" id="ulH-3N-xfc"/>
-                        <outlet property="btnExportAsPNG" destination="Lfi-Jw-HpD" id="DRu-pN-2HL"/>
+                        <outlet property="btnExportAs" destination="NJX-ec-K1L" id="ZcW-TV-VVG"/>
                         <outlet property="btnPreplay" destination="WZX-ch-Cls" id="rkf-sk-sO8"/>
                         <outlet property="btnShare" destination="R5W-ns-hpF" id="oPa-Rx-rW7"/>
                         <outlet property="btnUpdateInformation" destination="FAA-jg-fq4" id="BNG-U9-r6a"/>
@@ -3509,14 +3455,13 @@ In the opposite case, enter the number of the smallest area in the subdivision o
         <image name="camera.fill" catalog="system" width="128" height="93"/>
         <image name="close_p.png" width="21" height="21"/>
         <image name="daniel-tuttle-7iFNGzRRukA-unsplash" width="4898" height="3265"/>
+        <image name="doc.badge.ellipsis" catalog="system" width="116" height="128"/>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
-        <image name="doc.text" catalog="system" width="115" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="globe" catalog="system" width="128" height="123"/>
         <image name="grab pull" width="188" height="137"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="loading-icon-static" width="615" height="450"/>
-        <image name="music.note" catalog="system" width="96" height="128"/>
         <image name="musicbox-appicon-1" width="1072" height="1072"/>
         <image name="musicbox-appicon-2" width="1024" height="1024"/>
         <image name="musicbox-appicon-3" width="1024" height="1024"/>
@@ -3524,7 +3469,6 @@ In the opposite case, enter the number of the smallest area in the subdivision o
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="128" height="85"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="120" height="128"/>

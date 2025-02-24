@@ -21,3 +21,5 @@
 "paperinfo_comment_placeholder" = "Please entering the comment makes it easier to tell information to other people.";
 
 "description_IntervalMaster" = "Master intervals effortlessly with fun quizzes, sheet music, and sound! Track your progress with stats, customize settings, and speed up your learning!";
+
+"MIDI File (*.mid)" = "🎹 MIDI File (*.mid)";
